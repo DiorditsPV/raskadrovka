@@ -9,5 +9,60 @@
     "портрет",
     "космос"
   ],
-  "refs": {}
+  "refs": {
+    "ref-01": {
+      "file": "refs/ref-01.jpg",
+      "sha256": "bce05d4c6f2d3f39909418532199caa484e2baf9eb28d9e446a9cba49db4cb79",
+      "source": "https://commons.wikimedia.org/wiki/File:At_the_Nadir_site_%2849278184847%29.jpg",
+      "author": "ESA_events",
+      "license": "CC BY-SA 2.0",
+      "license_basis": "съёмка правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "отражение в визоре и микро-фактура скафандра с натуры"
+    },
+    "ref-02": {
+      "file": "refs/ref-02.jpg",
+      "sha256": "68a59d0fbdb7d77a3f887441ef3229c1f26eff6c67155aaf9bced40f7d91cbe1",
+      "source": "https://commons.wikimedia.org/wiki/File:Earthling_%2849277969566%29.jpg",
+      "author": "ESA_events",
+      "license": "CC BY-SA 2.0",
+      "license_basis": "съёмка правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "отражение в визоре и микро-фактура скафандра с натуры"
+    },
+    "ref-03": {
+      "file": "refs/ref-03.png",
+      "sha256": "6bad31090260c4f945b8dcb47d2226996a7296c65bb900c4f293c19d51b6d091",
+      "source": "https://commons.wikimedia.org/wiki/File:AS09-20-3097_-_46979485094.png",
+      "author": "jccwrt",
+      "license": "CC BY 2.0",
+      "license_basis": "съёмка правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "отражение в визоре и микро-фактура скафандра с натуры"
+    },
+    "ref-04": {
+      "file": "refs/ref-04.png",
+      "sha256": "8098113068702053ddc1499a81e969621ea3bac586294a79d7bd4c6f3db3936a",
+      "source": "https://commons.wikimedia.org/wiki/File:AS09-19-3001_-_47716237622.png",
+      "author": "jccwrt",
+      "license": "CC BY 2.0",
+      "license_basis": "съёмка правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "отражение в визоре и микро-фактура скафандра с натуры"
+    },
+    "ref-05": {
+      "file": "refs/ref-05.jpg",
+      "sha256": "25baa7ac2108465eecc76b536aa30fb51f0e8ca6cffb1d97780f75e8af0f9fad",
+      "source": "https://commons.wikimedia.org/wiki/File:Terra_Nova_Analog_Mission_Crew.jpg",
+      "author": "Armenara245",
+      "license": "CC BY 4.0",
+      "license_basis": "съёмка правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "отражение в визоре и микро-фактура скафандра с натуры"
+    },
+    "ref-06": {
+      "file": "refs/ref-06.jpg",
+      "sha256": "77f12e9c32c3622c4c8c0e9c30b6db4e2899c1f24405a709d088fb19715ceb29",
+      "source": "https://commons.wikimedia.org/wiki/File:Certificate._Jpg.jpg",
+      "author": "Dikgang134",
+      "license": "CC BY-SA 4.0",
+      "license_basis": "съёмка правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "отражение в визоре и микро-фактура скафандра с натуры"
+    }
+  }
 }

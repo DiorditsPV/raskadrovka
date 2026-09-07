@@ -9,5 +9,60 @@
     "социальная фантастика",
     "массовая сцена"
   ],
-  "refs": {}
+  "refs": {
+    "ref-01": {
+      "file": "refs/ref-01.jpg",
+      "sha256": "c26ef658bfcc44c52904f2a5d56c1d5d4c3c693a8ded877ed8b73632261a6348",
+      "source": "https://commons.wikimedia.org/wiki/File:Anheuser_Busch_Brewery_Workers.jpg",
+      "author": "Unknown authorUnknown author",
+      "license": "Public domain",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "много людей в одинаковой форме под одним холодным светом, лица разные"
+    },
+    "ref-02": {
+      "file": "refs/ref-02.jpg",
+      "sha256": "0b158d8a0c928bd741d6a373341fab1fc81831b23d41c5c9514944507143d0db",
+      "source": "https://commons.wikimedia.org/wiki/File:Alpen_Brau_brewery_workers.jpg",
+      "author": "Unknown authorUnknown author",
+      "license": "Public domain",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "много людей в одинаковой форме под одним холодным светом, лица разные"
+    },
+    "ref-03": {
+      "file": "refs/ref-03.jpg",
+      "sha256": "4012e3d5364abbc9b7ffd388eed8d331b316fd01a5f2c66afb49240fcf0a4501",
+      "source": "https://commons.wikimedia.org/wiki/File:ANTONELLI_INDUSTRIES%2C_RIFLE%2C_A_SKI_GOGGLES_FACTORY%2C_EMPLOYS_FOURTEEN_WORKERS_MOST_OF_WHOM_ARE_FARM_WIVES_-_NARA_-_552635.jpg",
+      "author": "David Hiser",
+      "license": "Public domain",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "много людей в одинаковой форме под одним холодным светом, лица разные"
+    },
+    "ref-04": {
+      "file": "refs/ref-04.jpg",
+      "sha256": "229869645f1a063820c86ba2ead738a9eb1cc64b75c16b02f745b2c50eb18e98",
+      "source": "https://commons.wikimedia.org/wiki/File:Bagan-Lacquerware-Factory-Workers.JPG",
+      "author": "Hybernator",
+      "license": "Public domain",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "много людей в одинаковой форме под одним холодным светом, лица разные"
+    },
+    "ref-05": {
+      "file": "refs/ref-05.jpg",
+      "sha256": "f95b9a594e2b4a712d14ab9d103e859af286f00522edc773d2a90ec971813d55",
+      "source": "https://commons.wikimedia.org/wiki/File:A_worker_sprays_protective_%289605228043%29.jpg",
+      "author": "Tyne &amp; Wear Archives &amp; Museums",
+      "license": "No restrictions",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "много людей в одинаковой форме под одним холодным светом, лица разные"
+    },
+    "ref-06": {
+      "file": "refs/ref-06.jpg",
+      "sha256": "4a2cd8dfae836469427e98a56da0d7ee749c7ab43331555307b0df9e81336251",
+      "source": "https://commons.wikimedia.org/wiki/File:A_Worker_at_Linread_%289717140968%29.jpg",
+      "author": "Tyne &amp; Wear Archives &amp; Museums",
+      "license": "No restrictions",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "много людей в одинаковой форме под одним холодным светом, лица разные"
+    }
+  }
 }

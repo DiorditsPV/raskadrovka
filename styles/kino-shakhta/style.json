@@ -9,5 +9,60 @@
     "шахты",
     "социальная фантастика"
   ],
-  "refs": {}
+  "refs": {
+    "ref-01": {
+      "file": "refs/ref-01.jpg",
+      "sha256": "f42b5cc573b3cd7b019174be0eeafa8cdef408322673f0f5292b94809f05e743",
+      "source": "https://commons.wikimedia.org/wiki/File:African-American_coal_miner_-_DPLA_-_57987c4ddb3e3874a31a92530642a971.jpg",
+      "author": "Department of Agriculture. 1862",
+      "license": "Public domain",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "настоящие шахтёры, угольная пыль, свет из проёма"
+    },
+    "ref-02": {
+      "file": "refs/ref-02.jpg",
+      "sha256": "2d383d1514412ac6871a51abda8cd2a1d63a83976133ed7758fe5a4af2fd4be9",
+      "source": "https://commons.wikimedia.org/wiki/File:Coal_Miner_1958.JPG",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "настоящие шахтёры, угольная пыль, свет из проёма"
+    },
+    "ref-03": {
+      "file": "refs/ref-03.jpg",
+      "sha256": "34304375a4f2f58c54f4e7d2f5c9aed732deb5ed87165ea6b272ff3f01f31216",
+      "source": "https://commons.wikimedia.org/wiki/File:Coal_Miner_1969.JPG",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "настоящие шахтёры, угольная пыль, свет из проёма"
+    },
+    "ref-04": {
+      "file": "refs/ref-04.jpg",
+      "sha256": "061d360f724aa5aa2da94a1a274e2a6ffaae8759f4fce468daea401f2c639666",
+      "source": "https://commons.wikimedia.org/wiki/File:Coal_Miner_1975.JPG",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "настоящие шахтёры, угольная пыль, свет из проёма"
+    },
+    "ref-05": {
+      "file": "refs/ref-05.jpg",
+      "sha256": "67df175fb0c732a6837961f27b3baa2f6025dc07e5c254b6291aa925990632a4",
+      "source": "https://commons.wikimedia.org/wiki/File:Coal_Miner_1980.JPG",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "настоящие шахтёры, угольная пыль, свет из проёма"
+    },
+    "ref-06": {
+      "file": "refs/ref-06.jpg",
+      "sha256": "63159ee4a620d12f6d532a5f35a36c743aa717c74151f577f3a7afda1db7007b",
+      "source": "https://commons.wikimedia.org/wiki/File:Coal_Miner_1997.JPG",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_basis": "съёмка до 1930 года, авторы умерли более 70 лет назад — свободно и в РФ, и в США",
+      "why": "настоящие шахтёры, угольная пыль, свет из проёма"
+    }
+  }
 }
