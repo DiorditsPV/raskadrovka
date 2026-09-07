@@ -10,7 +10,7 @@
   ],
   "refs": {
     "ref-01": {
-      "file": "refs/tekhnicheskiy-razrez--ref-01.png",
+      "file": "refs/tekhnicheskiy-razrez/ref-01.png",
       "stored": true,
       "sha256": "7117689e6cab4de8819a8adce640c57384dcfb6dbaffe70cf83533ec3e276833",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -20,7 +20,7 @@
       "why": "базовый разрез: устройство видно, люди для масштаба"
     },
     "ref-02": {
-      "file": "refs/tekhnicheskiy-razrez--ref-02.png",
+      "file": "refs/tekhnicheskiy-razrez/ref-02.png",
       "stored": true,
       "sha256": "015bca27f9b4672451172dc26ddb9939383ce42753cb4f330ded7e484dcc5558",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -30,7 +30,7 @@
       "why": "вертикальный разрез: та же подача на другой машине"
     },
     "ref-03": {
-      "file": "refs/tekhnicheskiy-razrez--ref-03.png",
+      "file": "refs/tekhnicheskiy-razrez/ref-03.png",
       "stored": true,
       "sha256": "2e87b5d91cbf695203c012b7d2f6dc32cc0f84296d0dacde36cd5fd9885bb6d9",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -40,7 +40,7 @@
       "why": "разрез на человеческом объекте, не на машине"
     },
     "ref-04": {
-      "file": "refs/tekhnicheskiy-razrez--ref-04.png",
+      "file": "refs/tekhnicheskiy-razrez/ref-04.png",
       "stored": true,
       "sha256": "12f756f45566c59ffc2c21198f11c32a6297b7517aeeecff45ec238454073a25",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",

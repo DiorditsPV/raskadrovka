@@ -1,8 +1,7 @@
 """Собирает styles/index.html — страницу выбора направления стиля. Только стандартная библиотека.
 
 Читает описания манер из styles/directions/<направление>.json и показывает эталоны сеткой.
-Картинки лежат общей папкой styles/refs/ с именем <направление>--<ref-id>, как результаты
-в корневом output/: смотреть их подряд удобнее, чем разложенными по шести папкам.
+Картинки лежат под styles/refs/<направление>/, отдельно от описаний манер.
 Страница открывается локально, ничего не встраивает и никуда не ходит.
 """
 import html
@@ -94,7 +93,7 @@ def main(argv=None):
         'в промпт дословно.</p>'
         f'<nav>{menu}</nav></header><main>' + ''.join(section(s) for s in styles) +
         '</main><footer>Эталоны сгенерированы в этом проекте; описания манер — в '
-        '<code>styles/directions/</code>, сами картинки общей папкой в <code>styles/refs/</code>. '
+        '<code>styles/directions/</code>, картинки — в <code>styles/refs/</code>. '
         'Правила по референсам — в <a href="../RIGHTS.md">RIGHTS.md</a>, контракт направления — в '
         '<a href="README.md">styles/README.md</a>.</footer></body></html>'
     )

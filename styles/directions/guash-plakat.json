@@ -11,7 +11,7 @@
   ],
   "refs": {
     "ref-01": {
-      "file": "refs/guash-plakat--ref-01.png",
+      "file": "refs/guash-plakat/ref-01.png",
       "stored": true,
       "sha256": "c31067853fec732ca1c5abf37f1ae8744e4d2eee83aeb0f830421232f96bdd0f",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -21,7 +21,7 @@
       "why": "плакатная плоскость на промышленном масштабе"
     },
     "ref-02": {
-      "file": "refs/guash-plakat--ref-02.png",
+      "file": "refs/guash-plakat/ref-02.png",
       "stored": true,
       "sha256": "dc44a10ca2b9058535fc5d61fe10f7c6275c71ed9daf946ffbaa1f2bd4bb5f7c",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -31,7 +31,7 @@
       "why": "одинаковые формы и одна выпадающая — на что способна плоскость"
     },
     "ref-03": {
-      "file": "refs/guash-plakat--ref-03.png",
+      "file": "refs/guash-plakat/ref-03.png",
       "stored": true,
       "sha256": "57fc54e94482101960195d805be2e7912861f7b18617d9041e8ca497dbf0e416",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -41,7 +41,7 @@
       "why": "геометрия техники: приборы плоскими блоками"
     },
     "ref-04": {
-      "file": "refs/guash-plakat--ref-04.png",
+      "file": "refs/guash-plakat/ref-04.png",
       "stored": true,
       "sha256": "a99f5bfc5a51d2bb7e346dd6794cbbfc4f745023eaf474c841dcb6d0e6008114",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",

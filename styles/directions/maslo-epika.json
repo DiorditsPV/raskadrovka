@@ -11,7 +11,7 @@
   ],
   "refs": {
     "ref-01": {
-      "file": "refs/maslo-epika--ref-01.png",
+      "file": "refs/maslo-epika/ref-01.png",
       "stored": true,
       "sha256": "d71cd272304c7eebb9ce90f9acdbc73a60f81e65b0b89798bf713335ebcf7476",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -21,7 +21,7 @@
       "why": "эпический масштаб: фигура мелко, воздух между планами"
     },
     "ref-02": {
-      "file": "refs/maslo-epika--ref-02.png",
+      "file": "refs/maslo-epika/ref-02.png",
       "stored": true,
       "sha256": "00b743b07e4363bd1a20ba98e00b8cf00dc912c2522b104c47e2315ca1083f50",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -31,7 +31,7 @@
       "why": "та же живопись на воде и камне"
     },
     "ref-03": {
-      "file": "refs/maslo-epika--ref-03.png",
+      "file": "refs/maslo-epika/ref-03.png",
       "stored": true,
       "sha256": "c98ba0bff3b3cf55a6f82d672381fc1ed1fb3e29690a0a271dd0d518ab79aa60",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
@@ -41,7 +41,7 @@
       "why": "человек против масштаба — сердцевина манеры"
     },
     "ref-04": {
-      "file": "refs/maslo-epika--ref-04.png",
+      "file": "refs/maslo-epika/ref-04.png",
       "stored": true,
       "sha256": "edbe6510a6daa302e690cdefca39d3d8d80a237cde6f6839d5007f902d743d45",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
