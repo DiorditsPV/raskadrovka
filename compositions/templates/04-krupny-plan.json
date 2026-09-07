@@ -1,0 +1,18 @@
+{
+  "id": "04-krupny-plan",
+  "name": "Крупный план головы и плеч",
+  "about": "Портретная крупность: голова и плечи в три четверти, фон пустой.",
+  "figures": [
+    {
+      "key": "a",
+      "value": "тёмно-серая",
+      "where": "центр-справа, голова и плечи, три четверти"
+    }
+  ],
+  "camera": "уровень глаз, крупный план",
+  "file": "refs/04-krupny-plan.png",
+  "sha256": "22278e764023d5bd27e4567dc982bd47c74df9588d6cc3d73797c83cd61acf78",
+  "source": "сгенерировано скриптом compositions.py через codex exec, 2026-09-07",
+  "license": "generated-here",
+  "prompt_en": "Style: a flat composition blockout, NOT an illustration and NOT a finished picture.\nFeatureless smooth grey mannequin figures: no faces, no hair, no clothing, no fingers, no\ntexture, no pattern. Plain flat mid-grey background. Environment reduced to the few plain grey\nboxes and planes needed to place the figures — a table is a box, a wall is a plane, a doorway is\na rectangular hole. Even flat illumination with no cast shadows, no rim light, no atmosphere, no\ndepth haze. Greyscale only: no colour anywhere. No linework, no hatching, no rendering style, no\nartistic flourish. This image exists solely to record where bodies are in space and how they are\nturned. Each figure is a distinct flat value of grey so they can be told apart.\n\nThe head and shoulders of a single featureless grey mannequin, seen in three-quarter\nview, filling the right half of the frame. No face, no features — a smooth blank form. Plain flat\ngrey background with nothing in it.\nComposition: eye level close-up, head slightly right of centre, empty grey to the left.\nAsset: a single image, 3:2 landscape.\n\nAvoid: colour, texture, pattern, facial features, clothing detail, dramatic lighting, cast\nshadows, background scenery, mood, atmosphere, artistic style of any kind, signatures,\nwatermarks, any legible text, numbers or labels anywhere in the frame."
+}

@@ -1,0 +1,50 @@
+{
+  "id": "08-narol-s-tsitroy",
+  "book": "pierce-brown-red-rising",
+  "title": "Нарол с цитрой",
+  "order": 8,
+  "locator": {
+    "chapter": 3,
+    "paragraphs": [
+      125,
+      125
+    ]
+  },
+  "excerpt": {
+    "text": "Lights are strung along the lengthy corridor. In the distance, drunk Uncle Narol, old now at thirty-five, plays his zither for the children who dance about our legs; even he cannot scowl forever. He wears the instrument suspended on shoulder straps so that it rests at his hips, with its plastic soundboard and its many taut metal strings facing up toward the ceiling. The right thumb strums the strings, except when the index finger drops down or when the thumb picks single strings, all while the left hand picks out the bass line string by string. It is maddeningly difficult to make the zither sound anything but mournful. Uncle Narol’s are equal to the task, though mine only make tragic music.",
+    "attribution": "Pierce Brown, «Red Rising», Del Rey, 2014"
+  },
+  "caption": "Тридцать пять — и такой старый.",
+  "brief": "Крупно: дядя Нарол над струнами. Лицо бледное, призрачное, всегда хмурое; моргает долго и тяжело. Цитра висит на плечевых ремнях. Даже он не может хмуриться вечно — на празднике почти улыбается.",
+  "frame": {
+    "setting": "a tunnel corridor hung with lights, warm and out of focus behind him",
+    "time": "evening of the feast",
+    "characters": [
+      {
+        "ref": "narol",
+        "state": "head and shoulders, three-quarter view, looking down at the strings, eyes half closed"
+      }
+    ],
+    "action": "he plays, and the habitual scowl slips for a moment",
+    "mood": "a bitter man briefly let off",
+    "details": [
+      "the metal zither top edge entering the lower frame",
+      "shoulder straps cutting across his chest",
+      "the crew-chief head unit pushed up into his greying red hair",
+      "string lights blurred behind him",
+      "stubble and broken veins on pale skin"
+    ],
+    "composition": "head and shoulders in three-quarter view, instrument entering the bottom of the frame",
+    "avoid": [
+      "full body",
+      "sharp background",
+      "cheerfulness",
+      "clean clothing"
+    ]
+  },
+  "composition": "04-krupny-plan",
+  "style_refs": [],
+  "invariants": [
+    "narol"
+  ]
+}

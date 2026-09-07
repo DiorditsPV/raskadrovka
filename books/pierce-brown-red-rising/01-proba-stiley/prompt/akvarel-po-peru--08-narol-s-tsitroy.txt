@@ -1,0 +1,34 @@
+Use case: one illustration for a book scene series.
+
+Asset: a single image, 3:2 landscape.
+
+Input images:
+Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
+Image 4 is a CHARACTER REFERENCE for дядя Нарол: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+
+Series visual language: light pen contour with transparent watercolour washes laid over it, generous areas of untouched white paper, light rendered as reserved paper rather than added pigment, muted desaturated palette, soft blooms where wet met wet, intimate quiet scale, no heavy black and no hard edges.
+
+Scene: a tunnel corridor hung with lights, warm and out of focus behind him. Time: evening of the feast.
+
+Characters:
+- дядя Нарол: head and shoulders, three-quarter view, looking down at the strings, eyes half closed
+
+Action: he plays, and the habitual scowl slips for a moment.
+
+Mood: a bitter man briefly let off.
+
+Details: the metal zither top edge entering the lower frame; shoulder straps cutting across his chest; the crew-chief head unit pushed up into his greying red hair; string lights blurred behind him; stubble and broken veins on pale skin.
+
+Composition: head and shoulders in three-quarter view, instrument entering the bottom of the frame.
+
+Source passage (context only, in the book's own words; do not render any of it as lettering):
+Lights are strung along the lengthy corridor. In the distance, drunk Uncle Narol, old now at thirty-five, plays his zither for the children who dance about our legs; even he cannot scowl forever. He wears the instrument suspended on shoulder straps so that it rests at his hips, with its plastic soundboard and its many taut metal strings facing up toward the ceiling. The right thumb strums the strings, except when the index finger drops down or when the thumb picks single strings, all while the left hand picks out the bass line string by string. It is maddeningly difficult to make the zither sound anything but mournful. Uncle Narol’s are equal to the task, though mine only make tragic music.
+
+Identity invariants:
+- дядя Нарол: a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest
+
+Avoid: full body; sharp background; cheerfulness; clean clothing; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.

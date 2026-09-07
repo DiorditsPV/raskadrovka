@@ -1,0 +1,37 @@
+Use case: one illustration for a book scene series.
+
+Asset: a single image, 3:2 landscape.
+
+Input images:
+Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
+Image 4 is a CHARACTER REFERENCE for Ио: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+Image 5 is a CHARACTER REFERENCE for Дэрроу: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+
+Series visual language: light pen contour with transparent watercolour washes laid over it, generous areas of untouched white paper, light rendered as reserved paper rather than added pigment, muted desaturated palette, soft blooms where wet met wet, intimate quiet scale, no heavy black and no hard edges.
+
+Scene: a small room hewn out of rock, low ceiling, a doorway behind her, a hanging lamp. Time: evening, after the shift.
+
+Characters:
+- Ио: standing close, flushed and laughing, chin lifted, hair a dusty cobwebbed tangle
+- Дэрроу: facing her, both hands raised into her hair, working the tangle loose
+
+Action: he rakes his hands through the web-matted tangle of her hair while she holds the door shut behind her.
+
+Mood: private, warm, teasing — the only unguarded moment of the day.
+
+Details: strands of pale bioSilk caught in her hair; rock dust on her shoulders; the closed door she is guarding at her back; his sigil-marked hands against her red hair; a single warm bulb on a cord.
+
+Composition: two figures face to face at close conversational distance, both in three-quarter view, the room tight around them.
+
+Source passage (context only, in the book's own words; do not render any of it as lettering):
+She comes out a minute later, flustered and blushing. Her hair is covered in dust and webs. I rake my hands through the tangle. She’s straight from the Webbery, where they harvest the bioSilk.
+
+Identity invariants:
+- Ио: a sixteen-year-old girl, tiny and thin, ribs showing beneath the skin, all wire wrapped in pale skin; pale underground complexion; a heavy mane of rust-red hair, the red of Mars rock, dusted and cobwebbed from a shift in the silk works; a face fine enough to pass for one of the Golds; layered skirts falling below the knee and a blouse, all in half a dozen different reds as the clan women wear; a thin band of woven hair on her ring finger; upright and light on her feet, a dancer
+- Дэрроу: a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg
+
+Avoid: spacious interior; modern furniture; cold light; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.

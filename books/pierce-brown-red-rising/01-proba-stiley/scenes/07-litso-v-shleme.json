@@ -1,0 +1,50 @@
+{
+  "id": "07-litso-v-shleme",
+  "book": "pierce-brown-red-rising",
+  "title": "Лицо под забралом",
+  "order": 7,
+  "locator": {
+    "chapter": 1,
+    "paragraphs": [
+      5,
+      5
+    ]
+  },
+  "excerpt": {
+    "text": "A new river of sweat breaks through the scarlet sweatband tied around my forehead and slips into my eyes, burning them till they’re as red as my rusty hair. I used to reach and try to wipe the sweat away, only to scratch futilely at the faceplate of my frysuit. I still want to. Even after three years, the tickle and sting of the sweat is a raw misery.",
+    "attribution": "Pierce Brown, «Red Rising», Del Rey, 2014"
+  },
+  "caption": "Пот не вытереть: между рукой и глазами — забрало.",
+  "brief": "Крупно: лицо Дэрроу внутри фрайсьюта. Пот пробивает алую повязку и течёт в глаза, и они краснеют до цвета его ржавых волос. Вытереть нельзя — мешает забрало, и он всё равно тянется рукой, по привычке трёх лет.",
+  "frame": {
+    "setting": "inside a mining suit helmet, the faceplate close to the camera, machine light from below",
+    "time": "deep in the shift",
+    "characters": [
+      {
+        "ref": "darrow",
+        "state": "head and shoulders, three-quarter view, jaw set, eyes reddened and streaming"
+      }
+    ],
+    "action": "he blinks the sweat back and does not reach up",
+    "mood": "endurance that has stopped being noticed",
+    "details": [
+      "sweat running from under the scarlet sweatband",
+      "the inside of the faceplate fogged at the edges",
+      "reflected lamp light across the plastic",
+      "grime in the creases of his neck",
+      "the cord of the wedding band at his collar"
+    ],
+    "composition": "head and shoulders filling the frame in three-quarter view, faceplate between viewer and face",
+    "avoid": [
+      "full body",
+      "background scenery",
+      "clean glass",
+      "heroic expression"
+    ]
+  },
+  "composition": "04-krupny-plan",
+  "style_refs": [],
+  "invariants": [
+    "darrow"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "02-krupno-i-daleko",
+  "name": "Крупно спереди, мелко позади",
+  "about": "Один герой близко и крупно, второй мелко в глубине: разрыв масштаба между ними.",
+  "figures": [
+    {
+      "key": "a",
+      "value": "тёмно-серая",
+      "where": "передний план справа, обрезана кадром по грудь"
+    },
+    {
+      "key": "b",
+      "value": "светло-серая",
+      "where": "глубина слева, целиком, мелко"
+    }
+  ],
+  "camera": "уровень глаз, глубокий план",
+  "file": "refs/02-krupno-i-daleko.png",
+  "sha256": "7be0b49054c1f7e32b7dbb4dc85ca0327489e4e78a475fa6c6a7fbdc198d5e94",
+  "source": "сгенерировано скриптом compositions.py через codex exec, 2026-09-07",
+  "license": "generated-here",
+  "prompt_en": "Style: a flat composition blockout, NOT an illustration and NOT a finished picture.\nFeatureless smooth grey mannequin figures: no faces, no hair, no clothing, no fingers, no\ntexture, no pattern. Plain flat mid-grey background. Environment reduced to the few plain grey\nboxes and planes needed to place the figures — a table is a box, a wall is a plane, a doorway is\na rectangular hole. Even flat illumination with no cast shadows, no rim light, no atmosphere, no\ndepth haze. Greyscale only: no colour anywhere. No linework, no hatching, no rendering style, no\nartistic flourish. This image exists solely to record where bodies are in space and how they are\nturned. Each figure is a distinct flat value of grey so they can be told apart.\n\nOne dark grey mannequin figure stands close to the camera at the right, cropped by\nthe frame at chest height, turned slightly away. A second lighter figure stands far back at the\nleft, small and whole, facing the camera. Flat grey ground plane running into the distance.\nComposition: eye level, strong scale break between the near and far figure.\nAsset: a single image, 3:2 landscape.\n\nAvoid: colour, texture, pattern, facial features, clothing detail, dramatic lighting, cast\nshadows, background scenery, mood, atmosphere, artistic style of any kind, signatures,\nwatermarks, any legible text, numbers or labels anywhere in the frame."
+}
