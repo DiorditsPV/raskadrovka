@@ -9,51 +9,5 @@
     "быт станции",
     "день"
   ],
-  "refs": {
-    "ref-01": {
-      "file": "refs/ref-01.jpg",
-      "sha256": "318c33d5849a8b59df5f25e98cf97794f44734d20cb788831b0c270040ecdf11",
-      "source": "https://commons.wikimedia.org/wiki/File:ISS064E048595_-_Shannon_Walker_installing_Ethernet_cables_aboard_the_ISS.jpg",
-      "author": "NASA",
-      "license": "Public domain",
-      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
-      "why": "настоящий свет и настоящая фактура для этой ситуации"
-    },
-    "ref-02": {
-      "file": "refs/ref-02.jpg",
-      "sha256": "4426ca7c86ae10f440c731321b4c15a91359b3f321cb6727fc407614030cb610",
-      "source": "https://commons.wikimedia.org/wiki/File:ISS-65_Mark_Vande_Hei_gets_his_eyes_checked.jpg",
-      "author": "NASA",
-      "license": "Public domain",
-      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
-      "why": "настоящий свет и настоящая фактура для этой ситуации"
-    },
-    "ref-03": {
-      "file": "refs/ref-03.jpg",
-      "sha256": "aaab183c464049dde68154dc936453f4a8dd201eeb0ce1041fa22c5457c719fc",
-      "source": "https://commons.wikimedia.org/wiki/File:Iss065e162499.jpg",
-      "author": "NASA Johnson Space Center",
-      "license": "Public domain",
-      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
-      "why": "настоящий свет и настоящая фактура для этой ситуации"
-    },
-    "ref-04": {
-      "file": "refs/ref-04.jpg",
-      "sha256": "65b88df64b85f6642dcab5456d2aa34f90388ef0468301f43dcb7874d2105fac",
-      "source": "https://commons.wikimedia.org/wiki/File:Iss065e162500.jpg",
-      "author": "NASA Johnson Space Center",
-      "license": "Public domain",
-      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
-      "why": "настоящий свет и настоящая фактура для этой ситуации"
-    },
-    "ref-05": {
-      "file": "refs/ref-05.jpg",
-      "sha256": "67948b15cf9bd75343f32db1974b65baf27615a153744f468e96c2f650a1aa83",
-      "source": "https://commons.wikimedia.org/wiki/File:Iss065e162503.jpg",
-      "author": "NASA Johnson Space Center",
-      "license": "Public domain",
-      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
-      "why": "настоящий свет и настоящая фактура для этой ситуации"
-    }
-  }
+  "refs": {}
 }
