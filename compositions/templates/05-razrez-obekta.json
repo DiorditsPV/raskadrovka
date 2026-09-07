@@ -1,0 +1,29 @@
+{
+  "id": "05-razrez-obekta",
+  "name": "Разрез объекта",
+  "about": "Предмет вскрыт по одной плоскости: видно, что у него внутри и на каких уровнях. Фигуры расставлены по отсекам — по одной-две на уровень, каждая занята своим. Это способ показать предмет, а не манера рисунка: разрез применим с любым направлением стиля, и именно оно решает, чем он нарисован.",
+  "figures": [
+    {
+      "key": "a",
+      "value": "тёмно-серая",
+      "where": "нижний уровень, у механизма, спиной к срезу"
+    },
+    {
+      "key": "b",
+      "value": "средне-серая",
+      "where": "средний уровень, за пультом, в профиль"
+    },
+    {
+      "key": "c",
+      "value": "светло-серая",
+      "where": "верхний уровень, стоит у края, смотрит вниз"
+    }
+  ],
+  "camera": "фронтально к плоскости среза, уровень середины объекта",
+  "file": "refs/05-razrez-obekta.png",
+  "source": "сгенерировано через codex exec, 2026-09-07",
+  "license": "generated-here",
+  "scene": "Scene: a large machine or structure cut open along one flat vertical plane, so that its\ninterior is fully visible: three stacked levels separated by plain grey decks, with plain grey\nboxes standing in for equipment, tanks and stowage. On the lowest level one dark grey mannequin\nstands at a machine with its back to the cut. On the middle level a mid-grey mannequin sits at a\nconsole in profile. On the top level a lighter mannequin stands at the edge of the deck looking\ndown. Ladders connect the levels. Outside the cut face, the object's plain outer shell is visible\nat both ends.\nComposition: the cut face square to the camera and filling the frame, levels stacked, figures\nsmall but clearly placed, thin leader lines running out to the margins.",
+  "sha256": "6278a5cb248d6e60878df9b52cfbafcc43c992e385a53bfe31b9d5120f2becbf",
+  "prompt_en": "Style: a flat composition blockout, NOT an illustration and NOT a finished picture.\nFeatureless smooth grey mannequin figures: no faces, no hair, no clothing, no fingers, no\ntexture, no pattern. Plain flat mid-grey background. Environment reduced to the few plain grey\nboxes and planes needed to place the figures — a table is a box, a wall is a plane, a doorway is\na rectangular hole. Even flat illumination with no cast shadows, no rim light, no atmosphere, no\ndepth haze. Greyscale only: no colour anywhere. No linework, no hatching, no rendering style, no\nartistic flourish. This image exists solely to record where bodies are in space and how they are\nturned. Each figure is a distinct flat value of grey so they can be told apart.\n\nScene: a large machine or structure cut open along one flat vertical plane, so that its\ninterior is fully visible: three stacked levels separated by plain grey decks, with plain grey\nboxes standing in for equipment, tanks and stowage. On the lowest level one dark grey mannequin\nstands at a machine with its back to the cut. On the middle level a mid-grey mannequin sits at a\nconsole in profile. On the top level a lighter mannequin stands at the edge of the deck looking\ndown. Ladders connect the levels. Outside the cut face, the object's plain outer shell is visible\nat both ends.\nComposition: the cut face square to the camera and filling the frame, levels stacked, figures\nsmall but clearly placed, thin leader lines running out to the margins.\nAsset: a single image, 3:2 landscape.\n\nAvoid: colour, texture, pattern, facial features, clothing detail, dramatic lighting, cast\nshadows, background scenery, mood, atmosphere, artistic style of any kind, signatures,\nwatermarks, any legible text, numbers or labels anywhere in the frame."
+}

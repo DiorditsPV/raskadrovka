@@ -17,7 +17,7 @@
   "caption": "Сто метров вниз между пальцами бура, со сканером в руке.",
   "brief": "Дэрроу выбрался из ремней и прыгнул в стометровый провал, который сам и пробурил. Он спускается руками между раскалёнными пальцами бура, чтобы поднести сканер к газовому карману. Внизу расплавленная порода и шипящие буры. В комме кричат.",
   "frame": {
-    "setting": "the throat of a drilled shaft, enormous metal drill fingers converging below, molten rock glowing at the very bottom",
+    "setting": "the throat of a drilled shaft, enormous metal drill fingers converging below, molten rock at the very bottom as the only light from beneath",
     "time": "no time of day underground",
     "characters": [
       {
@@ -28,9 +28,9 @@
     "action": "he lowers himself hand over hand, feet first, toward the heat",
     "mood": "a mistake being made at speed, heat past bearing",
     "details": [
-      "drill fingers glowing dull orange where they meet rock",
+      "drill fingers glowing where they bite into rock",
       "the outer layer of his suit blistered and part melted",
-      "a hundred-metre drop resolving into molten glare far below",
+      "a hundred-metre drop ending in the glare of the working face far below",
       "sparks and grit falling past him",
       "his knuckles white on the metal"
     ],
