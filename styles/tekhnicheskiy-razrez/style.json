@@ -1,0 +1,12 @@
+{
+  "slug": "tekhnicheskiy-razrez",
+  "name": "Технический разрез",
+  "about": "Инженерная подача: аппарат вскрыт, видно устройство, люди даны для масштаба. Точная линия, ровный свет, приглушённый чертёжный цвет. Не картинка, а объяснение.",
+  "style_notes_en": "engineering cutaway presentation, the machine opened to show internal structure, precise ruled line work over restrained flat colour, even shadowless illumination, human figures included purely for scale, muted blueprint palette of slate, cream and oxide, callout marks rendered as illegible tick strokes and never as readable words",
+  "fits": [
+    "твёрдая НФ",
+    "научная фантастика",
+    "производственный роман"
+  ],
+  "refs": {}
+}

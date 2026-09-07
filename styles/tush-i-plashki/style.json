@@ -1,0 +1,13 @@
+{
+  "slug": "tush-i-plashki",
+  "name": "Тушь с плашками цвета",
+  "about": "Плотная чёрная кисть задаёт форму, цвет ложится крупными плашками без растушёвки. Тень — не градиент, а силуэт. Контраст резкий, деталей мало, читается издалека.",
+  "style_notes_en": "heavy black brush ink defining every form, colour applied as large flat unmodulated areas with no blending, shadow rendered as solid silhouette shape rather than gradient, high contrast, economical detail that reads at a distance, limited palette of three or four colours plus black, textured brush edges and dry-brush breakup",
+  "fits": [
+    "фэнтези",
+    "приключения",
+    "нуар",
+    "тёмное фэнтези"
+  ],
+  "refs": {}
+}
