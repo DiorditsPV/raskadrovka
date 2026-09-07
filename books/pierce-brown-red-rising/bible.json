@@ -1,0 +1,312 @@
+{
+  "characters": {
+    "darrow": {
+      "name": "Дэрроу",
+      "appearance": "Шестнадцать лет, ещё растёт: худой, жилистый, ловкий — по стенам бегает и крутит сальто на танцах. Выглядит моложе, чем себя чувствует. Лицо угловатое и худое, от рождения красивое. Ржаво-рыжие волосы — красные как марсианский камень, не чистый красный. Кожа бледная, подземная, в поту и рудной пыли. Кроваво-красный фрайсьют Хеллдайвера в обтяжку, на спине клановая метка Лямбды. Алая повязка на лбу. На тыльных сторонах обеих ладоней сигилы Красных: грубый круг со стрелой и штриховкой, на ощупь как кость. Руки шахтёрские — сильные, в шрамах, свежий ожог на ладони. На шнурке на шее обручальное кольцо из сплетённых волос и шёлка. За спиной кобура со слингБлейдом — жестоко изогнутым резаком длиной с ногу.",
+      "appearance_en": "a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg",
+      "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            5,
+            5
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            36,
+            36
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            51,
+            51
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            114,
+            114
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            147,
+            147
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            149,
+            149
+          ]
+        }
+      ],
+      "understanding": 9.0,
+      "sheet": "characters/darrow.png",
+      "sheet_sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a teenage boy, a helium miner on Mars in an underground colony. a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "eo": {
+      "name": "Ио",
+      "appearance": "Шестнадцать. Крошечная и худая — рёбра проступают под кожей, вся проволока, обёрнутая бледной кожей, колени подгибаются. Кожа бледная, подземная. Тяжёлая грива ржаво-рыжих волос, красных как марсианский камень; после смены в Уэбберри волосы в пыли и паутине. Лицом могла бы сойти за Золотую. Многослойные юбки ниже колена и блуза — красные, полудюжины оттенков, как носят все женщины клана. Тонкое кольцо из сплетённых волос на безымянном пальце. Держится прямо, легка на ногу — танцовщица.",
+      "appearance_en": "a sixteen-year-old girl, tiny and thin, ribs showing beneath the skin, all wire wrapped in pale skin; pale underground complexion; a heavy mane of rust-red hair, the red of Mars rock, dusted and cobwebbed from a shift in the silk works; a face fine enough to pass for one of the Golds; layered skirts falling below the knee and a blouse, all in half a dozen different reds as the clan women wear; a thin band of woven hair on her ring finger; upright and light on her feet, a dancer",
+      "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            10,
+            10
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            36,
+            36
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            102,
+            102
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            114,
+            114
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            149,
+            149
+          ]
+        }
+      ],
+      "understanding": 9.0,
+      "sheet": "characters/eo.png",
+      "sheet_sha256": "8fe82935c6632233ae55f4e72b7a6af7f86395bf61db616a73d82f5b8c8def09",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a teenage girl, a silk-works weaver in an underground Martian mining colony. a sixteen-year-old girl, tiny and thin, ribs showing beneath the skin, all wire wrapped in pale skin; pale underground complexion; a heavy mane of rust-red hair, the red of Mars rock, dusted and cobwebbed from a shift in the silk works; a face fine enough to pass for one of the Golds; layered skirts falling below the knee and a blouse, all in half a dozen different reds as the clan women wear; a thin band of woven hair on her ring finger; upright and light on her feet, a dancer.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "narol": {
+      "name": "дядя Нарол",
+      "appearance": "Тридцать пять, но выглядит стариком: лицо бледное и призрачное, вечно нахмуренное. Моргает долго и тяжело, будто каждый раз больно открывать глаза и снова видеть мир. Пьёт не зная меры — сутулость и тяжесть в движениях. Рыжие волосы Красных, тронутые сединой. Руки шахтёрские, сильные, в шрамах. Алый фрайсьют headTalk'а — старшего смены, на голове рабочий блок с дисплеем. Цитра на плечевых ремнях поперёк груди, старая, металлическая.",
+      "appearance_en": "a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest",
+      "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            31,
+            31
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            125,
+            125
+          ]
+        }
+      ],
+      "understanding": 8.5,
+      "sheet": "characters/narol.png",
+      "sheet_sha256": "289f9eee63c6324a155ffff363519688a8fba21bae504f2be7851faf0098c99a",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a man, a mining crew chief in an underground Martian colony. a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "ugly_dan": {
+      "name": "Урод Дэн",
+      "appearance": "Серый капитан средних лет, засаленный и наглый. Ветеран фронта: покалечен, списан, вместо руки старый протез устаревшей модели — он его стесняется. Кожа потемнела от солнца, что под землёй редкость. Седые волосы висят тонкими редкими прядями на глаза; сами глаза — два кубика льда, обвалянные в золе. Простой изношенный серый дуроармор, такой же неопрятный, как волосы. Сигилы Серых на тыльной стороне ладоней и на шее.",
+      "appearance_en": "a greasy middle-aged Gray militia captain, insolent in his bearing; a front-line veteran, crippled and discharged, with an old outdated replacement arm he is self-conscious about; skin darkened by sun exposure, unusual underground; grey hair hanging thin and weedy over his eyes; eyes like two icecubes rolled in ash; simple worn grey duroArmor as unkempt as his hair; the sigils of his Color on the backs of his hands and at his neck",
+      "locators": [
+        {
+          "chapter": 2,
+          "paragraphs": [
+            55,
+            55
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            57,
+            57
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            58,
+            58
+          ]
+        }
+      ],
+      "understanding": 8.5,
+      "sheet": "characters/ugly_dan.png",
+      "sheet_sha256": "b20ee9eaa5ea09f5b6620230b9815ebf780186d3ba154a8b41d4f8d874203216",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a man, a militia captain garrisoning an underground Martian mining colony. a greasy middle-aged Gray militia captain, insolent in his bearing; a front-line veteran, crippled and discharged, with an old outdated replacement arm he is self-conscious about; skin darkened by sun exposure, unusual underground; grey hair hanging thin and weedy over his eyes; eyes like two icecubes rolled in ash; simple worn grey duroArmor as unkempt as his hair; the sigils of his Color on the backs of his hands and at his neck.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "dago": {
+      "name": "Даго",
+      "appearance": "Бледная полоса старой кожи, вместо лица — ухмылка. Курит длинную самокрутку.",
+      "appearance_en": "a pale strip of old leather with a smirk for a face, drawing on a long hand-rolled burner",
+      "locators": [
+        {
+          "chapter": 2,
+          "paragraphs": [
+            68,
+            68
+          ]
+        }
+      ]
+    },
+    "barlow": {
+      "name": "старый Барлоу",
+      "appearance": "Старый и толстый, по его собственным словам. Смеётся сухо, шутит через рацию.",
+      "appearance_en": "an old fat crewman, dry chuckling, voice crackling over suit static",
+      "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            21,
+            21
+          ]
+        }
+      ]
+    },
+    "kieran": {
+      "name": "Кирэн",
+      "appearance": "Брат Дэрроу. Рыжие волосы. Жена и дети виснут на нём.",
+      "appearance_en": "Darrow's brother, red-haired, his children swarming him and his wife at his side",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            147,
+            147
+          ]
+        }
+      ]
+    },
+    "mother": {
+      "name": "мать Дэрроу",
+      "appearance": "Улыбка женщины, которая видела, что жизнь может предложить, и в лучшем случае этим позабавлена. Говорит медленно, с иронией.",
+      "appearance_en": "a woman whose smile is that of someone who has seen what life offers and is at best amused by it; a slow ironic voice",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            134,
+            134
+          ]
+        }
+      ]
+    }
+  },
+  "places": {
+    "deep_tunnel": {
+      "name": "глубокий забой",
+      "look_en": "the bottom of a narrow vertical shaft cut by a drill; a holster seat bathed in a sulfurous yellow corona of lights; helium-3 glimmering like liquid silver in the rock above; molten rock and hissing drills a hundred metres below; darkness beyond the reach of the lamps",
+      "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            6,
+            6
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            7,
+            7
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            37,
+            37
+          ]
+        }
+      ]
+    },
+    "flush": {
+      "name": "Промывочная",
+      "look_en": "a cramped cold metal shed, musty, where thousands of men strip off frysuits; rows of decrepit transparent tubes; dirt and dead skin crusting the vents; the hum of motors and catcalls",
+      "locators": [
+        {
+          "chapter": 2,
+          "paragraphs": [
+            79,
+            79
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            80,
+            80
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            81,
+            81
+          ]
+        }
+      ]
+    },
+    "township": {
+      "name": "посёлок",
+      "look_en": "a hive-like cluster of homes carved into the rock walls of an old mine shaft; steep paths climbing the wall, pulleys and ropes for the old and infirm; a home cut into the rock a hundred metres above the floor",
+      "locators": [
+        {
+          "chapter": 2,
+          "paragraphs": [
+            88,
+            88
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            90,
+            90
+          ]
+        }
+      ]
+    },
+    "tunnelroad": {
+      "name": "туннельная дорога",
+      "look_en": "a long low corridor hung with strings of lights; crowds flowing toward a feast, boys jumping to touch the ceiling, children dancing between legs",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            124,
+            124
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            125,
+            125
+          ]
+        }
+      ]
+    }
+  }
+}
