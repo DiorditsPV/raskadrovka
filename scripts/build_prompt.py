@@ -22,14 +22,28 @@ TEMPLATE = ROOT / 'scripts' / 'templates' / 'prompt.txt'
 
 SECTIONS = ('Use case', 'Asset', 'Input images', 'Series visual language', 'Scene',
             'Characters', 'Action', 'Mood', 'Details', 'Composition', 'Source passage',
-            'Identity invariants', 'Avoid', 'Final constraints')
+            'Identity invariants', 'Legibility', 'Avoid', 'Final constraints')
 
 GLOBAL_AVOID = [
+    'anatomically impossible poses',
+    'a head turned further than the spine allows relative to the shoulders',
+    'hands, feet or limbs out of proportion to the body they belong to',
+    'extra or missing fingers, hands or limbs',
+    'joints bending against their natural direction',
     'likeness of actors or film adaptations',
     "other illustrators' recognisable compositions",
     'signatures, watermarks, artist marks',
     'any legible text, numbers or lettering anywhere in the frame',
 ]
+
+# Без этого генератор кроет фактурой весь кадр: три манеры из пяти сами просят видимого
+# мазка, и никто не просит тишины. Деталь должна работать у света и гаснуть дальше.
+CLARITY = (
+    'Legibility: the picture must read at a glance. Detail is concentrated where the light '
+    'falls and drops away into large calm areas; silhouettes stay clear against their ground; '
+    'texture serves the material it describes and never covers the whole frame evenly. '
+    'Fewer, better-placed details beat many small ones.'
+)
 
 # Сколько эталонов манеры подавать. Больше трёх — вес каждого падает, и манера начинает
 # спорить сама с собой; меньше двух — держится на одном кадре и тянет за собой его сюжет.
@@ -76,28 +90,47 @@ def inputs_for(card, bible, style, composition, root=ROOT, book_dir=None, wanted
     return out
 
 
+def _span(numbers):
+    return f'Image {numbers[0]}' if len(numbers) == 1 else \
+        'Images ' + ', '.join(map(str, numbers[:-1])) + f' and {numbers[-1]}'
+
+
 def render_input_images(inputs, bible):
-    lines = []
+    """Роль объясняется один раз на группу картинок, а не на каждую.
+
+    Прежний вид занимал треть промпта повторами одного и того же текста и ровно на эту
+    треть обесценивал всё остальное, включая манеру.
+    """
+    groups = {}
     for n, item in enumerate(inputs, 1):
-        if item['role'] == 'style-reference':
-            lines.append(
-                f"Image {n} is a STYLE REFERENCE: take from it only the manner — "
-                f"palette, drawing, texture, light logic. Do not copy its subjects, figures, "
-                f"buildings or lettering.")
-        elif item['role'] == 'composition-reference':
-            lines.append(
-                f"Image {n} is a COMPOSITION REFERENCE: a grey blockout. Take from it only "
-                f"where the bodies stand, how they are turned and how the frame is cut. Its "
-                f"grey surfaces, empty background and flat light are NOT part of the picture.")
-        elif item['role'] == 'character-reference':
-            name = bible['characters'][item['ref']].get('name', item['ref'])
-            lines.append(
-                f"Image {n} is a CHARACTER REFERENCE for {name}: keep this face, build, hair "
-                f"and clothing. Ignore its neutral pose, flat lighting and empty background.")
-        elif item['role'] == 'edit-target':
-            lines.append(
-                f"Image {n} is the EDIT TARGET: the previous version of this frame. Keep "
-                f"everything except what the correction below asks to change.")
+        groups.setdefault(item['role'], []).append((n, item))
+    lines = []
+    if 'style-reference' in groups:
+        nums = [n for n, _ in groups['style-reference']]
+        lines.append(f"{_span(nums)} are STYLE REFERENCES: take from them only the manner — "
+                     f"palette, drawing, texture, logic of light. Do not copy their subjects, "
+                     f"figures, buildings or lettering.")
+    if 'composition-reference' in groups:
+        nums = [n for n, _ in groups['composition-reference']]
+        lines.append(f"{_span(nums)} is a COMPOSITION REFERENCE, a grey blockout: take from it "
+                     f"only where the bodies stand, how they are turned and how the frame is "
+                     f"cut. Its grey surfaces, empty background and flat light are not part of "
+                     f"the picture.")
+    if 'character-reference' in groups:
+        items = groups['character-reference']
+        nums = [n for n, _ in items]
+        names = [bible['characters'][i['ref']].get('name', i['ref']) for _, i in items]
+        if len(items) == 1:
+            head = f"Image {nums[0]} is a CHARACTER REFERENCE for {names[0]}"
+        else:
+            listed = ', '.join(f'{n} — {name}' for n, name in zip(nums, names))
+            head = f"{_span(nums)} are CHARACTER REFERENCES ({listed})"
+        lines.append(f"{head}: keep the face, build, hair and clothing shown there. Ignore the "
+                     f"neutral pose, flat lighting and empty background.")
+    if 'edit-target' in groups:
+        nums = [n for n, _ in groups['edit-target']]
+        lines.append(f"{_span(nums)} is the EDIT TARGET, the previous version of this frame: "
+                     f"keep everything except what the correction asks to change.")
     return '\n'.join(lines)
 
 
@@ -121,6 +154,20 @@ def render_invariants(bible, keys):
     return '\n'.join(lines)
 
 
+def short_manner(style, limit=170):
+    """Короткая выжимка манеры для финального повтора.
+
+    Повторять notes целиком бессмысленно — это дублирование секции выше; нужен ровно тот
+    хвост, который генератор должен удержать до конца.
+    """
+    notes = style['style_notes_en']
+    for sep in (';', ','):
+        head = notes.split(sep)[0]
+        if len(head) <= limit:
+            return head.strip()
+    return notes[:limit].rsplit(' ', 1)[0].strip()
+
+
 def render_prompt(card, bible, style, composition, book, inputs):
     frame = card['frame']
     avoid = list(frame.get('avoid', [])) + GLOBAL_AVOID
@@ -138,10 +185,12 @@ def render_prompt(card, bible, style, composition, book, inputs):
         ('Source passage (context only, in the book\'s own words; do not render any of it as '
          'lettering):\n' + card['excerpt']['text']),
         'Identity invariants:\n' + render_invariants(bible, card['invariants']),
+        CLARITY,
         'Avoid: ' + '; '.join(avoid) + '.',
         ('Final constraints: the scene content comes from this card, not from the reference '
          'images. Keep the manner of the style references and the identity of the character '
-         'references, and invent nothing that contradicts the details above.'),
+         'references, and invent nothing that contradicts the details above. Above all the '
+         'picture must read as this manner: ' + short_manner(style) + '.'),
     ]
     return '\n\n'.join(parts) + '\n'
 
