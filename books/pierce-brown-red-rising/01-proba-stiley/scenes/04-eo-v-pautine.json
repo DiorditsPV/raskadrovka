@@ -1,0 +1,54 @@
+{
+  "id": "04-eo-v-pautine",
+  "book": "pierce-brown-red-rising",
+  "title": "Ио в дверях, волосы в паутине",
+  "order": 4,
+  "locator": {
+    "chapter": 2,
+    "paragraphs": [
+      102,
+      102
+    ]
+  },
+  "excerpt": {
+    "text": "She comes out a minute later, flustered and blushing. Her hair is covered in dust and webs. I rake my hands through the tangle. She’s straight from the Webbery, where they harvest the bioSilk.",
+    "attribution": "Pierce Brown, «Red Rising», Del Rey, 2014"
+  },
+  "caption": "Она вышла прямо из Уэбберри, и в волосах ещё паутина.",
+  "brief": "Ио выходит из комнаты, куда велела не смотреть, — раскрасневшаяся и смущённая, волосы в пыли и паутине после смены в Уэбберри. Дэрроу запускает руки в этот колтун и разбирает его пальцами. Тесная комната, выдолбленная в породе.",
+  "frame": {
+    "setting": "a small room hewn out of rock, low ceiling, a doorway behind her, a hanging lamp",
+    "time": "evening, after the shift",
+    "characters": [
+      {
+        "ref": "eo",
+        "state": "standing close, flushed and laughing, chin lifted, hair a dusty cobwebbed tangle"
+      },
+      {
+        "ref": "darrow",
+        "state": "facing her, both hands raised into her hair, working the tangle loose"
+      }
+    ],
+    "action": "he rakes his hands through the web-matted tangle of her hair while she holds the door shut behind her",
+    "mood": "private, warm, teasing — the only unguarded moment of the day",
+    "details": [
+      "strands of pale bioSilk caught in her hair",
+      "rock dust on her shoulders",
+      "the closed door she is guarding at her back",
+      "his sigil-marked hands against her red hair",
+      "a single warm bulb on a cord"
+    ],
+    "composition": "two figures face to face at close conversational distance, both in three-quarter view, the room tight around them",
+    "avoid": [
+      "spacious interior",
+      "modern furniture",
+      "cold light"
+    ]
+  },
+  "composition": "01-dvoe-litsom",
+  "style_refs": [],
+  "invariants": [
+    "eo",
+    "darrow"
+  ]
+}

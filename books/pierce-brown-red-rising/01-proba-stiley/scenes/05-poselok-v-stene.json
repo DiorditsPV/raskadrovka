@@ -1,0 +1,50 @@
+{
+  "id": "05-poselok-v-stene",
+  "book": "pierce-brown-red-rising",
+  "title": "Посёлок в стене шахты",
+  "order": 5,
+  "locator": {
+    "chapter": 2,
+    "paragraphs": [
+      88,
+      90
+    ]
+  },
+  "excerpt": {
+    "text": "A mess of electrical wires tangle together along the cavern’s ceiling like a jungle of black and red vines. Lights hang down from the jungle, swaying gently as air from the Common’s central oxygen system circulates. At the center of the township dangles a massive holoCan. It’s a square box with images on each side. Pixels are blacked out and the image is faded and fuzzy, but never has the thing faltered, never has it turned off. It bathes our cluster of homes in its own pale light. Videos from the Society.",
+    "attribution": "Pierce Brown, «Red Rising», Del Rey, 2014"
+  },
+  "caption": "Дома выдолблены в стене старой выработки, провода вьются по потолку.",
+  "brief": "Дэрроу стоит на крутой тропе к своему дому, в сотне метров над дном посёлка, и смотрит вниз. Ульем в стенах старой выработки — жильё, по потолку пещеры вьются чёрно-красные жгуты проводов, с них свисают лампы и покачиваются от вентиляции. В середине висит огромный холоКан.",
+  "frame": {
+    "setting": "a cavern whose rock walls are honeycombed with dwellings cut into the stone, steep paths and rope pulleys climbing the face",
+    "time": "evening, before the feast",
+    "characters": [
+      {
+        "ref": "darrow",
+        "state": "standing on a steep path high on the wall, seen from behind, one hand on the rock"
+      }
+    ],
+    "action": "he stops on the path and looks down over the township",
+    "mood": "home, and how small it is",
+    "details": [
+      "a jungle of black and red electrical cable tangled along the cavern ceiling",
+      "lamps hanging from the cables, swaying in circulated air",
+      "a massive holoCan box hanging at the centre of the cavern",
+      "washing and cookfires at the dwelling mouths",
+      "figures small on the floor far below"
+    ],
+    "composition": "figure in the near foreground seen from behind, cropped at the hip, the cavern opening away and down in front of him",
+    "avoid": [
+      "sky",
+      "daylight",
+      "clean architecture",
+      "wide streets"
+    ]
+  },
+  "composition": "03-spinoy-vdal",
+  "style_refs": [],
+  "invariants": [
+    "darrow"
+  ]
+}

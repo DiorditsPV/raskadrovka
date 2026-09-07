@@ -1,12 +1,14 @@
 {
   "slug": "tekhnicheskiy-razrez",
-  "name": "Технический разрез",
-  "about": "Инженерная подача: аппарат вскрыт, видно устройство, люди даны для масштаба. Точная линия, ровный свет, приглушённый чертёжный цвет. Не картинка, а объяснение.",
-  "style_notes_en": "engineering cutaway presentation, the machine opened to show internal structure, precise ruled line work over restrained flat colour, even shadowless illumination, human figures included purely for scale, muted blueprint palette of slate, cream and oxide, callout marks rendered as illegible tick strokes and never as readable words",
+  "name": "Разрез в реализме",
+  "about": "Разрез объекта, нарисованный не чертёжником, а живописцем. Аппарат, шахта или машина вскрыты по одной плоскости, устройство видно насквозь — но каждый отсек освещён своими лампами, экранами и заревом, а не ровным светом сверху. Внутри работают люди: в каждом отсеке своя маленькая сцена. Так делают разрезы в играх — кукольный дом ночью, где все комнаты светятся разом.",
+  "style_notes_en": "a cutaway cross-section rendered as painterly digital concept art rather than technical drawing: the vessel, shaft or machine opened along one plane so its interior structure reads through, decks and layers legible, but lit like a real place — each compartment lit by its own practical sources, work lamps, console glow, furnace light, so the whole section reads as many lit rooms at once against a dark hull; full value range down to true black in the unlit voids; visible brush economy on metal and rock with crisp detail where the light falls; figures at work inside the compartments, each occupied with a separate action, small but individually readable and giving the scale; worn lived-in surfaces, cable runs, stains and stowage rendered with the same care as the machinery; desaturated palette split warm interior light against cold exterior dark; thin leader lines and tick marks may edge the frame as a faint drafting trace, never as readable words or numbers",
   "fits": [
     "твёрдая НФ",
     "научная фантастика",
-    "производственный роман"
+    "антиутопия",
+    "производственный роман",
+    "шахты и станции"
   ],
   "refs": {
     "ref-01": {
@@ -22,16 +24,6 @@
     "ref-02": {
       "file": "refs/tekhnicheskiy-razrez/ref-02.png",
       "stored": true,
-      "sha256": "015bca27f9b4672451172dc26ddb9939383ce42753cb4f330ded7e484dcc5558",
-      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
-      "author": "Раскадровка",
-      "license": "generated-here",
-      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
-      "why": "вертикальный разрез: та же подача на другой машине"
-    },
-    "ref-03": {
-      "file": "refs/tekhnicheskiy-razrez/ref-03.png",
-      "stored": true,
       "sha256": "2e87b5d91cbf695203c012b7d2f6dc32cc0f84296d0dacde36cd5fd9885bb6d9",
       "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
       "author": "Раскадровка",
@@ -39,15 +31,15 @@
       "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
       "why": "разрез на человеческом объекте, не на машине"
     },
-    "ref-04": {
-      "file": "refs/tekhnicheskiy-razrez/ref-04.png",
+    "ref-03": {
+      "file": "refs/tekhnicheskiy-razrez/ref-03.png",
       "stored": true,
-      "sha256": "12f756f45566c59ffc2c21198f11c32a6297b7517aeeecff45ec238454073a25",
-      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "sha256": "919d1af079dd9257a99c5b9cace3b5dd69e8a8e04c4ba02fab98a8778e0a75a2",
+      "source": "сгенерировано по style_notes_en направления через codex exec, 2026-09-07",
       "author": "Раскадровка",
       "license": "generated-here",
       "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
-      "why": "круглая форма и толпа техников — предел читаемости разреза"
+      "why": "шахта в разрезе: уровни, забой внизу, посёлок в стене выше"
     }
   }
 }

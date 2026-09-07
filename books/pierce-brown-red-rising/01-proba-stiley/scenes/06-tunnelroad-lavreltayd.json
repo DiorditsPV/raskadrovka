@@ -1,0 +1,50 @@
+{
+  "id": "06-tunnelroad-lavreltayd",
+  "book": "pierce-brown-red-rising",
+  "title": "Туннельная дорога на Лаврелтайд",
+  "order": 6,
+  "locator": {
+    "chapter": 3,
+    "paragraphs": [
+      124,
+      125
+    ]
+  },
+  "excerpt": {
+    "text": "Lights are strung along the lengthy corridor. In the distance, drunk Uncle Narol, old now at thirty-five, plays his zither for the children who dance about our legs; even he cannot scowl forever. He wears the instrument suspended on shoulder straps so that it rests at his hips, with its plastic soundboard and its many taut metal strings facing up toward the ceiling. The right thumb strums the strings, except when the index finger drops down or when the thumb picks single strings, all while the left hand picks out the bass line string by string. It is maddeningly difficult to make the zither sound anything but mournful. Uncle Narol’s are equal to the task, though mine only make tragic music.",
+    "attribution": "Pierce Brown, «Red Rising», Del Rey, 2014"
+  },
+  "caption": "Пьяный Нарол играет на цитре, дети пляшут под ногами.",
+  "brief": "Народ течёт по туннельной дороге к празднику. Вдоль коридора развешаны гирлянды. Пьяный дядя Нарол — тридцать пять, а выглядит стариком — играет на цитре, подвешенной на плечевых ремнях, а вокруг ног пляшут дети. Мальчишки бегут по стенам, стараясь дотянуться до потолка.",
+  "frame": {
+    "setting": "a long low tunnel corridor hung with strings of lights, rock walls, a crowd flowing along it",
+    "time": "evening of the feast",
+    "characters": [
+      {
+        "ref": "narol",
+        "state": "in the near foreground, playing the zither slung at his hips, head down over the strings, drunk and almost smiling"
+      }
+    ],
+    "action": "he plays while children dance around his legs and the crowd streams past toward the Common",
+    "mood": "the one night a year the misery lifts",
+    "details": [
+      "strings of small bulbs receding down the corridor",
+      "children caught mid-step around his knees",
+      "boys running along the wall reaching for the ceiling",
+      "the crowd dissolving into warm haze in the depth",
+      "his crew-chief head unit pushed up on his brow"
+    ],
+    "composition": "Narol large in the near foreground at the left, cropped at the thigh; the corridor and crowd receding small into the depth at the right",
+    "avoid": [
+      "daylight",
+      "open sky",
+      "sober formality",
+      "empty corridor"
+    ]
+  },
+  "composition": "02-krupno-i-daleko",
+  "style_refs": [],
+  "invariants": [
+    "narol"
+  ]
+}

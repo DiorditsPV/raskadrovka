@@ -1,13 +1,14 @@
 # Промпты эталонов направлений
 
-Пять промптов — по одному на направление стиля. Каждый задаёт **манеру**, а не сюжет: сцена в
+Четыре промпта — по одному на направление стиля. Каждый задаёт **манеру**, а не сюжет: сцена в
 промпте выбрана так, чтобы манера была показана на людях, месте и действии, потому что именно
 это генератор потом должен уметь повторить.
 
 Промпты самодостаточны: **входных картинок не нужно**, манера целиком описана словами. Это и
 есть смысл подхода — эталон не ищется в чужих работах, а выращивается.
 
-Результат кладётся в `styles/<направление>/refs/ref-01.<ext>`. Запись в `style.json`:
+Результат кладётся в `styles/refs/<направление>/ref-01.png`. Запись в
+`styles/directions/<направление>.json`:
 `stored: true`, `license: own-work`, `license_basis` — «собственная генерация владельца
 репозитория; проект не считает сгенерированные изображения объектом исключительных прав
 (RIGHTS.md)».
@@ -45,25 +46,7 @@ thirds, rain as diagonal white scratches over everything.
 Palette: black, cold blue-grey, one warm ochre for the lantern light, muted brick red.
 ```
 
-## 2. `guash-plakat` — Гуашь, плакатная плоскость
-
-Под антиутопию, социальную фантастику, ретро-НФ, производственный роман.
-
-```text
-Style: opaque matte gouache, flatness instead of volume, figures and machinery simplified to
-geometric masses, palette cut to five mixed colours, poster logic with strong shape hierarchy,
-visible paper tooth, no gloss, no photographic depth of field, no lens effects. Retro-futurist
-restraint: everything drawn, nothing rendered.
-
-Scene: three workers in identical overalls stand on a narrow steel gantry high above an
-enormous machine hall. Turbines recede in rows below them. One worker points down; the others
-watch. Overhead lamps hang in a regular grid.
-Composition: gantry crossing the frame horizontally in the upper third, the hall opening
-beneath it, figures small and read as silhouettes against the lit depth.
-Palette: dusty teal, oxide orange, warm grey, cream, near-black.
-```
-
-## 3. `akvarel-po-peru` — Прозрачная акварель по перу
+## 2. `akvarel-po-peru` — Прозрачная акварель по перу
 
 Под классику, психологическую прозу, мемуары, камерную сцену.
 
@@ -81,7 +64,7 @@ lower left, wide empty space between them.
 Palette: pale grey-blue, warm sand, a single muted rose, and the white of the paper.
 ```
 
-## 4. `maslo-epika` — Густое масло, атмосферная глубина
+## 3. `maslo-epika` — Густое масло, атмосферная глубина
 
 Под эпическое фэнтези, исторический роман, классику, приключения.
 
@@ -100,35 +83,32 @@ Palette: warm ochre and umber in the foreground, cold blue-violet in the distanc
 pale gold.
 ```
 
-## 5. `tekhnicheskiy-razrez` — Технический разрез
+## 4. `tekhnicheskiy-razrez` — Разрез в реализме
 
-Под твёрдую НФ, научную фантастику, производственный роман.
+Под твёрдая НФ, научная фантастика, антиутопия, производственный роман, шахты и станции.
 
 ```text
-Style: engineering cutaway presentation, the machine opened along one plane to show its
-internal structure, precise ruled line work over restrained flat colour, even shadowless
-illumination with no dramatic light, human figures included purely for scale, muted blueprint
-palette. Callout marks appear as illegible tick strokes and short rules only — never as
-readable words or numbers.
+Style: a cutaway cross-section rendered as painterly digital concept art rather than technical drawing: the vessel, shaft or machine opened along one plane so its interior structure reads through, decks and layers legible, but lit like a real place — each compartment lit by its own practical sources, work lamps, console glow, furnace light, so the whole section reads as many lit rooms at once against a dark hull; full value range down to true black in the unlit voids; visible brush economy on metal and rock with crisp detail where the light falls; figures at work inside the compartments, each occupied with a separate action, small but individually readable and giving the scale; worn lived-in surfaces, cable runs, stains and stowage rendered with the same care as the machinery; desaturated palette split warm interior light against cold exterior dark; thin leader lines and tick marks may edge the frame as a faint drafting trace, never as readable words or numbers
 
-Scene: a cylindrical spacecraft habitat module cut open lengthwise. Decks, tanks, ducting and
-stowage are visible inside. Two crew members work at a console on the middle deck, drawn small
-and plainly, to give the scale of the structure.
-Composition: module lying across the frame horizontally, cut face toward the viewer, thin
-leader lines running out to the margins.
-Palette: slate blue, cream, oxide red, warm grey; no saturated accents.
+Scene: a Martian helium mine cut open vertically through the rock. At the bottom a claw-shaped
+drilling machine grips a glowing seam, its operator small in a holster seat, lit sulfurous
+yellow. Above it the shaft rises past working levels where crews hang on lines. Higher still,
+dwellings are cut into the rock wall, their doorways lit warm.
+Composition: the shaft running vertically through the centre of the frame, levels stacked, rock
+black between the lit pockets.
+Palette: sulfurous yellow and ember orange in the lit pockets against cold black rock.
 ```
 
 ---
 
 ## Что делать с результатом
 
-1. Файл — в `styles/<направление>/refs/ref-01.<ext>` (второй и третий — `ref-02`, `ref-03`).
-2. Запись в `style.json`: это сделает `scripts/add_ref.py` (задача 4), пока — руками.
+1. Файл — в `styles/refs/<направление>/ref-01.png` (дальше `ref-02`, `ref-03`).
+2. Запись в `styles/directions/<направление>.json`: это сделает `scripts/add_ref.py`
+   (задача 4), пока — руками.
 3. `python3 scripts/build_styles_page.py` — пересобрать `styles/index.html`.
 
-Шестое направление, `kinematograficheskiy-realizm`, уже закрыто вашими тремя генерациями —
-промпт для него не нужен.
+Направление `kinematograficheskiy-realizm` закрыто отдельно — промпт для него не нужен.
 
 Если какая-то манера выйдет мимо описания, правится **текст** `style_notes_en`, а не подбор
 картинок: текст здесь первичен, картинка — его закрепление.

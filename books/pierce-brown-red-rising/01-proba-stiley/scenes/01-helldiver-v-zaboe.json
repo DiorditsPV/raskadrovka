@@ -1,0 +1,50 @@
+{
+  "id": "01-helldiver-v-zaboe",
+  "book": "pierce-brown-red-rising",
+  "title": "Хеллдайвер в глубоком забое",
+  "order": 1,
+  "locator": {
+    "chapter": 1,
+    "paragraphs": [
+      6,
+      7
+    ]
+  },
+  "excerpt": {
+    "text": "The tunnel walls around my holster seat are bathed a sulfurous yellow by a corona of lights. The reach of the light fades as I look up the thin vertical shaft I’ve carved today. Above, precious helium-3 glimmers like liquid silver, but I’m looking at the shadows, looking for the pitvipers that curl through the darkness seeking the warmth of my drill. They’ll eat into your suit too, bite through the shell and then try to burrow into the warmest place they find, usually your belly, so they can lay their eggs. I’ve been bitten before. Still dream of the beast—black, like a thick tendril of oil. They can get as wide as a thigh and long as three men, but it’s the babies we fear. They don’t know how to ration their poison. Like me, their ancestors came from Earth, then Mars and the deep tunnels changed them.",
+    "attribution": "Pierce Brown, «Red Rising», Del Rey, 2014"
+  },
+  "caption": "Один в километре под землёй, и над ним светится то, ради чего всё.",
+  "brief": "Дэрроу сидит в кресле-кобуре на клоуДриле у самого низа пробитой им шахты. Снизу серные фонари, выше — узкий вертикальный ствол, и в породе мерцает гелий-3, как жидкое серебро. Дальше свет не достаёт: там темнота, где-то в полукилометре выше работает бригада, которую не видно.",
+  "frame": {
+    "setting": "the bottom of a narrow vertical shaft cut into rock, a claw-shaped drilling machine filling the lower frame, its rock-melting digits gripping the wall",
+    "time": "no time of day underground; the only light is machine light",
+    "characters": [
+      {
+        "ref": "darrow",
+        "state": "seated in the holster seat atop the drill, seen from behind, head tilted back to look up the shaft"
+      }
+    ],
+    "action": "he looks up the shaft he has carved, past the reach of his own lamps, into darkness",
+    "mood": "solitude at the bottom of a hole, the world reduced to vibration and heat",
+    "details": [
+      "a corona of lamps washing the rock a sulfurous yellow",
+      "helium-3 glimmering like liquid silver in a seam far above",
+      "the shaft narrowing to a dim point where the crew works unseen",
+      "condensation and ore dust hanging in the lamp beams",
+      "the scarlet sweatband dark with sweat"
+    ],
+    "composition": "figure small and low, seen from behind and slightly below; the shaft rising the full height of the frame; empty dark above him",
+    "avoid": [
+      "daylight",
+      "open sky",
+      "clean surfaces",
+      "modern mining equipment"
+    ]
+  },
+  "composition": "03-spinoy-vdal",
+  "style_refs": [],
+  "invariants": [
+    "darrow"
+  ]
+}
