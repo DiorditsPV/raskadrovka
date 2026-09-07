@@ -1,0 +1,59 @@
+{
+  "slug": "kino-dnevnoy-otsek",
+  "name": "Дневной отсек: серебристый рассеянный свет",
+  "about": "Светлый интерьер станции: рассеянный серебристый свет сверху, тёплая кожа против серого металла, стол завален бумагами, кружками и приборами — всё выписано.",
+  "style_notes_en": "painterly digital concept art with photographic weight, rendered as a film keyframe rather than a photograph or a classical painting; practical light sources visible or implied inside the frame; full value range down to true black; visible brush economy on metal and fabric while the focal object holds crisp detail; worn lived-in objects — mugs, taped paper, handwritten notes, scuffed panels — rendered with the same care as the machinery; desaturated palette split warm against cool; wide cinematic framing with foreground objects cropped by the frame edge; a bright habitat interior under soft silvery diffuse toplight, warm skin tones against grey brushed metal, a working table strewn with papers, mugs, pens and instruments all fully rendered, high detail across the whole frame, palette of aluminium grey, bone white and warm flesh",
+  "fits": [
+    "научная фантастика",
+    "твёрдая НФ",
+    "быт станции",
+    "день"
+  ],
+  "refs": {
+    "ref-01": {
+      "file": "refs/ref-01.jpg",
+      "sha256": "b4788dcb56475d029c08b395e4418fcb362cb5fbb6f600738514acc135a81679",
+      "source": "https://commons.wikimedia.org/wiki/File:ISS064E048595_-_Shannon_Walker_installing_Ethernet_cables_aboard_the_ISS.jpg",
+      "author": "NASA",
+      "license": "Public domain",
+      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "настоящий свет и настоящая фактура для этой ситуации"
+    },
+    "ref-02": {
+      "file": "refs/ref-02.jpg",
+      "sha256": "165d0ec195f01188b0c48f3d140bb17da9a8266064d1b1a329772de30476a4f9",
+      "source": "https://commons.wikimedia.org/wiki/File:ISS-65_Mark_Vande_Hei_gets_his_eyes_checked.jpg",
+      "author": "NASA",
+      "license": "Public domain",
+      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "настоящий свет и настоящая фактура для этой ситуации"
+    },
+    "ref-03": {
+      "file": "refs/ref-03.jpg",
+      "sha256": "7e884a2a252fe426fad470de6092bc8d032710149b92e5dc4ba127b795c17988",
+      "source": "https://commons.wikimedia.org/wiki/File:Iss065e162499.jpg",
+      "author": "NASA Johnson Space Center",
+      "license": "Public domain",
+      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "настоящий свет и настоящая фактура для этой ситуации"
+    },
+    "ref-04": {
+      "file": "refs/ref-04.jpg",
+      "sha256": "c65c82fcff3a2450f692e1f03fc6f896ff091a87a445875b3027ff41f7b82ee0",
+      "source": "https://commons.wikimedia.org/wiki/File:Iss065e162500.jpg",
+      "author": "NASA Johnson Space Center",
+      "license": "Public domain",
+      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "настоящий свет и настоящая фактура для этой ситуации"
+    },
+    "ref-05": {
+      "file": "refs/ref-05.jpg",
+      "sha256": "09b16bd11787fbcf3b4152b99aef6455d2685f6d03ba2ddceb8214031a6fa7ca",
+      "source": "https://commons.wikimedia.org/wiki/File:Iss065e162503.jpg",
+      "author": "NASA Johnson Space Center",
+      "license": "Public domain",
+      "license_basis": "съёмка сотрудников правительства США — общественное достояние по 17 U.S.C. §105",
+      "why": "настоящий свет и настоящая фактура для этой ситуации"
+    }
+  }
+}

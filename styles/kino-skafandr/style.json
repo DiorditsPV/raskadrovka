@@ -1,0 +1,13 @@
+{
+  "slug": "kino-skafandr",
+  "name": "Скафандр крупно: отражение в визоре",
+  "about": "Шлем крупным планом: в золотом визоре отражается всё, чего не видно в кадре, — солнце, аппарат, второй человек. Микро-детали ткани и креплений.",
+  "style_notes_en": "painterly digital concept art with photographic weight, rendered as a film keyframe rather than a photograph or a classical painting; practical light sources visible or implied inside the frame; full value range down to true black; visible brush economy on metal and fabric while the focal object holds crisp detail; worn lived-in objects — mugs, taped paper, handwritten notes, scuffed panels — rendered with the same care as the machinery; desaturated palette split warm against cool; wide cinematic framing with foreground objects cropped by the frame edge; a helmet in close-up where the gold visor reflects everything outside the frame — the sun, the vehicle, the other crew member — micro-detail in suit fabric, straps and fittings, shallow depth of field, warm gold against cold white and black",
+  "fits": [
+    "научная фантастика",
+    "твёрдая НФ",
+    "портрет",
+    "космос"
+  ],
+  "refs": {}
+}
