@@ -1,0 +1,198 @@
+"""Собирает промпт сцены из карточки, библии, направления стиля и шаблона композиции.
+
+Промпт коммитится целиком и должен пересобираться байт-в-байт: он часть провенанса кадра.
+Поэтому здесь нет ничего случайного — порядок секций и порядок входных изображений заданы
+жёстко, а весь текст берётся из файлов, а не сочиняется на месте.
+
+Роли входов и их порядок:
+    style-reference        манера: палитра, рисовка, фактура; сюжет с них не переносится
+    composition-reference  расстановка тел; серый блокинг, из него берётся только геометрия
+    character-reference    лицо, сложение и одежда конкретного героя
+    edit-target            прежний результат, когда правится готовый кадр
+
+Только стандартная библиотека.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+TEMPLATE = ROOT / 'scripts' / 'templates' / 'prompt.txt'
+
+SECTIONS = ('Use case', 'Asset', 'Input images', 'Series visual language', 'Scene',
+            'Characters', 'Action', 'Mood', 'Details', 'Composition', 'Source passage',
+            'Identity invariants', 'Avoid', 'Final constraints')
+
+GLOBAL_AVOID = [
+    'likeness of actors or film adaptations',
+    "other illustrators' recognisable compositions",
+    'signatures, watermarks, artist marks',
+    'any legible text, numbers or lettering anywhere in the frame',
+]
+
+# Сколько эталонов манеры подавать. Больше трёх — вес каждого падает, и манера начинает
+# спорить сама с собой; меньше двух — держится на одном кадре и тянет за собой его сюжет.
+MAX_STYLE_REFS = 3
+
+
+def sha256_file(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def load_style(slug, root=ROOT):
+    return json.loads((root / 'styles' / 'directions' / f'{slug}.json').read_text())
+
+
+def load_composition(comp_id, root=ROOT):
+    if not comp_id:
+        return None
+    path = root / 'compositions' / 'templates' / f'{comp_id}.json'
+    return json.loads(path.read_text()) if path.is_file() else None
+
+
+def pick_style_refs(style, wanted=None, limit=MAX_STYLE_REFS):
+    """Эталоны манеры: либо перечисленные в карточке, либо первые по порядку."""
+    keys = wanted or sorted(style['refs'])
+    return [(k, style['refs'][k]) for k in keys if k in style['refs']][:limit]
+
+
+def inputs_for(card, bible, style, composition, root=ROOT, book_dir=None, wanted_refs=None):
+    """Список входных изображений в том порядке, в котором они уйдут в генератор."""
+    out = []
+    for ref_id, ref in pick_style_refs(style, wanted_refs):
+        out.append({'role': 'style-reference', 'ref': ref_id,
+                    'path': (root / 'styles' / ref['file']).as_posix(),
+                    'notes_en': style['style_notes_en']})
+    if composition:
+        out.append({'role': 'composition-reference', 'ref': composition['id'],
+                    'path': (root / 'compositions' / composition['file']).as_posix()})
+    for key in card['invariants']:
+        person = bible['characters'].get(key, {})
+        if 'sheet' in person and book_dir:
+            out.append({'role': 'character-reference', 'ref': key,
+                        'path': (book_dir / person['sheet']).as_posix(),
+                        'name_en': key})
+    return out
+
+
+def render_input_images(inputs, bible):
+    lines = []
+    for n, item in enumerate(inputs, 1):
+        if item['role'] == 'style-reference':
+            lines.append(
+                f"Image {n} is a STYLE REFERENCE: take from it only the manner — "
+                f"palette, drawing, texture, light logic. Do not copy its subjects, figures, "
+                f"buildings or lettering.")
+        elif item['role'] == 'composition-reference':
+            lines.append(
+                f"Image {n} is a COMPOSITION REFERENCE: a grey blockout. Take from it only "
+                f"where the bodies stand, how they are turned and how the frame is cut. Its "
+                f"grey surfaces, empty background and flat light are NOT part of the picture.")
+        elif item['role'] == 'character-reference':
+            name = bible['characters'][item['ref']].get('name', item['ref'])
+            lines.append(
+                f"Image {n} is a CHARACTER REFERENCE for {name}: keep this face, build, hair "
+                f"and clothing. Ignore its neutral pose, flat lighting and empty background.")
+        elif item['role'] == 'edit-target':
+            lines.append(
+                f"Image {n} is the EDIT TARGET: the previous version of this frame. Keep "
+                f"everything except what the correction below asks to change.")
+    return '\n'.join(lines)
+
+
+def render_characters(card, bible):
+    """Кто в кадре и что делает. Внешность здесь не повторяется — она идёт ниже,
+    в Identity invariants, дословно из библии; дублировать её значит вдвое раздуть промпт."""
+    lines = []
+    for person in card['frame']['characters']:
+        entry = bible['characters'].get(person['ref'], {})
+        lines.append(f"- {entry.get('name', person['ref'])}: {person['state']}")
+    return '\n'.join(lines)
+
+
+def render_invariants(bible, keys):
+    lines = []
+    for key in keys:
+        entry = bible['characters'].get(key)
+        if entry is None:
+            raise KeyError(f'нет в библии: {key}')
+        lines.append(f"- {entry.get('name', key)}: {entry['appearance_en']}")
+    return '\n'.join(lines)
+
+
+def render_prompt(card, bible, style, composition, book, inputs):
+    frame = card['frame']
+    avoid = list(frame.get('avoid', [])) + GLOBAL_AVOID
+    parts = [
+        'Use case: one illustration for a book scene series.',
+        'Asset: a single image, 3:2 landscape.',
+        'Input images:\n' + render_input_images(inputs, bible),
+        'Series visual language: ' + style['style_notes_en'] + '.',
+        'Scene: ' + frame['setting'] + '. Time: ' + frame['time'] + '.',
+        'Characters:\n' + render_characters(card, bible),
+        'Action: ' + frame['action'] + '.',
+        'Mood: ' + frame['mood'] + '.',
+        'Details: ' + '; '.join(frame['details']) + '.',
+        'Composition: ' + frame['composition'] + '.',
+        ('Source passage (context only, in the book\'s own words; do not render any of it as '
+         'lettering):\n' + card['excerpt']['text']),
+        'Identity invariants:\n' + render_invariants(bible, card['invariants']),
+        'Avoid: ' + '; '.join(avoid) + '.',
+        ('Final constraints: the scene content comes from this card, not from the reference '
+         'images. Keep the manner of the style references and the identity of the character '
+         'references, and invent nothing that contradicts the details above.'),
+    ]
+    return '\n\n'.join(parts) + '\n'
+
+
+def template_sha256(root=ROOT):
+    return sha256_file(TEMPLATE) if TEMPLATE.is_file() else ''
+
+
+def build(batch_dir, scene_id, style_slug, root=ROOT, use_composition=True, wanted_refs=None):
+    batch_dir = Path(batch_dir)
+    book_dir = batch_dir.parent
+    card = json.loads((batch_dir / 'scenes' / f'{scene_id}.json').read_text())
+    bible = json.loads((book_dir / 'bible.json').read_text())
+    book = json.loads((book_dir / 'book.json').read_text())
+    style = load_style(style_slug, root)
+    composition = load_composition(card.get('composition') if use_composition else None, root)
+    inputs = inputs_for(card, bible, style, composition, root, book_dir, wanted_refs)
+    return render_prompt(card, bible, style, composition, book, inputs), inputs
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description='Сборка промпта сцены')
+    ap.add_argument('batch', help='папка партии, например books/<книга>/01-proba-stiley')
+    ap.add_argument('scene')
+    ap.add_argument('--style', required=True)
+    ap.add_argument('--no-composition', action='store_true')
+    ap.add_argument('--refs', nargs='*', help='какие эталоны манеры брать, например ref-01 ref-03')
+    ap.add_argument('--check', action='store_true',
+                    help='сверить с сохранённым промптом байт-в-байт, 1 при расхождении')
+    ap.add_argument('--out', help='куда записать; по умолчанию <партия>/prompt/<сцена>.txt')
+    args = ap.parse_args(argv)
+
+    text, inputs = build(args.batch, args.scene, args.style,
+                         use_composition=not args.no_composition, wanted_refs=args.refs)
+    out = Path(args.out) if args.out else Path(args.batch) / 'prompt' / f'{args.scene}.txt'
+    if args.check:
+        if not out.is_file():
+            print(f'нет промпта для сверки: {out}')
+            return 1
+        if out.read_text() != text:
+            print(f'промпт разошёлся со сборкой: {out}')
+            return 1
+        print(f'промпт сходится: {out}')
+        return 0
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text)
+    print(f'{out}  {len(text)} знаков, входов {len(inputs)}')
+    for n, i in enumerate(inputs, 1):
+        print(f'  {n}. {i["role"]:<22} {i["ref"]}')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

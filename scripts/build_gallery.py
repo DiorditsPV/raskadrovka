@@ -75,8 +75,7 @@ STYLE = (
     'h2{font-size:28px;font-weight:550;margin:0 0 28px}h3{font-size:21px;font-weight:540;line-height:1.3;margin:0 0 8px}'
     '.quote{font-style:italic;margin:0 0 6px}section{margin-bottom:48px;scroll-margin-top:24px}'
     'nav{display:flex;gap:14px 22px;flex-wrap:wrap;margin:14px 0}a{color:#e1c99a;text-underline-offset:4px}a:hover{color:#fff}'
-    'a:focus-visible,summary:focus-visible{outline:2px solid #e1c99a;outline-offset:5px}'
-    '.history{border-top:1px solid #353b35;padding:24px 0}.history summary{font-size:22px;cursor:pointer;margin-bottom:24px}'
+    'a:focus-visible{outline:2px solid #e1c99a;outline-offset:5px}'
     'footer{border-top:1px solid #353b35;color:#969d94;font-size:14px;line-height:1.6}'
     '@media(max-width:900px){.grid{grid-template-columns:1fr}header,main,footer{padding-left:18px;padding-right:18px}header{padding-top:34px}}'
 )
@@ -84,8 +83,7 @@ STYLE = (
 
 def main():
     requests = sorted(BOOKS.glob('*/*/metadata/request.json'))
-    groups, previous, books = {}, [], {}
-    count = 0
+    groups, books = {}, {}
     for file in requests:
         base = file.parent.parent
         assert all((base / folder).is_dir() for folder in ['input', 'prompt', 'scenes', 'metadata']), base
@@ -96,20 +94,15 @@ def main():
         assert manifest['book'] == slug, file
         books.setdefault(slug, load_book(slug))
         for scene in manifest['scenes']:
-            rendered = card(base, scene)
             key = (scene.get('order', 0), scene['id'])
-            (groups.setdefault(slug, []) if scene['latest'] else previous).append((key, rendered))
-            count += 1
-    current_count = sum(len(v) for v in groups.values())
+            groups.setdefault(slug, []).append((key, card(base, scene)))
+    count = sum(len(v) for v in groups.values())
     sections = []
     for slug in sorted(groups):
         book = books[slug]
         title = f"{book['author']}. «{book['title']}»"
         cards = ''.join(c for _, c in sorted(groups[slug]))
         sections.append(f'<section id="{ESC(slug)}"><h2>{ESC(title)}</h2><div class="grid">{cards}</div></section>')
-    if previous:
-        cards = ''.join(c for _, c in sorted(previous))
-        sections.append(f'<details class="history" id="previous"><summary>Прежние версии · {len(previous)}</summary><div class="grid">{cards}</div></details>')
     if not sections:
         sections.append('<p>Пока ни одной сцены: первая книга появится по плану ребилда.</p>')
     menu = ''.join(f'<a href="#{ESC(slug)}">{ESC(books[slug]["title"])}</a>' for slug in sorted(groups))
@@ -117,7 +110,7 @@ def main():
         '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>Раскадровка — сцены из книг</title><style>{STYLE}</style></head><body><header>'
         '<div class="eyebrow">Раскадровка</div><h1>Сцены из книг</h1>'
-        f'<p>{current_count} сцен — по одной актуальной версии каждой. Все изображения собраны в общей папке output; карточки сцен, промпты и метаданные — по партиям.</p>'
+        f'<p>{count} сцен из книг. Все изображения собраны в общей папке output; карточки сцен, промпты и метаданные — по партиям. Исправление сцены — новая партия, прежняя уходит в локальный архив.</p>'
         f'<nav aria-label="Книги">{menu}</nav></header><main>' + ''.join(sections) +
         '</main><footer><a href="README.md">О проекте и структуре</a> · <a href="RIGHTS.md">Права и публикация</a></footer></body></html>'
     )
@@ -130,7 +123,7 @@ def main():
 
     Links().feed(page)
     (ROOT / 'index.html').write_text(page)
-    print(f'Галерея проверена: партий {len(requests)}, актуальных сцен {current_count}, результатов {count}; хеши и локальные ссылки сходятся.')
+    print(f'Галерея собрана: партий {len(requests)}, сцен {count}; хеши и локальные ссылки сходятся.')
 
 
 if __name__ == '__main__':

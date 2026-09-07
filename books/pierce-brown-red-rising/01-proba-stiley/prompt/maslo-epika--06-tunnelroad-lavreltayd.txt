@@ -1,0 +1,34 @@
+Use case: one illustration for a book scene series.
+
+Asset: a single image, 3:2 landscape.
+
+Input images:
+Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
+Image 4 is a CHARACTER REFERENCE for дядя Нарол: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+
+Series visual language: thick impasto oil with glazed transparent darks, vast sky occupying most of the frame, layered atmospheric perspective with visible air between planes, figures small against landscape scale, romantic painting logic rather than concept art, warm earth palette against cool distance, visible canvas weave.
+
+Scene: a long low tunnel corridor hung with strings of lights, rock walls, a crowd flowing along it. Time: evening of the feast.
+
+Characters:
+- дядя Нарол: in the near foreground, playing the zither slung at his hips, head down over the strings, drunk and almost smiling
+
+Action: he plays while children dance around his legs and the crowd streams past toward the Common.
+
+Mood: the one night a year the misery lifts.
+
+Details: strings of small bulbs receding down the corridor; children caught mid-step around his knees; boys running along the wall reaching for the ceiling; the crowd dissolving into warm haze in the depth; his crew-chief head unit pushed up on his brow.
+
+Composition: Narol large in the near foreground at the left, cropped at the thigh; the corridor and crowd receding small into the depth at the right.
+
+Source passage (context only, in the book's own words; do not render any of it as lettering):
+Lights are strung along the lengthy corridor. In the distance, drunk Uncle Narol, old now at thirty-five, plays his zither for the children who dance about our legs; even he cannot scowl forever. He wears the instrument suspended on shoulder straps so that it rests at his hips, with its plastic soundboard and its many taut metal strings facing up toward the ceiling. The right thumb strums the strings, except when the index finger drops down or when the thumb picks single strings, all while the left hand picks out the bass line string by string. It is maddeningly difficult to make the zither sound anything but mournful. Uncle Narol’s are equal to the task, though mine only make tragic music.
+
+Identity invariants:
+- дядя Нарол: a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest
+
+Avoid: daylight; open sky; sober formality; empty corridor; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.

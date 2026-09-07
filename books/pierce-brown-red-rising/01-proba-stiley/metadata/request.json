@@ -1,0 +1,506 @@
+{
+  "schema_version": 2,
+  "book": "pierce-brown-red-rising",
+  "title": "Red Rising — проба направлений",
+  "request": "По два кадра на каждое из пяти направлений плюс пара «с шаблоном композиции и без», чтобы выбрать манеру для книги и решить вопрос о шаблонах.",
+  "style": "проба-нескольких-направлений",
+  "path_base": "request-directory",
+  "scenes": [
+    {
+      "id": "kinematograficheskiy-realizm--01-helldiver-v-zaboe",
+      "title": "Хеллдайвер в глубоком забое — kinematograficheskiy-realizm",
+      "order": 1,
+      "caption": "Один в километре под землёй, и над ним светится то, ради чего всё.",
+      "style": "kinematograficheskiy-realizm",
+      "style_refs": [
+        "ref-01",
+        "ref-05"
+      ],
+      "composition": "03-spinoy-vdal",
+      "card": "scenes/01-helldiver-v-zaboe.json",
+      "card_sha256": "2feda447d2ff24bac7997f968133695286c7054d2538a921c3f5081fbc5aeabb",
+      "prompt": "prompt/kinematograficheskiy-realizm--01-helldiver-v-zaboe.txt",
+      "prompt_sha256": "05ae7362d89e069ec4a3b0c02939d7e7668d4d3480940745a3ab43fc05ea7e79",
+      "output": "../../../output/pierce-brown-red-rising--proba--kinematograficheskiy-realizm--01-helldiver-v-zaboe.png",
+      "output_sha256": "f4ab4cece92eb24c6854aba5410e06d8bb4c28701b01f0713ff42130aa172233",
+      "inputs": [
+        {
+          "path": "input/style--kinematograficheskiy-realizm--ref-01.jpeg",
+          "sha256": "48a49ca8b61f878f19968b9c87958a874af1c71028d611b145f7bf0903a469c2",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--kinematograficheskiy-realizm--ref-05.png",
+          "sha256": "9a96c24a7e8cdb281fbb26b2745a0f4b0db605de6cecccdbc865ae83ab9c1c2d",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--03-spinoy-vdal.png",
+          "sha256": "487dc6cbb6b03dcaf8f3ecdcf103d844e59c1f8e18da792dd04e8e3b3ac66de6",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "kinematograficheskiy-realizm--02-spusk-k-karmanu",
+      "title": "Спуск к газовому карману — kinematograficheskiy-realizm",
+      "order": 2,
+      "caption": "Сто метров вниз между пальцами бура, со сканером в руке.",
+      "style": "kinematograficheskiy-realizm",
+      "style_refs": [
+        "ref-01",
+        "ref-05"
+      ],
+      "composition": "02-krupno-i-daleko",
+      "card": "scenes/02-spusk-k-karmanu.json",
+      "card_sha256": "24fd16f2ca5090e8f9d66facc9d0c2fdd8b092268edc945bc36ab8817c0167c0",
+      "prompt": "prompt/kinematograficheskiy-realizm--02-spusk-k-karmanu.txt",
+      "prompt_sha256": "107ef04637d31299c19201a9085946d0eabb340c35d553097f023b8c8b98d758",
+      "output": "../../../output/pierce-brown-red-rising--proba--kinematograficheskiy-realizm--02-spusk-k-karmanu.png",
+      "output_sha256": "00bbaac88e7b84d6baeaf7f1f4abe274ca3546398fb37f04ebda78dc4b0d3b32",
+      "inputs": [
+        {
+          "path": "input/style--kinematograficheskiy-realizm--ref-01.jpeg",
+          "sha256": "48a49ca8b61f878f19968b9c87958a874af1c71028d611b145f7bf0903a469c2",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--kinematograficheskiy-realizm--ref-05.png",
+          "sha256": "9a96c24a7e8cdb281fbb26b2745a0f4b0db605de6cecccdbc865ae83ab9c1c2d",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--02-krupno-i-daleko.png",
+          "sha256": "7be0b49054c1f7e32b7dbb4dc85ca0327489e4e78a475fa6c6a7fbdc198d5e94",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "tush-i-plashki--03-ugly-dan-kidaet-kamen",
+      "title": "Урод Дэн бросает камешек — tush-i-plashki",
+      "order": 3,
+      "caption": "Серый капитан швыряет камешек в шахтёра, и шахтёр кланяется.",
+      "style": "tush-i-plashki",
+      "style_refs": [
+        "ref-01",
+        "ref-03"
+      ],
+      "composition": "01-dvoe-litsom",
+      "card": "scenes/03-ugly-dan-kidaet-kamen.json",
+      "card_sha256": "1853c52980276eb202a3c4034259d02a234251f8012b3998e9c0d0364814e08b",
+      "prompt": "prompt/tush-i-plashki--03-ugly-dan-kidaet-kamen.txt",
+      "prompt_sha256": "0e76f12380fdd72e4f264769e08f7bee62acb7da420de492dd85ed2d754a1f2a",
+      "output": "../../../output/pierce-brown-red-rising--proba--tush-i-plashki--03-ugly-dan-kidaet-kamen.png",
+      "output_sha256": "920a4d2d60391c1fcff012396e6d598ca1107c06ea492cee4cfdeaf1662acc8b",
+      "inputs": [
+        {
+          "path": "input/style--tush-i-plashki--ref-01.png",
+          "sha256": "7aba4b29fba8854072ec7e0fa2a76a757a64b62fa9c0b2bd8722c0d7405ebdf4",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--tush-i-plashki--ref-03.png",
+          "sha256": "15fe92b59a50429020a35dfe0f61688f45a159f70f54ea4330b4db458fe13fee",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--01-dvoe-litsom.png",
+          "sha256": "537302a2e9f1d41f1b73bcec82699b85b5b972d65e7ab63073834d645d4276a0",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--ugly_dan.png",
+          "sha256": "b20ee9eaa5ea09f5b6620230b9815ebf780186d3ba154a8b41d4f8d874203216",
+          "role": "character-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "tush-i-plashki--03-ugly-dan-kidaet-kamen--bez-kompozitsii",
+      "title": "Урод Дэн бросает камешек — tush-i-plashki (без композиции)",
+      "order": 4,
+      "caption": "Серый капитан швыряет камешек в шахтёра, и шахтёр кланяется.",
+      "style": "tush-i-plashki",
+      "style_refs": [
+        "ref-01",
+        "ref-03"
+      ],
+      "composition": null,
+      "card": "scenes/03-ugly-dan-kidaet-kamen.json",
+      "card_sha256": "1853c52980276eb202a3c4034259d02a234251f8012b3998e9c0d0364814e08b",
+      "prompt": "prompt/tush-i-plashki--03-ugly-dan-kidaet-kamen--bez-kompozitsii.txt",
+      "prompt_sha256": "68dd4ce2402ccd77328d32fd9be01fbcce95e59947ddae397c2332241bdab48e",
+      "output": "../../../output/pierce-brown-red-rising--proba--tush-i-plashki--03-ugly-dan-kidaet-kamen--bez-kompozitsii.png",
+      "output_sha256": "fb3c5b198a028e7d56de501be9a4789e340b9bd7cba3d92333d237e5ab578090",
+      "inputs": [
+        {
+          "path": "input/style--tush-i-plashki--ref-01.png",
+          "sha256": "7aba4b29fba8854072ec7e0fa2a76a757a64b62fa9c0b2bd8722c0d7405ebdf4",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--tush-i-plashki--ref-03.png",
+          "sha256": "15fe92b59a50429020a35dfe0f61688f45a159f70f54ea4330b4db458fe13fee",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--ugly_dan.png",
+          "sha256": "b20ee9eaa5ea09f5b6620230b9815ebf780186d3ba154a8b41d4f8d874203216",
+          "role": "character-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "tush-i-plashki--07-litso-v-shleme",
+      "title": "Лицо под забралом — tush-i-plashki",
+      "order": 5,
+      "caption": "Пот не вытереть: между рукой и глазами — забрало.",
+      "style": "tush-i-plashki",
+      "style_refs": [
+        "ref-01",
+        "ref-03"
+      ],
+      "composition": "04-krupny-plan",
+      "card": "scenes/07-litso-v-shleme.json",
+      "card_sha256": "feeb549cc668cfb9b8d1836c591995189c07e07e20256bd2f86040a014caf3fa",
+      "prompt": "prompt/tush-i-plashki--07-litso-v-shleme.txt",
+      "prompt_sha256": "542c691d9baad1f8b98543f9c032f688d2b7d73968a3298f9f3cbbd1099e2e10",
+      "output": "../../../output/pierce-brown-red-rising--proba--tush-i-plashki--07-litso-v-shleme.png",
+      "output_sha256": "135cff9b5e9e54db64f79dc5cdbdf1529364bbb21b9b34b29aa9237f5127d6dc",
+      "inputs": [
+        {
+          "path": "input/style--tush-i-plashki--ref-01.png",
+          "sha256": "7aba4b29fba8854072ec7e0fa2a76a757a64b62fa9c0b2bd8722c0d7405ebdf4",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--tush-i-plashki--ref-03.png",
+          "sha256": "15fe92b59a50429020a35dfe0f61688f45a159f70f54ea4330b4db458fe13fee",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--04-krupny-plan.png",
+          "sha256": "22278e764023d5bd27e4567dc982bd47c74df9588d6cc3d73797c83cd61acf78",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "akvarel-po-peru--04-eo-v-pautine",
+      "title": "Ио в дверях, волосы в паутине — akvarel-po-peru",
+      "order": 6,
+      "caption": "Она вышла прямо из Уэбберри, и в волосах ещё паутина.",
+      "style": "akvarel-po-peru",
+      "style_refs": [
+        "ref-01",
+        "ref-03"
+      ],
+      "composition": "01-dvoe-litsom",
+      "card": "scenes/04-eo-v-pautine.json",
+      "card_sha256": "e051a1e3e7ec0a9b7e7f9a98ad6034b9e7eb6a27476d3885974dfa1e909dfa98",
+      "prompt": "prompt/akvarel-po-peru--04-eo-v-pautine.txt",
+      "prompt_sha256": "c58a84e252d8bf2af0283fbeaf5d10c6fecab230caacd5f90359765a8a526030",
+      "output": "../../../output/pierce-brown-red-rising--proba--akvarel-po-peru--04-eo-v-pautine.png",
+      "output_sha256": "6c5bbd1f0870ab2770fe391155aa5154878f4402200f1078137c0f7694278414",
+      "inputs": [
+        {
+          "path": "input/style--akvarel-po-peru--ref-01.png",
+          "sha256": "8d2c142668ff49e6d879521e6eaf190aa1a98a76756eeff0537f1cca3ae4edb8",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--akvarel-po-peru--ref-03.png",
+          "sha256": "94bef0afb9582ab94b34af92f05b44de0a92496fe66daa6bda5b7c1bb70f459f",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--01-dvoe-litsom.png",
+          "sha256": "537302a2e9f1d41f1b73bcec82699b85b5b972d65e7ab63073834d645d4276a0",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--eo.png",
+          "sha256": "8fe82935c6632233ae55f4e72b7a6af7f86395bf61db616a73d82f5b8c8def09",
+          "role": "character-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "akvarel-po-peru--08-narol-s-tsitroy",
+      "title": "Нарол с цитрой — akvarel-po-peru",
+      "order": 7,
+      "caption": "Тридцать пять — и такой старый.",
+      "style": "akvarel-po-peru",
+      "style_refs": [
+        "ref-02",
+        "ref-04"
+      ],
+      "composition": "04-krupny-plan",
+      "card": "scenes/08-narol-s-tsitroy.json",
+      "card_sha256": "2dc81154c43c48a5fd7635f9253e8a1d64d3a51aecfd13f3087f6f3b7df97089",
+      "prompt": "prompt/akvarel-po-peru--08-narol-s-tsitroy.txt",
+      "prompt_sha256": "51d986c453827fb139090b6c7fee952a8c9a6238bde23c291f0003441ca97d86",
+      "output": "../../../output/pierce-brown-red-rising--proba--akvarel-po-peru--08-narol-s-tsitroy.png",
+      "output_sha256": "a1690f334b4586401c86ee4ff1ed53056a8090dc87bc33c9363933049be8a073",
+      "inputs": [
+        {
+          "path": "input/style--akvarel-po-peru--ref-02.png",
+          "sha256": "697d89342964159c4c69f75d11c97b9f58e9332547b462e4b36b78f25426b096",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--akvarel-po-peru--ref-04.png",
+          "sha256": "0fa1bc3483ca67a4a1f6474b92836a57233ed93a831f67188122fb59555a3b14",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--04-krupny-plan.png",
+          "sha256": "22278e764023d5bd27e4567dc982bd47c74df9588d6cc3d73797c83cd61acf78",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--narol.png",
+          "sha256": "289f9eee63c6324a155ffff363519688a8fba21bae504f2be7851faf0098c99a",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "maslo-epika--05-poselok-v-stene",
+      "title": "Посёлок в стене шахты — maslo-epika",
+      "order": 8,
+      "caption": "Дома выдолблены в стене старой выработки, провода вьются по потолку.",
+      "style": "maslo-epika",
+      "style_refs": [
+        "ref-01",
+        "ref-03"
+      ],
+      "composition": "03-spinoy-vdal",
+      "card": "scenes/05-poselok-v-stene.json",
+      "card_sha256": "5154044c3d94c6f5b7d057fffa379ed8914a6ac6f97fd7042f1652ff4fec3b44",
+      "prompt": "prompt/maslo-epika--05-poselok-v-stene.txt",
+      "prompt_sha256": "db55044de0189cb6203dc7d673cc1838d749c4ae4c442f1c265dd615111d8c7b",
+      "output": "../../../output/pierce-brown-red-rising--proba--maslo-epika--05-poselok-v-stene.png",
+      "output_sha256": "8638870233cfb06b6dd7225b8ac2a149e3e4bcb047f96d517a59d1caf4487575",
+      "inputs": [
+        {
+          "path": "input/style--maslo-epika--ref-01.png",
+          "sha256": "d71cd272304c7eebb9ce90f9acdbc73a60f81e65b0b89798bf713335ebcf7476",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--maslo-epika--ref-03.png",
+          "sha256": "c98ba0bff3b3cf55a6f82d672381fc1ed1fb3e29690a0a271dd0d518ab79aa60",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--03-spinoy-vdal.png",
+          "sha256": "487dc6cbb6b03dcaf8f3ecdcf103d844e59c1f8e18da792dd04e8e3b3ac66de6",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "maslo-epika--06-tunnelroad-lavreltayd",
+      "title": "Туннельная дорога на Лаврелтайд — maslo-epika",
+      "order": 9,
+      "caption": "Пьяный Нарол играет на цитре, дети пляшут под ногами.",
+      "style": "maslo-epika",
+      "style_refs": [
+        "ref-01",
+        "ref-04"
+      ],
+      "composition": "02-krupno-i-daleko",
+      "card": "scenes/06-tunnelroad-lavreltayd.json",
+      "card_sha256": "cac9286f3e32c566a6d413b50fee2c64a455107609613ffb0090c1426f6ffa58",
+      "prompt": "prompt/maslo-epika--06-tunnelroad-lavreltayd.txt",
+      "prompt_sha256": "85e13665bc52869ab5f5421c4e012fbef18b5a5a3db8d89366ebeb8707533f21",
+      "output": "../../../output/pierce-brown-red-rising--proba--maslo-epika--06-tunnelroad-lavreltayd.png",
+      "output_sha256": "fc92a7c0fb5603adfada26900fcdc81493a38b9091f42c7c2107afbb0cba6867",
+      "inputs": [
+        {
+          "path": "input/style--maslo-epika--ref-01.png",
+          "sha256": "d71cd272304c7eebb9ce90f9acdbc73a60f81e65b0b89798bf713335ebcf7476",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--maslo-epika--ref-04.png",
+          "sha256": "edbe6510a6daa302e690cdefca39d3d8d80a237cde6f6839d5007f902d743d45",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--02-krupno-i-daleko.png",
+          "sha256": "7be0b49054c1f7e32b7dbb4dc85ca0327489e4e78a475fa6c6a7fbdc198d5e94",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--narol.png",
+          "sha256": "289f9eee63c6324a155ffff363519688a8fba21bae504f2be7851faf0098c99a",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "tekhnicheskiy-razrez--01-helldiver-v-zaboe",
+      "title": "Хеллдайвер в глубоком забое — tekhnicheskiy-razrez",
+      "order": 10,
+      "caption": "Один в километре под землёй, и над ним светится то, ради чего всё.",
+      "style": "tekhnicheskiy-razrez",
+      "style_refs": [
+        "ref-01",
+        "ref-03"
+      ],
+      "composition": "03-spinoy-vdal",
+      "card": "scenes/01-helldiver-v-zaboe.json",
+      "card_sha256": "2feda447d2ff24bac7997f968133695286c7054d2538a921c3f5081fbc5aeabb",
+      "prompt": "prompt/tekhnicheskiy-razrez--01-helldiver-v-zaboe.txt",
+      "prompt_sha256": "5d6979778368fe3b42520853ac62db03ff495bb684cd1e45ba3f5bb0bcdbf9e5",
+      "output": "../../../output/pierce-brown-red-rising--proba--tekhnicheskiy-razrez--01-helldiver-v-zaboe.png",
+      "output_sha256": "907d822397d23f7a2aef1aa3959eb80e369d7f8369f6035a738d6d6000cf6d26",
+      "inputs": [
+        {
+          "path": "input/style--tekhnicheskiy-razrez--ref-01.png",
+          "sha256": "7117689e6cab4de8819a8adce640c57384dcfb6dbaffe70cf83533ec3e276833",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--tekhnicheskiy-razrez--ref-03.png",
+          "sha256": "919d1af079dd9257a99c5b9cace3b5dd69e8a8e04c4ba02fab98a8778e0a75a2",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--03-spinoy-vdal.png",
+          "sha256": "487dc6cbb6b03dcaf8f3ecdcf103d844e59c1f8e18da792dd04e8e3b3ac66de6",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    },
+    {
+      "id": "tekhnicheskiy-razrez--02-spusk-k-karmanu",
+      "title": "Спуск к газовому карману — tekhnicheskiy-razrez",
+      "order": 11,
+      "caption": "Сто метров вниз между пальцами бура, со сканером в руке.",
+      "style": "tekhnicheskiy-razrez",
+      "style_refs": [
+        "ref-01",
+        "ref-03"
+      ],
+      "composition": "02-krupno-i-daleko",
+      "card": "scenes/02-spusk-k-karmanu.json",
+      "card_sha256": "24fd16f2ca5090e8f9d66facc9d0c2fdd8b092268edc945bc36ab8817c0167c0",
+      "prompt": "prompt/tekhnicheskiy-razrez--02-spusk-k-karmanu.txt",
+      "prompt_sha256": "d79f4e245964d09713c94df1bd5868527d7c14d8acb48b70445322f7ecd857b3",
+      "output": "../../../output/pierce-brown-red-rising--proba--tekhnicheskiy-razrez--02-spusk-k-karmanu.png",
+      "output_sha256": "8050bc33a10e84eab7c22adbd2fda5bccd8c1f68ed863b8d5502bb9d6e3cd000",
+      "inputs": [
+        {
+          "path": "input/style--tekhnicheskiy-razrez--ref-01.png",
+          "sha256": "7117689e6cab4de8819a8adce640c57384dcfb6dbaffe70cf83533ec3e276833",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/style--tekhnicheskiy-razrez--ref-03.png",
+          "sha256": "919d1af079dd9257a99c5b9cace3b5dd69e8a8e04c4ba02fab98a8778e0a75a2",
+          "role": "style-reference",
+          "stored": true
+        },
+        {
+          "path": "input/composition--refs--02-krupno-i-daleko.png",
+          "sha256": "7be0b49054c1f7e32b7dbb4dc85ca0327489e4e78a475fa6c6a7fbdc198d5e94",
+          "role": "composition-reference",
+          "stored": true
+        },
+        {
+          "path": "input/character--characters--darrow.png",
+          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
+          "role": "character-reference",
+          "stored": true
+        }
+      ]
+    }
+  ]
+}

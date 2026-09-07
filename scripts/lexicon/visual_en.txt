@@ -1,0 +1,17 @@
+# Слова, по которым абзац опознаётся как зримый: свет, погода, цвет, поза, движение,
+# обстановка, материал. Дополнять без опаски — лишнее слово даст лишнего кандидата,
+# недостающее спрячет сцену.
+light lights lamp lamps lantern torch candle glow glare beam shaft flare spark ember
+sun sunlight moon moonlight star stars dawn dusk twilight shadow shadows dark darkness
+fog mist haze smoke steam dust rain snow wind storm frost ice cold heat
+red crimson scarlet rust orange amber gold golden yellow green blue indigo violet
+grey gray black white pale bright dim silver bronze copper
+stood standing sat sitting lay lying knelt leaned leaning bent stooped rose stepped
+walked ran running climbed jumped fell reached grabbed held gripped turned looked
+watched stared glanced pointed raised lowered dragged pushed pulled swung struck
+door doorway gate wall window stair stairs staircase ladder rope corridor hall room
+table chair bench bed floor ceiling roof tunnel shaft cave rock stone metal iron steel
+glass wood cloth leather rope chain cable pipe wire machine engine drill blade knife
+sword helmet mask armour armor coat cloak boots gloves banner flag
+river sea shore cliff ridge valley field forest tree road bridge tower ship boat
+crowd figures figure silhouette face hands eyes

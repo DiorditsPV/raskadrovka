@@ -1,0 +1,34 @@
+Use case: one illustration for a book scene series.
+
+Asset: a single image, 3:2 landscape.
+
+Input images:
+Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
+Image 4 is a CHARACTER REFERENCE for Дэрроу: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+
+Series visual language: thick impasto oil with glazed transparent darks, vast sky occupying most of the frame, layered atmospheric perspective with visible air between planes, figures small against landscape scale, romantic painting logic rather than concept art, warm earth palette against cool distance, visible canvas weave.
+
+Scene: a cavern whose rock walls are honeycombed with dwellings cut into the stone, steep paths and rope pulleys climbing the face. Time: evening, before the feast.
+
+Characters:
+- Дэрроу: standing on a steep path high on the wall, seen from behind, one hand on the rock
+
+Action: he stops on the path and looks down over the township.
+
+Mood: home, and how small it is.
+
+Details: a jungle of black and red electrical cable tangled along the cavern ceiling; lamps hanging from the cables, swaying in circulated air; a massive holoCan box hanging at the centre of the cavern; washing and cookfires at the dwelling mouths; figures small on the floor far below.
+
+Composition: figure in the near foreground seen from behind, cropped at the hip, the cavern opening away and down in front of him.
+
+Source passage (context only, in the book's own words; do not render any of it as lettering):
+A mess of electrical wires tangle together along the cavern’s ceiling like a jungle of black and red vines. Lights hang down from the jungle, swaying gently as air from the Common’s central oxygen system circulates. At the center of the township dangles a massive holoCan. It’s a square box with images on each side. Pixels are blacked out and the image is faded and fuzzy, but never has the thing faltered, never has it turned off. It bathes our cluster of homes in its own pale light. Videos from the Society.
+
+Identity invariants:
+- Дэрроу: a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg
+
+Avoid: sky; daylight; clean architecture; wide streets; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.

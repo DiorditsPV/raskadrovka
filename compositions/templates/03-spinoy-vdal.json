@@ -1,0 +1,18 @@
+{
+  "id": "03-spinoy-vdal",
+  "name": "Спиной к камере, смотрит вдаль",
+  "about": "Зритель смотрит вместе с героем: фигура на переднем плане со спины, перед ней пусто.",
+  "figures": [
+    {
+      "key": "a",
+      "value": "тёмно-серая",
+      "where": "передний план по центру-слева, спиной, по бедро"
+    }
+  ],
+  "camera": "уровень плеча, за спиной",
+  "file": "refs/03-spinoy-vdal.png",
+  "sha256": "487dc6cbb6b03dcaf8f3ecdcf103d844e59c1f8e18da792dd04e8e3b3ac66de6",
+  "source": "сгенерировано скриптом compositions.py через codex exec, 2026-09-07",
+  "license": "generated-here",
+  "prompt_en": "Style: a flat composition blockout, NOT an illustration and NOT a finished picture.\nFeatureless smooth grey mannequin figures: no faces, no hair, no clothing, no fingers, no\ntexture, no pattern. Plain flat mid-grey background. Environment reduced to the few plain grey\nboxes and planes needed to place the figures — a table is a box, a wall is a plane, a doorway is\na rectangular hole. Even flat illumination with no cast shadows, no rim light, no atmosphere, no\ndepth haze. Greyscale only: no colour anywhere. No linework, no hatching, no rendering style, no\nartistic flourish. This image exists solely to record where bodies are in space and how they are\nturned. Each figure is a distinct flat value of grey so they can be told apart.\n\nOne dark grey mannequin figure stands in the near foreground with its back to the\ncamera, cropped at the hip by the bottom edge, looking away into empty space. A flat grey ground\nplane recedes ahead of it; a low plain grey block sits far off at the right.\nComposition: shoulder level from behind, figure left of centre, the space ahead deliberately\nempty.\nAsset: a single image, 3:2 landscape.\n\nAvoid: colour, texture, pattern, facial features, clothing detail, dramatic lighting, cast\nshadows, background scenery, mood, atmosphere, artistic style of any kind, signatures,\nwatermarks, any legible text, numbers or labels anywhere in the frame."
+}

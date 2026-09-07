@@ -1,0 +1,55 @@
+{
+  "id": "03-ugly-dan-kidaet-kamen",
+  "book": "pierce-brown-red-rising",
+  "title": "Урод Дэн бросает камешек",
+  "order": 3,
+  "locator": {
+    "chapter": 2,
+    "paragraphs": [
+      55,
+      57
+    ]
+  },
+  "excerpt": {
+    "text": "The Gray captain, Ugly Dan, a greasy bastard, throws a pebble at me. Though his skin is darkened from exposure to the sun, his hair is gray like the rest of his Color. It hangs thin and weedy over his eyes—two icecubes rolled in ash. The Sigils of his Color, a curling gray symbol like the number four with several bars beside it, wend along each hand hands and wrists. Cruel and stark, like all the Grays.",
+    "attribution": "Pierce Brown, «Red Rising», Del Rey, 2014"
+  },
+  "caption": "Серый капитан швыряет камешек в шахтёра, и шахтёр кланяется.",
+  "brief": "Пересменка в перевалочном депо. Бригады в ржаво-красных костюмах бредут мимо кадры Серых. Урод Дэн, засаленный капитан с протезом вместо руки, швыряет в Дэрроу камешек. Дэрроу кланяется — так положено.",
+  "frame": {
+    "setting": "a big grey cavern of concrete and metal, a staging depot, worn floor, distant lights flickering",
+    "time": "shift change",
+    "characters": [
+      {
+        "ref": "ugly_dan",
+        "state": "standing at the right in worn grey duroArmor, weight on one hip, the replacement arm just finishing a throw"
+      },
+      {
+        "ref": "darrow",
+        "state": "standing at the left in a blood-red frysuit, head lowered in a shallow bow, eyes up and level"
+      }
+    ],
+    "action": "the Gray captain flicks a pebble at the boy; the boy bows without lowering his eyes",
+    "mood": "a small daily humiliation, absorbed and remembered",
+    "details": [
+      "a pebble caught mid-air between them",
+      "other Grays lounging out of focus behind the captain",
+      "a staggered line of rust-red suits trudging past in the background",
+      "the sigil of the Gray Color at the captain’s throat",
+      "concrete floor worn smooth and greasy"
+    ],
+    "composition": "two figures facing each other at conversational distance in three-quarter view, the depot opening behind them",
+    "avoid": [
+      "open violence",
+      "weapons drawn",
+      "daylight",
+      "clean armour"
+    ]
+  },
+  "composition": "01-dvoe-litsom",
+  "style_refs": [],
+  "invariants": [
+    "ugly_dan",
+    "darrow"
+  ]
+}

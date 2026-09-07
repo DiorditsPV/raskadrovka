@@ -1,0 +1,34 @@
+Use case: one illustration for a book scene series.
+
+Asset: a single image, 3:2 landscape.
+
+Input images:
+Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
+Image 4 is a CHARACTER REFERENCE for Дэрроу: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+
+Series visual language: painterly digital concept art with photographic weight, rendered as a film keyframe rather than a photograph or a classical painting; practical light sources visible or implied inside the frame; full value range down to true black; visible brush economy on metal and fabric while the focal object holds crisp detail; worn lived-in objects — mugs, taped paper, handwritten notes, scuffed panels — rendered with the same care as the machinery; desaturated palette split warm against cool; wide cinematic framing with foreground objects cropped by the frame edge.
+
+Scene: the bottom of a narrow vertical shaft cut into rock, a claw-shaped drilling machine filling the lower frame, its rock-melting digits gripping the wall. Time: no time of day underground; the only light is machine light.
+
+Characters:
+- Дэрроу: seated in the holster seat atop the drill, seen from behind, head tilted back to look up the shaft
+
+Action: he looks up the shaft he has carved, past the reach of his own lamps, into darkness.
+
+Mood: solitude at the bottom of a hole, the world reduced to vibration and heat.
+
+Details: a corona of lamps washing the rock a sulfurous yellow; helium-3 glimmering like liquid silver in a seam far above; the shaft narrowing to a dim point where the crew works unseen; condensation and ore dust hanging in the lamp beams; the scarlet sweatband dark with sweat.
+
+Composition: figure small and low, seen from behind and slightly below; the shaft rising the full height of the frame; empty dark above him.
+
+Source passage (context only, in the book's own words; do not render any of it as lettering):
+The tunnel walls around my holster seat are bathed a sulfurous yellow by a corona of lights. The reach of the light fades as I look up the thin vertical shaft I’ve carved today. Above, precious helium-3 glimmers like liquid silver, but I’m looking at the shadows, looking for the pitvipers that curl through the darkness seeking the warmth of my drill. They’ll eat into your suit too, bite through the shell and then try to burrow into the warmest place they find, usually your belly, so they can lay their eggs. I’ve been bitten before. Still dream of the beast—black, like a thick tendril of oil. They can get as wide as a thigh and long as three men, but it’s the babies we fear. They don’t know how to ration their poison. Like me, their ancestors came from Earth, then Mars and the deep tunnels changed them.
+
+Identity invariants:
+- Дэрроу: a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg
+
+Avoid: daylight; open sky; clean surfaces; modern mining equipment; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.
