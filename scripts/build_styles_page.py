@@ -1,8 +1,9 @@
 """Собирает styles/index.html — страницу выбора направления стиля. Только стандартная библиотека.
 
-Обходит styles/<направление>/style.json, показывает референсы направления сеткой и
-печатает сводку по лицензиям. Страница открывается локально: она ссылается на файлы
-в refs/, ничего не встраивает и никуда не ходит.
+Читает описания манер из styles/directions/<направление>.json и показывает эталоны сеткой.
+Картинки лежат общей папкой styles/refs/ с именем <направление>--<ref-id>, как результаты
+в корневом output/: смотреть их подряд удобнее, чем разложенными по шести папкам.
+Страница открывается локально, ничего не встраивает и никуда не ходит.
 """
 import html
 import json
@@ -45,15 +46,13 @@ STYLE = (
 
 def load():
     out = []
-    for file in sorted(STYLES.glob('*/style.json')):
-        style = json.loads(file.read_text())
-        style['_dir'] = file.parent
-        out.append(style)
+    for file in sorted((STYLES / 'directions').glob('*.json')):
+        out.append(json.loads(file.read_text()))
     return out
 
 
 def figure(style, ref_id, ref):
-    path = (style['_dir'] / ref['file']).relative_to(STYLES).as_posix()
+    path = ref['file']          # уже относительно styles/
     author = ref.get('author') or '—'
     return (
         f'<figure><a href="{ESC(path)}"><img src="{ESC(path)}" loading="lazy" '
@@ -80,7 +79,7 @@ def section(style):
 def main(argv=None):
     styles = load()
     if not styles:
-        print('Направлений нет: styles/<направление>/style.json не найдено.')
+        print('Направлений нет: styles/directions/<направление>.json не найдено.')
         return 1
     total = sum(len(s.get('refs', {})) for s in styles)
     menu = ''.join(f'<a href="#{ESC(s["slug"])}">{ESC(s["name"])}</a>' for s in styles)
@@ -94,9 +93,9 @@ def main(argv=None):
         '<code>style_notes_en</code> в каждый промпт. Моноширинным набран текст, который уходит '
         'в промпт дословно.</p>'
         f'<nav>{menu}</nav></header><main>' + ''.join(section(s) for s in styles) +
-        '</main><footer>Все референсы — со свободной лицензией и обоснованием свободы в России и '
-        'в США; условия каждого — в <code>style.json</code> направления. Правила — в '
-        '<a href="../RIGHTS.md">RIGHTS.md</a>, контракт направления — в '
+        '</main><footer>Эталоны сгенерированы в этом проекте; описания манер — в '
+        '<code>styles/directions/</code>, сами картинки общей папкой в <code>styles/refs/</code>. '
+        'Правила по референсам — в <a href="../RIGHTS.md">RIGHTS.md</a>, контракт направления — в '
         '<a href="README.md">styles/README.md</a>.</footer></body></html>'
     )
     (STYLES / 'index.html').write_text(page)

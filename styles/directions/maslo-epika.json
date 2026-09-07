@@ -1,0 +1,54 @@
+{
+  "slug": "maslo-epika",
+  "name": "Густое масло, атмосферная глубина",
+  "about": "Плотный мазок, лессировки, огромное небо и воздух между планами. Фигура мелкая, масштаб задаёт пейзаж. Романтическая живопись, а не концепт-арт.",
+  "style_notes_en": "thick impasto oil with glazed transparent darks, vast sky occupying most of the frame, layered atmospheric perspective with visible air between planes, figures small against landscape scale, romantic painting logic rather than concept art, warm earth palette against cool distance, visible canvas weave",
+  "fits": [
+    "эпическое фэнтези",
+    "исторический роман",
+    "классика",
+    "приключения"
+  ],
+  "refs": {
+    "ref-01": {
+      "file": "refs/maslo-epika--ref-01.png",
+      "stored": true,
+      "sha256": "d71cd272304c7eebb9ce90f9acdbc73a60f81e65b0b89798bf713335ebcf7476",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "эпический масштаб: фигура мелко, воздух между планами"
+    },
+    "ref-02": {
+      "file": "refs/maslo-epika--ref-02.png",
+      "stored": true,
+      "sha256": "00b743b07e4363bd1a20ba98e00b8cf00dc912c2522b104c47e2315ca1083f50",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "та же живопись на воде и камне"
+    },
+    "ref-03": {
+      "file": "refs/maslo-epika--ref-03.png",
+      "stored": true,
+      "sha256": "c98ba0bff3b3cf55a6f82d672381fc1ed1fb3e29690a0a271dd0d518ab79aa60",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "человек против масштаба — сердцевина манеры"
+    },
+    "ref-04": {
+      "file": "refs/maslo-epika--ref-04.png",
+      "stored": true,
+      "sha256": "edbe6510a6daa302e690cdefca39d3d8d80a237cde6f6839d5007f902d743d45",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "массовка в живописи: толпа как масса, не как лица"
+    }
+  }
+}

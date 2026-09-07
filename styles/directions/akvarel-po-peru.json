@@ -1,0 +1,54 @@
+{
+  "slug": "akvarel-po-peru",
+  "name": "Прозрачная акварель по перу",
+  "about": "Лёгкий перьевой контур и прозрачные заливки поверх, много незакрашенной бумаги. Цвет приглушён, свет — это оставленная белизна. Камерно и негромко.",
+  "style_notes_en": "light pen contour with transparent watercolour washes laid over it, generous areas of untouched white paper, light rendered as reserved paper rather than added pigment, muted desaturated palette, soft blooms where wet met wet, intimate quiet scale, no heavy black and no hard edges",
+  "fits": [
+    "классика",
+    "психологическая проза",
+    "мемуары",
+    "камерная сцена"
+  ],
+  "refs": {
+    "ref-01": {
+      "file": "refs/akvarel-po-peru--ref-01.png",
+      "stored": true,
+      "sha256": "8d2c142668ff49e6d879521e6eaf190aa1a98a76756eeff0537f1cca3ae4edb8",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "камерная сцена: свет — оставленная белизна"
+    },
+    "ref-02": {
+      "file": "refs/akvarel-po-peru--ref-02.png",
+      "stored": true,
+      "sha256": "697d89342964159c4c69f75d11c97b9f58e9332547b462e4b36b78f25426b096",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "та же манера при тёплом источнике — проверка, что не уходит в плотность"
+    },
+    "ref-03": {
+      "file": "refs/akvarel-po-peru--ref-03.png",
+      "stored": true,
+      "sha256": "94bef0afb9582ab94b34af92f05b44de0a92496fe66daa6bda5b7c1bb70f459f",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "разговор двоих: мягкие заливки вместо контура"
+    },
+    "ref-04": {
+      "file": "refs/akvarel-po-peru--ref-04.png",
+      "stored": true,
+      "sha256": "0fa1bc3483ca67a4a1f6474b92836a57233ed93a831f67188122fb59555a3b14",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "пейзаж почти без пигмента — предел манеры"
+    }
+  }
+}

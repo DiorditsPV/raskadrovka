@@ -1,0 +1,53 @@
+{
+  "slug": "tekhnicheskiy-razrez",
+  "name": "Технический разрез",
+  "about": "Инженерная подача: аппарат вскрыт, видно устройство, люди даны для масштаба. Точная линия, ровный свет, приглушённый чертёжный цвет. Не картинка, а объяснение.",
+  "style_notes_en": "engineering cutaway presentation, the machine opened to show internal structure, precise ruled line work over restrained flat colour, even shadowless illumination, human figures included purely for scale, muted blueprint palette of slate, cream and oxide, callout marks rendered as illegible tick strokes and never as readable words",
+  "fits": [
+    "твёрдая НФ",
+    "научная фантастика",
+    "производственный роман"
+  ],
+  "refs": {
+    "ref-01": {
+      "file": "refs/tekhnicheskiy-razrez--ref-01.png",
+      "stored": true,
+      "sha256": "7117689e6cab4de8819a8adce640c57384dcfb6dbaffe70cf83533ec3e276833",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "базовый разрез: устройство видно, люди для масштаба"
+    },
+    "ref-02": {
+      "file": "refs/tekhnicheskiy-razrez--ref-02.png",
+      "stored": true,
+      "sha256": "015bca27f9b4672451172dc26ddb9939383ce42753cb4f330ded7e484dcc5558",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "вертикальный разрез: та же подача на другой машине"
+    },
+    "ref-03": {
+      "file": "refs/tekhnicheskiy-razrez--ref-03.png",
+      "stored": true,
+      "sha256": "2e87b5d91cbf695203c012b7d2f6dc32cc0f84296d0dacde36cd5fd9885bb6d9",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "разрез на человеческом объекте, не на машине"
+    },
+    "ref-04": {
+      "file": "refs/tekhnicheskiy-razrez--ref-04.png",
+      "stored": true,
+      "sha256": "12f756f45566c59ffc2c21198f11c32a6297b7517aeeecff45ec238454073a25",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "круглая форма и толпа техников — предел читаемости разреза"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "tush-i-plashki",
+  "name": "Тушь с плашками цвета",
+  "about": "Плотная чёрная кисть задаёт форму, цвет ложится крупными плашками без растушёвки. Тень — не градиент, а силуэт. Контраст резкий, деталей мало, читается издалека.",
+  "style_notes_en": "heavy black brush ink defining every form, colour applied as large flat unmodulated areas with no blending, shadow rendered as solid silhouette shape rather than gradient, high contrast, economical detail that reads at a distance, limited palette of three or four colours plus black, textured brush edges and dry-brush breakup",
+  "fits": [
+    "фэнтези",
+    "приключения",
+    "нуар",
+    "тёмное фэнтези"
+  ],
+  "refs": {
+    "ref-01": {
+      "file": "refs/tush-i-plashki--ref-01.png",
+      "stored": true,
+      "sha256": "7aba4b29fba8854072ec7e0fa2a76a757a64b62fa9c0b2bd8722c0d7405ebdf4",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "чёрная кисть держит форму, цвет тремя плашками, двор за решёткой ушёл в силуэт"
+    },
+    "ref-02": {
+      "file": "refs/tush-i-plashki--ref-02.png",
+      "stored": true,
+      "sha256": "c4ecad3f2385185e2a13a4817ce9eab2932731ed3d8f301fe982986c4847afab",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "та же кисть на воде и тумане: плашка тумана и силуэт города"
+    },
+    "ref-03": {
+      "file": "refs/tush-i-plashki--ref-03.png",
+      "stored": true,
+      "sha256": "15fe92b59a50429020a35dfe0f61688f45a159f70f54ea4330b4db458fe13fee",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "манера на движении: тела силуэтами, свет одной плашкой"
+    },
+    "ref-04": {
+      "file": "refs/tush-i-plashki--ref-04.png",
+      "stored": true,
+      "sha256": "f4e361e1a73bbfcf6dd1155c361ff9b58934718ec0e1a083903dc54b29640dec",
+      "source": "сгенерировано по styles/prompts-directions.md через codex exec, 2026-09-07",
+      "author": "Раскадровка",
+      "license": "generated-here",
+      "license_basis": "сгенерировано в этом проекте; проект не считает сгенерированные изображения объектом исключительных прав (RIGHTS.md)",
+      "why": "манера на пейзаже: небо плашками, фигура мелко"
+    }
+  }
+}
