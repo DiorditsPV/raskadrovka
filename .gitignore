@@ -1,0 +1,11 @@
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+archive/
+cache/
+refs-local/
+books/*/source/
+*.pyc
+.codex/
+.agents/
