@@ -27,9 +27,9 @@ python3 scripts/build_prompt.py books/<книга>/<партия> <сцена> \
 python3 scripts/build_prompt.py books/<книга>/<партия> <сцена> --style <направление> --check
 ```
 
-Скрипт склеивает четырнадцать секций в жёстком порядке: Use case · Asset · Input images ·
-Series visual language · Scene · Characters · Action · Mood · Details · Composition ·
-Source passage · Identity invariants · Avoid · Final constraints.
+Скрипт склеивает секции в жёстком порядке: Use case · Asset · Input images · Series visual
+language · Tonal key and palette · Scene · Characters · Action · Mood · Details ·
+Composition · Source passage · Identity invariants · Legibility · Avoid · Final constraints.
 
 Флаги: `--refs` — какие эталоны манеры взять (по ситуации кадра, не первые попавшиеся);
 `--no-composition` — собрать без шаблона блокинга; `--check` — сверить с сохранённым
@@ -92,17 +92,22 @@ instruction = (
 
 ## Регистрация результата
 
-Пока `register_result.py` не написан — руками, но по контракту `books/README.md`:
+```bash
+python3 scripts/register_result.py books/<книга>/<партия>          # записать
+python3 scripts/register_result.py books/<книга>/<партия> --check  # сверить, 1 при расхождении
+```
 
-`metadata/request.json`, `schema_version: 2`, на сцену — `id`, `title`, `order`, `caption`,
-`card` + `card_sha256`, `prompt` + `prompt_sha256`, `template_sha256`, `output` +
-`output_sha256`, `inputs[]` с путём, хешем, ролью и `stored`.
+Скрипт пересобирает входы тем же кодом, что собирал промпт, пишет хеши карточки, промпта,
+сборщика и результата, снимает копии входов в `input/`, удаляет оттуда лишнее, заполняет
+`metadata/refs.json` лицензиями из направлений и список кадров в README партии. Руками
+манифест не правится: так в него уже попадали входы, которых в промпте не было.
 
 Флага актуальности нет: **одна сцена в партии — одна версия**. Исправление, которое нужно
 сохранить рядом с прежним, делается **новой партией** (`02-<что-исправляли>`), а прежняя
 целиком уезжает в локальный игнорируемый `archive/`.
 
-Затем `python3 scripts/build_gallery.py` — сверяет хеши и ссылки, пересобирает `index.html`.
+Затем `python3 scripts/check_rights.py` — права, и `python3 scripts/build_gallery.py` —
+сверка хешей и ссылок, пересборка `index.html`.
 
 ## Точечная правка кадра
 
