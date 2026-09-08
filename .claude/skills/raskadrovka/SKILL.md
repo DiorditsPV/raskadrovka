@@ -123,6 +123,11 @@ docs/superpowers/    спецификация и план ребилда
 
 План ребилда — `docs/superpowers/plans/2026-09-07-rebuild.md`, контракты —
 `docs/superpowers/specs/2026-09-07-raskadrovka-design.md`. Написаны: `ingest_book.py`,
-`index_book.py`, `show_paragraphs.py`, `build_prompt.py`, `build_gallery.py`,
-`build_styles_page.py`. Не написаны: `check.py`, `check_rights.py`, `add_ref.py`,
-`register_result.py` — их работу пока делают руками, и это надо помнить при проверке прав.
+`index_book.py`, `show_paragraphs.py`, `build_prompt.py`, `check_rights.py`,
+`register_result.py`, `build_gallery.py`, `build_styles_page.py`. Не написаны: `check.py`
+(общая точка входа для проверок) и `add_ref.py` (заведение эталона в направление) — их
+работу пока делают руками.
+
+Порядок после генерации кадров: `register_result.py` (хеши, снимок `input/`, `refs.json`)
+→ `check_rights.py` (права) → `build_gallery.py` (сборка и сверка) → `build_styles_page.py`,
+если трогали направления.

@@ -83,7 +83,7 @@
   локальную `refs-local/<имя>`.
 - `metadata/request.json`: `schema_version: 2`, `book`, `title`, `request`, `style`,
   `path_base`, `scenes[{id, title, order, caption, card, card_sha256, prompt,
-  prompt_sha256, template_sha256, output, output_sha256, inputs[{path, sha256, role,
+  prompt_sha256, builder_sha256, output, output_sha256, inputs[{path, sha256, role,
   stored}]}]`. Роли входов: `style-reference`, `character-reference`, `edit-target`.
   Флага `latest` нет — см. «Версии результатов». Схема остаётся второй: манифестов по
   первой схеме не существует, мигрировать нечего.
@@ -111,8 +111,8 @@ Mood · Details · Composition · Source passage (отрывок дословн�
 `frame.characters`, затем `edit-target`, если есть.
 
 Шаблон живёт в `scripts/templates/prompt.txt`. Его SHA-256 пишется в запись сцены как
-`template_sha256`; сборка сверяет промпт байт-в-байт только для сцен, чей
-`template_sha256` совпадает с текущим шаблоном. Сцены, собранные прежним шаблоном, — это
+`builder_sha256`; сборка сверяет промпт байт-в-байт только для сцен, чей
+`builder_sha256` совпадает с текущим сборщиком. Сцены, собранные прежним сборщиком, — это
 исторические записи: их промпт остаётся тем, из которого получена картинка.
 
 ## Права

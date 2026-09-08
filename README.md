@@ -47,11 +47,23 @@
 ```text
 index.html                      галерея
 output/<книга>--<партия>--<сцена>.png
-scripts/check.py                проверка прав, карточек, библии и хешей
-scripts/build_gallery.py        сборка index.html
-styles/<направление>/
-  style.json                    манера словами и формулировка для промпта
-  refs/                         свободно лицензированные референсы
+scripts/
+  ingest_book.py                FB2/EPUB/TXT -> book.json без текста
+  index_book.py                 механический индекс по всей книге: лица, места, сцены
+  show_paragraphs.py            печать нужных абзацев из локального кеша
+  build_prompt.py               промпт сцены из карточки, стиля, шаблона и листов
+  register_result.py            хеши, снимок input/, refs.json партии
+  check_rights.py               права: книга, цитирование, лицензии референсов
+  build_gallery.py              сборка и сверка index.html
+  build_styles_page.py          сборка styles/index.html
+styles/
+  directions/<направление>.json манера словами, палитра и записи об эталонах
+  refs/<направление>/           эталоны манеры
+  prompts-directions.md         промпты, которыми эталоны сгенерированы
+  index.html                    страница выбора направления
+compositions/
+  templates/<шаблон>.json       расстановка тел: кто где стоит, какая камера
+  refs/<шаблон>.png             серый блокинг
 books/<книга>/
   book.json                     манифест книги без текста
   bible.json                    персонажи и места
@@ -67,14 +79,22 @@ books/<книга>/
 ```
 
 Подробное устройство папки книги — в [books/README.md](books/README.md), направления стиля —
-в [styles/README.md](styles/README.md).
+в [styles/README.md](styles/README.md), шаблоны композиции — в
+[compositions/README.md](compositions/README.md).
 
 ## Запуск
 
 ```bash
-python3 scripts/check.py              # права, карточки, библия, хеши
-python3 scripts/build_gallery.py      # пересобрать index.html
+python3 scripts/register_result.py books/<книга>/<партия>   # хеши, input/, refs.json
+python3 scripts/check_rights.py                            # права
+python3 scripts/build_gallery.py                           # пересобрать index.html
+python3 scripts/build_styles_page.py                       # пересобрать styles/index.html
+pytest tests/                                              # проверки прав под тестами
 ```
+
+Порядок не случаен: регистрация записывает, из чего получены кадры, проверка прав читает
+записанное, сборка галереи сверяет хеши и падает, если картинка нарисована по карточке,
+которой больше нет.
 
 Скрипты используют только стандартную библиотеку Python 3.10+. Тесты — `pytest tests/`, он
 ставится отдельно и в проекте не требуется.
