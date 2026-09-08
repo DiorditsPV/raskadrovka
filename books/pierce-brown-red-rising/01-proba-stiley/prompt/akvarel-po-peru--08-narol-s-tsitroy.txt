@@ -3,14 +3,15 @@ Use case: one illustration for a book scene series.
 Asset: a single image, 3:2 landscape.
 
 Input images:
-Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
-Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
-Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
-Image 4 is a CHARACTER REFERENCE for дядя Нарол: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+Images 1 and 2 are STYLE REFERENCES: take from them only the manner — palette, drawing, texture, logic of light. Do not copy their subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE, a grey blockout: take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are not part of the picture.
+Image 4 is a CHARACTER REFERENCE for дядя Нарол: keep the face, build, hair and clothing shown there. Ignore the neutral pose, flat lighting and empty background.
 
 Series visual language: light pen contour with transparent watercolour washes laid over it, generous areas of untouched white paper, light rendered as reserved paper rather than added pigment, muted desaturated palette, soft blooms where wet met wet, intimate quiet scale, no heavy black and no hard edges.
 
-Scene: a tunnel corridor hung with lights, warm and out of focus behind him. Time: evening of the feast.
+Tonal key and palette: High key: about three quarters of the frame stays in the light and there is no true black anywhere — the deepest note is a warm grey. The white of the paper is the largest area in the picture and carries every lit surface. Colour is thin and few: muted ochre, dusty rose and pale slate.
+
+Scene: a tunnel corridor hung with lights, out of focus behind him. Time: evening of the feast.
 
 Characters:
 - дядя Нарол: head and shoulders, three-quarter view, looking down at the strings, eyes half closed
@@ -29,6 +30,8 @@ Lights are strung along the lengthy corridor. In the distance, drunk Uncle Narol
 Identity invariants:
 - дядя Нарол: a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest
 
-Avoid: full body; sharp background; cheerfulness; clean clothing; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+Legibility: the picture must read at a glance. Detail is concentrated where the light falls and drops away into large calm areas — calm may be bright or dark, whichever the tonal key above asks for; silhouettes stay clear against their ground; texture serves the material it describes and never covers the whole frame evenly. Fewer, better-placed details beat many small ones.
 
-Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.
+Avoid: full body; sharp background; cheerfulness; clean clothing; anatomically impossible poses; a head turned further than the spine allows relative to the shoulders; hands, feet or limbs out of proportion to the body they belong to; extra or missing fingers, hands or limbs; joints bending against their natural direction; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above. Hold the tonal key: what the scene is lit by decides where the light falls, never how bright the picture is overall. Above all it must read as this manner: light pen contour with transparent watercolour washes laid over it.

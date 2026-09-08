@@ -3,6 +3,7 @@
   "name": "Кинематографический реализм",
   "about": "Цифровая живопись с весом фотографии: свет всегда мотивирован источником внутри кадра, диапазон до истинного чёрного, мазок виден на металле и ткани, а обжитый хлам — кружки, бумажки, потёртые панели — выписан наравне с техникой.",
   "style_notes_en": "painterly digital concept art with photographic weight, rendered as a film keyframe rather than a photograph or a classical painting; practical light sources visible or implied inside the frame; full value range down to true black; visible brush economy on metal and fabric while the focal object holds crisp detail; worn lived-in objects — mugs, taped paper, handwritten notes, scuffed panels — rendered with the same care as the machinery; desaturated palette split warm against cool; wide cinematic framing with foreground objects cropped by the frame edge",
+  "palette_en": "Low key: roughly three quarters of the frame sits in deep shadow and near-black is the largest area in the picture; light claims only what its sources directly reach. Colour comes from those sources — warm amber and sodium — against shadow that stays a cold steel-blue rather than turning brown.",
   "fits": [
     "научная фантастика",
     "твёрдая НФ",

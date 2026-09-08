@@ -3,12 +3,13 @@ Use case: one illustration for a book scene series.
 Asset: a single image, 3:2 landscape.
 
 Input images:
-Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
-Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
-Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
-Image 4 is a CHARACTER REFERENCE for дядя Нарол: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+Images 1 and 2 are STYLE REFERENCES: take from them only the manner — palette, drawing, texture, logic of light. Do not copy their subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE, a grey blockout: take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are not part of the picture.
+Image 4 is a CHARACTER REFERENCE for дядя Нарол: keep the face, build, hair and clothing shown there. Ignore the neutral pose, flat lighting and empty background.
 
-Series visual language: thick impasto oil with glazed transparent darks, vast sky occupying most of the frame, layered atmospheric perspective with visible air between planes, figures small against landscape scale, romantic painting logic rather than concept art, warm earth palette against cool distance, visible canvas weave.
+Series visual language: thick impasto oil with glazed transparent darks, a great open expanse above the figures — sky, vault or shaft, whatever the place actually offers — taking much of the frame, layered atmospheric perspective with visible air between planes, figures small against the scale of the place, romantic painting logic rather than concept art, visible canvas weave.
+
+Tonal key and palette: Middle key: the picture reads at middle brightness and is not a dark painting — deep shadow is held to about a fifth of the frame and there is lit air between the planes. Warm earth near at hand — ochre, umber, brick — against a distance that stays genuinely blue and keeps its colour instead of going black.
 
 Scene: a long low tunnel corridor hung with strings of lights, rock walls, a crowd flowing along it. Time: evening of the feast.
 
@@ -19,7 +20,7 @@ Action: he plays while children dance around his legs and the crowd streams past
 
 Mood: the one night a year the misery lifts.
 
-Details: strings of small bulbs receding down the corridor; children caught mid-step around his knees; boys running along the wall reaching for the ceiling; the crowd dissolving into warm haze in the depth; his crew-chief head unit pushed up on his brow.
+Details: strings of small bulbs receding down the corridor; children caught mid-step around his knees; boys running along the wall reaching for the ceiling; the crowd dissolving into haze in the depth; his crew-chief head unit pushed up on his brow.
 
 Composition: Narol large in the near foreground at the left, cropped at the thigh; the corridor and crowd receding small into the depth at the right.
 
@@ -29,6 +30,8 @@ Lights are strung along the lengthy corridor. In the distance, drunk Uncle Narol
 Identity invariants:
 - дядя Нарол: a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest
 
-Avoid: daylight; open sky; sober formality; empty corridor; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+Legibility: the picture must read at a glance. Detail is concentrated where the light falls and drops away into large calm areas — calm may be bright or dark, whichever the tonal key above asks for; silhouettes stay clear against their ground; texture serves the material it describes and never covers the whole frame evenly. Fewer, better-placed details beat many small ones.
 
-Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.
+Avoid: daylight; open sky; sober formality; empty corridor; anatomically impossible poses; a head turned further than the spine allows relative to the shoulders; hands, feet or limbs out of proportion to the body they belong to; extra or missing fingers, hands or limbs; joints bending against their natural direction; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above. Hold the tonal key: what the scene is lit by decides where the light falls, never how bright the picture is overall. Above all it must read as this manner: thick impasto oil with glazed transparent darks.

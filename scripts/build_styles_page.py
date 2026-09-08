@@ -27,8 +27,9 @@ STYLE = (
     '.about{max-width:72ch;margin:0 0 10px}'
     '.fits{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px;padding:0;list-style:none}'
     '.fits li{font-size:12px;color:#cabea3;border:1px solid #3f463e;padding:2px 9px}'
-    '.notes{font-size:13.5px;color:#8f958c;max-width:80ch;margin:0 0 20px;'
+    '.notes{font-size:13.5px;color:#8f958c;max-width:80ch;margin:0 0 8px;'
     'font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.55}'
+    '.palette{color:#a8a08c;border-left:2px solid #3f463e;padding-left:12px;margin-bottom:20px}'
     '.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}'
     'figure{margin:0;min-width:0}'
     'figure a{display:block;background:#252826;line-height:0}'
@@ -71,6 +72,7 @@ def section(style):
         f'<p class="about">{ESC(style.get("about", ""))}</p>'
         f'<ul class="fits">{fits}</ul>'
         f'<p class="notes">{ESC(style.get("style_notes_en", ""))}</p>'
+        f'<p class="notes palette">{ESC(style.get("palette_en", ""))}</p>'
         f'<div class="grid">{refs}</div></section>'
     )
 
@@ -89,8 +91,9 @@ def main(argv=None):
         '<header><div class="eyebrow">Раскадровка</div><h1>Направления стиля</h1>'
         f'<p>{len(styles)} направлений, {total} референса. Манера серии берётся отсюда: партия '
         'выбирает направление, снимает с него копию референсов и подмешивает '
-        '<code>style_notes_en</code> в каждый промпт. Моноширинным набран текст, который уходит '
-        'в промпт дословно.</p>'
+        '<code>style_notes_en</code> и <code>palette_en</code> в каждый промпт. Моноширинным набран '
+        'текст, который уходит в промпт дословно: сначала манера, следом тональный ключ и '
+        'палитра.</p>'
         f'<nav>{menu}</nav></header><main>' + ''.join(section(s) for s in styles) +
         '</main><footer>Эталоны сгенерированы в этом проекте; описания манер — в '
         '<code>styles/directions/</code>, картинки — в <code>styles/refs/</code>. '
