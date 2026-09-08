@@ -2,7 +2,7 @@
   "schema_version": 2,
   "book": "pierce-brown-red-rising",
   "title": "Red Rising — проба направлений",
-  "request": "По два кадра на каждое из пяти направлений плюс пара «с шаблоном композиции и без», чтобы выбрать манеру для книги и решить вопрос о шаблонах.",
+  "request": "По два кадра на каждое из четырёх направлений плюс пара «с шаблоном композиции и без», чтобы выбрать манеру для книги и решить вопрос о шаблонах. Партия пересобрана после разбора: анатомия внесена в запреты, добавлена секция ясности, палитра переехала из карточек в направления отдельным полем palette_en, разрез убран из манер на ось композиции.",
   "style": "проба-нескольких-направлений",
   "path_base": "request-directory",
   "scenes": [
@@ -18,11 +18,11 @@
       ],
       "composition": "03-spinoy-vdal",
       "card": "scenes/01-helldiver-v-zaboe.json",
-      "card_sha256": "2feda447d2ff24bac7997f968133695286c7054d2538a921c3f5081fbc5aeabb",
+      "card_sha256": "6c5874cc51d6e4bc01b1bca7f7c4680a1c650f4d89fea53567ae064693d9c4c1",
       "prompt": "prompt/kinematograficheskiy-realizm--01-helldiver-v-zaboe.txt",
-      "prompt_sha256": "05ae7362d89e069ec4a3b0c02939d7e7668d4d3480940745a3ab43fc05ea7e79",
+      "prompt_sha256": "f2b9665c7247340b9d786fd28e6c995518fb93ee07b6dc1489af33a80b6e14c1",
       "output": "../../../output/pierce-brown-red-rising--proba--kinematograficheskiy-realizm--01-helldiver-v-zaboe.png",
-      "output_sha256": "f4ab4cece92eb24c6854aba5410e06d8bb4c28701b01f0713ff42130aa172233",
+      "output_sha256": "148a38341cf4c255a88e9c01db55d6eb6f9255f7ce0ad91501e7aab65fbbf643",
       "inputs": [
         {
           "path": "input/style--kinematograficheskiy-realizm--ref-01.jpeg",
@@ -48,7 +48,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
+      ],
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     },
     {
       "id": "kinematograficheskiy-realizm--02-spusk-k-karmanu",
@@ -62,11 +63,11 @@
       ],
       "composition": "02-krupno-i-daleko",
       "card": "scenes/02-spusk-k-karmanu.json",
-      "card_sha256": "24fd16f2ca5090e8f9d66facc9d0c2fdd8b092268edc945bc36ab8817c0167c0",
+      "card_sha256": "9edd60e5b1afa49e59da165cae301bc2c5630000886b09ca3be51fcf02cc90d9",
       "prompt": "prompt/kinematograficheskiy-realizm--02-spusk-k-karmanu.txt",
-      "prompt_sha256": "107ef04637d31299c19201a9085946d0eabb340c35d553097f023b8c8b98d758",
+      "prompt_sha256": "ce738bd40a6a059dfa33a961facb2bb656a428c6a3ef4b431eee7339c6be428a",
       "output": "../../../output/pierce-brown-red-rising--proba--kinematograficheskiy-realizm--02-spusk-k-karmanu.png",
-      "output_sha256": "00bbaac88e7b84d6baeaf7f1f4abe274ca3546398fb37f04ebda78dc4b0d3b32",
+      "output_sha256": "c674c9b637dbcc9626f60dd8555f55d9b323592392705b73af91c8ce91b1ed6b",
       "inputs": [
         {
           "path": "input/style--kinematograficheskiy-realizm--ref-01.jpeg",
@@ -92,7 +93,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
+      ],
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     },
     {
       "id": "tush-i-plashki--03-ugly-dan-kidaet-kamen",
@@ -106,11 +108,11 @@
       ],
       "composition": "01-dvoe-litsom",
       "card": "scenes/03-ugly-dan-kidaet-kamen.json",
-      "card_sha256": "1853c52980276eb202a3c4034259d02a234251f8012b3998e9c0d0364814e08b",
+      "card_sha256": "a2e9b6ed49814bf551bc911e0ea915b1fc8b096f4e54b37aeef9e254272a7ca6",
       "prompt": "prompt/tush-i-plashki--03-ugly-dan-kidaet-kamen.txt",
-      "prompt_sha256": "0e76f12380fdd72e4f264769e08f7bee62acb7da420de492dd85ed2d754a1f2a",
+      "prompt_sha256": "ed7c1878a58c0762fe9c6a0f82ac6a7fbc2fa40c774f8f71b9cd6699233e84ea",
       "output": "../../../output/pierce-brown-red-rising--proba--tush-i-plashki--03-ugly-dan-kidaet-kamen.png",
-      "output_sha256": "920a4d2d60391c1fcff012396e6d598ca1107c06ea492cee4cfdeaf1662acc8b",
+      "output_sha256": "3bcf5c3b1db26dbfa6718341c099307120416d752b930bbfa2ee157d059f43c9",
       "inputs": [
         {
           "path": "input/style--tush-i-plashki--ref-01.png",
@@ -142,7 +144,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
+      ],
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     },
     {
       "id": "tush-i-plashki--03-ugly-dan-kidaet-kamen--bez-kompozitsii",
@@ -156,11 +159,11 @@
       ],
       "composition": null,
       "card": "scenes/03-ugly-dan-kidaet-kamen.json",
-      "card_sha256": "1853c52980276eb202a3c4034259d02a234251f8012b3998e9c0d0364814e08b",
+      "card_sha256": "a2e9b6ed49814bf551bc911e0ea915b1fc8b096f4e54b37aeef9e254272a7ca6",
       "prompt": "prompt/tush-i-plashki--03-ugly-dan-kidaet-kamen--bez-kompozitsii.txt",
-      "prompt_sha256": "68dd4ce2402ccd77328d32fd9be01fbcce95e59947ddae397c2332241bdab48e",
+      "prompt_sha256": "2362ffc3acdc5a08a31e37961ecd4fcef2f0a0a6ef4e3492dfccaf465a006480",
       "output": "../../../output/pierce-brown-red-rising--proba--tush-i-plashki--03-ugly-dan-kidaet-kamen--bez-kompozitsii.png",
-      "output_sha256": "fb3c5b198a028e7d56de501be9a4789e340b9bd7cba3d92333d237e5ab578090",
+      "output_sha256": "aac01c0d2b1540a63fe5055e3c7a9048596c5f117a0dbfaa276872df3da5ca74",
       "inputs": [
         {
           "path": "input/style--tush-i-plashki--ref-01.png",
@@ -186,7 +189,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
+      ],
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     },
     {
       "id": "tush-i-plashki--07-litso-v-shleme",
@@ -200,11 +204,11 @@
       ],
       "composition": "04-krupny-plan",
       "card": "scenes/07-litso-v-shleme.json",
-      "card_sha256": "feeb549cc668cfb9b8d1836c591995189c07e07e20256bd2f86040a014caf3fa",
+      "card_sha256": "519cc2a2d685f6f8f3ae0f803d194cb28366641da0c3c97d0e1a65367a6fa9f5",
       "prompt": "prompt/tush-i-plashki--07-litso-v-shleme.txt",
-      "prompt_sha256": "542c691d9baad1f8b98543f9c032f688d2b7d73968a3298f9f3cbbd1099e2e10",
+      "prompt_sha256": "f28034d8dd431d8fa1ae59a46633a621306eb4f910a932fded17865d53f6e662",
       "output": "../../../output/pierce-brown-red-rising--proba--tush-i-plashki--07-litso-v-shleme.png",
-      "output_sha256": "135cff9b5e9e54db64f79dc5cdbdf1529364bbb21b9b34b29aa9237f5127d6dc",
+      "output_sha256": "e56afe7a145ec44d3580bce09e2e507f0511f672f8b7b2ccb7c8c7c1c48ee6c3",
       "inputs": [
         {
           "path": "input/style--tush-i-plashki--ref-01.png",
@@ -230,7 +234,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
+      ],
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     },
     {
       "id": "akvarel-po-peru--04-eo-v-pautine",
@@ -244,11 +249,11 @@
       ],
       "composition": "01-dvoe-litsom",
       "card": "scenes/04-eo-v-pautine.json",
-      "card_sha256": "e051a1e3e7ec0a9b7e7f9a98ad6034b9e7eb6a27476d3885974dfa1e909dfa98",
+      "card_sha256": "4e51cc1f0835b10bb91d640efd5098fb260ba80dbaead60a2dec8dc3b21bd988",
       "prompt": "prompt/akvarel-po-peru--04-eo-v-pautine.txt",
-      "prompt_sha256": "c58a84e252d8bf2af0283fbeaf5d10c6fecab230caacd5f90359765a8a526030",
+      "prompt_sha256": "cf1a868cfb81b337346232787274c086a494c95f0a1af86bb974b48871f708f1",
       "output": "../../../output/pierce-brown-red-rising--proba--akvarel-po-peru--04-eo-v-pautine.png",
-      "output_sha256": "6c5bbd1f0870ab2770fe391155aa5154878f4402200f1078137c0f7694278414",
+      "output_sha256": "eb38a6bddb8db8088609f1710662a0c08250353b096465d5f7f2dcf126114e83",
       "inputs": [
         {
           "path": "input/style--akvarel-po-peru--ref-01.png",
@@ -280,7 +285,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
+      ],
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     },
     {
       "id": "akvarel-po-peru--08-narol-s-tsitroy",
@@ -294,11 +300,11 @@
       ],
       "composition": "04-krupny-plan",
       "card": "scenes/08-narol-s-tsitroy.json",
-      "card_sha256": "2dc81154c43c48a5fd7635f9253e8a1d64d3a51aecfd13f3087f6f3b7df97089",
+      "card_sha256": "6cbc6546752cad6ef3142080b5acac4b1c184e5847200b67d7de03695491d247",
       "prompt": "prompt/akvarel-po-peru--08-narol-s-tsitroy.txt",
-      "prompt_sha256": "51d986c453827fb139090b6c7fee952a8c9a6238bde23c291f0003441ca97d86",
+      "prompt_sha256": "da46d669f82c183549d7beebe45ef2469cf98df1daa5e40523848c4a9843e1f0",
       "output": "../../../output/pierce-brown-red-rising--proba--akvarel-po-peru--08-narol-s-tsitroy.png",
-      "output_sha256": "a1690f334b4586401c86ee4ff1ed53056a8090dc87bc33c9363933049be8a073",
+      "output_sha256": "203cc6397afd554a6819c27728a2d9f99144baa8a06ac9d8a3851adc7a643cc3",
       "inputs": [
         {
           "path": "input/style--akvarel-po-peru--ref-02.png",
@@ -324,51 +330,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
-    },
-    {
-      "id": "maslo-epika--05-poselok-v-stene",
-      "title": "Посёлок в стене шахты — maslo-epika",
-      "order": 8,
-      "caption": "Дома выдолблены в стене старой выработки, провода вьются по потолку.",
-      "style": "maslo-epika",
-      "style_refs": [
-        "ref-01",
-        "ref-03"
       ],
-      "composition": "03-spinoy-vdal",
-      "card": "scenes/05-poselok-v-stene.json",
-      "card_sha256": "5154044c3d94c6f5b7d057fffa379ed8914a6ac6f97fd7042f1652ff4fec3b44",
-      "prompt": "prompt/maslo-epika--05-poselok-v-stene.txt",
-      "prompt_sha256": "db55044de0189cb6203dc7d673cc1838d749c4ae4c442f1c265dd615111d8c7b",
-      "output": "../../../output/pierce-brown-red-rising--proba--maslo-epika--05-poselok-v-stene.png",
-      "output_sha256": "8638870233cfb06b6dd7225b8ac2a149e3e4bcb047f96d517a59d1caf4487575",
-      "inputs": [
-        {
-          "path": "input/style--maslo-epika--ref-01.png",
-          "sha256": "d71cd272304c7eebb9ce90f9acdbc73a60f81e65b0b89798bf713335ebcf7476",
-          "role": "style-reference",
-          "stored": true
-        },
-        {
-          "path": "input/style--maslo-epika--ref-03.png",
-          "sha256": "c98ba0bff3b3cf55a6f82d672381fc1ed1fb3e29690a0a271dd0d518ab79aa60",
-          "role": "style-reference",
-          "stored": true
-        },
-        {
-          "path": "input/composition--refs--03-spinoy-vdal.png",
-          "sha256": "487dc6cbb6b03dcaf8f3ecdcf103d844e59c1f8e18da792dd04e8e3b3ac66de6",
-          "role": "composition-reference",
-          "stored": true
-        },
-        {
-          "path": "input/character--characters--darrow.png",
-          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
-          "role": "character-reference",
-          "stored": true
-        }
-      ]
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     },
     {
       "id": "maslo-epika--06-tunnelroad-lavreltayd",
@@ -382,11 +345,11 @@
       ],
       "composition": "02-krupno-i-daleko",
       "card": "scenes/06-tunnelroad-lavreltayd.json",
-      "card_sha256": "cac9286f3e32c566a6d413b50fee2c64a455107609613ffb0090c1426f6ffa58",
+      "card_sha256": "88e5ecaca9ebe0b6f5904a8c65df7828018fd277022caf78a46f10c459b9f439",
       "prompt": "prompt/maslo-epika--06-tunnelroad-lavreltayd.txt",
-      "prompt_sha256": "85e13665bc52869ab5f5421c4e012fbef18b5a5a3db8d89366ebeb8707533f21",
+      "prompt_sha256": "60a31321135821e1a3cadfb498aca59fd2cbec1380c0285aff705932bab1cf85",
       "output": "../../../output/pierce-brown-red-rising--proba--maslo-epika--06-tunnelroad-lavreltayd.png",
-      "output_sha256": "fc92a7c0fb5603adfada26900fcdc81493a38b9091f42c7c2107afbb0cba6867",
+      "output_sha256": "fd0a20b749ccc01e460d331b67c48715ed5405455d889e848401810e3b3ec303",
       "inputs": [
         {
           "path": "input/style--maslo-epika--ref-01.png",
@@ -412,95 +375,8 @@
           "role": "character-reference",
           "stored": true
         }
-      ]
-    },
-    {
-      "id": "tekhnicheskiy-razrez--01-helldiver-v-zaboe",
-      "title": "Хеллдайвер в глубоком забое — tekhnicheskiy-razrez",
-      "order": 10,
-      "caption": "Один в километре под землёй, и над ним светится то, ради чего всё.",
-      "style": "tekhnicheskiy-razrez",
-      "style_refs": [
-        "ref-01",
-        "ref-03"
       ],
-      "composition": "03-spinoy-vdal",
-      "card": "scenes/01-helldiver-v-zaboe.json",
-      "card_sha256": "2feda447d2ff24bac7997f968133695286c7054d2538a921c3f5081fbc5aeabb",
-      "prompt": "prompt/tekhnicheskiy-razrez--01-helldiver-v-zaboe.txt",
-      "prompt_sha256": "5d6979778368fe3b42520853ac62db03ff495bb684cd1e45ba3f5bb0bcdbf9e5",
-      "output": "../../../output/pierce-brown-red-rising--proba--tekhnicheskiy-razrez--01-helldiver-v-zaboe.png",
-      "output_sha256": "907d822397d23f7a2aef1aa3959eb80e369d7f8369f6035a738d6d6000cf6d26",
-      "inputs": [
-        {
-          "path": "input/style--tekhnicheskiy-razrez--ref-01.png",
-          "sha256": "7117689e6cab4de8819a8adce640c57384dcfb6dbaffe70cf83533ec3e276833",
-          "role": "style-reference",
-          "stored": true
-        },
-        {
-          "path": "input/style--tekhnicheskiy-razrez--ref-03.png",
-          "sha256": "919d1af079dd9257a99c5b9cace3b5dd69e8a8e04c4ba02fab98a8778e0a75a2",
-          "role": "style-reference",
-          "stored": true
-        },
-        {
-          "path": "input/composition--refs--03-spinoy-vdal.png",
-          "sha256": "487dc6cbb6b03dcaf8f3ecdcf103d844e59c1f8e18da792dd04e8e3b3ac66de6",
-          "role": "composition-reference",
-          "stored": true
-        },
-        {
-          "path": "input/character--characters--darrow.png",
-          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
-          "role": "character-reference",
-          "stored": true
-        }
-      ]
-    },
-    {
-      "id": "tekhnicheskiy-razrez--02-spusk-k-karmanu",
-      "title": "Спуск к газовому карману — tekhnicheskiy-razrez",
-      "order": 11,
-      "caption": "Сто метров вниз между пальцами бура, со сканером в руке.",
-      "style": "tekhnicheskiy-razrez",
-      "style_refs": [
-        "ref-01",
-        "ref-03"
-      ],
-      "composition": "02-krupno-i-daleko",
-      "card": "scenes/02-spusk-k-karmanu.json",
-      "card_sha256": "24fd16f2ca5090e8f9d66facc9d0c2fdd8b092268edc945bc36ab8817c0167c0",
-      "prompt": "prompt/tekhnicheskiy-razrez--02-spusk-k-karmanu.txt",
-      "prompt_sha256": "d79f4e245964d09713c94df1bd5868527d7c14d8acb48b70445322f7ecd857b3",
-      "output": "../../../output/pierce-brown-red-rising--proba--tekhnicheskiy-razrez--02-spusk-k-karmanu.png",
-      "output_sha256": "8050bc33a10e84eab7c22adbd2fda5bccd8c1f68ed863b8d5502bb9d6e3cd000",
-      "inputs": [
-        {
-          "path": "input/style--tekhnicheskiy-razrez--ref-01.png",
-          "sha256": "7117689e6cab4de8819a8adce640c57384dcfb6dbaffe70cf83533ec3e276833",
-          "role": "style-reference",
-          "stored": true
-        },
-        {
-          "path": "input/style--tekhnicheskiy-razrez--ref-03.png",
-          "sha256": "919d1af079dd9257a99c5b9cace3b5dd69e8a8e04c4ba02fab98a8778e0a75a2",
-          "role": "style-reference",
-          "stored": true
-        },
-        {
-          "path": "input/composition--refs--02-krupno-i-daleko.png",
-          "sha256": "7be0b49054c1f7e32b7dbb4dc85ca0327489e4e78a475fa6c6a7fbdc198d5e94",
-          "role": "composition-reference",
-          "stored": true
-        },
-        {
-          "path": "input/character--characters--darrow.png",
-          "sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
-          "role": "character-reference",
-          "stored": true
-        }
-      ]
+      "builder_sha256": "8fd88f67908d77f62f02469d0501d4b536c3c43b556f5a40875e86d3b1fe17b0"
     }
   ]
 }

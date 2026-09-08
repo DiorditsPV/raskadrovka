@@ -3,14 +3,15 @@ Use case: one illustration for a book scene series.
 Asset: a single image, 3:2 landscape.
 
 Input images:
-Image 1 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
-Image 2 is a STYLE REFERENCE: take from it only the manner — palette, drawing, texture, light logic. Do not copy its subjects, figures, buildings or lettering.
-Image 3 is a COMPOSITION REFERENCE: a grey blockout. Take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are NOT part of the picture.
-Image 4 is a CHARACTER REFERENCE for Дэрроу: keep this face, build, hair and clothing. Ignore its neutral pose, flat lighting and empty background.
+Images 1 and 2 are STYLE REFERENCES: take from them only the manner — palette, drawing, texture, logic of light. Do not copy their subjects, figures, buildings or lettering.
+Image 3 is a COMPOSITION REFERENCE, a grey blockout: take from it only where the bodies stand, how they are turned and how the frame is cut. Its grey surfaces, empty background and flat light are not part of the picture.
+Image 4 is a CHARACTER REFERENCE for Дэрроу: keep the face, build, hair and clothing shown there. Ignore the neutral pose, flat lighting and empty background.
 
 Series visual language: painterly digital concept art with photographic weight, rendered as a film keyframe rather than a photograph or a classical painting; practical light sources visible or implied inside the frame; full value range down to true black; visible brush economy on metal and fabric while the focal object holds crisp detail; worn lived-in objects — mugs, taped paper, handwritten notes, scuffed panels — rendered with the same care as the machinery; desaturated palette split warm against cool; wide cinematic framing with foreground objects cropped by the frame edge.
 
-Scene: the throat of a drilled shaft, enormous metal drill fingers converging below, molten rock glowing at the very bottom. Time: no time of day underground.
+Tonal key and palette: Low key: roughly three quarters of the frame sits in deep shadow and near-black is the largest area in the picture; light claims only what its sources directly reach. Colour comes from those sources — warm amber and sodium — against shadow that stays a cold steel-blue rather than turning brown.
+
+Scene: the throat of a drilled shaft, enormous metal drill fingers converging below, molten rock at the very bottom as the only light from beneath. Time: no time of day underground.
 
 Characters:
 - Дэрроу: hanging by his hands from a drill finger in the near foreground, cropped by the frame, a scanner clipped at his hip, legs reaching for the next hold
@@ -19,7 +20,7 @@ Action: he lowers himself hand over hand, feet first, toward the heat.
 
 Mood: a mistake being made at speed, heat past bearing.
 
-Details: drill fingers glowing dull orange where they meet rock; the outer layer of his suit blistered and part melted; a hundred-metre drop resolving into molten glare far below; sparks and grit falling past him; his knuckles white on the metal.
+Details: drill fingers glowing where they bite into rock; the outer layer of his suit blistered and part melted; a hundred-metre drop ending in the glare of the working face far below; sparks and grit falling past him; his knuckles white on the metal.
 
 Composition: his hands and shoulders large in the near foreground cropped by the frame edge; the drop and the molten glow small and far below; strong vertical scale break.
 
@@ -29,6 +30,8 @@ I look down over the edge of my drill. It’s a long fall to the bottom of the h
 Identity invariants:
 - Дэрроу: a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg
 
-Avoid: safety harness; clean machinery; daylight; onlookers; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+Legibility: the picture must read at a glance. Detail is concentrated where the light falls and drops away into large calm areas — calm may be bright or dark, whichever the tonal key above asks for; silhouettes stay clear against their ground; texture serves the material it describes and never covers the whole frame evenly. Fewer, better-placed details beat many small ones.
 
-Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above.
+Avoid: safety harness; clean machinery; daylight; onlookers; anatomically impossible poses; a head turned further than the spine allows relative to the shoulders; hands, feet or limbs out of proportion to the body they belong to; extra or missing fingers, hands or limbs; joints bending against their natural direction; likeness of actors or film adaptations; other illustrators' recognisable compositions; signatures, watermarks, artist marks; any legible text, numbers or lettering anywhere in the frame.
+
+Final constraints: the scene content comes from this card, not from the reference images. Keep the manner of the style references and the identity of the character references, and invent nothing that contradicts the details above. Hold the tonal key: what the scene is lit by decides where the light falls, never how bright the picture is overall. Above all it must read as this manner: painterly digital concept art with photographic weight, rendered as a film keyframe rather than a photograph or a classical painting.

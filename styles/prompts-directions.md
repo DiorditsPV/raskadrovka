@@ -1,8 +1,13 @@
 # Промпты эталонов направлений
 
-Четыре промпта — по одному на направление стиля. Каждый задаёт **манеру**, а не сюжет: сцена в
-промпте выбрана так, чтобы манера была показана на людях, месте и действии, потому что именно
-это генератор потом должен уметь повторить.
+Промпты эталонов: каждый задаёт **манеру**, а не сюжет. Сцена в промпте выбрана так, чтобы
+манера была показана на людях, месте и действии, потому что именно это генератор потом должен
+уметь повторить.
+
+Здесь три направления из четырёх. Эталоны `kinematograficheskiy-realizm` пришли извне —
+владелец репозитория сгенерировал их в ChatGPT, — и промпта к ним нет. Направление
+`tekhnicheskiy-razrez` было отсюда убрано: разрез оказался не манерой, а способом показать
+предмет, и переехал в `compositions/` шаблоном `05-razrez-obekta`.
 
 Промпты самодостаточны: **входных картинок не нужно**, манера целиком описана словами. Это и
 есть смысл подхода — эталон не ищется в чужих работах, а выращивается.
@@ -83,23 +88,15 @@ Palette: warm ochre and umber in the foreground, cold blue-violet in the distanc
 pale gold.
 ```
 
-## 4. `tekhnicheskiy-razrez` — Разрез в реализме
+## Палитра
 
-Под твёрдая НФ, научная фантастика, антиутопия, производственный роман, шахты и станции.
+В каждом промпте выше палитра названа отдельной строкой — и именно её потом надо перенести в
+`palette_en` направления. Без этого палитра остаётся только в эталонах: сцена её не просит,
+и кадр уезжает в тот цвет, которым освещено место действия. Так четыре направления и сошлись
+в один янтарь на чёрном — все сцены книги подземные и освещены рабочими лампами.
 
-```text
-Style: a cutaway cross-section rendered as painterly digital concept art rather than technical drawing: the vessel, shaft or machine opened along one plane so its interior structure reads through, decks and layers legible, but lit like a real place — each compartment lit by its own practical sources, work lamps, console glow, furnace light, so the whole section reads as many lit rooms at once against a dark hull; full value range down to true black in the unlit voids; visible brush economy on metal and rock with crisp detail where the light falls; figures at work inside the compartments, each occupied with a separate action, small but individually readable and giving the scale; worn lived-in surfaces, cable runs, stains and stowage rendered with the same care as the machinery; desaturated palette split warm interior light against cold exterior dark; thin leader lines and tick marks may edge the frame as a faint drafting trace, never as readable words or numbers
-
-Scene: a Martian helium mine cut open vertically through the rock. At the bottom a claw-shaped
-drilling machine grips a glowing seam, its operator small in a holster seat, lit sulfurous
-yellow. Above it the shaft rises past working levels where crews hang on lines. Higher still,
-dwellings are cut into the rock wall, their doorways lit warm.
-Composition: the shaft running vertically through the centre of the frame, levels stacked, rock
-black between the lit pockets.
-Palette: sulfurous yellow and ember orange in the lit pockets against cold black rock.
-```
-
----
+`palette_en` пишется по факту: тональный ключ (какая доля кадра в свету, какая в тени) и
+названные цвета — измеренные по готовым эталонам направления, а не выдуманные.
 
 ## Что делать с результатом
 
