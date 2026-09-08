@@ -18,9 +18,9 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TEMPLATE = ROOT / 'scripts' / 'templates' / 'prompt.txt'
 
-SECTIONS = ('Use case', 'Asset', 'Input images', 'Series visual language', 'Scene',
+SECTIONS = ('Use case', 'Asset', 'Input images', 'Series visual language',
+            'Tonal key and palette', 'Scene',
             'Characters', 'Action', 'Mood', 'Details', 'Composition', 'Source passage',
             'Identity invariants', 'Legibility', 'Avoid', 'Final constraints')
 
@@ -40,9 +40,10 @@ GLOBAL_AVOID = [
 # мазка, и никто не просит тишины. Деталь должна работать у света и гаснуть дальше.
 CLARITY = (
     'Legibility: the picture must read at a glance. Detail is concentrated where the light '
-    'falls and drops away into large calm areas; silhouettes stay clear against their ground; '
-    'texture serves the material it describes and never covers the whole frame evenly. '
-    'Fewer, better-placed details beat many small ones.'
+    'falls and drops away into large calm areas — calm may be bright or dark, whichever the '
+    'tonal key above asks for; silhouettes stay clear against their ground; texture serves the '
+    'material it describes and never covers the whole frame evenly. Fewer, better-placed '
+    'details beat many small ones.'
 )
 
 # Сколько эталонов манеры подавать. Больше трёх — вес каждого падает, и манера начинает
@@ -176,6 +177,7 @@ def render_prompt(card, bible, style, composition, book, inputs):
         'Asset: a single image, 3:2 landscape.',
         'Input images:\n' + render_input_images(inputs, bible),
         'Series visual language: ' + style['style_notes_en'] + '.',
+        'Tonal key and palette: ' + style['palette_en'],
         'Scene: ' + frame['setting'] + '. Time: ' + frame['time'] + '.',
         'Characters:\n' + render_characters(card, bible),
         'Action: ' + frame['action'] + '.',
@@ -189,14 +191,19 @@ def render_prompt(card, bible, style, composition, book, inputs):
         'Avoid: ' + '; '.join(avoid) + '.',
         ('Final constraints: the scene content comes from this card, not from the reference '
          'images. Keep the manner of the style references and the identity of the character '
-         'references, and invent nothing that contradicts the details above. Above all the '
-         'picture must read as this manner: ' + short_manner(style) + '.'),
+         'references, and invent nothing that contradicts the details above. Hold the tonal '
+         'key: what the scene is lit by decides where the light falls, never how bright the '
+         'picture is overall. Above all it must read as this manner: '
+         + short_manner(style) + '.'),
     ]
     return '\n\n'.join(parts) + '\n'
 
 
-def template_sha256(root=ROOT):
-    return sha256_file(TEMPLATE) if TEMPLATE.is_file() else ''
+def builder_sha256():
+    """Чем собран промпт. Шаблон здесь не файл, а порядок секций в этом модуле, поэтому
+    версией сборщика служит хеш самого модуля: правка сборщика не объявляет прежние промпты
+    неверными, но видно, что они собраны другим кодом."""
+    return sha256_file(__file__)
 
 
 def build(batch_dir, scene_id, style_slug, root=ROOT, use_composition=True, wanted_refs=None):
