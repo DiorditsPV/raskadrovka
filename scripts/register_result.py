@@ -14,6 +14,7 @@
 import argparse
 import hashlib
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -86,6 +87,12 @@ def scenes_block(kept):
     return '\n'.join(lines)
 
 
+def _table_norm(text):
+    text = re.sub(r'-{3,}', '---', text)
+    text = re.sub(r'[ \t]+\|', '|', text)
+    return re.sub(r'\|[ \t]+', '|', text)
+
+
 def update_readme(batch, kept, check, problems):
     """Список кадров в README партии переписывается машиной: руками он устаревает молча."""
     file = batch / 'README.md'
@@ -99,7 +106,9 @@ def update_readme(batch, kept, check, problems):
     _, tail = rest.split(MARK_CLOSE, 1)
     fresh = f'{head}{MARK_OPEN}\n{scenes_block(kept)}\n{MARK_CLOSE}{tail}'
     if check:
-        if text != fresh:
+        # Форматтер markdown выравнивает таблицу пробелами и удлиняет разделители; сверяем
+        # содержимое ячеек, а не их набивку — иначе каждая правка README чужой рукой красная.
+        if _table_norm(text) != _table_norm(fresh):
             problems.append('README.md: список кадров разошёлся с манифестом')
     else:
         file.write_text(fresh)
