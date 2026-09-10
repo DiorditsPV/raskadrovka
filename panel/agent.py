@@ -114,6 +114,13 @@ def _append(log, text):
         fh.write(text)
 
 
+def _stopped(attempts, tries, log):
+    if log is not None:
+        _append(log, 'задание снято человеком, следующей попытки не будет\n')
+    return {'ok': False, 'attempts': attempts, 'stopped': True,
+            'complaints': ['задание снято человеком'], 'tries': tries}
+
+
 def retry_note(complaints):
     return ('\n\n## Прошлая попытка не прошла проверку\n\n'
             'Претензии проверяющего, дословно:\n\n'
@@ -121,7 +128,8 @@ def retry_note(complaints):
             + '\n\nИсправь ровно это и не переделывай остальное.\n')
 
 
-def run(kind, fields, validate, expected, root=ROOT, config=None, log=None, watch=None):
+def run(kind, fields, validate, expected, root=ROOT, config=None, log=None, watch=None,
+        should_stop=None):
     """Задание с суждением: инструкция → Codex → проверка → при провале одна повторная попытка.
 
     `validate` — функция без аргументов, возвращающая список претензий (пустой = годно).
@@ -138,6 +146,8 @@ def run(kind, fields, validate, expected, root=ROOT, config=None, log=None, watc
     before = git_status(root)
 
     for attempt in range(1, attempts + 1):
+        if should_stop is not None and should_stop():
+            return _stopped(attempt - 1, tries, log)
         prompt = base if attempt == 1 else base + retry_note(complaints)
         if log is not None:
             _append(log, f'\n=== попытка {attempt} из {attempts}, '
@@ -145,6 +155,10 @@ def run(kind, fields, validate, expected, root=ROOT, config=None, log=None, watc
             _append(Path(log).with_suffix('.prompt.txt'),
                     f'=== попытка {attempt} ===\n{prompt}\n')
         code, output, spent = run_codex(prompt, root, config, log, watch)
+        if should_stop is not None and should_stop():
+            # Убитый процесс неотличим от неудачной попытки, и без этой проверки снятие
+            # задания запускало бы вторую попытку — ещё столько же минут работы Codex.
+            return _stopped(attempt, tries, log)
         try:
             complaints = list(validate())
         except Exception as error:

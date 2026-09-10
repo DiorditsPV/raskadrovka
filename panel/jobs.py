@@ -32,10 +32,16 @@ def _now():
 class Tools:
     """То, что рабочий поток даёт обработчику: путь лога и способ отдать процесс на убийство."""
 
-    def __init__(self, queue, job):
+    def __init__(self, queue, job, stop=None):
         self.queue = queue
         self.job = job
         self.log = queue.log_of(job['id'])
+        self._stop = stop or threading.Event()
+
+    def stopped(self):
+        """Задание сняли на ходу. Обработчик обязан спрашивать: убитый процесс сам по себе
+        выглядит как неудачная попытка, и без этого флага раннер начнёт следующую."""
+        return self._stop.is_set()
 
     def watch(self, process):
         self.queue._watch(self.job['id'], process)
@@ -59,6 +65,7 @@ class Queue:
         self._order = deque()
         self._process = None
         self._current = None
+        self._stop_current = None
         self._worker = None
 
     # — файлы —
@@ -131,6 +138,8 @@ class Queue:
             if job['status'] == RUNNING and self._current == job_id:
                 job['error'] = 'снято человеком'
                 self._write(job)
+                if self._stop_current is not None:
+                    self._stop_current.set()
                 if self._process is not None and self._process.poll() is None:
                     self._process.kill()
                 return job
@@ -172,6 +181,7 @@ class Queue:
                 if job is not None and job['status'] == QUEUED:
                     job.update(status=RUNNING, started=_now(), attempts=job['attempts'] + 1)
                     self._current, self._process = job['id'], None
+                    self._stop_current = threading.Event()
                     return self._write(job)
             return None
 
@@ -182,12 +192,12 @@ class Queue:
             if fresh.get('error') == 'снято человеком':
                 status, error = CANCELLED, 'снято человеком'
             fresh.update(status=status, finished=_now(), result=result, error=error)
-            self._current, self._process = None, None
+            self._current, self._process, self._stop_current = None, None, None
             return self._write(fresh)
 
     def run_one(self, job):
         """Одно задание целиком. Вынесено отдельно: так его можно позвать из теста без потока."""
-        tools = Tools(self, job)
+        tools = Tools(self, job, self._stop_current)
         try:
             result = self.handlers[job['kind']](job, tools)
         except Exception:                                   # обработчик — чужой код
