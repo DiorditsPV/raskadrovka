@@ -398,8 +398,20 @@ function draw() {
     (state.error ? `<div class="err">${esc(state.error)}</div>` : '') + body;
 }
 
+let jobsShape = null;
+
 function drawJobs() {
   const box = document.getElementById('jobs');
+  // Пересобирать разметку каждые две секунды нельзя: открытый лог при этом уничтожается и
+  // рождается заново — он мигает и теряет прокрутку. Разметку трогаем, только когда
+  // изменился сам состав очереди; текст лога обновляем на месте.
+  const shape = JSON.stringify([state.openLog, state.jobs.map(j => [j.id, j.status, j.error])]);
+  if (shape === jobsShape) { if (state.openLog) showLog(state.openLog); return; }
+  jobsShape = shape;
+  // Состав очереди меняется и когда задание просто дошло до конца. Перенесём в новую
+  // разметку то, что уже прочитано, — иначе на смене статуса лог мигнёт «загрузкой».
+  const open = state.openLog ? document.getElementById('log-' + state.openLog) : null;
+  const kept = open ? {text: open.textContent, top: open.scrollTop} : null;
   if (!state.jobs.length) { box.innerHTML = '<div class="empty">Пока пусто.</div>'; return; }
   const TAG = {done: 'ok', failed: 'bad', running: 'run', queued: 'wait',
                cancelled: 'wait', interrupted: 'bad'};
@@ -416,16 +428,29 @@ function drawJobs() {
         ${['queued', 'running'].includes(j.status)
           ? `<button class="btn btn-sm" data-cancel="${esc(j.id)}">Снять</button>` : ''}
       </div>
-      ${state.openLog === j.id ? `<div class="log" id="log-${esc(j.id)}">загрузка…</div>` : ''}
+      ${state.openLog === j.id
+          ? `<div class="log" id="log-${esc(j.id)}">${esc(kept ? kept.text : 'загрузка…')}</div>`
+          : ''}
     </div>`).join('');
+  if (kept) {
+    const fresh = document.getElementById('log-' + state.openLog);
+    if (fresh) fresh.scrollTop = kept.top;
+  }
   if (state.openLog) showLog(state.openLog);
 }
 
 async function showLog(id) {
+  const box = document.getElementById('log-' + id);
+  if (!box) return;
   try {
-    const data = await api(`/api/jobs/${encodeURIComponent(id)}/log?tail=120`);
-    const box = document.getElementById('log-' + id);
-    if (box) { box.textContent = data.log || '(лог пуст)'; box.scrollTop = box.scrollHeight; }
+    const data = await api(`/api/jobs/${encodeURIComponent(id)}/log?tail=200`);
+    const text = data.log || '(лог пуст)';
+    if (box.textContent === text) return;
+    // Догоняем хвост, только если человек и так смотрел в конец: иначе чтение середины
+    // лога у бегущего задания невозможно — его каждый раз уносило бы вниз.
+    const atEnd = box.scrollHeight - box.scrollTop - box.clientHeight < 24;
+    box.textContent = text;
+    if (atEnd) box.scrollTop = box.scrollHeight;
   } catch (error) { /* задание могло исчезнуть */ }
 }
 
