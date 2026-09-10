@@ -155,6 +155,74 @@ def test_panel_keeps_the_accepted_sheet_the_agent_dropped(live):
     assert 'вернула поля принятого листа' in panel.queue.tail(job['id'])
 
 
+def test_batch_shows_cards_with_their_frames(live):
+    """Экран партии — про картинки: карточка, кадр, кто в кадре, отрывок книги."""
+    port, _, root = live
+    batch = root / 'books' / SLUG / '01-proba'
+    (batch / 'scenes').mkdir(parents=True)
+    (batch / 'metadata').mkdir()
+    (batch / 'scenes' / '01-scena.json').write_text(json.dumps({
+        'id': '01-scena', 'title': 'Сцена', 'order': 1, 'caption': 'подпись',
+        'locator': {'chapter': 1, 'paragraphs': [1, 2]},
+        'excerpt': {'text': 'Второй абзац, в нём про волосы.'},
+        'invariants': ['hero'], 'composition': '01-dvoe'}, ensure_ascii=False), encoding='utf-8')
+    (root / 'output' / 'book--proba--tush--01-scena.png').write_bytes(PNG)
+    (batch / 'metadata' / 'request.json').write_text(json.dumps({
+        'request': 'проба', 'style': 'tush', 'scenes': [{
+            'id': 'tush--01-scena', 'title': 'Сцена', 'order': 1, 'caption': 'подпись',
+            'style': 'tush', 'style_refs': ['ref-01'], 'composition': '01-dvoe',
+            'card': 'scenes/01-scena.json', 'prompt': 'prompt/tush--01-scena.txt',
+            'output': '../../../output/book--proba--tush--01-scena.png'}]},
+        ensure_ascii=False), encoding='utf-8')
+
+    status, data = call(port, f'/api/books/{SLUG}/batches/01-proba')
+    assert status == 200 and len(data['scenes']) == 1
+    scene = data['scenes'][0]
+    assert scene['invariants'] == ['hero'] and 'про волосы' in scene['excerpt']
+    frame = scene['frames'][0]
+    assert frame['image'] == 'output/book--proba--tush--01-scena.png'
+    assert call(port, '/file/' + frame['image'])[1][:4] == b'\x89PNG'
+
+
+def test_card_without_a_frame_is_still_listed(live):
+    """Карточка есть всегда, запись в манифесте — только после кадра; список ведут карточки."""
+    port, _, root = live
+    batch = root / 'books' / SLUG / '02-plan'
+    (batch / 'scenes').mkdir(parents=True)
+    (batch / 'metadata').mkdir()
+    (batch / 'scenes' / '01-bez-kadra.json').write_text(
+        json.dumps({'id': '01-bez-kadra', 'title': 'Без кадра', 'order': 1},
+                   ensure_ascii=False), encoding='utf-8')
+    status, data = call(port, f'/api/books/{SLUG}/batches/02-plan')
+    assert status == 200 and data['scenes'][0]['frames'] == []
+
+
+def test_sheet_is_given_as_a_servable_path(live):
+    """В библии путь от папки книги; странице нужен путь, по которому картинку отдадут."""
+    port, _, root = live
+    (root / 'books' / SLUG / 'characters').mkdir()
+    (root / 'books' / SLUG / 'characters' / 'hero.png').write_bytes(PNG)
+    bible_file = root / 'books' / SLUG / 'bible.json'
+    data = json.loads(bible_file.read_text())
+    data['characters']['hero'].update({'sheet': 'characters/hero.png',
+                                       'sheet_sha256': 'a' * 64, 'sheet_prompt': 'чем'})
+    bible_file.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+    hero = call(port, f'/api/books/{SLUG}')[1]['characters'][0]
+    assert hero['sheet_file'] == f'books/{SLUG}/characters/hero.png'
+    assert call(port, '/file/' + hero['sheet_file'])[1][:4] == b'\x89PNG'
+
+
+def test_second_click_does_not_start_a_second_codex(live):
+    """Задание с суждением идёт минутами: два запуска — два Codex на одном файле."""
+    port, panel, _ = live
+    panel.queue.stop()                                   # ничего не разбирать: смотрим очередь
+    first = call(port, f'/api/books/{SLUG}/bible/hero', 'POST', {})
+    second = call(port, f'/api/books/{SLUG}/bible/hero', 'POST', {})
+    assert first[0] == 200
+    assert second[0] == 409 and second[1]['job'] == first[1]['job']
+    assert len(panel.queue.all()) == 1
+
+
 def test_job_log_is_readable(live):
     port, panel, _ = live
     job = panel.queue.wait(call(port, f'/api/books/{SLUG}/bible/hero', 'POST', {})[1]['job'],

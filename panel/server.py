@@ -153,6 +153,52 @@ class Panel:
                         'planned': plan.is_file()})
         return out
 
+    def batch(self, slug, name):
+        """Партия целиком: замысел из карточек, факт из манифеста и кадры на диске.
+
+        Карточки и манифест — разные вещи: карточка есть всегда, запись в манифесте
+        появляется только после кадра. Поэтому список ведут карточки, а манифест их
+        дополняет, а не наоборот.
+        """
+        folder = self.root / 'books' / slug / name
+        if not folder.is_dir():
+            return None
+        manifest_file = folder / 'metadata' / 'request.json'
+        manifest = (json.loads(manifest_file.read_text(encoding='utf-8'))
+                    if manifest_file.is_file() else {})
+        by_card = {}
+        for entry in manifest.get('scenes') or []:
+            by_card.setdefault(Path(entry['card']).stem, []).append(entry)
+
+        scenes = []
+        for card_file in sorted((folder / 'scenes').glob('*.json')):
+            card = json.loads(card_file.read_text(encoding='utf-8'))
+            frames = []
+            for entry in by_card.get(card_file.stem, []):
+                output = Path(entry['output']).name
+                frames.append({'id': entry['id'], 'style': entry.get('style'),
+                               'composition': entry.get('composition'),
+                               'style_refs': entry.get('style_refs') or [],
+                               'caption': entry.get('caption'),
+                               'image': f'output/{output}'
+                                        if (self.root / 'output' / output).is_file() else None,
+                               'prompt': entry.get('prompt')})
+            scenes.append({
+                'id': card.get('id') or card_file.stem,
+                'title': card.get('title') or card_file.stem,
+                'order': card.get('order'),
+                'caption': card.get('caption'),
+                'brief': card.get('brief'),
+                'locator': card.get('locator'),
+                'excerpt': (card.get('excerpt') or {}).get('text'),
+                'invariants': card.get('invariants') or [],
+                'composition': card.get('composition'),
+                'frames': frames,
+            })
+        scenes.sort(key=lambda s: (s['order'] or 0, s['id']))
+        return {'name': name, 'request': manifest.get('request'),
+                'style': manifest.get('style'), 'scenes': scenes}
+
     def books(self):
         folder = self.root / 'books'
         out = []
@@ -234,6 +280,7 @@ def api_book(panel, match, query, body):
                             'understanding': c.get('understanding'),
                             'audit': c.get('audit'),
                             'sheet': c.get('sheet'),
+                            'sheet_file': (f'books/{slug}/' + c['sheet']) if c.get('sheet') else None,
                             'complaints': validators.check_bible_entry(
                                 k, c, slug, panel.root, book_text)}
                            for k, c in sorted(characters.items())]}
@@ -244,8 +291,17 @@ def api_bible_entry(panel, match, query, body):
     slug, key = match.group(1), match.group(2)
     if not panel.book(slug):
         return 404, {'error': f'книги «{slug}» нет'}
-    return {'job': panel.queue.add('bible-entry', {'slug': slug, 'key': key},
-                                   label=key)['id']}
+    args = {'slug': slug, 'key': key}
+    already = panel.queue.open_job('bible-entry', args)
+    if already:
+        return 409, {'error': f'запись «{key}» уже собирается', 'job': already['id']}
+    return {'job': panel.queue.add('bible-entry', args, label=key)['id']}
+
+
+@route('GET', r'/api/books/([^/]+)/batches/([^/]+)')
+def api_batch(panel, match, query, body):
+    batch = panel.batch(match.group(1), match.group(2))
+    return batch if batch else (404, {'error': 'партии нет'})
 
 
 @route('GET', r'/api/styles')
