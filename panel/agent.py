@@ -64,18 +64,29 @@ def codex_command(prompt, root=ROOT, config=None):
     return [fill.get(arg, arg) for arg in config['codex_cmd']]
 
 
-def run_codex(prompt, root=ROOT, config=None, log=None):
-    """Один запуск Codex. stdin закрыт: с открытым stdin `codex exec` виснет."""
+def run_codex(prompt, root=ROOT, config=None, log=None, watch=None):
+    """Один запуск Codex. stdin закрыт: с открытым stdin `codex exec` виснет.
+
+    `watch` получает запущенный процесс — так очередь может его убить по «снять задание».
+    """
     config = config or panel_settings.load(root)
     command = codex_command(prompt, root, config)
     started = time.monotonic()
+    process = subprocess.Popen(command, cwd=str(root), stdin=subprocess.DEVNULL,
+                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    if watch is not None:
+        watch(process)
     try:
-        done = subprocess.run(command, cwd=str(root), stdin=subprocess.DEVNULL,
-                              capture_output=True, text=True,
-                              timeout=int(config.get('timeout', 1200)))
-        code, output = done.returncode, (done.stdout or '') + (done.stderr or '')
+        output = process.communicate(timeout=int(config.get('timeout', 1200)))[0] or ''
+        code = process.returncode
     except subprocess.TimeoutExpired:
-        code, output = None, f'таймаут {config.get("timeout", 1200)} с'
+        process.kill()
+        output = (process.communicate()[0] or '') + \
+                 f'\n— таймаут {config.get("timeout", 1200)} с, процесс убит'
+        code = None
+    finally:
+        if watch is not None:
+            watch(None)
     spent = time.monotonic() - started
     if log is not None:
         _append(log, f'$ {shlex.join(command[:-1])} <инструкция>\n{output}\n'
@@ -97,7 +108,7 @@ def retry_note(complaints):
             + '\n\nИсправь ровно это и не переделывай остальное.\n')
 
 
-def run(kind, fields, validate, expected, root=ROOT, config=None, log=None):
+def run(kind, fields, validate, expected, root=ROOT, config=None, log=None, watch=None):
     """Задание с суждением: инструкция → Codex → проверка → при провале одна повторная попытка.
 
     `validate` — функция без аргументов, возвращающая список претензий (пустой = годно).
@@ -120,7 +131,7 @@ def run(kind, fields, validate, expected, root=ROOT, config=None, log=None):
                          f'{datetime.now():%Y-%m-%d %H:%M:%S} ===\n')
             _append(Path(log).with_suffix('.prompt.txt'),
                     f'=== попытка {attempt} ===\n{prompt}\n')
-        code, output, spent = run_codex(prompt, root, config, log)
+        code, output, spent = run_codex(prompt, root, config, log, watch)
         complaints = list(validate()) + stray_changes(before, git_status(root), expected)
         tries.append({'attempt': attempt, 'returncode': code, 'seconds': round(spent),
                       'complaints': complaints})
