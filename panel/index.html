@@ -169,8 +169,13 @@ tr:hover td{background:#fafbfc}
   .scene{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:820px){
+  /* Одна колонка. Обязательно сбросить grid-column у очереди: с прежним «2/-1» она
+     заводит вторую колонку, и боковина схлопывается в нулевую ширину. */
   .app{grid-template-columns:minmax(0,1fr);background:var(--surface)}
-  .rail{position:static;max-height:none}
+  .rail,.work,.queue{grid-column:1/-1}
+  .rail{position:static;max-height:none;padding-bottom:14px}
+  .work{box-shadow:none;padding:22px 18px 48px}
+  .queue{padding:18px}
   .top{gap:12px;overflow-x:auto}
 }
 </style>
