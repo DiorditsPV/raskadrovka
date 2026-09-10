@@ -154,6 +154,24 @@ class Queue:
                 return job
             return job
 
+    def forget_finished(self):
+        """Убрать законченные задания вместе с логами.
+
+        Очередь — не журнал: файлы копятся в `cache/panel/jobs/` без конца, и правая
+        колонка через неделю работы превращается в ленту истории, в которой не найти
+        то, что идёт сейчас. Открытые задания не трогаются.
+        """
+        gone = 0
+        with self._lock:
+            for job in self.all():
+                if job['status'] in OPEN_STATUSES:
+                    continue
+                self.file_of(job['id']).unlink(missing_ok=True)
+                self.log_of(job['id']).unlink(missing_ok=True)
+                self.log_of(job['id']).with_suffix('.prompt.txt').unlink(missing_ok=True)
+                gone += 1
+        return gone
+
     def recover(self):
         """Разбор после падения: `running` → `interrupted`, `queued` возвращается в очередь."""
         restored = []
