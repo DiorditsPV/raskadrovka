@@ -2,9 +2,16 @@
   "characters": {
     "darrow": {
       "name": "Дэрроу",
-      "appearance": "Шестнадцать лет, ещё растёт: худой, жилистый, ловкий — по стенам бегает и крутит сальто на танцах. Выглядит моложе, чем себя чувствует. Лицо угловатое и худое, от рождения красивое. Ржаво-рыжие волосы — красные как марсианский камень, не чистый красный. Кожа бледная, подземная, в поту и рудной пыли. Кроваво-красный фрайсьют Хеллдайвера в обтяжку, на спине клановая метка Лямбды. Алая повязка на лбу. На тыльных сторонах обеих ладоней сигилы Красных: грубый круг со стрелой и штриховкой, на ощупь как кость. Руки шахтёрские — сильные, в шрамах, свежий ожог на ладони. На шнурке на шее обручальное кольцо из сплетённых волос и шёлка. За спиной кобура со слингБлейдом — жестоко изогнутым резаком длиной с ногу.",
-      "appearance_en": "a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg",
+      "appearance": "До резьбы, в Ликосе: шестнадцать лет, высокий и всё ещё растёт; худой и жилистый, выглядит моложе, чем себя чувствует. Красивое от рождения угловатое худое лицо. Волосы цвета старой крови, ржаво-рыжие; радужки такие же ржаво-красные. Кожа тугая и бледная, испещрена шрамами от ожогов и порезов. Кроваво-красный фрайсьют Хеллдайвера из нанопластика закрывает тело с ног до головы; на спине тёмно-красная клановая L Лямбды. На лбу алая повязка. На обеих кистях костяные на ощупь сигилы Красных — грубый круг со стрелой и штриховкой. Шахтёрские руки сильные, порезанные, обожжённые и в шрамах; свежий ожог на тыльной стороне кисти тянется от костяшек до запястья. На шнурке у груди висит обручальное кольцо из волос и шёлка. В задней кобуре — складной слингБлейд, жестоко изогнутый резак длиной с ногу. В шахте двигается быстро и ловко; даже в ужасе руки не становятся неуклюжими.",
+      "appearance_en": "pre-Carving 16-year-old Red miner; tall, thin, wiry; angular handsome face; rust-red hair and irises; tight pale scarred skin; blood-red Helldiver frysuit, Lambda L on back; scarlet headband; Red hand sigils; burned hands; hair-and-silk wedding ring on neck cord; curved slingBlade in back holster",
       "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            2,
+            3
+          ]
+        },
         {
           "chapter": 1,
           "paragraphs": [
@@ -15,8 +22,36 @@
         {
           "chapter": 1,
           "paragraphs": [
+            35,
+            36
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
             36,
             37
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            37,
+            38
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            40,
+            41
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            45,
+            46
           ]
         },
         {
@@ -29,8 +64,15 @@
         {
           "chapter": 2,
           "paragraphs": [
-            114,
-            115
+            54,
+            55
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            111,
+            112
           ]
         },
         {
@@ -46,9 +88,42 @@
             149,
             150
           ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            286,
+            287
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            557,
+            558
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            638,
+            639
+          ]
         }
       ],
-      "understanding": 9.0,
+      "audit": {
+        "age": 1,
+        "build": 1,
+        "face": 1,
+        "eyes": 1,
+        "hair": 1,
+        "skin": 1,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 10.0,
       "sheet": "characters/darrow.png",
       "sheet_sha256": "6fd005edbef2587cba2436a02c84c603fec07c5ed7818e5103b2eb7346c3a4c7",
       "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a teenage boy, a helium miner on Mars in an underground colony. a sixteen-year-old boy, lean and wiry and quick, looking younger than he feels; an angular slim handsome face; rusty red hair, the red of Mars rock rather than true red; pale underground skin filmed with sweat and ore dust; a close-fitting blood-red mining frysuit with a clan letter marked on its back; a scarlet sweatband tied around the forehead; on the backs of both hands the Red sigil, a crude circle with an arrow and cross-hatching, bone-like in texture; strong scarred miner's hands with a fresh burn across one palm; a wedding band of woven hair and silk on a cord at his neck; a back holster carrying a hinged slingBlade, a cruelly curved cutter as long as his leg.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."

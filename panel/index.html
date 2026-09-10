@@ -1,0 +1,350 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Раскадровка — панель</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%232c4a66'/%3E%3Crect x='3' y='4.5' width='10' height='7' rx='1' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#eef0f3; --surface:#ffffff; --raised:#e3e7ec; --line:#cfd5dc; --line-soft:#e2e6eb;
+  --text:#171b20; --muted:#59636e; --dim:#8a939d;
+  --accent:#2c4a66; --accent-deep:#1f3649; --accent-soft:#e3ebf2; --accent-line:#bfd0df;
+  --read:#eaf0f5; --read-line:#cdd9e3;
+  --ok:#2f8a4c; --ok-soft:#e4f2e8; --ok-line:#bfe0ca; --warn:#c48a00; --bad:#c2213f; --run:#1b8fb0;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
+  --display:"Unbounded","IBM Plex Sans",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{color-scheme:light;background:var(--ground)}
+body{margin:0;background:var(--ground);color:var(--text);font:14px/1.5 var(--sans);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+img{display:block;max-width:100%}
+h1{font:500 24px/1.2 var(--display);margin:0 0 6px;letter-spacing:-.005em}
+h2{font:600 15px/1.3 var(--sans);margin:0}
+code,.mono{font-family:var(--mono)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:5px;border:1px solid var(--line);background:var(--surface);font-weight:500;line-height:1.3;white-space:nowrap}
+.btn:hover{background:var(--accent-soft)}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn[disabled]:hover{background:var(--surface)}
+.btn-primary{background:var(--accent);border-color:var(--accent-deep);color:#fff}
+.btn-primary:hover{background:var(--accent-deep)}
+.btn-sm{padding:5px 10px;font-size:13px}
+
+.app{display:grid;grid-template-columns:248px minmax(0,1fr) 296px;grid-template-rows:52px 1fr;min-height:100vh;max-width:1720px;margin:0 auto;border-left:1px solid var(--line-soft);border-right:1px solid var(--line-soft);background:linear-gradient(to right,#2c4a66 0 248px,var(--surface) 248px calc(100% - 296px),var(--ground) calc(100% - 296px))}
+.top{grid-column:1/-1;display:flex;align-items:center;gap:28px;padding:0 22px;border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0;z-index:5}
+.brand{font:500 15px/1 var(--display);letter-spacing:-.01em}
+.tabs{display:flex;gap:2px;margin-left:8px}
+.tab{padding:7px 13px;border-radius:5px;color:var(--muted);font-weight:500}
+.tab:hover{background:var(--ground)}
+.tab.on{background:var(--accent-soft);color:var(--accent-deep)}
+.status{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.dot.busy{background:var(--run)}
+
+.rail,.queue{position:sticky;top:52px;align-self:start;max-height:calc(100vh - 52px);overflow:auto}
+.rail{background:#2c4a66;color:#e8edf2;padding:20px 0}
+.rail .kicker{color:#a3afbb;font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:0 18px 8px}
+.rail .book{padding:0 18px 18px}
+.rail .book-name{font:500 16px/1.25 var(--display)}
+.rail .book-sub{color:#a3afbb;font-size:12px;margin-top:4px}
+.stage{display:flex;align-items:center;gap:11px;width:100%;padding:11px 18px;color:inherit}
+.stage:hover{background:#3a5872}
+.stage.on{background:#f6f8fb;color:var(--text)}
+.stage.on .stage-sub{color:var(--muted)}
+.mark{flex:0 0 auto;width:21px;height:21px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-size:11px;color:#c5cfd9}
+.stage.on .mark{background:var(--accent);border-color:var(--accent);color:#fff}
+.stage.done .mark{background:#3f9a5c;border-color:#3f9a5c;color:#fff}
+.stage-name{display:block;font-weight:500}
+.stage-sub{display:block;font-size:12px;color:#a3afbb;margin-top:1px}
+.rail .note{margin:18px 18px 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);color:#a3afbb;font-size:12px;line-height:1.5}
+.rail .note b{color:#8fd1a3;font-weight:500}
+
+.work{padding:26px 30px 60px;box-shadow:-1px 0 0 var(--line),1px 0 0 var(--line);min-width:0}
+.lede{color:var(--muted);max-width:66ch;margin:0 0 22px}
+.step{border-top:1px solid var(--line-soft);padding:20px 0}
+.step:first-of-type{border-top:0}
+.step-head{display:flex;align-items:flex-start;gap:11px;margin-bottom:12px}
+.num{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:500;margin-top:1px}
+.step-sub{color:var(--muted);font-size:13px;margin-top:2px;max-width:64ch}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.card{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:14px 15px}
+.card h2{margin-bottom:2px}
+.card .sub{color:var(--muted);font-size:13px}
+.card.on{border-color:var(--accent-line);background:var(--accent-soft)}
+.kv{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--muted)}
+.kv b{color:var(--text);font-weight:500}
+
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-weight:500;color:var(--muted);padding:7px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr:hover td{background:#fafbfc}
+.name{font:500 14px/1.3 var(--display)}
+
+.audit{display:inline-flex;gap:3px;vertical-align:middle}
+.cell{width:12px;height:12px;border:1px solid var(--line);border-radius:2px;background:var(--surface)}
+.cell.full{background:var(--accent);border-color:var(--accent)}
+.cell.half{background:linear-gradient(135deg,var(--warn) 0 50%,var(--surface) 50% 100%);border-color:var(--warn)}
+
+.tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.tag.ok{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok)}
+.tag.bad{background:#fdecef;border-color:#f2c3cd;color:var(--bad)}
+.tag.run{background:#e3f2f7;border-color:#bcdfe9;color:var(--run)}
+.tag.wait{background:var(--raised)}
+.why{color:var(--bad);font-size:12px;margin-top:5px;line-height:1.45}
+
+.queue{background:var(--ground);padding:20px 18px}
+.queue h2{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.job{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:10px 12px;margin-bottom:8px}
+.job-top{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.job-kind{font-weight:500}
+.job-id{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:3px;word-break:break-all}
+.log{font-family:var(--mono);font-size:11.5px;line-height:1.5;background:var(--read);border:1px solid var(--read-line);border-radius:5px;padding:9px 10px;margin-top:8px;max-height:190px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.empty{color:var(--dim);font-size:13px;padding:14px 0}
+.err{border:1px solid #f2c3cd;background:#fdecef;color:#8d1b31;border-radius:6px;padding:10px 12px;margin-bottom:16px;font-size:13px}
+.refs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.refs img{width:62px;height:62px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+.notes{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.5}
+</style>
+
+<div class="app">
+  <div class="top">
+    <span class="brand">Раскадровка</span>
+    <nav class="tabs" id="tabs"></nav>
+    <span class="status"><span class="dot" id="dot"></span><span id="statusText">панель готова</span></span>
+  </div>
+  <aside class="rail" id="rail"></aside>
+  <main class="work" id="work"></main>
+  <aside class="queue" id="queue"><h2>Очередь</h2><div id="jobs"></div></aside>
+</div>
+
+<script>
+const state = {screen: 'books', slug: null, books: [], book: null, styles: [], jobs: [], openLog: null, error: null};
+
+const SCREENS = [
+  ['books', 'Книги', 'приём и разбор'],
+  ['characters', 'Персонажи', 'библия и листы'],
+  ['batches', 'Партии', 'карточки и кадры'],
+  ['styles', 'Стили', 'направления и эталоны'],
+];
+
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function api(path, options) {
+  const answer = await fetch(path, {headers: {'Content-Type': 'application/json'}, ...options});
+  const data = await answer.json().catch(() => ({error: 'ответ не разобрался'}));
+  if (!answer.ok) throw new Error(data.error || answer.statusText);
+  return data;
+}
+
+async function load() {
+  try {
+    state.books = (await api('/api/books')).books;
+    if (!state.slug && state.books.length) state.slug = state.books[0].slug;
+    if (state.slug) state.book = await api('/api/books/' + state.slug);
+    if (!state.styles.length) state.styles = (await api('/api/styles')).styles;
+    state.error = null;
+  } catch (error) { state.error = error.message; }
+  draw();
+}
+
+async function pollJobs() {
+  try {
+    state.jobs = (await api('/api/jobs?limit=12')).jobs;
+    drawJobs();
+    const busy = state.jobs.some(j => j.status === 'running');
+    document.getElementById('dot').className = 'dot' + (busy ? ' busy' : '');
+    document.getElementById('statusText').textContent = busy ? 'Codex работает' : 'панель готова';
+  } catch (error) { /* сервер мог уйти — молча ждём следующего круга */ }
+}
+
+function go(screen) { state.screen = screen; draw(); }
+
+function drawTabs() {
+  document.getElementById('tabs').innerHTML = SCREENS
+    .map(([key, name]) => `<button class="tab${state.screen === key ? ' on' : ''}" data-go="${key}">${name}</button>`)
+    .join('');
+}
+
+function drawRail() {
+  const book = state.books.find(b => b.slug === state.slug);
+  const done = {
+    books: book && book.parsed,
+    characters: book && book.sheets > 0,
+    batches: book && book.batches > 0,
+    styles: state.styles.length > 0,
+  };
+  document.getElementById('rail').innerHTML = `
+    <div class="kicker">Книга</div>
+    <div class="book">
+      <div class="book-name">${esc(book ? book.title : '—')}</div>
+      <div class="book-sub">${esc(book ? (book.author || '') : 'книг ещё нет')}</div>
+    </div>
+    <div class="kicker">Этапы</div>
+    ${SCREENS.map(([key, name, sub], n) => `
+      <button class="stage${state.screen === key ? ' on' : ''}${done[key] ? ' done' : ''}" data-go="${key}">
+        <span class="mark">${done[key] ? '✓' : n + 1}</span>
+        <span><span class="stage-name">${name}</span><span class="stage-sub">${sub}</span></span>
+      </button>`).join('')}
+    <div class="note">Текст книги в репозиторий не попадает: файл лежит в
+      <b>books/${esc(state.slug || '…')}/source/</b>, разбор — в <b>cache/</b>, оба вне git.</div>`;
+}
+
+function auditStrip(audit) {
+  const KEYS = ['age','build','face','eyes','hair','skin','clothing','gear','marks','bearing'];
+  if (!audit) return '<span class="tag wait">аудита нет</span>';
+  return '<span class="audit">' + KEYS.map(k => {
+    const v = audit[k];
+    return `<span class="cell ${v === 1 ? 'full' : v === 0.5 ? 'half' : ''}" title="${k}: ${v ?? '—'}"></span>`;
+  }).join('') + '</span>';
+}
+
+function screenBooks() {
+  if (!state.books.length) return '<div class="empty">Книг нет. Первая версия работает на той, что уже в репозитории.</div>';
+  return `<h1>Книги</h1>
+    <p class="lede">Каждая книга проходит один путь: разбор на абзацы, индекс лиц и сцен, библия
+    и листы персонажей, партии кадров. Панель показывает, где книга стоит сейчас.</p>
+    <div class="grid">${state.books.map(b => `
+      <div class="card${b.slug === state.slug ? ' on' : ''}">
+        <h2 class="name">${esc(b.title)}</h2>
+        <div class="sub">${esc(b.author || '')} · <code>${esc(b.slug)}</code></div>
+        <div class="kv">
+          <span>разобрана <b>${b.parsed ? 'да' : 'нет'}</b></span>
+          <span>индекс <b>${b.indexed ? 'есть' : 'нет'}</b></span>
+          <span>героев <b>${b.characters}</b></span>
+          <span>листов <b>${b.sheets}</b></span>
+          <span>партий <b>${b.batches}</b></span>
+        </div>
+        <div class="actions">
+          <button class="btn btn-sm" data-book="${esc(b.slug)}">Открыть</button>
+        </div>
+      </div>`).join('')}</div>`;
+}
+
+function screenCharacters() {
+  const book = state.book;
+  if (!book) return '<div class="empty">Книга не выбрана.</div>';
+  const rows = book.characters.map(c => `
+    <tr>
+      <td><span class="name">${esc(c.name)}</span><div class="sub"><code>${esc(c.key)}</code></div></td>
+      <td>${auditStrip(c.audit)}</td>
+      <td>${c.understanding ?? '—'}</td>
+      <td>${c.sheet ? '<span class="tag ok">лист принят</span>' : '<span class="tag wait">листа нет</span>'}</td>
+      <td>${c.complaints.length
+            ? `<span class="tag bad">${c.complaints.length} к записи</span>
+               <div class="why">${c.complaints.map(esc).join('<br>')}</div>`
+            : '<span class="tag ok">запись годна</span>'}</td>
+      <td><button class="btn btn-sm" data-entry="${esc(c.key)}" data-name="${esc(c.name)}">Собрать запись</button></td>
+    </tr>`).join('');
+  return `<h1>Персонажи</h1>
+    <p class="lede">Запись героя — внешность словами книги с указателями на абзацы и аудит
+    понимания из десяти клеток. Порог для листа — 8 из 10: ниже панель не даёт генерировать.</p>
+    <div class="step">
+      <div class="step-head"><span class="num">1</span>
+        <div><h2>Библия и аудит</h2>
+        <div class="step-sub">«Собрать запись» ставит задание Codex: он читает книгу через
+        кеш, пишет запись и сам проходит проверку. Всё, что панель не пропустила, названо
+        в последней колонке.</div></div></div>
+      <table><thead><tr><th>Герой</th><th>Аудит</th><th>Балл</th><th>Лист</th><th>Проверка</th><th></th></tr></thead>
+      <tbody>${rows || '<tr><td colspan="6" class="empty">Записей нет.</td></tr>'}</tbody></table>
+    </div>`;
+}
+
+function screenBatches() {
+  const book = state.book;
+  if (!book) return '<div class="empty">Книга не выбрана.</div>';
+  if (!book.batches.length) return '<h1>Партии</h1><div class="empty">Партий нет.</div>';
+  return `<h1>Партии</h1>
+    <p class="lede">Партия — замысел серии: направление, отобранные сцены, карточки и кадры.
+    Манифест пишется только по существующим кадрам.</p>
+    <div class="grid">${book.batches.map(b => `
+      <div class="card"><h2 class="name">${esc(b.name)}</h2>
+        <div class="sub">${esc(b.style || 'направление не задано')}</div>
+        <div class="kv"><span>карточек <b>${b.cards}</b></span>
+          <span>в манифесте <b>${b.scenes}</b></span>
+          <span>план <b>${b.planned ? 'есть' : 'нет'}</b></span></div>
+      </div>`).join('')}</div>`;
+}
+
+function screenStyles() {
+  return `<h1>Стили</h1>
+    <p class="lede">Направление держит манеру и тональный ключ. Эталоны собственной генерации:
+    собранные со свободных источников картинки нужной манеры не дают.</p>
+    <div class="grid">${state.styles.map(s => `
+      <div class="card"><h2 class="name">${esc(s.name)}</h2>
+        <div class="sub"><code>${esc(s.key)}</code> · эталонов ${s.refs.length}</div>
+        <div class="refs">${s.refs.slice(0, 6).map(r =>
+          `<img src="/file/${esc(r.file)}" alt="${esc(r.id)}" loading="lazy">`).join('')}</div>
+        <div class="notes">${esc((s.palette_en || '').slice(0, 220))}</div>
+      </div>`).join('')}</div>`;
+}
+
+function draw() {
+  drawTabs();
+  drawRail();
+  const body = {books: screenBooks, characters: screenCharacters,
+                batches: screenBatches, styles: screenStyles}[state.screen]();
+  document.getElementById('work').innerHTML =
+    (state.error ? `<div class="err">${esc(state.error)}</div>` : '') + body;
+}
+
+function drawJobs() {
+  const box = document.getElementById('jobs');
+  if (!state.jobs.length) { box.innerHTML = '<div class="empty">Пока пусто.</div>'; return; }
+  const TAG = {done: 'ok', failed: 'bad', running: 'run', queued: 'wait',
+               cancelled: 'wait', interrupted: 'bad'};
+  box.innerHTML = state.jobs.map(j => `
+    <div class="job">
+      <div class="job-top">
+        <span class="job-kind">${esc(j.kind)}</span>
+        <span class="tag ${TAG[j.status] || ''}">${esc(j.status)}</span>
+      </div>
+      <div class="job-id">${esc(j.id)}</div>
+      ${j.error ? `<div class="why">${esc(j.error)}</div>` : ''}
+      <div class="actions">
+        <button class="btn btn-sm" data-log="${esc(j.id)}">${state.openLog === j.id ? 'Скрыть лог' : 'Лог'}</button>
+        ${['queued', 'running'].includes(j.status)
+          ? `<button class="btn btn-sm" data-cancel="${esc(j.id)}">Снять</button>` : ''}
+      </div>
+      ${state.openLog === j.id ? `<div class="log" id="log-${esc(j.id)}">загрузка…</div>` : ''}
+    </div>`).join('');
+  if (state.openLog) showLog(state.openLog);
+}
+
+async function showLog(id) {
+  try {
+    const data = await api(`/api/jobs/${encodeURIComponent(id)}/log?tail=120`);
+    const box = document.getElementById('log-' + id);
+    if (box) { box.textContent = data.log || '(лог пуст)'; box.scrollTop = box.scrollHeight; }
+  } catch (error) { /* задание могло исчезнуть */ }
+}
+
+document.addEventListener('click', async event => {
+  const target = event.target.closest('[data-go],[data-book],[data-entry],[data-log],[data-cancel]');
+  if (!target) return;
+  const d = target.dataset;
+  if (d.go) return go(d.go);
+  if (d.book) { state.slug = d.book; state.screen = 'characters'; return load(); }
+  if (d.log) { state.openLog = state.openLog === d.log ? null : d.log; return drawJobs(); }
+  if (d.cancel) { await api(`/api/jobs/${encodeURIComponent(d.cancel)}/cancel`, {method: 'POST'}); return pollJobs(); }
+  if (d.entry) {
+    target.disabled = true;
+    target.textContent = 'поставлено';
+    try {
+      await api(`/api/books/${encodeURIComponent(state.slug)}/bible/${encodeURIComponent(d.entry)}`,
+                {method: 'POST', body: JSON.stringify({name: d.name})});
+    } catch (error) { state.error = error.message; draw(); }
+    pollJobs();
+  }
+});
+
+load();
+pollJobs();
+setInterval(pollJobs, 2000);
+</script>

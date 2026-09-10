@@ -13,6 +13,7 @@
 import shlex
 import string
 import subprocess
+import threading
 import time
 from datetime import datetime
 from pathlib import Path
@@ -72,25 +73,37 @@ def run_codex(prompt, root=ROOT, config=None, log=None, watch=None):
     config = config or panel_settings.load(root)
     command = codex_command(prompt, root, config)
     started = time.monotonic()
+    timeout = int(config.get('timeout', 1200))
+    if log is not None:
+        _append(log, f'$ {shlex.join(command[:-1])} <инструкция>\n')
     process = subprocess.Popen(command, cwd=str(root), stdin=subprocess.DEVNULL,
-                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                               text=True, bufsize=1)
     if watch is not None:
         watch(process)
+    # Вывод пишется построчно, а не одним куском в конце: кадр идёт минуты, и хвост лога
+    # в панели должен что-то показывать всё это время.
+    killed = threading.Event()
+    killer = threading.Timer(timeout, lambda: (killed.set(), process.kill()))
+    killer.start()
+    lines = []
     try:
-        output = process.communicate(timeout=int(config.get('timeout', 1200)))[0] or ''
-        code = process.returncode
-    except subprocess.TimeoutExpired:
-        process.kill()
-        output = (process.communicate()[0] or '') + \
-                 f'\n— таймаут {config.get("timeout", 1200)} с, процесс убит'
-        code = None
+        for line in process.stdout:
+            lines.append(line)
+            if log is not None:
+                _append(log, line)
+        process.wait()
     finally:
+        killer.cancel()
         if watch is not None:
             watch(None)
+    output = ''.join(lines)
+    code = None if killed.is_set() else process.returncode
+    if killed.is_set():
+        output += f'\n— таймаут {timeout} с, процесс убит'
     spent = time.monotonic() - started
     if log is not None:
-        _append(log, f'$ {shlex.join(command[:-1])} <инструкция>\n{output}\n'
-                     f'— код {code}, {spent:.0f} с\n')
+        _append(log, f'— код {code}, {spent:.0f} с\n')
     return code, output, spent
 
 
@@ -132,7 +145,14 @@ def run(kind, fields, validate, expected, root=ROOT, config=None, log=None, watc
             _append(Path(log).with_suffix('.prompt.txt'),
                     f'=== попытка {attempt} ===\n{prompt}\n')
         code, output, spent = run_codex(prompt, root, config, log, watch)
-        complaints = list(validate()) + stray_changes(before, git_status(root), expected)
+        try:
+            complaints = list(validate())
+        except Exception as error:
+            # Неразбираемый JSON — самый вероятный плохой исход, и это претензия к попытке,
+            # а не крах задания: иначе повтор, существующий ровно для этого, не наступит.
+            complaints = [f'результат не читается: {type(error).__name__}: {error} — '
+                          f'файл должен существовать и разбираться как JSON']
+        complaints += stray_changes(before, git_status(root), expected)
         tries.append({'attempt': attempt, 'returncode': code, 'seconds': round(spent),
                       'complaints': complaints})
         if log is not None:
