@@ -108,7 +108,9 @@ code,.mono{font-family:var(--mono)}
 
 /* Широкое содержимое прокручивается внутри себя, а не выталкивает соседнюю колонку. */
 .wide{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:600px;font-size:13px}
+/* Ширину без потолка получают картинки, а не таблица: растянутая на 2500 px, она разносит
+   колонки так, что строку приходится читать поворотом головы. */
+table{border-collapse:collapse;width:100%;min-width:600px;max-width:1180px;font-size:13px}
 th{text-align:left;font-weight:500;color:var(--muted);padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 td{padding:10px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
 tr:hover td{background:#fafbfc}
@@ -393,6 +395,7 @@ function applyHash(first) {
     state.batch = want ? {name: want} : null;
     return load();
   }
+  canonical();     // ссылка без книги выправляется в полную, иначе она снова станет двусмысленной
   draw();
 }
 
