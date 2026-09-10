@@ -330,6 +330,11 @@ def api_job_log(panel, match, query, body):
     return {'log': panel.queue.tail(match.group(1), lines)}
 
 
+@route('POST', r'/api/jobs/clear')
+def api_jobs_clear(panel, match, query, body):
+    return {'forgotten': panel.queue.forget_finished()}
+
+
 @route('POST', r'/api/jobs/([^/]+)/cancel')
 def api_job_cancel(panel, match, query, body):
     job = panel.queue.cancel(match.group(1))

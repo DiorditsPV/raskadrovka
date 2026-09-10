@@ -33,6 +33,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .rail :focus-visible{outline-color:#fff}
 img{display:block;max-width:100%}
 h1{font:500 24px/1.2 var(--display);margin:0 0 6px;letter-spacing:-.005em}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 h2{font:600 16px/1.3 var(--sans);margin:0}
 code,.mono{font-family:var(--mono)}
 /* Текст только для чтения с экрана: имя кнопки собирается из её содержимого, а не
@@ -50,7 +51,9 @@ code,.mono{font-family:var(--mono)}
 /* Ширины колонок — переменные: на узком окне двигается только они, а не вся раскладка. */
 .app{--rail:248px; --queue:296px;
   display:grid;grid-template-columns:var(--rail) minmax(0,1fr) var(--queue);
-  grid-template-rows:52px 1fr;grid-auto-rows:auto;min-height:100vh;max-width:1720px;margin:0 auto;
+  /* Без потолка: на экране 2560 колпак 1720 оставлял по 420 px пустоты с каждой стороны,
+     а место нужнее всего картинкам. Длину строки держит не окно, а сам текст (64ch). */
+  grid-template-rows:52px 1fr;grid-auto-rows:auto;min-height:100vh;
   border-left:1px solid var(--line-soft);border-right:1px solid var(--line-soft);
   background:linear-gradient(to right,#2c4a66 0 var(--rail),var(--surface) var(--rail) calc(100% - var(--queue)),var(--ground) calc(100% - var(--queue)))}
 .top{grid-column:1/-1;display:flex;align-items:center;gap:28px;padding:0 22px;border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0;z-index:5}
@@ -132,6 +135,7 @@ tr:hover td{background:#fafbfc}
 
 .queue{background:var(--ground);padding:20px 18px}
 .queue h2{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.queue-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .job{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:10px 12px;margin-bottom:8px}
 .job-top{display:flex;align-items:center;gap:8px;justify-content:space-between}
 .job-kind{font-weight:500}
@@ -150,17 +154,22 @@ tr:hover td{background:#fafbfc}
 .skeleton{color:var(--dim);font-size:13px;padding:20px 0}
 .rail-skeleton{min-height:420px}
 .refs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-/* Эталон — единственное доказательство манеры; в квадрате 62 px манеры не видно. */
-.refs img{width:94px;height:63px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+/* Эталон — единственное доказательство манеры. В 94 px это уменьшение в шестнадцать раз:
+   манеры там не видно, а выбирают направление именно по ней. */
+.refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:12px}
+.refs img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:5px;border:1px solid var(--line)}
+.styles-list{display:grid;gap:14px}
+.style-head{display:flex;justify-content:space-between;align-items:baseline;gap:18px;flex-wrap:wrap}
+.style-head .notes{margin:0;max-width:78ch}
 .notes{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.5}
 
-/* лист персонажа: три проекции в ряд, поэтому широкая полоска, а не квадрат */
-.sheet{width:104px;height:50px;object-fit:cover;object-position:center top;border:1px solid var(--line);border-radius:4px;background:var(--raised)}
-.sheet-none{width:104px;height:50px;border:1px dashed var(--line);border-radius:4px;display:grid;place-items:center;color:var(--dim);font-size:12px}
+/* Лист несёт три проекции. Полоской в 50 px их было не разглядеть — показываем целиком. */
+.sheet{width:210px;height:auto;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
+.sheet-none{width:210px;height:140px;border:1px dashed var(--line);border-radius:5px;display:grid;place-items:center;color:var(--dim);font-size:12px}
 .who{display:flex;align-items:center;gap:12px}
 .who .name{white-space:nowrap}
 
-.scene{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;border-top:1px solid var(--line-soft);padding:22px 0}
+.scene{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,540px);gap:26px;border-top:1px solid var(--line-soft);padding:22px 0}
 .frames{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));align-content:start}
 .frame img{width:100%;height:auto;aspect-ratio:3/2;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
 .frame-label{font-weight:500;margin-bottom:7px}
@@ -174,8 +183,8 @@ tr:hover td{background:#fafbfc}
 .excerpt .from{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:6px}
 .crumbs{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--muted)}
 .whos{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.whos figure{margin:0;text-align:center;width:96px}
-.whos img{width:96px;height:52px;object-fit:cover;object-position:center top;border:1px solid var(--line);border-radius:4px}
+.whos figure{margin:0;text-align:center;width:132px}
+.whos img{width:132px;height:auto;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--line);border-radius:5px}
 .whos figcaption{font-size:12px;color:var(--muted);margin-top:3px}
 
 @media (max-width:1400px){ .app{--rail:216px; --queue:264px} .work{padding:24px 22px 60px} }
@@ -217,7 +226,7 @@ tr:hover td{background:#fafbfc}
 <script>
 const state = {screen: 'books', slug: null, books: [], book: null, styles: [], jobs: [],
                batch: null, openLog: null, wideLog: null, error: null, ready: false,
-               total: 0, settings: null, git: null};
+               total: 0, settings: null, git: null, showAll: false};
 
 const SCREENS = [
   ['books', 'Книги', 'приём и разбор'],
@@ -275,7 +284,10 @@ async function load() {
     state.git = await api('/api/git');
   } catch (error) { state.error = error.message; }
   state.ready = true;
+  canonical();
   draw();
+  // Имена героев в очереди приходят вместе с книгой: без этого они минуту стоят ключами.
+  drawJobs();
 }
 
 // — часы заданий —
@@ -351,20 +363,44 @@ async function pollJobs() {
 // Экран живёт в адресе. Без этого вкладка «Партии» изнутри партии ничего не делала (меняла
 // state.screen на тот же самый), перезагрузка всегда сбрасывала на «Книги», а сослаться на
 // экран было нечем.
-function go(screen) { location.hash = '#/' + screen; }
-function openBatch(name) { location.hash = '#/batches/' + encodeURIComponent(name); }
+// Книга — часть адреса. «Персонажи» без книги — вопрос без ответа: чьи это персонажи,
+// понять неоткуда, а ссылка на экран означала бы разное в разное время.
+function href(screen, batch) {
+  if (screen === 'books' || !state.slug) return '#/books';
+  return '#/' + encodeURIComponent(state.slug) + '/' + screen
+       + (batch ? '/' + encodeURIComponent(batch) : '');
+}
+function go(screen) { location.hash = href(screen, null); }
+function openBatch(name) { location.hash = href('batches', name); }
 
 function applyHash(first) {
   const parts = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/').filter(Boolean);
-  const screen = SCREENS.some(([k]) => k === parts[0]) ? parts[0] : 'books';
-  const want = screen === 'batches' && parts[1] ? parts[1] : null;
+  const known = key => SCREENS.some(([k]) => k === key);
+  let slug = null, screen = 'books', want = null;
+  if (known(parts[0])) {                       // старая ссылка без книги — берём текущую
+    screen = parts[0];
+    want = screen === 'batches' && parts[1] ? parts[1] : null;
+  } else if (parts.length) {
+    slug = parts[0];
+    screen = known(parts[1]) ? parts[1] : 'books';
+    want = screen === 'batches' && parts[2] ? parts[2] : null;
+  }
+  const swap = slug && slug !== state.slug;
+  if (slug) state.slug = slug;
   const had = state.batch ? state.batch.name : null;
   state.screen = screen;
-  if (first === true || want !== had) {
+  if (first === true || swap || want !== had) {
     state.batch = want ? {name: want} : null;
     return load();
   }
   draw();
+}
+
+function canonical() {
+  // После загрузки книга известна: приводим адрес к полному виду, чтобы ссылка была
+  // однозначной и после перезагрузки открывала то же самое.
+  const want = href(state.screen, state.batch ? state.batch.name : null);
+  if (location.hash !== want) history.replaceState(null, '', want);
 }
 
 function drawTabs() {
@@ -455,6 +491,12 @@ function checkCell(complaints) {
   return parts.join(' ');
 }
 
+function eyebrow() {
+  const book = state.books.find(b => b.slug === state.slug);
+  return book ? `<div class="eyebrow">${esc(book.title)}${
+    book.author ? ' · ' + esc(book.author) : ''}</div>` : '';
+}
+
 function screenBooks() {
   if (!state.books.length) return `<h1>Книги</h1>
     <div class="empty">Книг нет. Положите файл в <code>books/&lt;слаг&gt;/source/</code> и
@@ -504,7 +546,7 @@ function screenCharacters() {
                  c.complaints.length ? 'Собрать запись' : 'Собрать заново'}</button>`}</td>
     </tr>`;
   }).join('');
-  return `<h1>Персонажи</h1>
+  return `${eyebrow()}<h1>Персонажи</h1>
     <p class="lede">Запись героя — внешность словами книги с указателями на абзацы и аудит
     понимания из десяти клеток. Порог для листа — 8 из 10: ниже панель не даёт генерировать.
     «Не хватает» — поля, которых в записи нет: разбивка <code>audit</code> появилась позже
@@ -531,7 +573,7 @@ function whoStrip(keys) {
     const c = known[k];
     return `<figure>${c && c.sheet_file
       ? `<img src="/file/${esc(c.sheet_file)}" alt="лист внешности: ${esc(c.name)}" loading="lazy" width="1536" height="1024">`
-      : '<span class="sheet-none" style="width:96px;height:52px">нет</span>'}
+      : '<span class="sheet-none" style="width:132px;height:88px">нет</span>'}
       <figcaption>${esc(c ? c.name : k)}</figcaption></figure>`;
   }).join('')}</div>`;
 }
@@ -602,11 +644,11 @@ function screenBatches() {
       ${b.scenes.map(sceneBlock).join('')}`;
   }
 
-  if (!book.batches.length) return `<h1>Партии</h1>
+  if (!book.batches.length) return `${eyebrow()}<h1>Партии</h1>
     <div class="empty">Партий нет. Партия заводится папкой
     <code>books/${esc(state.slug)}/&lt;номер-имя&gt;/</code> с планом сцен;
     создание из панели — вторая версия.</div>`;
-  return `<h1>Партии</h1>
+  return `${eyebrow()}<h1>Партии</h1>
     <p class="lede">Партия — замысел серии: направление, отобранные сцены, карточки и кадры.
     Манифест пишется только по существующим кадрам.</p>
     <div class="grid">${book.batches.map(b => `
@@ -625,14 +667,17 @@ function screenStyles() {
     эталоны — в <code>styles/refs/</code>.</div>`;
   return `<h1>Стили</h1>
     <p class="lede">Направление держит манеру и тональный ключ. Эталоны собственной генерации:
-    собранные со свободных источников картинки нужной манеры не дают.</p>
-    <div class="grid">${state.styles.map(s => `
-      <div class="card"><h2 class="name">${esc(s.name)}</h2>
-        <div class="sub"><code>${esc(s.key)}</code> · эталонов ${s.refs.length}${
-          s.refs.length > 6 ? ', показаны 6' : ''}</div>
-        <div class="refs">${s.refs.slice(0, 6).map(r =>
-          `<img src="/file/${esc(r.file)}" alt="эталон ${esc(r.id)} направления «${esc(s.name)}»" loading="lazy" width="1536" height="1024" title="${esc(r.id)}${r.why ? ' — ' + esc(r.why) : ''}">`).join('')}</div>
-        <div class="notes" lang="en">${esc(clip(s.palette_en, 240))}</div>
+    собранные со свободных источников картинки нужной манеры не дают. Направление выбирают
+    глазами по эталонам — поэтому здесь они крупные.</p>
+    <div class="styles-list">${state.styles.map(s => `
+      <div class="card">
+        <div class="style-head">
+          <div><h2 class="name">${esc(s.name)}</h2>
+            <div class="sub"><code>${esc(s.key)}</code> · эталонов ${s.refs.length}</div></div>
+          <div class="notes" lang="en">${esc(clip(s.palette_en, 320))}</div>
+        </div>
+        <div class="refs">${s.refs.map(r =>
+          `<a href="/file/${esc(r.file)}" target="_blank" title="${esc(r.id)}${r.why ? ' — ' + esc(r.why) : ''}"><img src="/file/${esc(r.file)}" alt="эталон ${esc(r.id)} направления «${esc(s.name)}»" loading="lazy" width="1536" height="1024"></a>`).join('')}</div>
       </div>`).join('')}</div>`;
 }
 
@@ -673,7 +718,7 @@ function drawJobs() {
   // изменился сам состав очереди; текст лога и часы обновляем на месте.
   // Имя героя приходит вместе с книгой, позже первой отрисовки очереди: без него в
   // сигнатуре карточки навсегда остались бы с ключом вместо имени.
-  const shape = JSON.stringify([state.openLog, state.wideLog, state.total,
+  const shape = JSON.stringify([state.openLog, state.wideLog, state.total, state.showAll,
                                 state.jobs.map(j => [j.id, j.status, j.error, jobSubject(j)])]);
   if (shape === jobsShape) { if (state.openLog) showLog(state.openLog); return; }
   jobsShape = shape;
@@ -686,8 +731,13 @@ function drawJobs() {
       нажимаете кнопку на экране этапа: панель показывает ход, лог и даёт снять задание.</div>`;
     return;
   }
+  // Очередь — не журнал. По умолчанию видно то, что идёт, и последние пять законченных;
+  // остальное — по требованию, а ненужное можно забыть совсем.
+  const live = state.jobs.filter(j => OPEN.includes(j.status));
+  const past = state.jobs.filter(j => !OPEN.includes(j.status));
+  const shown = state.showAll ? state.jobs : live.concat(past.slice(0, 5));
   let place = 0;
-  box.innerHTML = state.jobs.map(j => {
+  box.innerHTML = shown.map(j => {
     if (j.status === 'queued') place += 1;
     const subject = jobSubject(j);
     return `
@@ -717,11 +767,13 @@ function drawJobs() {
                   aria-label="Лог задания ${esc(j.id)}">${esc(kept ? kept.text : 'загрузка…')}</div>`
           : ''}
     </div>`; }).join('');
-  if (state.total > state.jobs.length) {
-    box.insertAdjacentHTML('beforeend',
-      `<div class="empty">Показаны ${state.jobs.length} из ${state.total}; остальные —
-       в <code>cache/panel/jobs/</code>.</div>`);
-  }
+  const hidden = state.total - shown.length;
+  box.insertAdjacentHTML('beforeend', `<div class="queue-foot">
+    ${hidden > 0 ? `<button class="btn btn-sm" data-more="">Показать все (${state.total})</button>`
+      : state.showAll && state.total > live.length + 5
+        ? '<button class="btn btn-sm" data-more="">Свернуть</button>' : ''}
+    ${past.length ? '<button class="btn btn-sm" data-forget="">Убрать законченные</button>' : ''}
+  </div>`);
   if (kept) {
     const fresh = document.getElementById('log-' + state.openLog);
     if (fresh) fresh.scrollTop = kept.top;
@@ -760,7 +812,7 @@ async function startEntry(key, button) {
 
 document.addEventListener('click', async event => {
   const target = event.target.closest('[data-go],[data-book],[data-batch],[data-entry],'
-    + '[data-log],[data-wide],[data-cancel],[data-again],[data-dismiss]');
+    + '[data-log],[data-wide],[data-cancel],[data-again],[data-dismiss],[data-more],[data-forget]');
   if (!target) return;
   const d = target.dataset;
   if (d.go) return go(d.go);
@@ -774,6 +826,14 @@ document.addEventListener('click', async event => {
     return draw();
   }
   if (d.wide) { state.wideLog = d.wide; state.openLog = null; drawJobs(); return draw(); }
+  if (d.more !== undefined) { state.showAll = !state.showAll; return drawJobs(); }
+  if (d.forget !== undefined) {
+    await api('/api/jobs/clear', {method: 'POST'});
+    state.showAll = false;
+    state.openLog = state.wideLog = null;
+    await pollJobs();
+    return draw();
+  }
   if (d.cancel) { await api(`/api/jobs/${encodeURIComponent(d.cancel)}/cancel`, {method: 'POST'}); return pollJobs(); }
   if (d.again) return startEntry(d.again, target);
   if (d.entry) return startEntry(d.entry, target);
