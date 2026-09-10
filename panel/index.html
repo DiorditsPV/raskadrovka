@@ -110,6 +110,27 @@ tr:hover td{background:#fafbfc}
 .err{border:1px solid #f2c3cd;background:#fdecef;color:#8d1b31;border-radius:6px;padding:10px 12px;margin-bottom:16px;font-size:13px}
 .refs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .refs img{width:62px;height:62px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+
+/* лист персонажа: три проекции в ряд, поэтому широкая полоска, а не квадрат */
+.sheet{width:112px;height:52px;object-fit:cover;object-position:center top;border:1px solid var(--line);border-radius:4px;background:var(--raised)}
+.sheet-none{width:112px;height:52px;border:1px dashed var(--line);border-radius:4px;display:grid;place-items:center;color:var(--dim);font-size:11px}
+.who{display:flex;align-items:center;gap:11px}
+
+.scene{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;border-top:1px solid var(--line-soft);padding:22px 0}
+.frames{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));align-content:start}
+.frame img{width:100%;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
+.frame .under{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px;font-size:12px;color:var(--muted)}
+.frame-none{border:1px dashed var(--line);border-radius:5px;padding:26px;text-align:center;color:var(--dim);font-size:13px}
+.scene h2{font:500 17px/1.25 var(--display);margin-bottom:4px}
+.scene .cap{color:var(--muted);margin-bottom:10px}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.excerpt{background:var(--read);border:1px solid var(--read-line);border-radius:5px;padding:11px 13px;font-size:13px;line-height:1.55;margin-top:10px}
+.excerpt .from{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px}
+.crumbs{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--muted)}
+.whos{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.whos figure{margin:0;text-align:center;width:74px}
+.whos img{width:74px;height:40px;object-fit:cover;object-position:center top;border:1px solid var(--line);border-radius:4px}
+.whos figcaption{font-size:11px;color:var(--muted);margin-top:3px}
 .notes{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.5}
 </style>
 
@@ -125,7 +146,8 @@ tr:hover td{background:#fafbfc}
 </div>
 
 <script>
-const state = {screen: 'books', slug: null, books: [], book: null, styles: [], jobs: [], openLog: null, error: null};
+const state = {screen: 'books', slug: null, books: [], book: null, styles: [], jobs: [],
+               batch: null, openLog: null, error: null};
 
 const SCREENS = [
   ['books', 'Книги', 'приём и разбор'],
@@ -149,6 +171,8 @@ async function load() {
     if (!state.slug && state.books.length) state.slug = state.books[0].slug;
     if (state.slug) state.book = await api('/api/books/' + state.slug);
     if (!state.styles.length) state.styles = (await api('/api/styles')).styles;
+    if (state.batch) state.batch = await api(
+      `/api/books/${encodeURIComponent(state.slug)}/batches/${encodeURIComponent(state.batch.name)}`);
     state.error = null;
   } catch (error) { state.error = error.message; }
   draw();
@@ -240,7 +264,12 @@ function screenCharacters() {
   if (!book) return '<div class="empty">Книга не выбрана.</div>';
   const rows = book.characters.map(c => `
     <tr>
-      <td><span class="name">${esc(c.name)}</span><div class="sub"><code>${esc(c.key)}</code></div></td>
+      <td><div class="who">
+        ${c.sheet_file
+          ? `<a href="/file/${esc(c.sheet_file)}" target="_blank" title="открыть лист целиком"><img class="sheet" src="/file/${esc(c.sheet_file)}" alt="лист ${esc(c.name)}" loading="lazy"></a>`
+          : '<span class="sheet-none">нет листа</span>'}
+        <span><span class="name">${esc(c.name)}</span><div class="sub"><code>${esc(c.key)}</code></div></span>
+      </div></td>
       <td>${auditStrip(c.audit)}</td>
       <td>${c.understanding ?? '—'}</td>
       <td>${c.sheet ? '<span class="tag ok">лист принят</span>' : '<span class="tag wait">листа нет</span>'}</td>
@@ -259,14 +288,64 @@ function screenCharacters() {
         <div class="step-sub">«Собрать запись» ставит задание Codex: он читает книгу через
         кеш, пишет запись и сам проходит проверку. Всё, что панель не пропустила, названо
         в последней колонке.</div></div></div>
-      <table><thead><tr><th>Герой</th><th>Аудит</th><th>Балл</th><th>Лист</th><th>Проверка</th><th></th></tr></thead>
+      <table><thead><tr><th>Герой и лист</th><th>Аудит</th><th>Балл</th><th>Состояние</th><th>Проверка</th><th></th></tr></thead>
       <tbody>${rows || '<tr><td colspan="6" class="empty">Записей нет.</td></tr>'}</tbody></table>
     </div>`;
+}
+
+function whoStrip(keys) {
+  const known = Object.fromEntries((state.book?.characters || []).map(c => [c.key, c]));
+  return `<div class="whos">${keys.map(k => {
+    const c = known[k];
+    return `<figure>${c && c.sheet_file
+      ? `<img src="/file/${esc(c.sheet_file)}" alt="${esc(c.name)}" loading="lazy">`
+      : '<span class="sheet-none" style="width:74px;height:40px">нет</span>'}
+      <figcaption>${esc(c ? c.name : k)}</figcaption></figure>`;
+  }).join('')}</div>`;
+}
+
+function sceneBlock(s) {
+  const frames = s.frames.length
+    ? s.frames.map(fr => `<div class="frame">
+        ${fr.image
+          ? `<a href="/file/${esc(fr.image)}" target="_blank"><img src="/file/${esc(fr.image)}" alt="${esc(s.title)}" loading="lazy"></a>`
+          : '<div class="frame-none">кадра нет</div>'}
+        <div class="under"><span class="tag">${esc(fr.style || '—')}</span>
+          <span>шаблон <code>${esc(fr.composition || '—')}</code></span>
+          <span>эталоны ${fr.style_refs.map(esc).join(', ') || '—'}</span></div>
+      </div>`).join('')
+    : '<div class="frame-none">кадров ещё нет — есть только карточка</div>';
+  const loc = s.locator
+    ? `гл${s.locator.chapter} [${s.locator.paragraphs[0]}, ${s.locator.paragraphs[1]})` : '—';
+  return `<div class="scene">
+    <div class="frames">${frames}</div>
+    <div>
+      <h2>${esc(s.title)}</h2>
+      <div class="cap">${esc(s.caption || '')}</div>
+      <div class="meta"><span class="tag">${s.order ?? '—'} по порядку</span>
+        <span class="tag mono">${esc(loc)}</span>
+        <span class="tag">шаблон ${esc(s.composition || '—')}</span></div>
+      ${s.brief ? `<div class="step-sub" style="max-width:none">${esc(s.brief)}</div>` : ''}
+      ${s.invariants.length ? whoStrip(s.invariants) : ''}
+      ${s.excerpt ? `<div class="excerpt"><div class="from">отрывок книги · ${esc(loc)}</div>${esc(s.excerpt)}</div>` : ''}
+    </div>
+  </div>`;
 }
 
 function screenBatches() {
   const book = state.book;
   if (!book) return '<div class="empty">Книга не выбрана.</div>';
+
+  if (state.batch) {
+    const b = state.batch;
+    const withFrame = b.scenes.filter(s => s.frames.some(f => f.image)).length;
+    return `<div class="crumbs"><button class="btn btn-sm" data-batch="">← Все партии</button>
+        <span>${esc(b.name)} · сцен ${b.scenes.length} · с кадром ${withFrame}</span></div>
+      <h1>${esc(b.name)}</h1>
+      ${b.request ? `<p class="lede">${esc(b.request)}</p>` : ''}
+      ${b.scenes.map(sceneBlock).join('')}`;
+  }
+
   if (!book.batches.length) return '<h1>Партии</h1><div class="empty">Партий нет.</div>';
   return `<h1>Партии</h1>
     <p class="lede">Партия — замысел серии: направление, отобранные сцены, карточки и кадры.
@@ -277,6 +356,7 @@ function screenBatches() {
         <div class="kv"><span>карточек <b>${b.cards}</b></span>
           <span>в манифесте <b>${b.scenes}</b></span>
           <span>план <b>${b.planned ? 'есть' : 'нет'}</b></span></div>
+        <div class="actions"><button class="btn btn-sm" data-batch="${esc(b.name)}">Открыть</button></div>
       </div>`).join('')}</div>`;
 }
 
@@ -334,11 +414,16 @@ async function showLog(id) {
 }
 
 document.addEventListener('click', async event => {
-  const target = event.target.closest('[data-go],[data-book],[data-entry],[data-log],[data-cancel]');
+  const target = event.target.closest('[data-go],[data-book],[data-batch],[data-entry],[data-log],[data-cancel]');
   if (!target) return;
   const d = target.dataset;
   if (d.go) return go(d.go);
-  if (d.book) { state.slug = d.book; state.screen = 'characters'; return load(); }
+  if (d.book) { state.slug = d.book; state.screen = 'characters'; state.batch = null; return load(); }
+  if (d.batch !== undefined) {
+    state.batch = d.batch ? {name: d.batch} : null;
+    state.screen = 'batches';
+    return load();
+  }
   if (d.log) { state.openLog = state.openLog === d.log ? null : d.log; return drawJobs(); }
   if (d.cancel) { await api(`/api/jobs/${encodeURIComponent(d.cancel)}/cancel`, {method: 'POST'}); return pollJobs(); }
   if (d.entry) {
@@ -350,6 +435,7 @@ document.addEventListener('click', async event => {
       await api(`/api/books/${encodeURIComponent(state.slug)}/bible/${encodeURIComponent(d.entry)}`,
                 {method: 'POST', body: '{}'});
     } catch (error) { state.error = error.message; draw(); }
+    state.openLog = null;
     pollJobs();
   }
 });

@@ -111,6 +111,15 @@ class Queue:
             n += 1
         return job_id
 
+    def open_job(self, kind, args):
+        """Такое задание уже в очереди или на ходу? Задание с суждением идёт минутами, и
+        второй запуск того же — не удвоенная скорость, а два Codex на одном файле."""
+        for job in self.all():
+            if (job['status'] in OPEN_STATUSES and job['kind'] == kind
+                    and job['args'] == dict(args or {})):
+                return job
+        return None
+
     def add(self, kind, args=None, label=None):
         if kind not in self.handlers:
             raise KeyError(f'нет обработчика для задания «{kind}»')
