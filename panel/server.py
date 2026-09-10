@@ -313,7 +313,9 @@ def api_styles(panel, match, query, body):
 @route('GET', r'/api/jobs')
 def api_jobs(panel, match, query, body):
     limit = int(query.get('limit', ['50'])[0])
-    return {'jobs': panel.queue.all(limit=limit)}
+    jobs = panel.queue.all()
+    # Отдаём и общее число: срез без него молчит о том, что показана не вся очередь.
+    return {'jobs': jobs[:limit], 'total': len(jobs)}
 
 
 @route('GET', r'/api/jobs/([^/]+)')
@@ -423,13 +425,25 @@ class Handler(BaseHTTPRequestHandler):
     def _file(self, path):
         if path is None or not Path(path).is_file():
             return self._json(404, {'error': 'нет файла'})
+        # Кадры и листы весят мегабайты, а за один обход панели их запрашивают по два-три
+        # раза. `no-store` заставлял качать всё заново; метка версии по времени и размеру
+        # оставляет свежесть (файл на диске мог смениться) и убирает лишние мегабайты.
+        stat = Path(path).stat()
+        etag = f'"{int(stat.st_mtime):x}-{stat.st_size:x}"'
+        if self.headers.get('If-None-Match') == etag:
+            self.send_response(304)
+            self.send_header('ETag', etag)
+            self.send_header('Cache-Control', 'no-cache')
+            self.end_headers()
+            return
         raw = Path(path).read_bytes()
         kind = mimetypes.guess_type(str(path))[0] or 'application/octet-stream'
         self.send_response(200)
         self.send_header('Content-Type', kind + ('; charset=utf-8' if kind.startswith('text/')
                                                  or kind.endswith('json') else ''))
         self.send_header('Content-Length', str(len(raw)))
-        self.send_header('Cache-Control', 'no-store')
+        self.send_header('ETag', etag)
+        self.send_header('Cache-Control', 'no-cache')
         self.end_headers()
         self.wfile.write(raw)
 
