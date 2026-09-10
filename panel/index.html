@@ -84,7 +84,9 @@ code,.mono{font-family:var(--mono)}
 .rail .note{margin:18px 18px 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.16);color:var(--on-slate);font-size:13px;line-height:1.5}
 .rail .note b{color:#a8dcba;font-weight:500}
 
-.work{padding:26px 30px 60px;box-shadow:-1px 0 0 var(--line),1px 0 0 var(--line);min-width:0}
+/* min-height, чтобы страница не подскакивала, когда заглушку сменяет содержимое:
+   документ сразу занимает свою высоту, а не растёт с одной строки до экрана. */
+.work{padding:26px 30px 60px;box-shadow:-1px 0 0 var(--line),1px 0 0 var(--line);min-width:0;min-height:calc(100vh - 52px)}
 .lede{color:var(--muted);max-width:64ch;margin:0 0 22px}
 .step{border-top:1px solid var(--line-soft);padding:20px 0}
 .step:first-of-type{border-top:0}
@@ -146,6 +148,7 @@ tr:hover td{background:#fafbfc}
 .job.now{border-color:var(--accent-line);box-shadow:inset 3px 0 0 var(--accent)}
 .job-what{font-size:13px;color:var(--muted);margin-top:2px}
 .skeleton{color:var(--dim);font-size:13px;padding:20px 0}
+.rail-skeleton{min-height:420px}
 .refs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 /* Эталон — единственное доказательство манеры; в квадрате 62 px манеры не видно. */
 .refs img{width:94px;height:63px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
