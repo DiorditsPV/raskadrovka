@@ -121,7 +121,11 @@ def test_book_screen_carries_validator_complaints(live):
     assert status == 200
     hero = data['characters'][0]
     assert hero['key'] == 'hero'
-    assert any('нет поля audit' in c for c in hero['complaints'])
+    gaps = [c for c in hero['complaints'] if c['level'] == 'missing']
+    # Поля контракта, которого в записи нет, — «не хватает», а не «сломано»: разбивка
+    # audit появилась позже самих записей.
+    assert any('нет поля audit' in c['text'] for c in gaps)
+    assert not [c for c in hero['complaints'] if c['level'] != 'missing']
 
 
 def test_bible_entry_job_runs_through_the_queue(live):

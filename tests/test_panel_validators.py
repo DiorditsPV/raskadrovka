@@ -39,9 +39,17 @@ def test_good_entry_passes(book):
     assert check(GOOD, book) == []
 
 
-def test_missing_field_is_named(book):
+def test_missing_field_is_named_and_is_not_an_error(book):
+    """Поле, которого нет, — «не хватает»; противоречие — «не сходится». Красным только второе."""
     entry = {k: v for k, v in GOOD.items() if k != 'appearance_en'}
-    assert any('нет поля appearance_en' in c for c in check(entry, book))
+    out = check(entry, book)
+    assert any('нет поля appearance_en' in c for c in out)
+    assert all(c.level == 'missing' for c in out)
+
+
+def test_contradiction_is_an_error_not_a_gap(book):
+    out = check(dict(GOOD, understanding=10.0), book)
+    assert out and all(c.level == 'error' for c in out)
 
 
 def test_empty_locators_rejected(book):

@@ -259,6 +259,22 @@ function screenBooks() {
       </div>`).join('')}</div>`;
 }
 
+function checkCell(complaints) {
+  // «Не сходится» и «не хватает» — разные вещи. Первое чинят, второе дописывают; если красить
+  // одинаково, экран краснеет весь и перестаёт что-либо сообщать.
+  const wrong = complaints.filter(c => c.level !== 'missing');
+  const gaps = complaints.filter(c => c.level === 'missing');
+  const parts = [];
+  if (wrong.length) parts.push(`<span class="tag bad">${wrong.length} не сходится</span>
+      <div class="why">${wrong.map(c => esc(c.text)).join('<br>')}</div>`);
+  if (gaps.length) {
+    const fields = gaps.map(c => (c.text.match(/нет поля (\w+)/) || [, c.text])[1]);
+    parts.push(`<span class="tag wait" title="${esc(gaps.map(c => c.text).join('; '))}">не хватает: ${esc(fields.join(', '))}</span>`);
+  }
+  if (!parts.length) parts.push('<span class="tag ok">запись годна</span>');
+  return parts.join(' ');
+}
+
 function screenCharacters() {
   const book = state.book;
   if (!book) return '<div class="empty">Книга не выбрана.</div>';
@@ -273,15 +289,15 @@ function screenCharacters() {
       <td>${auditStrip(c.audit)}</td>
       <td>${c.understanding ?? '—'}</td>
       <td>${c.sheet ? '<span class="tag ok">лист принят</span>' : '<span class="tag wait">листа нет</span>'}</td>
-      <td>${c.complaints.length
-            ? `<span class="tag bad">${c.complaints.length} к записи</span>
-               <div class="why">${c.complaints.map(esc).join('<br>')}</div>`
-            : '<span class="tag ok">запись годна</span>'}</td>
+      <td>${checkCell(c.complaints)}</td>
       <td><button class="btn btn-sm" data-entry="${esc(c.key)}">Собрать запись</button></td>
     </tr>`).join('');
   return `<h1>Персонажи</h1>
     <p class="lede">Запись героя — внешность словами книги с указателями на абзацы и аудит
-    понимания из десяти клеток. Порог для листа — 8 из 10: ниже панель не даёт генерировать.</p>
+    понимания из десяти клеток. Порог для листа — 8 из 10: ниже панель не даёт генерировать.
+    «Не хватает» — поля, которых в записи нет: разбивка <code>audit</code> появилась позже
+    самих записей, и «Собрать запись» её дописывает. «Не сходится» — запись противоречит
+    себе или книге, это чинят.</p>
     <div class="step">
       <div class="step-head"><span class="num">1</span>
         <div><h2>Библия и аудит</h2>
