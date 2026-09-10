@@ -17,7 +17,7 @@
   --read:#eaf0f5; --read-line:#cdd9e3;
   --ok:#2a7b44; --ok-soft:#e4f2e8; --ok-line:#bfe0ca; --ok-solid:#378550;
   --warn:#c48a00; --bad:#c2213f; --run:#166f89;
-  --on-slate:#acb7c1;
+  --on-slate:#b3bec8;      /* 4.5:1 с запасом; #acb7c1 давал 4.52 — ровно на пороге */
   --sans:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;
   --display:"Unbounded","IBM Plex Sans",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
@@ -76,6 +76,9 @@ code,.mono{font-family:var(--mono)}
 .mark{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;font-size:12px;color:#ccd5de}
 .stage[aria-current] .mark{background:var(--accent);border-color:var(--accent);color:#fff}
 .stage.done .mark{background:var(--ok-solid);border-color:var(--ok-solid);color:#fff}
+/* Начатый, но не пройденный этап: кольцо зелёное, номер на месте. Галочка приберегается
+   для настоящего гейта, иначе она перестаёт что-либо означать. */
+.mark.part{border-color:var(--ok-solid);border-width:2px;color:#fff}
 .stage-name{display:block;font-weight:500}
 .stage-sub{display:block;font-size:13px;color:var(--on-slate);margin-top:1px}
 .rail .note{margin:18px 18px 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.16);color:var(--on-slate);font-size:13px;line-height:1.5}
@@ -122,6 +125,8 @@ tr:hover td{background:#fafbfc}
 .tag.run{background:#e3f2f7;border-color:#bcdfe9;color:var(--run)}
 .tag.wait{background:var(--raised)}
 .why{color:var(--bad);font-size:12px;margin-top:5px;line-height:1.45}
+/* Причина штатного события — не беда: красным здесь красить нечего. */
+.why.quiet{color:var(--muted)}
 
 .queue{background:var(--ground);padding:20px 18px}
 .queue h2{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
@@ -135,10 +140,15 @@ tr:hover td{background:#fafbfc}
    с клавиатуры недостижима, а лог — единственное окно в идущее задание. */
 .log{font-family:var(--mono);font-size:12px;line-height:1.5;background:var(--read);border:1px solid var(--read-line);border-radius:5px;padding:9px 10px;margin-top:8px;max-height:190px;overflow:auto;white-space:pre-wrap;word-break:break-word}
 .empty{color:var(--muted);font-size:13px;padding:12px 0;line-height:1.5;max-width:46ch}
-.err{border:1px solid #f2c3cd;background:#fdecef;color:#8d1b31;border-radius:6px;padding:10px 12px;margin-bottom:16px;font-size:13px}
+.err{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border:1px solid #f2c3cd;background:#fdecef;color:#8d1b31;border-radius:6px;padding:10px 12px;margin-bottom:16px;font-size:13px}
+.err .btn{background:transparent;border-color:#e2aab6;color:#8d1b31}
+.wide-log{max-height:none;height:min(58vh,560px);font-size:13px}
+.job.now{border-color:var(--accent-line);box-shadow:inset 3px 0 0 var(--accent)}
+.job-what{font-size:13px;color:var(--muted);margin-top:2px}
 .skeleton{color:var(--dim);font-size:13px;padding:20px 0}
 .refs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
-.refs img{width:62px;height:62px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
+/* Эталон — единственное доказательство манеры; в квадрате 62 px манеры не видно. */
+.refs img{width:94px;height:63px;object-fit:cover;border-radius:4px;border:1px solid var(--line)}
 .notes{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.5}
 
 /* лист персонажа: три проекции в ряд, поэтому широкая полоска, а не квадрат */
@@ -149,9 +159,11 @@ tr:hover td{background:#fafbfc}
 
 .scene{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;border-top:1px solid var(--line-soft);padding:22px 0}
 .frames{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));align-content:start}
-.frame img{width:100%;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
+.frame img{width:100%;height:auto;aspect-ratio:3/2;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
+.frame-label{font-weight:500;margin-bottom:7px}
+.gaps{font-size:12px;color:var(--muted);margin-top:5px}
 .frame .under{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px;font-size:12px;color:var(--muted)}
-.frame-none{border:1px dashed var(--line);border-radius:5px;padding:26px;text-align:center;color:var(--dim);font-size:13px}
+.frame-none{border:1px dashed var(--line);border-radius:5px;min-height:150px;display:grid;place-items:center;padding:20px;text-align:center;color:var(--dim);font-size:13px}
 .scene h2{font:500 18px/1.25 var(--display);margin-bottom:4px}
 .scene .cap{color:var(--muted);margin-bottom:10px}
 .meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
@@ -159,8 +171,8 @@ tr:hover td{background:#fafbfc}
 .excerpt .from{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:6px}
 .crumbs{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--muted)}
 .whos{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.whos figure{margin:0;text-align:center;width:74px}
-.whos img{width:74px;height:40px;object-fit:cover;object-position:center top;border:1px solid var(--line);border-radius:4px}
+.whos figure{margin:0;text-align:center;width:96px}
+.whos img{width:96px;height:52px;object-fit:cover;object-position:center top;border:1px solid var(--line);border-radius:4px}
 .whos figcaption{font-size:12px;color:var(--muted);margin-top:3px}
 
 @media (max-width:1400px){ .app{--rail:216px; --queue:264px} .work{padding:24px 22px 60px} }
@@ -196,12 +208,13 @@ tr:hover td{background:#fafbfc}
   </header>
   <nav class="rail" id="rail" aria-label="Книга и этапы"></nav>
   <main class="work" id="work"></main>
-  <aside class="queue" aria-label="Очередь заданий"><h2>Очередь</h2><div class="jobs" id="jobs"></div></aside>
+  <aside class="queue" aria-label="Задания"><h2>Задания</h2><div class="jobs" id="jobs"></div></aside>
 </div>
 
 <script>
 const state = {screen: 'books', slug: null, books: [], book: null, styles: [], jobs: [],
-               batch: null, openLog: null, error: null, ready: false};
+               batch: null, openLog: null, wideLog: null, error: null, ready: false,
+               total: 0, settings: null, git: null};
 
 const SCREENS = [
   ['books', 'Книги', 'приём и разбор'],
@@ -210,6 +223,20 @@ const SCREENS = [
   ['styles', 'Стили', 'направления и эталоны'],
 ];
 
+const KIND_NAMES = {'ingest': 'разбор книги', 'index': 'индекс лиц и сцен',
+  'bible-entry': 'запись в библию', 'sheet': 'лист персонажа', 'scene-card': 'карточка сцены',
+  'prompt': 'промпт сцены', 'scene': 'кадр сцены', 'register': 'регистрация партии',
+  'styles-page': 'страница стилей'};
+const STATUS_NAMES = {queued: 'в очереди', running: 'идёт', done: 'готово',
+  failed: 'не прошло', cancelled: 'снято', interrupted: 'прервано'};
+// Метка статуса: `interrupted` — не авария. Спека прямо называет перезапуск панели обычным
+// делом, и красная плашка на штатном событии обесценивает красный там, где он нужен.
+const STATUS_TAGS = {done: 'ok', failed: 'bad', running: 'run', queued: 'wait',
+  cancelled: 'wait', interrupted: 'wait'};
+const FIELD_NAMES = {name: 'имя', appearance: 'описание', appearance_en: 'описание для промпта',
+  locators: 'локаторы', understanding: 'балл', audit: 'аудит', sheet: 'лист',
+  sheet_sha256: 'хеш листа', sheet_prompt: 'промпт листа'};
+
 const AUDIT_KEYS = ['age','build','face','eyes','hair','skin','clothing','gear','marks','bearing'];
 const AUDIT_NAMES = {age:'возраст', build:'сложение', face:'лицо', eyes:'глаза', hair:'волосы',
                      skin:'кожа', clothing:'одежда', gear:'экипировка', marks:'приметы',
@@ -217,6 +244,14 @@ const AUDIT_NAMES = {age:'возраст', build:'сложение', face:'ли�
 const OPEN = ['queued', 'running'];
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// Обрезка по границе слова: «…carries every lit surfac» читается как опечатка, а не как срез.
+function clip(text, n) {
+  if (!text || text.length <= n) return text || '';
+  const cut = text.slice(0, n);
+  const space = cut.lastIndexOf(' ');
+  return (space > n * 0.6 ? cut.slice(0, space) : cut) + '…';
+}
 
 async function api(path, options) {
   const answer = await fetch(path, {headers: {'Content-Type': 'application/json'}, ...options});
@@ -233,7 +268,8 @@ async function load() {
     if (!state.styles.length) state.styles = (await api('/api/styles')).styles;
     if (state.batch) state.batch = await api(
       `/api/books/${encodeURIComponent(state.slug)}/batches/${encodeURIComponent(state.batch.name)}`);
-    state.error = null;
+    if (!state.settings) state.settings = await api('/api/settings');
+    state.git = await api('/api/git');
   } catch (error) { state.error = error.message; }
   state.ready = true;
   draw();
@@ -257,14 +293,29 @@ function tick() {
   }
 }
 
-function spent(job) {
-  if (job.status === 'running' && job.started)
-    return `<span class="clock" data-since="${esc(job.started)}">идёт ${clock(seconds(job.started))}</span>`;
+function spent(job, place) {
+  if (job.status === 'running' && job.started) {
+    // Часы без знаменателя не отвечают на вопрос «это половина пути или конец?».
+    const cap = state.settings ? ` из ${clock(state.settings.timeout)} до таймаута` : '';
+    return `<div class="clock"><span data-since="${esc(job.started)}">идёт ${
+      clock(seconds(job.started))}</span>${esc(cap)}</div>`;
+  }
+  if (job.status === 'queued')
+    return `<div class="clock">ждёт очереди${place ? `, ${place}-е по счёту` : ''} · задания идут по одному</div>`;
   if (job.started && job.finished) {
     const sec = Math.max(0, Math.round((new Date(job.finished) - new Date(job.started)) / 1000));
-    return `<span class="clock">${clock(sec)} · ${esc(job.finished.slice(11))}</span>`;
+    const tries = (job.result && job.result.tries || []).length;
+    return `<div class="clock">шло ${clock(sec)} · кончилось ${esc(job.finished.slice(11))}${
+      tries > 1 ? ` · попыток ${tries}` : ''}</div>`;
   }
-  return '<span class="clock">в очереди</span>';
+  return '<div class="clock">ещё не начиналось</div>';
+}
+
+function jobSubject(job) {
+  const key = job.args && (job.args.key || job.args.id || job.args.batch);
+  if (!key) return null;
+  const hero = ((state.book && state.book.characters) || []).find(c => c.key === key);
+  return hero ? hero.name : key;
 }
 
 function openEntryJob(key) {
@@ -273,8 +324,11 @@ function openEntryJob(key) {
 }
 
 async function pollJobs() {
+  if (document.hidden) return;          // вкладка не на виду — сервер дёргать незачем
   try {
-    const fresh = (await api('/api/jobs?limit=12')).jobs;
+    const answer = await api('/api/jobs?limit=12');
+    const fresh = answer.jobs;
+    state.total = answer.total || fresh.length;
     // Задание кончилось — значит, в репозитории что-то изменилось: перечитываем рабочую
     // колонку, иначе после «Собрать запись» экран остаётся вчерашним до смены вкладки.
     const was = new Set(state.jobs.filter(j => OPEN.includes(j.status)).map(j => j.id));
@@ -291,7 +345,24 @@ async function pollJobs() {
   } catch (error) { /* сервер мог уйти — молча ждём следующего круга */ }
 }
 
-function go(screen) { state.screen = screen; draw(); }
+// Экран живёт в адресе. Без этого вкладка «Партии» изнутри партии ничего не делала (меняла
+// state.screen на тот же самый), перезагрузка всегда сбрасывала на «Книги», а сослаться на
+// экран было нечем.
+function go(screen) { location.hash = '#/' + screen; }
+function openBatch(name) { location.hash = '#/batches/' + encodeURIComponent(name); }
+
+function applyHash(first) {
+  const parts = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/').filter(Boolean);
+  const screen = SCREENS.some(([k]) => k === parts[0]) ? parts[0] : 'books';
+  const want = screen === 'batches' && parts[1] ? parts[1] : null;
+  const had = state.batch ? state.batch.name : null;
+  state.screen = screen;
+  if (first === true || want !== had) {
+    state.batch = want ? {name: want} : null;
+    return load();
+  }
+  draw();
+}
 
 function drawTabs() {
   document.getElementById('tabs').innerHTML = SCREENS
@@ -300,14 +371,29 @@ function drawTabs() {
     .join('');
 }
 
+function stages() {
+  // Этап считается пройденным по гейту, а не по непустоте. «Один лист из восьми» — это
+  // начатый этап, а не пройденный; галочка на нём обесценивает все остальные галочки.
+  const book = state.books.find(b => b.slug === state.slug);
+  const batches = (state.book && state.book.batches) || [];
+  const shot = batches.filter(b => b.cards > 0 && b.scenes >= b.cards).length;
+  const chars = book ? book.characters : 0, sheets = book ? book.sheets : 0;
+  return {
+    books: {done: !!(book && book.parsed && book.indexed), started: !!book,
+            note: !book ? 'книг нет' : !book.parsed ? 'не разобрана'
+                  : book.indexed ? 'разобрана, индекс есть' : 'разобрана, индекса нет'},
+    characters: {done: chars > 0 && sheets === chars, started: sheets > 0,
+                 note: chars ? `листов ${sheets} из ${chars}` : 'записей нет'},
+    batches: {done: batches.length > 0 && shot === batches.length, started: batches.length > 0,
+              note: batches.length ? `с кадрами ${shot} из ${batches.length}` : 'партий нет'},
+    styles: {done: state.styles.length > 0, started: state.styles.length > 0,
+             note: state.styles.length ? `направлений ${state.styles.length}` : 'направлений нет'},
+  };
+}
+
 function drawRail() {
   const book = state.books.find(b => b.slug === state.slug);
-  const done = {
-    books: book && book.parsed,
-    characters: book && book.sheets > 0,
-    batches: book && book.batches > 0,
-    styles: state.styles.length > 0,
-  };
+  const done = stages();
   document.getElementById('rail').innerHTML = `
     <div class="kicker">Книга</div>
     <div class="book">
@@ -315,16 +401,22 @@ function drawRail() {
       <div class="book-sub">${esc(book ? (book.author || '') : 'книг ещё нет')}</div>
     </div>
     <div class="kicker">Этапы</div>
-    ${SCREENS.map(([key, name, sub], n) => `
-      <button class="stage${done[key] ? ' done' : ''}" data-go="${key}"${
+    ${SCREENS.map(([key, name], n) => {
+      const s = done[key];
+      return `
+      <button class="stage${s.done ? ' done' : ''}" data-go="${key}"${
         state.screen === key ? ' aria-current="step"' : ''}>
-        <span class="mark" aria-hidden="true">${done[key] ? '✓' : n + 1}</span>
-        <span><span class="stage-name">${name}</span> <span class="stage-sub">${sub}</span></span>
+        <span class="mark${s.done ? '' : s.started ? ' part' : ''}" aria-hidden="true">${
+          s.done ? '✓' : n + 1}</span>
+        <span><span class="stage-name">${name}</span> <span class="stage-sub">${esc(s.note)}</span></span>
         <span class="sr">, этап ${n + 1} из ${SCREENS.length}, ${
-          done[key] ? 'пройден' : 'не пройден'}</span>
-      </button>`).join('')}
+          s.done ? 'пройден' : s.started ? 'начат' : 'не начат'}</span>
+      </button>`; }).join('')}
     <div class="note">Текст книги в репозиторий не попадает: файл лежит в
-      <b>books/${esc(state.slug || '…')}/source/</b>, разбор — в <b>cache/</b>, оба вне git.</div>`;
+      <b>books/${esc(state.slug || '…')}/source/</b>, разбор — в <b>cache/</b>, оба вне git.
+      ${state.git ? (state.git.lines.length
+        ? `<br>В дереве изменений: <b>${state.git.lines.length}</b>. Коммит — руками.`
+        : '<br>Дерево чистое.') : ''}</div>`;
 }
 
 function auditStrip(audit, understanding) {
@@ -336,8 +428,9 @@ function auditStrip(audit, understanding) {
     const v = audit[k];
     return `<span class="cell ${v === 1 ? 'full' : v === 0.5 ? 'half' : ''}"></span>`;
   }).join('');
-  return `<span class="audit" role="img" aria-label="${esc(label)}" title="${esc(label)}">${cells}</span>`
-       + `<span class="score">${understanding ?? '—'}</span>`;
+  return `<div><span class="audit" role="img" aria-label="${esc(label)}" title="${esc(label)}">${cells}</span>`
+       + `<span class="score">${understanding ?? '—'}</span></div>`
+       + (gaps.length ? `<div class="gaps">просели: ${esc(gaps.join(', '))}</div>` : '');
 }
 
 function checkCell(complaints) {
@@ -349,7 +442,10 @@ function checkCell(complaints) {
   if (wrong.length) parts.push(`<span class="tag bad">${wrong.length} не сходится</span>
       <div class="why">${wrong.map(c => esc(c.text)).join('<br>')}</div>`);
   if (gaps.length) {
-    const fields = gaps.map(c => (c.text.match(/нет поля (\w+)/) || [, c.text])[1]);
+    const fields = gaps.map(c => {
+      const key = (c.text.match(/нет поля (\w+)/) || [])[1];
+      return key ? (FIELD_NAMES[key] || key) : c.text;
+    });
     parts.push(`<span class="tag wait" title="${esc(gaps.map(c => c.text).join('; '))}">не хватает: ${esc(fields.join(', '))}</span>`);
   }
   if (!parts.length) parts.push('<span class="tag ok">запись годна</span>');
@@ -375,7 +471,7 @@ function screenBooks() {
           <span>партий <b>${b.batches}</b></span>
         </div>
         <div class="actions">
-          <button class="btn btn-sm" data-book="${esc(b.slug)}">Открыть</button>
+          <button class="btn btn-sm" data-book="${esc(b.slug)}">Персонажи книги →</button>
         </div>
       </div>`).join('')}</div>`;
 }
@@ -388,7 +484,7 @@ function screenCharacters() {
     return `<tr>
       <td><div class="who">
         ${c.sheet_file
-          ? `<a href="/file/${esc(c.sheet_file)}" target="_blank" title="открыть лист целиком"><img class="sheet" src="/file/${esc(c.sheet_file)}" alt="лист внешности: ${esc(c.name)}" loading="lazy"></a>`
+          ? `<a href="/file/${esc(c.sheet_file)}" target="_blank" title="открыть лист целиком"><img class="sheet" src="/file/${esc(c.sheet_file)}" alt="лист внешности: ${esc(c.name)}" loading="lazy" width="1536" height="1024"></a>`
           : '<span class="sheet-none">нет листа</span>'}
         <span><span class="name">${esc(c.name)}</span>
           <div class="sub"><code>${esc(c.key)}</code></div>
@@ -398,8 +494,11 @@ function screenCharacters() {
       <td>${auditStrip(c.audit, c.understanding)}</td>
       <td>${checkCell(c.complaints)}</td>
       <td>${running
-            ? '<button class="btn btn-sm" disabled>собирается…</button>'
-            : `<button class="btn btn-sm" data-entry="${esc(c.key)}">Собрать запись</button>`}</td>
+            ? `<button class="btn btn-sm" disabled>${running.status === 'running'
+                 ? 'собирается…' : 'ждёт очереди'}</button>`
+            : `<button class="btn btn-sm" data-entry="${esc(c.key)}"
+                 title="${c.complaints.length ? 'Допишет недостающее' : 'Перепишет готовую запись целиком'}; Codex работает около 10–16 минут">${
+                 c.complaints.length ? 'Собрать запись' : 'Собрать заново'}</button>`}</td>
     </tr>`;
   }).join('');
   return `<h1>Персонажи</h1>
@@ -412,7 +511,9 @@ function screenCharacters() {
       <div class="step-head"><span class="num" aria-hidden="true">1</span>
         <div><h2>Библия и аудит</h2>
         <div class="step-sub">«Собрать запись» ставит задание Codex: он читает книгу через
-        кеш, пишет запись и сам проходит проверку. Идёт это минутами — ход виден в очереди.</div></div></div>
+        кеш, пишет запись целиком и сам проходит проверку. Один герой — примерно 10–16 минут,
+        задания идут по одному. У героя с годной записью кнопка называется «Собрать заново»:
+        прежняя запись будет переписана.</div></div></div>
       <div class="wide"><table>
         <thead><tr><th scope="col">Герой и лист</th><th scope="col">Аудит и балл</th>
           <th scope="col">Проверка</th><th scope="col"><span class="sr">Действие</span></th></tr></thead>
@@ -426,22 +527,46 @@ function whoStrip(keys) {
   return `<div class="whos">${keys.map(k => {
     const c = known[k];
     return `<figure>${c && c.sheet_file
-      ? `<img src="/file/${esc(c.sheet_file)}" alt="лист внешности: ${esc(c.name)}" loading="lazy">`
-      : '<span class="sheet-none" style="width:74px;height:40px">нет</span>'}
+      ? `<img src="/file/${esc(c.sheet_file)}" alt="лист внешности: ${esc(c.name)}" loading="lazy" width="1536" height="1024">`
+      : '<span class="sheet-none" style="width:96px;height:52px">нет</span>'}
       <figcaption>${esc(c ? c.name : k)}</figcaption></figure>`;
   }).join('')}</div>`;
 }
 
+function styleName(key) {
+  const found = state.styles.find(s => s.key === key);
+  return found ? found.name : (key || '—');
+}
+
+function frameLabel(fr, differs) {
+  // Партия-проба существует, чтобы сравнивать. Различие двух кадров нельзя оставлять
+  // тире в служебной строке: его называют словами и в полный голос.
+  const parts = [];
+  if (differs.composition)
+    parts.push(fr.composition ? `с шаблоном ${fr.composition}` : 'без шаблона композиции');
+  if (differs.style) parts.push(styleName(fr.style));
+  if (differs.refs) parts.push(`эталоны ${fr.style_refs.join(', ') || 'без эталонов'}`);
+  return parts.join(' · ');
+}
+
 function sceneBlock(s) {
+  const many = s.frames.length > 1;
+  const vary = k => new Set(s.frames.map(fr => JSON.stringify(fr[k]))).size > 1;
+  const differs = many
+    ? {composition: vary('composition'), style: vary('style'), refs: vary('style_refs')}
+    : {};
   const frames = s.frames.length
-    ? s.frames.map(fr => `<div class="frame">
+    ? s.frames.map(fr => {
+        const label = many ? frameLabel(fr, differs) : '';
+        return `<div class="frame">
+        ${label ? `<div class="frame-label">${esc(label)}</div>` : ''}
         ${fr.image
-          ? `<a href="/file/${esc(fr.image)}" target="_blank"><img src="/file/${esc(fr.image)}" alt="кадр: ${esc(s.title)}" loading="lazy"></a>`
+          ? `<a href="/file/${esc(fr.image)}" target="_blank"><img src="/file/${esc(fr.image)}" alt="кадр: ${esc(s.title)}" loading="lazy" width="1536" height="1024"></a>`
           : '<div class="frame-none">кадра нет</div>'}
-        <div class="under"><span class="tag">${esc(fr.style || '—')}</span>
-          <span>шаблон <code>${esc(fr.composition || '—')}</code></span>
-          <span>эталоны ${fr.style_refs.map(esc).join(', ') || '—'}</span></div>
-      </div>`).join('')
+        <div class="under">${differs.style ? '' : `<span class="tag">${esc(styleName(fr.style))}</span>`}
+          ${differs.composition ? '' : `<span>шаблон <code>${esc(fr.composition || '—')}</code></span>`}
+          ${differs.refs ? '' : `<span>эталоны ${fr.style_refs.map(esc).join(', ') || '—'}</span>`}</div>
+      </div>`; }).join('')
     : '<div class="frame-none">кадров ещё нет — есть только карточка</div>';
   const loc = s.locator
     ? `гл${s.locator.chapter} [${s.locator.paragraphs[0]}, ${s.locator.paragraphs[1]})` : '—';
@@ -451,8 +576,8 @@ function sceneBlock(s) {
       <h2>${esc(s.title)}</h2>
       <div class="cap">${esc(s.caption || '')}</div>
       <div class="meta"><span class="tag">${s.order ?? '—'} по порядку</span>
-        <span class="tag mono">${esc(loc)}</span>
-        <span class="tag">шаблон ${esc(s.composition || '—')}</span></div>
+        <span class="tag mono" title="полуинтервал абзацев: правая граница не входит">${esc(loc)}</span>
+        <span class="tag">по плану шаблон ${esc(s.composition || '—')}</span></div>
       ${s.brief ? `<div class="step-sub" style="max-width:none">${esc(s.brief)}</div>` : ''}
       ${s.invariants.length ? whoStrip(s.invariants) : ''}
       ${s.excerpt ? `<div class="excerpt"><div class="from">отрывок книги · ${esc(loc)}</div>${esc(s.excerpt)}</div>` : ''}
@@ -500,10 +625,11 @@ function screenStyles() {
     собранные со свободных источников картинки нужной манеры не дают.</p>
     <div class="grid">${state.styles.map(s => `
       <div class="card"><h2 class="name">${esc(s.name)}</h2>
-        <div class="sub"><code>${esc(s.key)}</code> · эталонов ${s.refs.length}</div>
+        <div class="sub"><code>${esc(s.key)}</code> · эталонов ${s.refs.length}${
+          s.refs.length > 6 ? ', показаны 6' : ''}</div>
         <div class="refs">${s.refs.slice(0, 6).map(r =>
-          `<img src="/file/${esc(r.file)}" alt="эталон ${esc(r.id)} направления «${esc(s.name)}»" loading="lazy">`).join('')}</div>
-        <div class="notes">${esc((s.palette_en || '').slice(0, 220))}</div>
+          `<img src="/file/${esc(r.file)}" alt="эталон ${esc(r.id)} направления «${esc(s.name)}»" loading="lazy" width="1536" height="1024" title="${esc(r.id)}${r.why ? ' — ' + esc(r.why) : ''}">`).join('')}</div>
+        <div class="notes" lang="en">${esc(clip(s.palette_en, 240))}</div>
       </div>`).join('')}</div>`;
 }
 
@@ -514,7 +640,25 @@ function draw() {
   if (!state.ready) { work.innerHTML = '<div class="skeleton">Читаю репозиторий…</div>'; return; }
   const body = {books: screenBooks, characters: screenCharacters,
                 batches: screenBatches, styles: screenStyles}[state.screen]();
-  work.innerHTML = (state.error ? `<div class="err">${esc(state.error)}</div>` : '') + body;
+  const wide = state.wideLog ? `
+    <div class="step">
+      <div class="step-head"><span class="num" aria-hidden="true">⌄</span>
+        <div><h2>Лог задания</h2>
+        <div class="step-sub mono">${esc(state.wideLog)}</div></div></div>
+      <div class="log wide-log" id="log-${esc(state.wideLog)}" tabindex="0" role="region"
+           aria-label="Лог задания ${esc(state.wideLog)}">загрузка…</div>
+      <div class="actions"><button class="btn btn-sm" data-log="${esc(state.wideLog)}">Свернуть</button></div>
+    </div>` : '';
+  work.innerHTML = (state.error
+      ? `<div class="err"><span>${esc(state.error)}</span><button class="btn btn-sm" data-dismiss="">Скрыть</button></div>`
+      : '') + body + wide;
+  if (state.wideLog) {
+    showLog(state.wideLog);
+    // Иначе «Развернуть» выглядит как кнопка, которая ничего не сделала: лог оказывается
+    // под всей таблицей, вне экрана.
+    const box = document.getElementById('log-' + state.wideLog);
+    if (box) box.scrollIntoView({block: 'center'});
+  }
 }
 
 let jobsShape = null;
@@ -524,7 +668,10 @@ function drawJobs() {
   // Пересобирать разметку каждые две секунды нельзя: открытый лог при этом уничтожается и
   // рождается заново — он мигает и теряет прокрутку. Разметку трогаем, только когда
   // изменился сам состав очереди; текст лога и часы обновляем на месте.
-  const shape = JSON.stringify([state.openLog, state.jobs.map(j => [j.id, j.status, j.error])]);
+  // Имя героя приходит вместе с книгой, позже первой отрисовки очереди: без него в
+  // сигнатуре карточки навсегда остались бы с ключом вместо имени.
+  const shape = JSON.stringify([state.openLog, state.wideLog, state.total,
+                                state.jobs.map(j => [j.id, j.status, j.error, jobSubject(j)])]);
   if (shape === jobsShape) { if (state.openLog) showLog(state.openLog); return; }
   jobsShape = shape;
   // Состав очереди меняется и когда задание просто дошло до конца. Перенесём в новую
@@ -536,27 +683,42 @@ function drawJobs() {
       нажимаете кнопку на экране этапа: панель показывает ход, лог и даёт снять задание.</div>`;
     return;
   }
-  const TAG = {done: 'ok', failed: 'bad', running: 'run', queued: 'wait',
-               cancelled: 'wait', interrupted: 'bad'};
-  box.innerHTML = state.jobs.map(j => `
-    <div class="job">
+  let place = 0;
+  box.innerHTML = state.jobs.map(j => {
+    if (j.status === 'queued') place += 1;
+    const subject = jobSubject(j);
+    return `
+    <div class="job${j.status === 'running' ? ' now' : ''}">
       <div class="job-top">
-        <span class="job-kind">${esc(j.kind)}</span>
-        <span class="tag ${TAG[j.status] || ''}">${esc(j.status)}</span>
+        <span class="job-kind">${esc(subject || KIND_NAMES[j.kind] || j.kind)}</span>
+        <span class="tag ${STATUS_TAGS[j.status] || ''}">${esc(STATUS_NAMES[j.status] || j.status)}</span>
       </div>
+      ${subject ? `<div class="job-what">${esc(KIND_NAMES[j.kind] || j.kind)}</div>` : ''}
+      ${spent(j, j.status === 'queued' ? place : 0)}
+      ${j.error ? `<div class="why${STATUS_TAGS[j.status] === 'bad' ? '' : ' quiet'}">${
+        esc(j.error)}</div>` : ''}
       <div class="job-id">${esc(j.id)}</div>
-      ${spent(j)}
-      ${j.error ? `<div class="why">${esc(j.error)}</div>` : ''}
       <div class="actions">
-        <button class="btn btn-sm" data-log="${esc(j.id)}">${state.openLog === j.id ? 'Скрыть лог' : 'Лог'}</button>
+        <button class="btn btn-sm" data-log="${esc(j.id)}">${
+          state.openLog === j.id ? 'Скрыть лог'
+          : state.wideLog === j.id ? 'Свернуть лог' : 'Лог'}</button>
+        ${state.openLog === j.id
+          ? `<button class="btn btn-sm" data-wide="${esc(j.id)}">Развернуть</button>` : ''}
         ${OPEN.includes(j.status)
           ? `<button class="btn btn-sm" data-cancel="${esc(j.id)}">Снять</button>` : ''}
+        ${['failed', 'interrupted'].includes(j.status) && j.kind === 'bible-entry' && j.args
+          ? `<button class="btn btn-sm" data-again="${esc(j.args.key)}">Собрать заново</button>` : ''}
       </div>
       ${state.openLog === j.id
           ? `<div class="log" id="log-${esc(j.id)}" tabindex="0" role="region"
                   aria-label="Лог задания ${esc(j.id)}">${esc(kept ? kept.text : 'загрузка…')}</div>`
           : ''}
-    </div>`).join('');
+    </div>`; }).join('');
+  if (state.total > state.jobs.length) {
+    box.insertAdjacentHTML('beforeend',
+      `<div class="empty">Показаны ${state.jobs.length} из ${state.total}; остальные —
+       в <code>cache/panel/jobs/</code>.</div>`);
+  }
   if (kept) {
     const fresh = document.getElementById('log-' + state.openLog);
     if (fresh) fresh.scrollTop = kept.top;
@@ -579,39 +741,61 @@ async function showLog(id) {
   } catch (error) { /* задание могло исчезнуть */ }
 }
 
+async function startEntry(key, button) {
+  if (button) button.disabled = true;
+  try {
+    // Имя из книги и подсказки индекса выводит сервер: в браузере лежит русское имя
+    // из библии, а по английскому тексту оно ничего не найдёт.
+    await api(`/api/books/${encodeURIComponent(state.slug)}/bible/${encodeURIComponent(key)}`,
+              {method: 'POST', body: '{}'});
+  } catch (error) { state.error = error.message; }
+  // Кнопка не рассказывает свою версию событий: её состояние берётся из очереди.
+  await pollJobs();
+  schedulePoll();
+  draw();
+}
+
 document.addEventListener('click', async event => {
-  const target = event.target.closest('[data-go],[data-book],[data-batch],[data-entry],[data-log],[data-cancel]');
+  const target = event.target.closest('[data-go],[data-book],[data-batch],[data-entry],'
+    + '[data-log],[data-wide],[data-cancel],[data-again],[data-dismiss]');
   if (!target) return;
   const d = target.dataset;
   if (d.go) return go(d.go);
-  if (d.book) { state.slug = d.book; state.screen = 'characters'; state.batch = null; return load(); }
-  if (d.batch !== undefined) {
-    state.batch = d.batch ? {name: d.batch} : null;
-    state.screen = 'batches';
-    return load();
+  if (d.book) { state.slug = d.book; return go('characters'); }
+  if (d.batch !== undefined) return d.batch ? openBatch(d.batch) : go('batches');
+  if (d.dismiss !== undefined) { state.error = null; return draw(); }
+  if (d.log) {
+    if (state.wideLog === d.log) { state.wideLog = null; state.openLog = null; }
+    else state.openLog = state.openLog === d.log ? null : d.log;
+    drawJobs();
+    return draw();
   }
-  if (d.log) { state.openLog = state.openLog === d.log ? null : d.log; return drawJobs(); }
+  if (d.wide) { state.wideLog = d.wide; state.openLog = null; drawJobs(); return draw(); }
   if (d.cancel) { await api(`/api/jobs/${encodeURIComponent(d.cancel)}/cancel`, {method: 'POST'}); return pollJobs(); }
-  if (d.entry) {
-    target.disabled = true;
-    try {
-      // Имя из книги и подсказки индекса выводит сервер: в браузере лежит русское имя
-      // из библии, а по английскому тексту оно ничего не найдёт.
-      await api(`/api/books/${encodeURIComponent(state.slug)}/bible/${encodeURIComponent(d.entry)}`,
-                {method: 'POST', body: '{}'});
-    } catch (error) { state.error = error.message; draw(); }
-    state.openLog = null;
-    // Кнопка не рассказывает свою версию событий: её состояние берётся из очереди.
-    await pollJobs();
-    draw();
-  }
+  if (d.again) return startEntry(d.again, target);
+  if (d.entry) return startEntry(d.entry, target);
 });
 
+// Две секунды нужны, только пока что-то идёт. В покое это 1800 лишних запросов в час.
+let pollTimer = null;
+
+function schedulePoll() {
+  clearTimeout(pollTimer);
+  const busy = state.jobs.some(j => OPEN.includes(j.status));
+  pollTimer = setTimeout(async () => { await pollJobs(); schedulePoll(); },
+                         document.hidden ? 15000 : busy ? 2000 : 8000);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) { pollJobs().then(schedulePoll); }
+});
+window.addEventListener('hashchange', () => applyHash(false));
+
 draw();
-load();
-pollJobs();
-setInterval(pollJobs, 2000);
-setInterval(tick, 1000);
+if (!location.hash) location.hash = '#/books';
+applyHash(true);
+pollJobs().then(schedulePoll);
+setInterval(() => { if (state.jobs.some(j => j.status === 'running')) tick(); }, 1000);
 </script>
 </body>
 </html>
