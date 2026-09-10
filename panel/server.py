@@ -281,8 +281,9 @@ def api_book(panel, match, query, body):
                             'audit': c.get('audit'),
                             'sheet': c.get('sheet'),
                             'sheet_file': (f'books/{slug}/' + c['sheet']) if c.get('sheet') else None,
-                            'complaints': validators.check_bible_entry(
-                                k, c, slug, panel.root, book_text)}
+                            'complaints': [{'text': str(x), 'level': x.level}
+                                           for x in validators.check_bible_entry(
+                                               k, c, slug, panel.root, book_text)]}
                            for k, c in sorted(characters.items())]}
 
 

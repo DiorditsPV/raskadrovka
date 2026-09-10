@@ -28,6 +28,46 @@ REQUIRED = ('name', 'appearance', 'appearance_en', 'locators', 'understanding', 
 CYRILLIC = re.compile(r'[а-яёА-ЯЁ]')
 
 
+class Complaint(str):
+    """Претензия к записи. Строка — чтобы дописываться агенту дословно, но с уровнем.
+
+    Уровня два, и разница не косметическая. `error` — запись противоречит себе или книге:
+    локатор указывает не на ту главу, балл не сходится с клетками, английское поле написано
+    кириллицей. Это чинят. `missing` — поля контракта в записи ещё нет: чаще всего оттого,
+    что запись писали до того, как поле появилось. Это дописывают, и красным оно не горит,
+    иначе «не доделано» и «сломано» становятся неразличимы, а на экране всё красное.
+    """
+
+    def __new__(cls, text, level='error'):
+        out = super().__new__(cls, text)
+        out.level = level
+        return out
+
+
+def missing(text):
+    return Complaint(text, 'missing')
+
+
+class Complaints(list):
+    """Список претензий, в котором обычная строка становится «не сходится».
+
+    Уровень по умолчанию — ошибка, а исключение называется явно через `missing()`. Иначе
+    забытая обёртка молча делает противоречие безобидным, а это ровно тот класс дефектов,
+    ради которого валидатор и написан.
+    """
+
+    def append(self, item):
+        super().append(item if isinstance(item, Complaint) else Complaint(item))
+
+    def extend(self, items):
+        for item in items:
+            self.append(item)
+
+    def __iadd__(self, items):
+        self.extend(items)
+        return self
+
+
 def paragraphs(slug, root=ROOT):
     """Разобранная книга из кеша. Кеш игнорируется git-ом, поэтому его может не быть."""
     cache = Path(root) / 'cache' / slug / 'paragraphs.jsonl'
@@ -86,16 +126,16 @@ def check_audit(audit, understanding, out, where=''):
     if not isinstance(audit, dict):
         out.append(f'{where}audit: ожидается объект с десятью ключами {", ".join(AUDIT_KEYS)}')
         return
-    missing = [k for k in AUDIT_KEYS if k not in audit]
+    gaps = [k for k in AUDIT_KEYS if k not in audit]
     extra = [k for k in audit if k not in AUDIT_KEYS]
-    if missing:
-        out.append(f'{where}audit: нет клеток {", ".join(missing)}')
+    if gaps:
+        out.append(f'{where}audit: нет клеток {", ".join(gaps)}')
     if extra:
         out.append(f'{where}audit: лишние клетки {", ".join(extra)} — ключи ровно десять')
     bad = {k: v for k, v in audit.items() if k in AUDIT_KEYS and v not in AUDIT_SCORES}
     if bad:
         out.append(f'{where}audit: балл бывает только 0, 0.5 или 1; получено {bad}')
-    if missing or bad:
+    if gaps or bad:
         return
     total = sum(audit[k] for k in AUDIT_KEYS)
     if not isinstance(understanding, (int, float)):
@@ -107,14 +147,15 @@ def check_audit(audit, understanding, out, where=''):
 
 def check_bible_entry(key, entry, slug=None, root=ROOT, book=None):
     """Запись героя в `bible.json`. Возвращает список претензий; пустой — запись годна."""
-    out = []
+    out = Complaints()
     where = f'{key}: '
     if not isinstance(entry, dict):
-        return [f'{where}запись должна быть объектом JSON']
+        out.append(f'{where}запись должна быть объектом JSON')
+        return out
 
     for field in REQUIRED:
         if field not in entry:
-            out.append(f'{where}нет поля {field}')
+            out.append(missing(f'{where}нет поля {field}'))
 
     for field in ('name', 'appearance', 'appearance_en'):
         value = entry.get(field)
@@ -152,10 +193,11 @@ def check_bible_entry(key, entry, slug=None, root=ROOT, book=None):
 
 def check_bible(bible, slug=None, root=ROOT, keys=None):
     """Вся библия или выбранные ключи. Возвращает список претензий по всем героям."""
-    out = []
+    out = Complaints()
     characters = bible.get('characters')
     if not isinstance(characters, dict):
-        return ['bible.json: нет объекта characters']
+        out.append('bible.json: нет объекта characters')
+        return out
     book = paragraphs(slug, root) if slug else None
     for key in (keys if keys is not None else sorted(characters)):
         if key not in characters:
