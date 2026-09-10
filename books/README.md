@@ -62,7 +62,7 @@ books/<книга>/
       "name": "Акакий Акакиевич Башмачкин",
       "appearance": "низенький, рябоват, рыжеват, подслеповат, с лысиной на лбу",
       "appearance_en": "short, pockmarked, reddish-haired, weak-sighted, balding at the forehead; a worn uniform coat",
-      "locators": [{"chapter": 1, "paragraphs": [2, 2]}],
+      "locators": [{"chapter": 1, "paragraphs": [2, 3]}],
       "sheet": "characters/akakiy.png",
       "sheet_sha256": "…",
       "sheet_prompt": "prompt-sheet-akakiy.txt"
@@ -72,7 +72,7 @@ books/<книга>/
     "department": {
       "name": "департамент",
       "look_en": "a long clerks' hall with rows of desks, green baize, candles, stacks of papers",
-      "locators": [{"chapter": 1, "paragraphs": [4, 5]}]
+      "locators": [{"chapter": 1, "paragraphs": [4, 6]}]
     }
   }
 }
