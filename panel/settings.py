@@ -13,7 +13,7 @@ DEFAULTS = {
     # {root} и {prompt} подставляет раннер; остальные аргументы идут как есть.
     'codex_cmd': ['codex', 'exec', '-s', 'workspace-write', '--skip-git-repo-check',
                   '-C', '{root}', '--ephemeral', '{prompt}'],
-    'timeout': 1200,
+    'timeout': 1800,          # запись героя на настоящем Codex шла 969 с; 20 минут впритык
     'attempts': 2,
     'max_style_refs': 3,
 }
