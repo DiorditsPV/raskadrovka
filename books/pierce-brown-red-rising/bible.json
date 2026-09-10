@@ -233,17 +233,72 @@
     },
     "dago": {
       "name": "Даго",
-      "appearance": "Бледная полоса старой кожи, вместо лица — ухмылка. Курит длинную самокрутку.",
-      "appearance_en": "a pale strip of old leather with a smirk for a face, drawing on a long hand-rolled burner",
+      "appearance": "Мужчина-Красный, легендарный Хеллдайвер Гаммы. Возраст не назван; по бледной, жёсткой, словно полоса старой кожи, внешности и сравнению с юным Дэрроу кажется старше. Очень худой; вместо лица — ухмылка. Как у Красного, волосы цвета старой крови, радужки ржаво-красные, на кистях костяные на ощупь сигилы — грубый круг со стрелой и штриховкой. Кроваво-красный фрайсьют Хеллдайвера, на спине тёмно-красная трость Гаммы. Курит длинный бернер, глубоко затягивается. Говорит протяжно и мало; спокойно наблюдает с привычной ухмылкой.",
+      "appearance_en": "older-looking, extremely thin Red man; pale, craggy, old-leather skin and a smirk for a face; rust-red hair and eyes; blood-red Gamma Helldiver frysuit with a dark-red cane on the back; Red hand sigils; long burner; watchful, laconic, slow-drawling bearing",
       "locators": [
         {
           "chapter": 2,
           "paragraphs": [
-            68,
-            69
+            54,
+            55
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            67,
+            70
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            74,
+            79
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            147,
+            148
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            149,
+            150
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            163,
+            166
+          ]
+        },
+        {
+          "chapter": 43,
+          "paragraphs": [
+            3426,
+            3427
           ]
         }
-      ]
+      ],
+      "audit": {
+        "age": 0.5,
+        "build": 1,
+        "face": 1,
+        "eyes": 0.5,
+        "hair": 0.5,
+        "skin": 1,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 0.5,
+        "bearing": 1
+      },
+      "understanding": 8.0
     },
     "barlow": {
       "name": "старый Барлоу",
