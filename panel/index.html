@@ -154,13 +154,21 @@ async function load() {
   draw();
 }
 
+const OPEN = ['queued', 'running'];
+
 async function pollJobs() {
   try {
-    state.jobs = (await api('/api/jobs?limit=12')).jobs;
+    const fresh = (await api('/api/jobs?limit=12')).jobs;
+    // Задание кончилось — значит, в репозитории что-то изменилось: перечитываем рабочую
+    // колонку, иначе после «Собрать запись» экран остаётся вчерашним до смены вкладки.
+    const was = new Set(state.jobs.filter(j => OPEN.includes(j.status)).map(j => j.id));
+    const finished = fresh.some(j => was.has(j.id) && !OPEN.includes(j.status));
+    state.jobs = fresh;
     drawJobs();
-    const busy = state.jobs.some(j => j.status === 'running');
+    const busy = fresh.some(j => j.status === 'running');
     document.getElementById('dot').className = 'dot' + (busy ? ' busy' : '');
     document.getElementById('statusText').textContent = busy ? 'Codex работает' : 'панель готова';
+    if (finished) load();
   } catch (error) { /* сервер мог уйти — молча ждём следующего круга */ }
 }
 
@@ -240,7 +248,7 @@ function screenCharacters() {
             ? `<span class="tag bad">${c.complaints.length} к записи</span>
                <div class="why">${c.complaints.map(esc).join('<br>')}</div>`
             : '<span class="tag ok">запись годна</span>'}</td>
-      <td><button class="btn btn-sm" data-entry="${esc(c.key)}" data-name="${esc(c.name)}">Собрать запись</button></td>
+      <td><button class="btn btn-sm" data-entry="${esc(c.key)}">Собрать запись</button></td>
     </tr>`).join('');
   return `<h1>Персонажи</h1>
     <p class="lede">Запись героя — внешность словами книги с указателями на абзацы и аудит
@@ -337,8 +345,10 @@ document.addEventListener('click', async event => {
     target.disabled = true;
     target.textContent = 'поставлено';
     try {
+      // Имя из книги и подсказки индекса выводит сервер: в браузере лежит русское имя
+      // из библии, а по английскому тексту оно ничего не найдёт.
       await api(`/api/books/${encodeURIComponent(state.slug)}/bible/${encodeURIComponent(d.entry)}`,
-                {method: 'POST', body: JSON.stringify({name: d.name})});
+                {method: 'POST', body: '{}'});
     } catch (error) { state.error = error.message; draw(); }
     pollJobs();
   }

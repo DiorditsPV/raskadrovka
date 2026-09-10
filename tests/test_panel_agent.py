@@ -7,6 +7,7 @@
 import json
 import subprocess
 import sys
+import threading
 from pathlib import Path
 
 import pytest
@@ -145,6 +146,25 @@ def test_dirty_tree_before_start_is_not_a_stray_change(repo):
     report = agent.run('bible-entry', FIELDS, checker(repo), EXPECTED,
                        root=repo, config=config(repo, plan))
     assert report['ok'], report['complaints']
+
+
+def test_cancelling_stops_the_retry_instead_of_starting_it(repo):
+    """Убитый Codex выглядит как неудачная попытка; без флага снятие стоило бы второго прогона."""
+    stopped = threading.Event()          # человек снял задание, пока шла первая попытка
+    broken = dict(GOOD, understanding=10.0)
+    plan = [{f'books/{SLUG}/bible.json': bible(broken)},
+            {f'books/{SLUG}/bible.json': bible(GOOD)}]
+
+    def should_stop():
+        if not stopped.is_set() and (desk_of(repo) / 'calls').is_file():
+            stopped.set()
+        return stopped.is_set()
+
+    report = agent.run('bible-entry', FIELDS, checker(repo), EXPECTED,
+                       root=repo, config=config(repo, plan), should_stop=should_stop)
+    assert not report['ok'] and report['stopped'] is True
+    assert report['complaints'] == ['задание снято человеком']
+    assert (desk_of(repo) / 'calls').read_text() == '1'      # Codex позвали ровно один раз
 
 
 def test_log_keeps_prompt_and_outcome(repo):

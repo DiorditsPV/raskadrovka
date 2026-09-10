@@ -62,6 +62,7 @@ class Panel:
         # запись целиком, роняет эти поля. Судить — ему, вести учёт — нам.
         was = (self.bible(slug).get('characters') or {}).get(key) or {}
         keep = {f: was[f] for f in self.SHEET_FIELDS if f in was}
+        name, hints = self.hero_hints(slug, key, was.get('name'))
 
         def validate():
             data = json.loads(bible_file.read_text(encoding='utf-8'))
@@ -70,14 +71,43 @@ class Panel:
                 return [f'{key}: записи нет в {bible_rel} — файл не изменён']
             return validators.check_bible_entry(key, entry, slug, self.root)
 
-        fields = {'key': key, 'slug': slug, 'name': job['args'].get('name') or key,
-                  'title': self.book(slug).get('title') or slug,
-                  'hints': job['args'].get('hints') or 'индекс подсказок не дал'}
+        fields = {'key': key, 'slug': slug, 'name': name,
+                  'title': self.book(slug).get('title') or slug, 'hints': hints}
         report = agent.run('bible-entry', fields, validate, [bible_rel], root=self.root,
-                           config=self.settings, log=tools.log, watch=tools.watch)
-        if report['ok'] and keep:
+                           config=self.settings, log=tools.log, watch=tools.watch,
+                           should_stop=tools.stopped)
+        if keep:
+            # Не только при удаче: две неудачные попытки тоже оставляют запись переписанной,
+            # и принятый лист потерялся бы вместе с ней.
             self.keep_sheet(bible_file, key, keep, tools)
         return report
+
+    def index_of(self, slug):
+        file = self.root / 'cache' / slug / 'index.json'
+        return json.loads(file.read_text(encoding='utf-8')) if file.is_file() else {}
+
+    def hero_hints(self, slug, key, russian=None):
+        """Имя, которым книга зовёт героя, и абзацы, где индекс видел его внешность.
+
+        Агенту нужно имя из книги, а не из библии: `--grep "Дэрроу"` по английскому тексту
+        не найдёт ничего. Панель выводит его сама и браузеру не доверяет — из отметок
+        человека в `panel.json`, иначе по ключу, иначе честно говорит, что не нашла.
+        """
+        characters = (self.index_of(slug).get('characters') or {})
+        marked = (self.panel_state(slug).get('heroes') or {})
+        candidates = [name for name, mark in marked.items()
+                      if isinstance(mark, dict) and mark.get('key') == key]
+        candidates += [key.replace('_', ' ').title(), key.split('_')[-1].title()]
+        for name in candidates:
+            spots = (characters.get(name) or {}).get('appearance') or []
+            if name in characters:
+                hints = ', '.join(f'гл{s["chapter"]} [{s["i"]}, {s["i"] + 1})'
+                                  for s in spots[:12]) or 'индекс их не нашёл'
+                return name, hints
+        # Индекс знает не всех: короткие имена он отсеивает, а рассказчика от первого лица
+        # почти не видит. Тогда имя ищет сам агент, и сказать об этом надо прямо.
+        return (russian or key), ('индекс этого героя не нашёл — имя, которым его зовёт '
+                                  'книга, найди сам поиском по тексту')
 
     def keep_sheet(self, bible_file, key, keep, tools):
         """Вернуть в запись поля принятого листа, если агент их не сохранил."""
@@ -214,9 +244,8 @@ def api_bible_entry(panel, match, query, body):
     slug, key = match.group(1), match.group(2)
     if not panel.book(slug):
         return 404, {'error': f'книги «{slug}» нет'}
-    args = {'slug': slug, 'key': key, 'name': (body or {}).get('name') or key,
-            'hints': (body or {}).get('hints')}
-    return {'job': panel.queue.add('bible-entry', args, label=key)['id']}
+    return {'job': panel.queue.add('bible-entry', {'slug': slug, 'key': key},
+                                   label=key)['id']}
 
 
 @route('GET', r'/api/styles')

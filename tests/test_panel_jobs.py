@@ -117,6 +117,26 @@ def test_running_job_is_cancelled_and_its_process_killed(tmp_path):
     assert done['status'] == jobs.CANCELLED and done['error'] == 'снято человеком'
 
 
+def test_running_handler_sees_the_cancel_flag(tmp_path):
+    """Обработчик обязан узнать о снятии сам: раннер агента по этому флагу гасит повтор."""
+    saw, gate = [], threading.Event()
+
+    def watcher(job, tools):
+        gate.wait(5)
+        saw.append(tools.stopped())
+        return {'ok': True}
+
+    q = queue(tmp_path, {'watch': watcher})
+    q.start()
+    job = q.add('watch')
+    time.sleep(0.2)
+    q.cancel(job['id'])
+    gate.set()
+    q.wait(job['id'], timeout=5)
+    q.stop()
+    assert saw == [True]
+
+
 def test_restart_marks_running_interrupted_and_requeues_the_waiting(tmp_path):
     q = queue(tmp_path, {'ping': lambda job, tools: {'ok': True}})
     crashed = q.add('ping')

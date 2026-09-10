@@ -163,6 +163,23 @@ def test_job_log_is_readable(live):
     assert status == 200 and 'попытка 1' in data['log']
 
 
+def test_the_instruction_uses_the_name_the_book_uses(live):
+    """В браузере лежит русское имя из библии; по английскому тексту оно не найдёт ничего."""
+    port, panel, root = live
+    (root / 'cache' / SLUG / 'index.json').write_text(json.dumps(
+        {'characters': {'Hero': {'appearance': [{'i': 1, 'chapter': 1, 'score': 3}]}}},
+        ensure_ascii=False), encoding='utf-8')
+    name, hints = panel.hero_hints(SLUG, 'hero', 'Герой')
+    assert name == 'Hero' and hints == 'гл1 [1, 2)'
+
+
+def test_unknown_hero_says_so_instead_of_inventing_a_name(live):
+    """Индекс знает не всех: короткие имена он отсеивает, рассказчика почти не видит."""
+    port, panel, _ = live
+    name, hints = panel.hero_hints(SLUG, 'eo', 'Ио')
+    assert name == 'Ио' and 'найди сам' in hints
+
+
 def test_styles_are_listed(live):
     port, _, _ = live
     status, data = call(port, '/api/styles')
