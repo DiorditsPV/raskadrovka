@@ -9,42 +9,42 @@
           "chapter": 1,
           "paragraphs": [
             5,
-            5
+            6
           ]
         },
         {
           "chapter": 1,
           "paragraphs": [
             36,
-            36
+            37
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
             51,
-            51
+            52
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
             114,
-            114
+            115
           ]
         },
         {
           "chapter": 3,
           "paragraphs": [
             147,
-            147
+            148
           ]
         },
         {
           "chapter": 3,
           "paragraphs": [
             149,
-            149
+            150
           ]
         }
       ],
@@ -62,35 +62,35 @@
           "chapter": 1,
           "paragraphs": [
             10,
-            10
+            11
           ]
         },
         {
           "chapter": 1,
           "paragraphs": [
             36,
-            36
+            37
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
             102,
-            102
+            103
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
             114,
-            114
+            115
           ]
         },
         {
           "chapter": 3,
           "paragraphs": [
             149,
-            149
+            150
           ]
         }
       ],
@@ -108,14 +108,14 @@
           "chapter": 1,
           "paragraphs": [
             31,
-            31
+            32
           ]
         },
         {
           "chapter": 3,
           "paragraphs": [
             125,
-            125
+            126
           ]
         }
       ],
@@ -133,21 +133,21 @@
           "chapter": 2,
           "paragraphs": [
             55,
-            55
+            56
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
             57,
-            57
+            58
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
             58,
-            58
+            59
           ]
         }
       ],
@@ -165,7 +165,7 @@
           "chapter": 2,
           "paragraphs": [
             68,
-            68
+            69
           ]
         }
       ]
@@ -179,7 +179,7 @@
           "chapter": 1,
           "paragraphs": [
             21,
-            21
+            22
           ]
         }
       ]
@@ -193,7 +193,7 @@
           "chapter": 3,
           "paragraphs": [
             147,
-            147
+            148
           ]
         }
       ]
@@ -207,7 +207,7 @@
           "chapter": 3,
           "paragraphs": [
             134,
-            134
+            135
           ]
         }
       ]
@@ -222,21 +222,21 @@
           "chapter": 1,
           "paragraphs": [
             6,
-            6
-          ]
-        },
-        {
-          "chapter": 1,
-          "paragraphs": [
-            7,
             7
           ]
         },
         {
           "chapter": 1,
           "paragraphs": [
+            7,
+            8
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
             37,
-            37
+            38
           ]
         }
       ]
@@ -249,21 +249,21 @@
           "chapter": 2,
           "paragraphs": [
             79,
-            79
-          ]
-        },
-        {
-          "chapter": 2,
-          "paragraphs": [
-            80,
             80
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
-            81,
+            80,
             81
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            81,
+            82
           ]
         }
       ]
@@ -276,14 +276,14 @@
           "chapter": 2,
           "paragraphs": [
             88,
-            88
+            89
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
             90,
-            90
+            91
           ]
         }
       ]
@@ -296,14 +296,14 @@
           "chapter": 3,
           "paragraphs": [
             124,
-            124
+            125
           ]
         },
         {
           "chapter": 3,
           "paragraphs": [
             125,
-            125
+            126
           ]
         }
       ]
