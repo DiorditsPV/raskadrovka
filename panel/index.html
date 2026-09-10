@@ -172,7 +172,9 @@ tr:hover td{background:#fafbfc}
 .who .name{white-space:nowrap}
 
 .scene{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,540px);gap:26px;border-top:1px solid var(--line-soft);padding:22px 0}
-.frames{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));align-content:start}
+/* Кадр должен быть виден целиком и в подробностях, но не растекаться на сверхшироком
+   экране: за 1300 px одна картинка перестаёт помещаться в поле зрения. */
+.frames{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));align-content:start;max-width:1300px}
 .frame img{width:100%;height:auto;aspect-ratio:3/2;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
 .frame-label{font-weight:500;margin-bottom:7px}
 .gaps{font-size:12px;color:var(--muted);margin-top:5px}
