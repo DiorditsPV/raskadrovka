@@ -183,6 +183,126 @@ def parse(source):
 
 NUMBER_RE = re.compile(r'^\d{1,3}$')
 
+# ── что книга знает о себе ────────────────────────────────────────────────
+#
+# Название, автор, переводчик, год — всё это лежит в самом файле, и спрашивать их
+# у человека незачем: он их оттуда и переписывал бы. Права остаются за ним: срок
+# охраны из метаданных не выводится.
+
+# Таблица транслитерации одна на репозиторий: ключ героя и слаг книги должны ложиться
+# в пути одинаково, иначе «Дэрроу» в одном месте `derrou`, а в другом `derrow`.
+from index_book import TRANSLIT                              # noqa: E402
+
+META_FIELDS = ('title', 'author', 'translator', 'language', 'year_published', 'edition')
+YEAR_RE = re.compile(r'(1[0-9]{3}|20[0-9]{2})')
+
+
+def _text(node):
+    return ' '.join((node.itertext() if node is not None else [])).strip() if node is not None else ''
+
+
+def _person(node):
+    """Имя из fb2: три отдельных тега, порядок — как в книге, а не как в базе."""
+    if node is None:
+        return ''
+    parts = [_text(node.find(f'{{*}}{tag}'))
+             for tag in ('first-name', 'middle-name', 'last-name')]
+    return ' '.join(p for p in parts if p) or _text(node.find('{*}nickname'))
+
+
+def describe_fb2(data):
+    root = ET.fromstring(data)
+    info = root.find('.//{*}description/{*}title-info')
+    publish = root.find('.//{*}description/{*}publish-info')
+    if info is None:
+        return {}
+    year = _text(info.find('{*}date')) or _text(publish.find('{*}year')) if publish is not None \
+        else _text(info.find('{*}date'))
+    edition = ''
+    if publish is not None:
+        edition = ', '.join(x for x in (_text(publish.find('{*}publisher')),
+                                        _text(publish.find('{*}year'))) if x)
+    return {'title': _text(info.find('{*}book-title')),
+            'author': _person(info.find('{*}author')),
+            'translator': _person(info.find('{*}translator')),
+            'language': _text(info.find('{*}lang')) or 'ru',
+            'year_published': (YEAR_RE.search(year or '') or [''])[0] if year else '',
+            'edition': edition}
+
+
+def describe_epub(data):
+    import io
+    z = zipfile.ZipFile(io.BytesIO(data))
+    container = ET.fromstring(z.read('META-INF/container.xml'))
+    opf_path = container.find('.//{*}rootfile').get('full-path')
+    meta = ET.fromstring(z.read(opf_path)).find('{*}metadata')
+    if meta is None:
+        return {}
+
+    def dc(tag, role=None):
+        for node in meta.findall(f'{{*}}{tag}'):
+            if role and not any(role in (v or '') for k, v in node.attrib.items()
+                                if k.endswith('role')):
+                continue
+            if (_text(node) or '').strip():
+                return _text(node).strip()
+        return ''
+
+    year = dc('date') or ''
+    return {'title': dc('title'),
+            'author': dc('creator'),
+            'translator': dc('contributor', role='trl'),
+            'language': (dc('language') or 'en').split('-')[0],
+            'year_published': (YEAR_RE.search(year) or [''])[0] if year else '',
+            'edition': dc('publisher')}
+
+
+def describe(source):
+    """Что книга знает о себе. Неизвестное — пустая строка, а не выдумка."""
+    source = Path(source)
+    data = source.read_bytes()
+    try:
+        found = (describe_fb2(data) if source.suffix.lower() == '.fb2'
+                 else describe_epub(data) if source.suffix.lower() == '.epub' else {})
+    except Exception:
+        found = {}          # битые метаданные — не повод не завести книгу
+    out = {field: (found.get(field) or '').strip() for field in META_FIELDS}
+    if not out['title']:
+        # Ни fb2 без описания, ни txt о себе ничего не говорят: остаётся имя файла.
+        out['title'] = re.sub(r'[_-]+', ' ', source.stem).strip()
+    return out
+
+
+def slug_for(title, author='', taken=()):
+    """Слаг из названия: латиница, нижний регистр, дефисы. Занятый — с номером.
+
+    Название, а не «автор-название»: слаг стоит в путях и в адресе панели, и читать его
+    человеку. Если название уже занято другой книгой, различает фамилия автора.
+    """
+    def plain(text, limit=48):
+        out = []
+        for letter in (text or '').strip().lower():
+            if letter in TRANSLIT:
+                out.append(TRANSLIT[letter])
+            elif letter.isalnum() and letter.isascii():
+                out.append(letter)
+            elif out and out[-1] != '-':
+                out.append('-')
+        return ''.join(out).strip('-')[:limit].strip('-')
+
+    base = plain(title) or 'kniga'
+    taken = set(taken)
+    if base not in taken:
+        return base
+    surname = plain((author or '').split()[-1] if author else '', 24)
+    if surname and f'{surname}-{base}' not in taken:
+        return f'{surname}-{base}'
+    n = 2
+    while f'{base}-{n}' in taken:
+        n += 1
+    return f'{base}-{n}'
+
+
 
 def strip_running_header(chapters):
     """Убирает колонтитул: абзац, который повторяется первым в большинстве файлов."""
@@ -217,10 +337,25 @@ def ingest(source, slug, meta, root=ROOT, min_chapter_chars=MIN_CHAPTER_CHARS,
            numbered_only=False):
     fmt, chapters = parse(Path(source))
     chapters = lift_numbered_titles(strip_running_header(chapters))
+    parsed, numbered = len(chapters), None
     if numbered_only:
         chapters = [c for c in chapters if 'number' in c]
+        numbered = len(chapters)
     chapters = [c for c in chapters
                 if sum(len(p) for p in c['paragraphs']) >= min_chapter_chars]
+    if not chapters:
+        # Пустой разбор на диск не ложится. Иначе он неотличим от разобранной книги:
+        # файл кеша есть, `parsed` — да, индекс «готово» за ноль секунд, а книги нет.
+        if numbered_only and parsed and not numbered:
+            why = (f'глав разобрано {parsed}, но ни у одной номер не стоит отдельным абзацем, '
+                   f'а отбор «только пронумерованные главы» оставляет лишь такие — '
+                   f'снимите галочку')
+        elif parsed:
+            why = f'глав разобрано {parsed}, но все короче {min_chapter_chars} знаков'
+        else:
+            why = f'файл {Path(source).name} не разобрался: ни одной главы'
+        raise ValueError(f'разбор не дал ни одного абзаца. {why}. '
+                         f'Прежний разбор книги не тронут')
 
     book_dir = root / 'books' / slug
     cache_dir = root / 'cache' / slug

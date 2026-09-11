@@ -44,6 +44,27 @@ STOP = {
     'Когда', 'Если', 'Тогда', 'Там', 'Здесь', 'Да', 'Нет',
 }
 
+# Доля строчных, после которой слово перестаёт быть именем. У имени строчной формы
+# в книге нет вовсе: «Дэрроу» — 111 раз с прописной и ни разу со строчной, «Томас» — 806
+# и ни разу. У обычного слова наоборот: «Did» — 27 раз с прописной (начало реплики)
+# и 163 раза со строчной. Настоящие имена лежат ниже 0.1, мусор — выше 0.3.
+COMMON_SHARE = 0.30
+
+# Исключение: родство и звание. Ими в книгах зовут людей — «Мать сказала», «Cardinal nodded», —
+# и статистикой они неотличимы от обычных слов, потому что обычными словами и являются.
+# Без этого списка из индекса пропадают «мать Дэрроу» и «дядя Нарол», а вместе с ними
+# единственный способ их завести: имён, кроме индексных, панель не предлагает.
+KINSHIP = {
+    'mother', 'father', 'papa', 'mama', 'mom', 'dad', 'uncle', 'aunt', 'brother', 'sister',
+    'son', 'daughter', 'grandmother', 'grandfather', 'granny', 'nurse', 'widow',
+    'doctor', 'captain', 'priest', 'cardinal', 'pope', 'abbot', 'bishop', 'knight',
+    'king', 'queen', 'prince', 'princess', 'master', 'mistress', 'sire', 'comte', 'baron',
+    'madame', 'mademoiselle', 'monsieur', 'signor', 'senor',
+    'мать', 'отец', 'папа', 'мама', 'дядя', 'тётя', 'тетя', 'брат', 'сестра', 'сын', 'дочь',
+    'бабушка', 'дедушка', 'нянька', 'вдова', 'доктор', 'капитан', 'священник', 'батюшка',
+    'матушка', 'князь', 'граф', 'барон', 'король', 'королева', 'барин', 'госпожа', 'сударь',
+}
+
 # Слова, по которым узнаётся описание внешности. Дополняется без опаски: лишнее слово
 # добавит кандидата, которого агент отбросит, а недостающее — спрячет описание.
 APPEARANCE = {
@@ -71,7 +92,10 @@ def load_paragraphs(slug, root=ROOT):
     cache = root / 'cache' / slug / 'paragraphs.jsonl'
     if not cache.is_file():
         raise SystemExit(f'нет кеша: {cache} — сначала ingest_book.py')
-    return [json.loads(line) for line in cache.read_text(encoding='utf-8').splitlines()]
+    # Пустые строки пропускаются: у книги без единого абзаца кеш состоит из одного
+    # перевода строки, и разбор такого файла падал бы разбором JSON, а не понятным словом.
+    return [json.loads(line) for line in cache.read_text(encoding='utf-8').splitlines()
+            if line.strip()]
 
 
 def proper_nouns(text):
@@ -85,19 +109,25 @@ def proper_nouns(text):
         word = re.sub(r"[’']s$", '', word)  # притяжательное к тому же лицу
         if word in STOP or len(word) < 3:
             continue
-        if word in starts and text.count(word) == 1:
-            continue                       # встретилось только в начале фразы — не имя
         prefix = text[:m.start()]
-        found.append((word, bool(LOCATIVE.search(prefix)), bool(ARTICLE.search(prefix))))
+        found.append((word, bool(LOCATIVE.search(prefix)), bool(ARTICLE.search(prefix)),
+                      word in starts and prefix.rstrip().endswith(('.', '!', '?', '"', '”'))
+                      or not prefix.strip()))
     return found
+
+
+LOWERCASE = re.compile(r"(?<![\w’'-])([a-zа-яё][A-Za-zА-Яа-яЁё'’-]{2,})")
 
 
 def index_names(paragraphs, min_mentions=4):
     counts, chapters, first = Counter(), defaultdict(set), {}
-    locative, articled = Counter(), Counter()
+    locative, articled, sentence_start, lower = Counter(), Counter(), Counter(), Counter()
     for p in paragraphs:
-        for word, after_locative, after_article in proper_nouns(p['text']):
+        lower.update(LOWERCASE.findall(p['text']))
+        for word, after_locative, after_article, at_start in proper_nouns(p['text']):
             counts[word] += 1
+            if at_start:
+                sentence_start[word] += 1
             chapters[word].add(p['chapter'])
             first.setdefault(word, p['i'])
             if after_locative:
@@ -107,6 +137,16 @@ def index_names(paragraphs, min_mentions=4):
     names = {}
     for word, n in counts.items():
         if n < min_mentions:
+            continue
+        # Слово, которое почти всегда стоит первым в предложении, — не имя, а «Well»,
+        # «Because», «Something». Имя встречается и в середине фразы.
+        if n - sentence_start[word] < max(2, n * 0.25):
+            continue
+        # Главная проверка: пишет ли книга это слово со строчной. Прописную даёт и начало
+        # предложения, и начало реплики — «„Did you…“», — а строчную даёт только то, что
+        # словом и является. Родство и звание из проверки выведены: ими зовут людей.
+        low = lower[word.lower()]
+        if low and low / (low + n) >= COMMON_SHARE and word.lower() not in KINSHIP:
             continue
         # Имя человека почти не идёт после артикля: «the House» — вещь, «Cassius» — человек.
         if articled[word] >= n * 0.25:
@@ -175,6 +215,32 @@ def scene_candidates(paragraphs, lexicon, per_chapter=3, window=2, total=None):
         out = out[:total]
     out.sort(key=lambda c: (c['chapter'], -c['score']))
     return out
+
+
+TRANSLIT = {
+    'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
+    'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+    'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts',
+    'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu',
+    'я': 'ya',
+}
+
+
+def key_for(name):
+    """Ключ записи по имени из книги: латиница, нижний регистр, слова через подчёркивание.
+
+    Ключ — имя файла и путь к листу, поэтому кириллицы в нём быть не должно. Имя, каким
+    его зовёт книга, живёт в самой записи и в отметках панели, а не в ключе.
+    """
+    out = []
+    for letter in (name or '').strip().lower():
+        if letter in TRANSLIT:
+            out.append(TRANSLIT[letter])
+        elif letter.isalnum() and letter.isascii():
+            out.append(letter)
+        elif out and out[-1] != '_':
+            out.append('_')
+    return ''.join(out).strip('_') or 'geroy'
 
 
 def build(slug, root=ROOT, per_chapter=3, window=2, total=None, min_mentions=4):

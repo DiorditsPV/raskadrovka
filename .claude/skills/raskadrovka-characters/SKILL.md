@@ -63,6 +63,7 @@ python3 scripts/show_paragraphs.py <слаг> --grep "my (face|eyes|hands|hair)"
       "name": "Дэрроу",
       "appearance": "…по-русски, для человека…",
       "appearance_en": "…для промпта, из слов книги…",
+      "subject_en": "a teenage boy, a helium miner on Mars in an underground colony",
       "locators": [{"chapter": 1, "paragraphs": [5, 6]}, …],
       "audit": {"age": 1, "build": 1, "face": 1, "eyes": 0.5, "hair": 1,
                 "skin": 1, "clothing": 1, "gear": 1, "marks": 1, "bearing": 0.5},
@@ -125,7 +126,8 @@ python3 scripts/show_paragraphs.py <слаг> --grep "my (face|eyes|hands|hair)"
 
 ### 4. Сгенерировать лист
 
-Промпт: неизменная часть про формат листа плюс `appearance_en` героя.
+Промпт: неизменная часть про формат листа плюс `subject_en` и `appearance_en` героя.
+Собирает его `scripts/generate_sheet.py` — руками промпт не складывают.
 
 ```text
 Style: a plain character reference sheet for production use, NOT a finished illustration and
@@ -139,7 +141,7 @@ unexpressive. Natural restrained colour, true to the description. No artistic st
 painterly flourish, no mood, no story, no environment — this sheet exists only to fix who
 this person is.
 
-Subject: <кто это одной фразой>. <appearance_en>.
+Subject: <subject_en>. <appearance_en>.
 
 Asset: a single image, 3:2 landscape.
 
@@ -151,11 +153,19 @@ actors, signatures, watermarks, any legible text, numbers or labels anywhere in 
 Три проекции и видимые руки — не украшение: без рук не прочитать сигилы, протез, кольцо,
 ожог. Крупный план головы нужен, чтобы лицо потом узнавалось в кадре.
 
-Запуск — через Codex, как описано в скилле `raskadrovka`. Обязательно вторая попытка при
-сбое: генерация падает молча.
+Запуск:
 
-Файл — `books/<книга>/characters/<ключ>.png`. В библию записать `sheet`, `sheet_sha256` и
-`sheet_prompt` целиком: лист можно будет пересобрать, а не подбирать заново.
+```bash
+python3 scripts/generate_sheet.py <книга> <ключ>              # сразу в книгу
+python3 scripts/generate_sheet.py <книга> <ключ> --prompt-only
+```
+
+Скрипт сам зовёт Codex, делает вторую попытку при сбое (генерация падает молча) и после
+удачи пишет в библию `sheet`, `sheet_sha256` и `sheet_prompt` целиком: лист можно будет
+пересобрать, а не подбирать заново. Файл — `books/<книга>/characters/<ключ>.png`.
+
+Из панели тот же скрипт кладёт лист в `cache/panel/<книга>/sheets/` и ждёт приёмки: там
+запись в библию делает кнопка «Принять», а не генератор.
 
 ### 5. Гейт: посмотреть глазами
 

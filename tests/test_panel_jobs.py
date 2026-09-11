@@ -166,3 +166,124 @@ def test_listing_is_newest_first(tmp_path):
     listed = [j['id'] for j in q.all()]
     assert listed == sorted(ids, reverse=True)
     assert len(q.all(limit=2)) == 2
+
+
+# — несколько полос —
+
+def locks(kind, args):
+    """Та же таблица, что в панели, только короче: книга общая, правка — исключительная."""
+    slug, key = args.get('slug', ''), args.get('key', '')
+    if kind == 'bible-entry':
+        return (f'книга:{slug}',), (f'библия:{slug}',)
+    if kind == 'sheet':
+        return (f'книга:{slug}',), (f'лист:{slug}/{key}',)
+    if kind == 'ingest':
+        return (), (f'книга:{slug}',)
+    return (), ('всё',)
+
+
+def until(check, limit=4.0):
+    waited = 0.0
+    while waited < limit and not check():
+        time.sleep(0.05)
+        waited += 0.05
+    return check()
+
+
+def busy_queue(tmp_path, width, hold):
+    """Очередь, где обработчик держит задание, пока его не отпустят."""
+    started, release = [], threading.Event()
+
+    def handler(job, tools):
+        started.append(job['args'].get('key') or job['args'].get('slug'))
+        release.wait(timeout=hold)
+        return {'ok': True}
+
+    q = jobs.Queue(root=tmp_path, handlers={k: handler for k in
+                                            ('bible-entry', 'sheet', 'ingest')},
+                   locks=locks, width=width)
+    return q, started, release
+
+
+def test_jobs_that_share_a_file_still_go_one_at_a_time(tmp_path):
+    """Две записи героев одной книги правят один `bible.json`: рядом им нельзя."""
+    q, started, release = busy_queue(tmp_path, width=3, hold=5)
+    q.add('bible-entry', {'slug': 'kniga', 'key': 'a'})
+    q.add('bible-entry', {'slug': 'kniga', 'key': 'b'})
+    q.start()
+    time.sleep(0.4)
+    assert len(q.running()) == 1, 'взяли обе записи одной книги разом'
+    release.set()
+    assert until(lambda: len(started) == 2), f'вторая запись не пошла: {started}'
+    q.stop()
+    assert sorted(started) == ['a', 'b']
+
+
+def test_jobs_that_share_nothing_go_side_by_side(tmp_path):
+    """Листы независимы: каждый пишет свою картинку в кеш."""
+    q, started, release = busy_queue(tmp_path, width=3, hold=5)
+    for key in ('a', 'b', 'c'):
+        q.add('sheet', {'slug': 'kniga', 'key': key})
+    q.start()
+    assert until(lambda: len(q.running()) == 3), f'рядом пошло только {len(q.running())}'
+    release.set()
+    q.stop()
+
+
+def test_width_is_the_ceiling(tmp_path):
+    q, started, release = busy_queue(tmp_path, width=2, hold=5)
+    for key in ('a', 'b', 'c', 'd'):
+        q.add('sheet', {'slug': 'kniga', 'key': key})
+    q.start()
+    assert until(lambda: len(q.running()) == 2)
+    time.sleep(0.3)
+    assert len(q.running()) == 2, 'взяли больше, чем разрешено'
+    release.set()
+    q.stop()
+
+
+def test_a_blocked_job_does_not_block_the_one_behind_it(tmp_path):
+    """Задание, чьи замки заняты, не снимается с очереди, а пропускается: иначе одна
+    книга держала бы всю панель, пока её герои собираются по одному."""
+    q, started, release = busy_queue(tmp_path, width=2, hold=5)
+    q.add('bible-entry', {'slug': 'kniga', 'key': 'a'})
+    q.add('bible-entry', {'slug': 'kniga', 'key': 'b'})     # ждёт первого
+    q.add('sheet', {'slug': 'kniga', 'key': 'c'})           # спорить не с кем
+    q.start()
+    assert until(lambda: len(started) == 2), f'пошли {started}'
+    assert sorted(started) == ['a', 'c'], f'пошли {started}'
+    release.set()
+    q.stop()
+
+
+def test_parsing_a_book_holds_it_whole(tmp_path):
+    """Разбор правит книгу целиком: рядом с ним по ней нельзя ничего."""
+    q, started, release = busy_queue(tmp_path, width=3, hold=5)
+    q.add('ingest', {'slug': 'kniga'})
+    q.add('sheet', {'slug': 'kniga', 'key': 'a'})
+    q.add('sheet', {'slug': 'drugaya', 'key': 'a'})         # другая книга — можно
+    q.start()
+    assert until(lambda: len(q.running()) == 2)
+    time.sleep(0.3)
+    assert len(q.running()) == 2 and 'kniga' in started
+    release.set()
+    q.stop()
+
+
+def test_a_waiting_job_says_what_holds_it(tmp_path):
+    """«Ждёт очереди» при трёх полосах ничего не объясняет: рядом не идёт не потому,
+    что нельзя, а потому что занят файл. Очередь должна назвать какой и кем."""
+    q, started, release = busy_queue(tmp_path, width=3, hold=5)
+    first = q.add('bible-entry', {'slug': 'kniga', 'key': 'grace'})
+    second = q.add('bible-entry', {'slug': 'kniga', 'key': 'rocky'})
+    free = q.add('sheet', {'slug': 'kniga', 'key': 'rocky'})
+    q.start()
+    assert until(lambda: len(q.running()) == 2)
+
+    held = q.blocked_by(q.get(second['id']))
+    assert len(held) == 1
+    assert held[0]['lock'] == 'библия:kniga' and held[0]['job'] == first['id']
+    assert not q.blocked_by(q.get(free['id'])) or free['id'] in q.running()
+    assert jobs.subject_of(q.get(first['id'])) == 'grace'
+    release.set()
+    q.stop()

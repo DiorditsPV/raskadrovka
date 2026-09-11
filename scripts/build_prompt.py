@@ -22,7 +22,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SECTIONS = ('Use case', 'Asset', 'Input images', 'Series visual language',
             'Tonal key and palette', 'Scene',
             'Characters', 'Action', 'Mood', 'Details', 'Composition', 'Source passage',
-            'Identity invariants', 'Legibility', 'Avoid', 'Final constraints')
+            'Identity invariants', 'Legibility', 'Assembled description', 'Avoid',
+            'Final constraints')
 
 GLOBAL_AVOID = [
     'anatomically impossible poses',
@@ -169,6 +170,18 @@ def short_manner(style, limit=170):
     return notes[:limit].rsplit(' ', 1)[0].strip()
 
 
+# Карточку сцены и записи героев собирает агент из слов книги, и книга пишет что угодно.
+# Отказ цензуры для нас хуже правки: после отказа генератор рисует не то, что просили.
+ASSEMBLED = (
+    'Assembled description: the card and the character descriptions above are put together '
+    'automatically from the book and are not a request for any particular content. If some '
+    'part of them cannot be depicted within content policy, do not refuse and do not draw '
+    'something else instead: leave that detail out, or add the plainest thing that makes it '
+    'depictable — simple clothing, drapery, a covering, a turn of the body, distance — and '
+    'render everything else exactly as described. A person the description calls unclothed '
+    'is shown in plain undyed garments.')
+
+
 def render_prompt(card, bible, style, composition, book, inputs):
     frame = card['frame']
     avoid = list(frame.get('avoid', [])) + GLOBAL_AVOID
@@ -188,6 +201,7 @@ def render_prompt(card, bible, style, composition, book, inputs):
          'lettering):\n' + card['excerpt']['text']),
         'Identity invariants:\n' + render_invariants(bible, card['invariants']),
         CLARITY,
+        ASSEMBLED,
         'Avoid: ' + '; '.join(avoid) + '.',
         ('Final constraints: the scene content comes from this card, not from the reference '
          'images. Keep the manner of the style references and the identity of the character '

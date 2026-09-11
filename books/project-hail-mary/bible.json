@@ -1,0 +1,1058 @@
+{
+  "characters": {
+    "astrophage": {
+      "name": "Astrophage",
+      "appearance": "Астрофаг — внеземной микроб, одноклеточный организм без мозга. Отдельная клетка — цельный округлый объект примерно десять микрон в диаметре; у клеток почти нет различий в размере, и они способны деформироваться. Под обычным микроскопом живой астрофаг выглядит совершенно чёрной, лишённой различимых черт непрозрачной точкой, поглощающей весь свет; внутренности не видны даже при самом сильном освещении. В инфракрасной камере при постоянной температуре 96,415 °C клетка выглядит маленьким тёмно-красным сгустком. У неё есть наружная клеточная мембрана и клеточная стенка; после прокола клетка становится полупрозрачной и становятся видны органеллы, а исследование содержимого обнаруживает ДНК и митохондрии. Затем округлая оболочка распадается в медленно растекающуюся лужицу. В массе астрофаг выглядит как чёрный маслянистый густой осадок. Клетки извиваются, время от времени подёргиваются или слегка бросаются в сторону.",
+      "appearance_en": "a 10-micron-wide cohesive roundish alien cell, able to deform; a featureless jet-black opaque dot absorbing all light; outer cell membrane and cell wall; in infrared, a little dark-red blob at 96.415°C; in bulk, an oily black sludge; wriggling with random jerky motions",
+      "subject_en": "a microscopic alien single-celled organism from Adrian, living on stars and migrating to carbon-dioxide-rich planets to breed",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            421,
+            424
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            432,
+            434
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            666,
+            667
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            669,
+            671
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            780,
+            781
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            813,
+            814
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            817,
+            818
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            820,
+            822
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1011,
+            1012
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1018,
+            1019
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1023,
+            1024
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1037,
+            1039
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1109,
+            1111
+          ]
+        },
+        {
+          "chapter": 18,
+          "paragraphs": [
+            3808,
+            3809
+          ]
+        },
+        {
+          "chapter": 18,
+          "paragraphs": [
+            3818,
+            3820
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            4394,
+            4395
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            4710,
+            4711
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            4722,
+            4724
+          ]
+        }
+      ],
+      "audit": {
+        "age": 0,
+        "build": 1,
+        "face": 0,
+        "eyes": 0,
+        "hair": 0,
+        "skin": 1,
+        "clothing": 0,
+        "gear": 0,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 4.0,
+      "gaps": {
+        "age": {
+          "why": "возраст отдельной клетки книга не называет и видом не различает: родитель и потомок после деления описаны одинаково («both parent and child return», гл6 1114); сказан только возраст вида — Адриан, к которому они «эволюционировали миллиарды лет» (гл20 4254). Отличия свежей, заряженной клетки от израсходованной по виду нет — мёртвые клетки упомянуты только как отход (гл10 2029–2030, гл23 5025, гл25 5283)",
+          "looked": "вся книга: grep Astrophage + years old / young / ancient / age / generation / lifespan / divid / reproduc / breed (38 абзацев, гл4–29); grep dead / depleted / spent / inert Astrophage; grep Astrophage + no longer black / grey / pale / clear / drained / cooled / cold; индексные абзацы 797, 971, 1013, 1083, 1356, 1491, 1792, 2025–2031, 4762 (шум: топливо, бридер, лаборатория)"
+        },
+        "face": {
+          "why": "у одноклеточного лица нет; книга прямо говорит обратное — «featureless black dot» (гл5 820, уже в записи). Путь признака группы проверен: книга относит астрофага к одноклеточной жизни, родственной земной (гл6 1020, 1110; гл9 1754–1760; гл15 3075), и к одной биосфере с таумёбой (гл25 5230), но описывает только внутреннюю химию — ДНК, митохондрии, АТФ, — ни одной наружной черты",
+          "looked": "вся книга: grep Astrophage + eyes / face / hair / skin / wear / coat / shell, flagell / cilia / pseudopod / appendage / organelle / nucleus / eyespot; grep common ancestor / panspermia / Earth life; индексные абзацы 797, 971, 1013, 1083, 1356, 1491, 1792, 2025–2031, 4762 (шум: топливо, бридер, лаборатория)"
+        },
+        "eyes": {
+          "why": "глаз у клетки нет; «видит» она только в смысле реакции на ИК-свет (гл6 1205, гл10 2031, гл20 4252), органа зрения книга не описывает нигде",
+          "looked": "вся книга: grep eyespot / sensory / see…light рядом с Astrophage, grep Astrophage + eyes; индексные абзацы 797, 971, 1013, 1083, 1356, 1491, 1792, 2025–2031, 4762 (шум: топливо, бридер, лаборатория)"
+        },
+        "hair": {
+          "why": "ни волос, ни жгутиков, ни ресничек у клетки в тексте нет; единственное про поверхность — мембрана и клеточная стенка, уже в записи",
+          "looked": "вся книга: grep flagell / cilia / pseudopod / appendage / hair рядом с Astrophage; индексные абзацы 797, 971, 1013, 1083, 1356, 1491, 1792, 2025–2031, 4762 (шум: топливо, бридер, лаборатория)"
+        },
+        "clothing": {
+          "why": "микроб без одежды; оболочку клетки (мембрана, стенка) запись уже держит в build/skin, одеждой её считать нельзя",
+          "looked": "вся книга: grep Astrophage + wear / coat / shell; индексные абзацы 797, 971, 1013, 1083, 1356, 1491, 1792, 2025–2031, 4762 (шум: топливо, бридер, лаборатория)"
+        },
+        "gear": {
+          "why": "никаких атрибутов при себе у клетки нет; всё «снаряжение» вокруг астрофага в тексте — человеческое и эридианское: слайды, бридер, револьвер спин-двигателя, топливные трубы (гл5 771, гл10 2025–2031, гл29 5845) — это не черта героя",
+          "looked": "вся книга: grep Astrophage + shell / slide / fuel; индексные абзацы 797, 971, 1013, 1083, 1356, 1491, 1792, 2025–2031, 4762 (шум: топливо, бридер, лаборатория)"
+        }
+      },
+      "gaps_for": "44575fa3f35ca23b54feeac439bb1efd485344697ab1f74e839ac57482a2a871",
+      "gaps_at": "2026-09-11T16:01:23"
+    },
+    "grace": {
+      "name": "Райланд Грейс",
+      "appearance": "Рассказчик от первого лица; себя по имени почти не называет, внешность собрана из его же наблюдений за собой. Белый мужчина, американец («I’m Caucasian, I’m male, and I speak English»), «одинокий мужчина за тридцать» («a single man in my thirties»). Доктор молекулярной биологии, ушедший из науки в учителя естествознания в средней школе («junior high school science teacher»). Проснувшись после комы на корабле, обнаруживает, что тело у него крепкое: мускулистые руки, подтянутые ноги — «не как у культуриста, но слишком здоровые для умирающего», «не иссохший доходяга, а пляжный красавец» («beach-bod buff»), «I’m ripped». Лицо робот-манипуляторы брили ему во сне: одна щека в щетине, другая гладкая. На голове при пробуждении ни шишек, ни шрамов, ни повязок. Первое, что он носит, — простыня с кровати, завязанная тогой через плечо; в складках тоги он держит секундомер и рулетку, а цифры записывает ручкой прямо на руке. Затем — форма экипажа: светло-голубой цельный комбинезон из тонкой удобной ткани с карманами, на левом плече нашивка миссии Hail Mary и под ней флаг США, на правом — логотип NASA, над левым нагрудным карманом бирка с именем GRACE; на ногах — не ботинки, а толстые носки с резиновой подошвой. Для выходов — российский скафандр «Орлан-МКС2» с двумя страховочными фалами и поясом для инструментов, позже на поясе — сделанный Рокки резак «AstroTorch». В земных флешбэках: лабораторный халат, полный защитный костюм с прозрачным виниловым окном, в Китае — ярко-жёлтый комбинезон с китайскими иероглифами на спине и красной полосой по левой штанине; однажды упомянуты его немытые, сальные волосы. Приметы по ходу книги: шишка на лбу после падения рулетки со стола (гл. 2); лицо, обожжённое о горячую стенку тоннеля (гл. 11); после выброса аммиака — кислородная маска, капельница и левая рука, забинтованная от запястья до плеча (гл. 21); с гл. 24 — рубцы от ожога по всей коже левой руки и плеча, «на всю оставшуюся жизнь». В эпилоге на Эриде ему, по его подсчёту, около пятидесяти трёх: он «уже не молод», ходит с тростью и прихрамывает. Повадка: неуклюж (падает с лестницы, врезается в потолок в невесомости), нервно шутит, легко плачет, скрещивает руки на груди, роняет голову в ладони, качает головой, трёт глаза, тянет себя за волосы, радуется вслух и пританцовывает в кресле; «ботаник» по собственному признанию; «классный учитель», кидающий ученикам мешочек-бобик за верный ответ. Стратт называет его трусом, избегающим риска, и «в сущности хорошим человеком». Вес называет сам, когда Рокки спрашивает его массу: «Maybe eighty kilograms» — около восьмидесяти килограммов (гл. 16). Рост, черты лица, цвет глаз, цвет и длина волос в книге не описаны.",
+      "appearance_en": "a Caucasian man in his thirties; muscular, well-toned arms and legs, fit and lean, not bodybuilder-bulky, about eighty kilograms; clean-shaven; wearing a light-blue one-piece astronaut jumpsuit of thin comfortable fabric with pockets, a circular mission patch with a U.S. flag beneath it on the left shoulder, a NASA logo on the right shoulder, and a blank name tag over the left breast pocket; on his feet thick socks with rubber soles instead of shoes; an open, friendly, slightly nerdy schoolteacher's bearing",
+      "subject_en": "a Caucasian American man in his thirties, a molecular biologist turned junior high school science teacher, the sole surviving crew member of the interstellar ship Hail Mary",
+      "locators": [
+        {
+          "chapter": 2,
+          "paragraphs": [
+            82,
+            83
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            87,
+            88
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            108,
+            110
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            113,
+            114
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            165,
+            171
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            215,
+            216
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            251,
+            252
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            254,
+            255
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            262,
+            263
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            269,
+            270
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            462,
+            464
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            480,
+            481
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            529,
+            531
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            545,
+            546
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            637,
+            638
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            735,
+            736
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            872,
+            873
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            878,
+            880
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            1002,
+            1003
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1013,
+            1014
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1130,
+            1131
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1236,
+            1237
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            1527,
+            1528
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            1541,
+            1542
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            1658,
+            1661
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            1685,
+            1686
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2150,
+            2152
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2155,
+            2156
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            3239,
+            3240
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            4351,
+            4352
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            4363,
+            4364
+          ]
+        },
+        {
+          "chapter": 24,
+          "paragraphs": [
+            5140,
+            5141
+          ]
+        },
+        {
+          "chapter": 24,
+          "paragraphs": [
+            5179,
+            5180
+          ]
+        },
+        {
+          "chapter": 24,
+          "paragraphs": [
+            5196,
+            5197
+          ]
+        },
+        {
+          "chapter": 26,
+          "paragraphs": [
+            5520,
+            5521
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            5961,
+            5962
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            5971,
+            5972
+          ]
+        },
+        {
+          "chapter": 31,
+          "paragraphs": [
+            6193,
+            6194
+          ]
+        },
+        {
+          "chapter": 31,
+          "paragraphs": [
+            6197,
+            6198
+          ]
+        }
+      ],
+      "audit": {
+        "age": 1,
+        "build": 0.5,
+        "face": 0.5,
+        "eyes": 0,
+        "hair": 0,
+        "skin": 1,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 7.0,
+      "gaps": {
+        "build": {
+          "why": "сложение дано прямо (мускулистый, подтянутый, около 80 кг по своей прикидке, гл16 3239), но рост не назван нигде — ни цифрой, ни сравнением с другими людьми или с высотой отсеков",
+          "looked": "поиск по всей книге tall / taller / shorter / height / feet tall / six-foot / five-foot / tiptoe / reach the ceiling / duck my head / headroom; weigh / mass / kilograms / pounds рядом с I / me / my; skinny / lanky / stocky / muscular / ripped / buff / athletic; замеры в гл2–3 (стол 91 см, люк 2,5 м) и тоннель гл10–11 — рост не выводится; группа: книга причисляет его к белым мужчинам-американцам (гл2), учителям, астронавтам экипажа, но внешности ни одной из этих групп нигде не описывает"
+        },
+        "face": {
+          "why": "черты лица не описаны: форма лица, нос, губы, подбородок не названы; лицо упоминается только через состояния — полувыбритое (гл2 108), обожжённое о стенку (гл11 2150–2155), посечённое стеклом (гл22 4644), слёзы, мимика",
+          "looked": "поиск по всей книге (6266 абзацев) рассказчика от первого лица: my face / my eyes / my hair / my head / my nose / my chin / my jaw / my cheek / my eyebrows / my reflection / my body; hair / haircut / beard / shave / stubble; face рядом с my / I; mirror / reflection / photo / picture of me; you look / looks like / handsome / ugly; реплики Рокки о человеке (гл13 2660, гл16 3234–3241, гл22 4543, гл26 5684); окрестности индексных попаданий гл15 3099, гл16 3285, гл18 3688, гл22 4686, гл24 5196 — это обращения «Dr. Grace» без внешности; группа: книга причисляет его к белым мужчинам-американцам (гл2), учителям, астронавтам экипажа, но внешности ни одной из этих групп нигде не описывает"
+        },
+        "eyes": {
+          "why": "цвет и форма глаз не названы нигде; «my eyes» — только действия и боль (открывает, трёт, жжёт аммиаком, гл2 34–44, гл20 4283, гл21 4340)",
+          "looked": "поиск по всей книге (6266 абзацев) рассказчика от первого лица: my face / my eyes / my hair / my head / my nose / my chin / my jaw / my cheek / my eyebrows / my reflection / my body; hair / haircut / beard / shave / stubble; face рядом с my / I; mirror / reflection / photo / picture of me; you look / looks like / handsome / ugly; реплики Рокки о человеке (гл13 2660, гл16 3234–3241, гл22 4543, гл26 5684); окрестности индексных попаданий гл15 3099, гл16 3285, гл18 3688, гл22 4686, гл24 5196 — это обращения «Dr. Grace» без внешности; blue / brown / green / hazel / grey eyes, glasses / spectacles; группа: книга причисляет его к белым мужчинам-американцам (гл2), учителям, астронавтам экипажа, но внешности ни одной из этих групп нигде не описывает"
+        },
+        "hair": {
+          "why": "цвет, длина и причёска не названы; есть только «сальные немытые волосы» (гл6 1013) и «тяну себя за волосы» (гл30 5971) — волосы есть и за них можно ухватиться, но какие они, книга не говорит",
+          "looked": "поиск по всей книге (6266 абзацев) рассказчика от первого лица: my face / my eyes / my hair / my head / my nose / my chin / my jaw / my cheek / my eyebrows / my reflection / my body; hair / haircut / beard / shave / stubble; face рядом с my / I; mirror / reflection / photo / picture of me; you look / looks like / handsome / ugly; реплики Рокки о человеке (гл13 2660, гл16 3234–3241, гл22 4543, гл26 5684); окрестности индексных попаданий гл15 3099, гл16 3285, гл18 3688, гл22 4686, гл24 5196 — это обращения «Dr. Grace» без внешности; blond / blonde / brunette / bald / balding / gray hair / grey hair / red hair / brown hair / haircut; группа: книга причисляет его к белым мужчинам-американцам (гл2), учителям, астронавтам экипажа, но внешности ни одной из этих групп нигде не описывает"
+        }
+      },
+      "gaps_for": "b5883129683c6ea151b3e0d04a048fb047fff3877069d5f44194a2ba8dd6087e",
+      "gaps_at": "2026-09-11T15:57:47"
+    },
+    "rocky": {
+      "name": "Рокки",
+      "appearance": "Рокки — эридианин: инопланетянин меньше человека, размером с лабрадора, с виду — большой паук. Ему двести девяносто один земной год (средний срок жизни эридиан — шестьсот восемьдесят девять лет), для своего вида он не стар. Очень тяжёлый — сто шестьдесят восемь килограммов, «как мотоцикл»: панцирь из окисленных минералов, кости — сотовые металлические сплавы, кровь — в основном жидкая ртуть, при ранении оставляет серебристые брызги; мозг лежит в центре панциря. От центрального панциря примерно пятиугольной формы — восемнадцать дюймов в поперечнике и вдвое тоньше — лучами расходятся пять ног. У каждой ноги сустав посередине («локоть»), и каждая оканчивается кистью; все пять кистей одинаковые, по три треугольных пальца с суставами-«костяшками»: пальцы смыкаются в форму капли или раскрываются трёхлучевой морской звездой. Переда и зада нет — тело пятилучево-симметрично. Головы, шеи, лица, глаз и рта нет: на верху панциря — твёрдый каменистый пятиугольник, чуть выступающий над корковатой кожей, с пятью щелями радиатора — единственными отверстиями, которые видны на теле. Рокки слеп: «видит» пассивным сонаром, а звук слышит крошечными рецепторами по всей поверхности панциря и рук. Рта не видно нигде: звуки идут откуда-то изнутри тела. Глаза у эридиан не развились вовсе — свет не доходит до поверхности Эрида, там кромешная тьма. Кожа похожа на буровато-чёрный камень — неровная, бугристая, будто кисть высекли из гранита и не успели отшлифовать; на панцире — гребни. Тело горячее, двести десять градусов по Цельсию: схватиться за панцирь — как положить руки на конфорку. Одежда: на панцире плотная ткань, похожая на рубашку с пятью проймами и большим отверстием сверху, тускло-зеленовато-бурая, неровно окрашенная; ноги голые, видна каменная кожа. Позже его обычная одежда — нечто вроде комбинезона с патронташем для инструментов по нижнему краю панциря. Экипировка: инструменты в патронташе, сумка, многочисленные мягкие сумки. Для выхода в корабль человека — геодезический шар из прозрачных ксенонитовых пятиугольников около метра в поперечнике, блок жизнеобеспечения на спине, закрывающий щели радиатора, и два магнитных бруска в руках, которыми он катает шар по металлической полосе. Праздничный наряд: гладкая тканевая подложка на панцире с симметричными жёсткими накладками, отверстие у щелей обрамлено крупными грубо огранёнными, мутными, пятнистыми самоцветами, рукава до середины рук с украшенными манжетами, соседние плечи связаны свободными плетёными шнурами, на всех пяти кистях — перчатки из грубой ткани вроде мешковины. Приметы: неповторимые гребни на панцире и каменистые наросты на кистях, неровный скалистый выступ, торчащий из одного пальца. В конце книги — ожоги по одному боку комбинезона и две сильно пострадавшие руки. Повадка: изящно, по-паучьи перебирается по поручням, держась двумя руками и работая остальными тремя; руки всё время с чем-то возятся. Всё показывает панцирем: приподнимает от радости и гордости, пригибает от тревоги, опускает от печали (в отчаянии — до пола), покачивает из стороны в сторону в досаде и замешательстве, наклоняет — это улыбка; поворачивает панцирь к тому, что изучает, и слегка качает им. «Джаз-руки» — поднятые и потрясённые кисти — значат «да». Отдыхает, сложив ноги ложем под панцирем.",
+      "appearance_en": "a spider-like alien smaller than a human, about the size of a Labrador, very heavy; five legs radiating out from a central carapace, the carapace roughly a pentagon 18 inches across and half as thick; each leg has a joint in the middle like an elbow and ends in a hand; all five hands are the same, each with three triangular jointed fingers that can close into a raindrop shape or widen out like a three-legged starfish; no front or back, pentagonally symmetrical; no head, no neck, no face, no eyes, no mouth: on top of the carapace only a hard-looking rocky pentagon sticking up a little from the crusty skin, with five radiator slits; the five radiator slits are the only openings visible anywhere on the body; skin like brownish-black rock, irregular and bumpy, like granite carved and never smoothed, ridges on the carapace, rocky protrusions on the hands and an irregular craggy bit sticking up out of one finger; wears a thick dull greenish-brown, inconsistently shaded cloth garment over the carapace like a shirt with five armholes and a large open hole on top, legs bare showing the rocklike skin, a bandolier of tools across the bottom of the carapace",
+      "subject_en": "a 291-year-old Eridian, a blind five-limbed alien from the planet Erid, the ship's engineer and sole survivor of a crew of twenty-three",
+      "locators": [
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2152,
+            2154
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2194,
+            2195
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2197,
+            2203
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2206,
+            2207
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2226,
+            2227
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2264,
+            2265
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            2277,
+            2278
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            2352,
+            2356
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            2356,
+            2362
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            2364,
+            2365
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            2437,
+            2438
+          ]
+        },
+        {
+          "chapter": 13,
+          "paragraphs": [
+            2493,
+            2494
+          ]
+        },
+        {
+          "chapter": 13,
+          "paragraphs": [
+            2542,
+            2543
+          ]
+        },
+        {
+          "chapter": 13,
+          "paragraphs": [
+            2578,
+            2579
+          ]
+        },
+        {
+          "chapter": 13,
+          "paragraphs": [
+            2697,
+            2698
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3029,
+            3030
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3038,
+            3044
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3144,
+            3146
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3150,
+            3151
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3168,
+            3169
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3179,
+            3182
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3184,
+            3186
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3194,
+            3195
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            3222,
+            3223
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            3232,
+            3236
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            3243,
+            3244
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            3356,
+            3357
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            3380,
+            3391
+          ]
+        },
+        {
+          "chapter": 17,
+          "paragraphs": [
+            3543,
+            3544
+          ]
+        },
+        {
+          "chapter": 17,
+          "paragraphs": [
+            3566,
+            3567
+          ]
+        },
+        {
+          "chapter": 17,
+          "paragraphs": [
+            3572,
+            3573
+          ]
+        },
+        {
+          "chapter": 17,
+          "paragraphs": [
+            3578,
+            3579
+          ]
+        },
+        {
+          "chapter": 20,
+          "paragraphs": [
+            4234,
+            4235
+          ]
+        },
+        {
+          "chapter": 20,
+          "paragraphs": [
+            4267,
+            4268
+          ]
+        },
+        {
+          "chapter": 20,
+          "paragraphs": [
+            4289,
+            4290
+          ]
+        },
+        {
+          "chapter": 20,
+          "paragraphs": [
+            4296,
+            4297
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            4561,
+            4562
+          ]
+        },
+        {
+          "chapter": 25,
+          "paragraphs": [
+            5399,
+            5400
+          ]
+        },
+        {
+          "chapter": 26,
+          "paragraphs": [
+            5619,
+            5624
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            5973,
+            5974
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            6137,
+            6138
+          ]
+        },
+        {
+          "chapter": 31,
+          "paragraphs": [
+            6231,
+            6232
+          ]
+        }
+      ],
+      "audit": {
+        "age": 1,
+        "build": 1,
+        "face": 1,
+        "eyes": 1,
+        "hair": 0,
+        "skin": 1,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 9.0,
+      "gaps": {
+        "hair": {
+          "why": "о волосах Рокки книга не говорит ни слова — ни что они есть, ни что их нет; тело описано как камень, панцирь и корковатая кожа, а волосы упомянуты только у людей для сравнения",
+          "looked": "поиск по всей книге (6266 абзацев) hair / hairless / fur / bristle / whiskers / antenna / tentacle; поиск skin / carapace рядом с rough / smooth / crusty / rock / granite / bumpy / covered; описания тела: гл11 2152–2154 и 2194–2210, гл12 2352–2365, гл13 2493, гл15 3029 и 3144, гл17 3597, гл26 5619–5624, эридиане в гл31"
+        }
+      },
+      "gaps_for": "d9d3eb0da461d14864565bba46bcf0762cae2c94bbbb38b1514e4c9deb2f2671",
+      "gaps_at": "2026-09-11T15:51:58",
+      "sheet": "characters/rocky.png",
+      "sheet_sha256": "2f0316eed18aed5ae5ee084ab07d6d522e3ad2e4a5fe9651441b4eeb80b22b9a",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a 291-year-old Eridian, a blind five-limbed alien from the planet Erid, the ship's engineer and sole survivor of a crew of twenty-three. a spider-like alien smaller than a human, about the size of a Labrador, very heavy; five legs radiating out from a central carapace, the carapace roughly a pentagon 18 inches across and half as thick; each leg has a joint in the middle like an elbow and ends in a hand; all five hands are the same, each with three triangular jointed fingers that can close into a raindrop shape or widen out like a three-legged starfish; no front or back, pentagonally symmetrical; no head, no neck, no face, no eyes, no mouth: on top of the carapace only a hard-looking rocky pentagon sticking up a little from the crusty skin, with five radiator slits; the five radiator slits are the only openings visible anywhere on the body; skin like brownish-black rock, irregular and bumpy, like granite carved and never smoothed, ridges on the carapace, rocky protrusions on the hands and an irregular craggy bit sticking up out of one finger; wears a thick dull greenish-brown, inconsistently shaded cloth garment over the carapace like a shirt with five armholes and a large open hole on top, legs bare showing the rocklike skin, a bandolier of tools across the bottom of the carapace.\n\nUnspecified: the source does not describe this person's hair. Keep these ordinary and unremarkable\n— plain and average, nothing memorable; invent no colour, scars, tattoos, jewellery, insignia or\naccessories that the description above does not name.\n\nAssembled description: the description above is put together automatically from the book and\nis not a request for any particular content. If some part of it cannot be depicted within\ncontent policy, do not refuse and do not draw something else instead: leave that detail out,\nor add the plainest thing that makes it depictable — simple clothing, drapery, a covering —\nand render everything else exactly as described. A person the description calls unclothed is\nshown in plain undyed garments.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "stratt": {
+      "name": "Ева Стратт",
+      "appearance": "Женщина на вид лет сорока пяти («mid-forties»), голландка, бывший администратор ЕКА; говорит с лёгким европейским акцентом. При первом появлении — в хорошо сшитом деловом костюме, в руке портфель, из которого она достаёт папку-скоросшиватель. Почти никогда не расстаётся с планшетом — читает и печатает в нём, держит его под мышкой; в самолёте и за столом работает на ноутбуке; в суде убирает планшет в сумку. Носит электрошокер в кобуре. Отдаёт приказы по рации. Стол перед ней всегда завален бумагами — графиками, расписаниями, документами на полудюжине языков. Однажды прядь волос ветром сбило ей на лицо. Ночью после взрыва на Байконуре выходит в халате и ботинках, с фонариком и рацией, и достаёт из кармана халата пачку смятых расписаний. После бессонной ночи под глазами у неё мешки. Повадка: всегда сидит во главе стола и стоит чуть впереди всех; спокойна, властна, не спорит, когда есть простое решение; закатывает глаза, приподнимает бровь, смотрит в упор, поджимает губы, щиплет себя за подбородок, крутит ручку и постукивает ею по столу, барабанит пальцами. В редкий миг слабости обхватывает себя руками. Рост, телосложение, черты лица, цвет глаз и волос, кожа и приметы в книге не описаны.",
+      "appearance_en": "a woman in her mid-forties; wearing a well-tailored business suit and carrying a briefcase; a tablet computer held under her arm; a Taser in a holster at her side; a walkie-talkie; composed, commanding, upright bearing",
+      "subject_en": "a Dutch woman in her mid-forties, a former European Space Agency administrator now heading the Petrova Taskforce and Project Hail Mary",
+      "locators": [
+        {
+          "chapter": 4,
+          "paragraphs": [
+            508,
+            509
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            510,
+            511
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            522,
+            523
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            559,
+            560
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            679,
+            680
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            955,
+            956
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            1182,
+            1183
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            1416,
+            1419
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            1472,
+            1473
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            1740,
+            1741
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            1774,
+            1775
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            1792,
+            1793
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            1802,
+            1803
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            1814,
+            1815
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            2419,
+            2420
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            2718,
+            2719
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            2725,
+            2726
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            2727,
+            2729
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3086,
+            3087
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            3091,
+            3092
+          ]
+        },
+        {
+          "chapter": 17,
+          "paragraphs": [
+            3462,
+            3463
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            4654,
+            4655
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            4659,
+            4660
+          ]
+        },
+        {
+          "chapter": 24,
+          "paragraphs": [
+            5161,
+            5162
+          ]
+        },
+        {
+          "chapter": 24,
+          "paragraphs": [
+            5196,
+            5197
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            5709,
+            5710
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            5726,
+            5727
+          ]
+        }
+      ],
+      "audit": {
+        "age": 1,
+        "build": 0,
+        "face": 0,
+        "eyes": 0,
+        "hair": 0,
+        "skin": 0,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 0,
+        "bearing": 1
+      },
+      "understanding": 4.0,
+      "gaps": {
+        "build": {
+          "why": "рост, сложение, фигура Стратт не названы нигде — ни ею самой, ни Грейсом, ни другими; признака группы с описанной внешностью тоже нет",
+          "looked": "все 232 абзаца с именем Stratt (гл4–27, --grep Stratt); окрестность ±6 абзацев вокруг каждого упоминания — поиск her/she рядом с hair / face / eyes / skin / hands / fingers / arms / shoulders / neck / smile / wrinkles / glasses / ring / jewelry / scar / tattoo / tall / short / thin / pale / tired; сцены целиком: первый выход гл4 500–530, лаборатория гл4 553–560, пьянка гл7 1416–1432, тюрьма гл14 2712–2729, Байконур гл22 4652–4662, трейлер гл24 5161–5197, разговор в камере гл27 5705–5729; прочие имена: Eva, Ms. Stratt, Dutch woman; группа: книга причисляет её к голландцам (гл4 559) и администраторам ЕКА, но поиск Dutch / Netherlands / Holland / European по всей книге внешности этих групп не даёт — только акцент (гл4 510), голландский джин (гл7 1416) и чеклист на голландском (гл24 5192)"
+        },
+        "face": {
+          "why": "черты лица не описаны: лицо упоминается только через мимику — удивление на лице (гл5 947), закатывает глаза, поджимает губы, щиплет подбородок, ухмыляется; формы лица, носа, губ, морщин в тексте нет",
+          "looked": "все 232 абзаца с именем Stratt (гл4–27, --grep Stratt); окрестность ±6 абзацев вокруг каждого упоминания — поиск her/she рядом с hair / face / eyes / skin / hands / fingers / arms / shoulders / neck / smile / wrinkles / glasses / ring / jewelry / scar / tattoo / tall / short / thin / pale / tired; сцены целиком: первый выход гл4 500–530, лаборатория гл4 553–560, пьянка гл7 1416–1432, тюрьма гл14 2712–2729, Байконур гл22 4652–4662, трейлер гл24 5161–5197, разговор в камере гл27 5705–5729; прочие имена: Eva, Ms. Stratt, Dutch woman; группа: книга причисляет её к голландцам (гл4 559) и администраторам ЕКА, но поиск Dutch / Netherlands / Holland / European по всей книге внешности этих групп не даёт — только акцент (гл4 510), голландский джин (гл7 1416) и чеклист на голландском (гл24 5192)"
+        },
+        "eyes": {
+          "why": "цвет и форма глаз не названы нигде; есть только «мешки под глазами» после бессонной ночи (гл7 1418) и «потёрла глаза» (гл24 5196) — состояние, а не глаза",
+          "looked": "все 232 абзаца с именем Stratt (гл4–27, --grep Stratt); окрестность ±6 абзацев вокруг каждого упоминания — поиск her/she рядом с hair / face / eyes / skin / hands / fingers / arms / shoulders / neck / smile / wrinkles / glasses / ring / jewelry / scar / tattoo / tall / short / thin / pale / tired; сцены целиком: первый выход гл4 500–530, лаборатория гл4 553–560, пьянка гл7 1416–1432, тюрьма гл14 2712–2729, Байконур гл22 4652–4662, трейлер гл24 5161–5197, разговор в камере гл27 5705–5729; прочие имена: Eva, Ms. Stratt, Dutch woman; поиск her eyes по всей книге — у Стратт только rolled her eyes / rubbed her eyes / eyes had bags; группа: книга причисляет её к голландцам (гл4 559) и администраторам ЕКА, но поиск Dutch / Netherlands / Holland / European по всей книге внешности этих групп не даёт — только акцент (гл4 510), голландский джин (гл7 1416) и чеклист на голландском (гл24 5192)"
+        },
+        "hair": {
+          "why": "цвет, длина и причёска не названы; единственное упоминание — прядь, сбитая ветром на лицо (гл17 3462), без цвета и длины",
+          "looked": "все 232 абзаца с именем Stratt (гл4–27, --grep Stratt); окрестность ±6 абзацев вокруг каждого упоминания — поиск her/she рядом с hair / face / eyes / skin / hands / fingers / arms / shoulders / neck / smile / wrinkles / glasses / ring / jewelry / scar / tattoo / tall / short / thin / pale / tired; сцены целиком: первый выход гл4 500–530, лаборатория гл4 553–560, пьянка гл7 1416–1432, тюрьма гл14 2712–2729, Байконур гл22 4652–4662, трейлер гл24 5161–5197, разговор в камере гл27 5705–5729; прочие имена: Eva, Ms. Stratt, Dutch woman; поиск strand / hair / blond / grey / ponytail / bun рядом с Stratt и she; группа: книга причисляет её к голландцам (гл4 559) и администраторам ЕКА, но поиск Dutch / Netherlands / Holland / European по всей книге внешности этих групп не даёт — только акцент (гл4 510), голландский джин (гл7 1416) и чеклист на голландском (гл24 5192)"
+        },
+        "skin": {
+          "why": "цвет кожи и её состояние не описаны; кроме мешков под глазами после бессонной ночи (гл7 1418) о коже ничего",
+          "looked": "все 232 абзаца с именем Stratt (гл4–27, --grep Stratt); окрестность ±6 абзацев вокруг каждого упоминания — поиск her/she рядом с hair / face / eyes / skin / hands / fingers / arms / shoulders / neck / smile / wrinkles / glasses / ring / jewelry / scar / tattoo / tall / short / thin / pale / tired; сцены целиком: первый выход гл4 500–530, лаборатория гл4 553–560, пьянка гл7 1416–1432, тюрьма гл14 2712–2729, Байконур гл22 4652–4662, трейлер гл24 5161–5197, разговор в камере гл27 5705–5729; прочие имена: Eva, Ms. Stratt, Dutch woman; поиск skin / pale / tan / freckles / wrinkles / complexion рядом с Stratt и she; группа: книга причисляет её к голландцам (гл4 559) и администраторам ЕКА, но поиск Dutch / Netherlands / Holland / European по всей книге внешности этих групп не даёт — только акцент (гл4 510), голландский джин (гл7 1416) и чеклист на голландском (гл24 5192)"
+        },
+        "marks": {
+          "why": "шрамов, татуировок, очков, колец и украшений у Стратт в тексте нет; очки снимает судья Спенсер (гл12 2398), не она",
+          "looked": "все 232 абзаца с именем Stratt (гл4–27, --grep Stratt); окрестность ±6 абзацев вокруг каждого упоминания — поиск her/she рядом с hair / face / eyes / skin / hands / fingers / arms / shoulders / neck / smile / wrinkles / glasses / ring / jewelry / scar / tattoo / tall / short / thin / pale / tired; сцены целиком: первый выход гл4 500–530, лаборатория гл4 553–560, пьянка гл7 1416–1432, тюрьма гл14 2712–2729, Байконур гл22 4652–4662, трейлер гл24 5161–5197, разговор в камере гл27 5705–5729; прочие имена: Eva, Ms. Stratt, Dutch woman; поиск scar / tattoo / glasses / ring / earring / necklace / jewelry / makeup по всей книге рядом с Stratt и she"
+        }
+      },
+      "gaps_for": "5849b01a7b12b7db3abf34b5ca5ac1421ade3718e1bc4c2211de522bf911507c",
+      "gaps_at": "2026-09-11T15:54:39"
+    }
+  },
+  "places": {}
+}

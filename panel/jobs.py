@@ -1,8 +1,17 @@
-"""Очередь заданий панели: один рабочий поток, задания по одному, состояние — файлы в `cache/`.
+"""Очередь заданий панели: несколько полос, замки на общие файлы, состояние — файлы в `cache/`.
 
-Один поток нарочно. Codex один, кадры идут по одному, и очередь, которую видно сверху вниз,
-читается человеком без объяснений. Быстрые детерминированные шаги — разбор, индекс, сборка
-промпта, регистрация — идут через ту же очередь, чтобы порядок был один и лог общий.
+Рядом идёт столько заданий, сколько разрешает настройка `jobs`, и только тех, что не спорят
+за одно и то же. Спорят они не за процессор — почти всё время задание ждёт сеть, — а за файл:
+две записи героев одной книги правят один `bible.json` и затрут друг друга. Поэтому задание
+объявляет замки: исключительный на то, что правит само, и общий на то, чем пользуется, но
+не меняет. Очередь берёт следующее, только если его замки ни с кем не пересеклись.
+
+Замки объявляет не очередь, а тот, кто её заводит: что с чем спорит — знание о работе,
+а не об очереди. Без такой таблицы всё исключительно на одном ключе — то есть по одному,
+как было.
+
+Быстрые детерминированные шаги — разбор, индекс, сборка промпта, регистрация — идут через
+ту же очередь, чтобы порядок был один и лог общий.
 
 Состояние живёт в файлах `cache/panel/jobs/<id>.json`, а не в памяти: панель — не сервер
 с базой, а окно в репозиторий, и после падения должно быть видно, на чём всё встало.
@@ -23,6 +32,12 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUED, RUNNING, DONE, FAILED, INTERRUPTED, CANCELLED = (
     'queued', 'running', 'done', 'failed', 'interrupted', 'cancelled')
 OPEN_STATUSES = (QUEUED, RUNNING)
+
+
+def subject_of(job):
+    """Чем задание занято — героем, партией, книгой. Для сообщений о том, кто держит замок."""
+    args = job.get('args') or {}
+    return args.get('key') or args.get('card') or args.get('batch') or args.get('slug') or ''
 
 
 def _now():
@@ -55,18 +70,19 @@ class Tools:
 class Queue:
     """Очередь заданий. `handlers` — `{kind: обработчик(job, tools) -> результат}`."""
 
-    def __init__(self, root=ROOT, handlers=None):
+    def __init__(self, root=ROOT, handlers=None, locks=None, width=1):
         self.root = Path(root)
         self.dir = self.root / 'cache' / 'panel' / 'jobs'
         self.handlers = dict(handlers or {})
+        # Без таблицы замков — всё исключительно на одном ключе, то есть по одному.
+        self._locks = locks or (lambda kind, args: ((), ('всё',)))
+        self.width = max(1, int(width))
         self._lock = threading.RLock()
         self._wake = threading.Event()
         self._stop = threading.Event()
         self._order = deque()
-        self._process = None
-        self._current = None
-        self._stop_current = None
-        self._worker = None
+        self._running = {}
+        self._workers = []
 
     # — файлы —
 
@@ -144,13 +160,13 @@ class Queue:
                     self._order.remove(job_id)
                 job.update(status=CANCELLED, finished=_now())
                 return self._write(job)
-            if job['status'] == RUNNING and self._current == job_id:
+            if job['status'] == RUNNING and job_id in self._running:
                 job['error'] = 'снято человеком'
                 self._write(job)
-                if self._stop_current is not None:
-                    self._stop_current.set()
-                if self._process is not None and self._process.poll() is None:
-                    self._process.kill()
+                state = self._running[job_id]
+                state['stop'].set()
+                if state['process'] is not None and state['process'].poll() is None:
+                    state['process'].kill()
                 return job
             return job
 
@@ -198,18 +214,61 @@ class Queue:
 
     def _watch(self, job_id, process):
         with self._lock:
-            if self._current == job_id:
-                self._process = process
+            if job_id in self._running:
+                self._running[job_id]['process'] = process
+
+    def running(self):
+        with self._lock:
+            return list(self._running)
+
+    def blocked_by(self, job):
+        """Кто держит замок, из-за которого это задание ждёт. Пустой список — не ждёт
+        никого, дело только в ширине.
+
+        Без этого очередь молчит о причине: человек видит «ждёт очереди» и не понимает,
+        почему при ширине в три полосы рядом идёт одно.
+        """
+        shared, exclusive = self._locks(job['kind'], job['args'])
+        shared, exclusive = set(shared), set(exclusive)
+        out = []
+        with self._lock:
+            for job_id, state in self._running.items():
+                held = (exclusive & (state['shared'] | state['exclusive'])) \
+                    or (shared & state['exclusive'])
+                if held:
+                    out.append({'job': job_id, 'lock': sorted(held)[0]})
+        return out
+
+    def _conflicts(self, shared, exclusive):
+        """Замки пересеклись с кем-то из идущих? Исключительный спорит со всеми,
+        общий — только с исключительным."""
+        shared, exclusive = set(shared), set(exclusive)
+        for state in self._running.values():
+            if exclusive & (state['shared'] | state['exclusive']):
+                return True
+            if shared & state['exclusive']:
+                return True
+        return False
 
     def _take(self):
         with self._lock:
-            while self._order:
-                job = self.get(self._order.popleft())
-                if job is not None and job['status'] == QUEUED:
-                    job.update(status=RUNNING, started=_now(), attempts=job['attempts'] + 1)
-                    self._current, self._process = job['id'], None
-                    self._stop_current = threading.Event()
-                    return self._write(job)
+            if len(self._running) >= self.width:
+                return None
+            # Очередь просматривается по порядку, но задание, чьи замки заняты, не снимается
+            # с неё, а пропускается: оно дождётся своей очереди, а соседнее пойдёт сейчас.
+            for job_id in list(self._order):
+                job = self.get(job_id)
+                if job is None or job['status'] != QUEUED:
+                    self._order.remove(job_id)
+                    continue
+                shared, exclusive = self._locks(job['kind'], job['args'])
+                if self._conflicts(shared, exclusive):
+                    continue
+                self._order.remove(job_id)
+                job.update(status=RUNNING, started=_now(), attempts=job['attempts'] + 1)
+                self._running[job_id] = {'process': None, 'stop': threading.Event(),
+                                         'shared': set(shared), 'exclusive': set(exclusive)}
+                return self._write(job)
             return None
 
     def _finish(self, job, status, result=None, error=None):
@@ -219,12 +278,15 @@ class Queue:
             if fresh.get('error') == 'снято человеком':
                 status, error = CANCELLED, 'снято человеком'
             fresh.update(status=status, finished=_now(), result=result, error=error)
-            self._current, self._process, self._stop_current = None, None, None
+            self._running.pop(job['id'], None)
+            self._wake.set()            # замок освободился — соседнее задание может пойти
             return self._write(fresh)
 
     def run_one(self, job):
         """Одно задание целиком. Вынесено отдельно: так его можно позвать из теста без потока."""
-        tools = Tools(self, job, self._stop_current)
+        with self._lock:
+            stop = (self._running.get(job['id']) or {}).get('stop')
+        tools = Tools(self, job, stop)
         try:
             result = self.handlers[job['kind']](job, tools)
         except Exception:                                   # обработчик — чужой код
@@ -246,18 +308,21 @@ class Queue:
             self.run_one(job)
 
     def start(self):
-        if self._worker is None or not self._worker.is_alive():
-            self._stop.clear()
-            self._worker = threading.Thread(target=self._loop, name='raskadrovka-jobs',
-                                            daemon=True)
-            self._worker.start()
-        return self._worker
+        self._stop.clear()
+        alive = [w for w in self._workers if w.is_alive()]
+        while len(alive) < self.width:
+            worker = threading.Thread(target=self._loop, daemon=True,
+                                      name=f'raskadrovka-jobs-{len(alive) + 1}')
+            worker.start()
+            alive.append(worker)
+        self._workers = alive
+        return self._workers
 
     def stop(self, timeout=2):
         self._stop.set()
         self._wake.set()
-        if self._worker is not None:
-            self._worker.join(timeout=timeout)
+        for worker in self._workers:
+            worker.join(timeout=timeout)
 
     def wait(self, job_id, timeout=60):
         """Дождаться конца задания — для тестов и синхронных вызовов."""

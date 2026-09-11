@@ -69,9 +69,22 @@ code,.mono{font-family:var(--mono)}
 .rail,.queue{position:sticky;top:52px;align-self:start;max-height:calc(100vh - 52px);overflow:auto}
 .rail{background:#2c4a66;color:#e8edf2;padding:20px 0}
 .rail .kicker{color:var(--on-slate);font-size:12px;letter-spacing:.09em;text-transform:uppercase;padding:0 18px 8px}
-.rail .book{padding:0 18px 18px}
-.rail .book-name{font:500 16px/1.25 var(--display)}
-.rail .book-sub{color:var(--on-slate);font-size:13px;margin-top:4px}
+/* Выбор — книга и оператор — стоит под этапами, за разделителем. Книги кнопками, а не
+   выпадающим списком: их немного, и какая открыта, должно быть видно не нажимая. */
+.rail-part{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.16)}
+.pickable{display:block;width:100%;text-align:left;padding:8px 18px;color:inherit;
+  background:0;border:0;font:inherit;cursor:pointer}
+.pickable:hover{background:#3a5872}
+.pickable[aria-current]{background:#f6f8fb;color:var(--text)}
+.pick-name{display:block;font-weight:500;overflow-wrap:anywhere}
+.pick-sub{display:block;font-size:12px;color:var(--on-slate);margin-top:1px;
+  overflow-wrap:anywhere}
+.pickable[aria-current] .pick-sub{color:var(--muted)}
+.switch{display:flex;gap:6px;padding:2px 18px 0}
+.pickable.flat{width:auto;padding:5px 12px;border:1px solid rgba(255,255,255,.28);
+  border-radius:5px;font-size:13px}
+.pickable.flat[aria-current]{background:#f6f8fb;border-color:#f6f8fb}
+.rail-note{padding:8px 18px 0;color:var(--on-slate);font-size:12px;line-height:1.45}
 .stage{display:flex;align-items:center;gap:12px;width:100%;padding:11px 18px;color:inherit}
 .stage:hover{background:#3a5872}
 .stage[aria-current]{background:#f6f8fb;color:var(--text)}
@@ -110,7 +123,29 @@ code,.mono{font-family:var(--mono)}
 .wide{overflow-x:auto}
 /* Ширину без потолка получают картинки, а не таблица: растянутая на 2500 px, она разносит
    колонки так, что строку приходится читать поворотом головы. */
-table{border-collapse:collapse;width:100%;min-width:600px;max-width:1180px;font-size:13px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:13px}
+/* Ширины колонок заданы долями: при `auto` длинное имя героя раздувало первую колонку до
+   723 px и ужимало колонку действий до 125 px, где три кнопки приёмки не помещались. */
+/* Свой минимум шире общего: при 760 px доля первой колонки уходила под миниатюру целиком,
+   и на имя оставалось 34 px — «старый Барлоу» вставал по букве в строку. Ниже этой ширины
+   таблица прокручивается внутри своей рамки, а не сминается. */
+.chars{table-layout:fixed;min-width:900px}
+.chars col:nth-child(1){width:38%}
+.chars col:nth-child(2){width:30%}
+.chars col:nth-child(3){width:14%}
+.chars col:nth-child(4){width:18%}
+/* Две колонки действий стоят рядом и кнопки в них похожи: тонкая линия отделяет «что делать
+   с записью» от «что делать с листом», иначе их различают только заголовки наверху. */
+.chars td:nth-child(4),.chars th:nth-child(4){border-left:1px solid var(--line-soft);
+  padding-left:16px}
+/* На узком окне колонка действий получает больше доли: три кнопки приёмки в 170 px
+   рассыпаются в столбик, и строка вырастает вдвое. */
+@media (max-width:1500px){
+  .chars col:nth-child(1){width:30%}
+  .chars col:nth-child(2){width:26%}
+  .chars col:nth-child(3){width:16%}
+  .chars col:nth-child(4){width:28%}
+}
 th{text-align:left;font-weight:500;color:var(--muted);padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 td{padding:10px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
 tr:hover td{background:#fafbfc}
@@ -120,6 +155,12 @@ tr:hover td{background:#fafbfc}
 .cell{width:12px;height:12px;border:1px solid var(--line);border-radius:2px;background:var(--surface)}
 .cell.full{background:var(--accent);border-color:var(--accent)}
 .cell.half{background:linear-gradient(135deg,var(--warn) 0 50%,var(--surface) 50% 100%);border-color:var(--warn)}
+/* Клетка, по которой книгу прочли и в ней ничего нет: пустая, но не открытая. Крестик
+   отличает выясненную пустоту от неизвестности — иначе они на полоске неразличимы, и
+   человек ходит добирать то, чего в книге нет. */
+.cell.told{border-color:var(--dim);background:
+  linear-gradient(45deg,transparent 44%,var(--dim) 44% 56%,transparent 56%),
+  linear-gradient(135deg,transparent 44%,var(--dim) 44% 56%,transparent 56%)}
 .score{margin-left:9px;font-weight:500}
 @media (forced-colors: active){
   /* Иначе система перекрасит клетки в один цвет и полоса аудита перестанет что-либо значить. */
@@ -166,10 +207,72 @@ tr:hover td{background:#fafbfc}
 .notes{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.5}
 
 /* Лист несёт три проекции. Полоской в 50 px их было не разглядеть — показываем целиком. */
-.sheet{width:210px;height:auto;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
-.sheet-none{width:210px;height:140px;border:1px dashed var(--line);border-radius:5px;display:grid;place-items:center;color:var(--dim);font-size:12px}
-.who{display:flex;align-items:center;gap:12px}
-.who .name{white-space:nowrap}
+/* `flex-shrink:0` обязателен: внутри `.who` картинка — гибкий элемент, и рядом с длинным
+   именем и двумя метками она сжималась. Соседние листы получались разной ширины. */
+.sheet{width:var(--sheet-w);height:calc(var(--sheet-w) / 1.5);flex:0 0 auto;object-fit:cover;
+  box-sizing:border-box;border:2px solid var(--line);border-radius:5px;background:var(--raised)}
+/* Свои поля вместо системных. Без `appearance:none` macOS рисует select своим шрифтом и
+   своей рамкой: посреди Unbounded и Plex это выглядит вставкой из чужой программы. */
+select{appearance:none;-webkit-appearance:none;font:inherit;font-size:14px;color:var(--ink);
+  padding:7px 32px 7px 11px;border:1px solid var(--line);border-radius:5px;
+  background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%235d7186' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 11px center;cursor:pointer}
+select:hover{background-color:var(--accent-soft)}
+select:disabled{opacity:.6;cursor:default;background-color:var(--raised)}
+/* Оператор стоит в шапке рядом с книгой: он один на всю панель и меняется между заданиями,
+   а не внутри экрана. Подпись слева обязательна: одно слово «Codex» в шапке не говорит,
+   чем оно управляет. Подпись справа — короткая, в одну строку: шапка высотой 52 px,
+   и фраза в два ряда её распирает. */
+input,textarea{font:inherit}
+input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px}
+/* Поле файла нельзя оформить: браузер рисует свою кнопку и своё «Файл не выбран».
+   Поэтому поле спрятано, а видимая кнопка — это `label`, и имя файла пишем сами. */
+.file{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.file input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.file input[type=file]:focus-visible+.btn{outline:2px solid var(--accent);outline-offset:2px}
+.file .btn{cursor:pointer}
+.file-name{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+/* Что панель вычитала из файла — строкой над полями: человек должен видеть, что заполнено
+   не им, и что именно осталось на нём. */
+.filled{font-size:13px;color:var(--accent-deep);background:var(--accent-soft);
+  border-radius:5px;padding:8px 11px}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 16px;
+  align-items:end;max-width:1100px}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--dim)}
+.form .wide-field{grid-column:1/-1}
+.form input,.form textarea{font:inherit;font-size:14px;color:var(--ink);
+  padding:7px 9px;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
+.form select{width:100%}                /* остальное — общее правило select выше */
+.form textarea{min-height:64px;resize:vertical}
+.form input:focus-visible,.form select:focus-visible,.form textarea:focus-visible,
+.field:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.form .check{flex-direction:row;align-items:center;gap:8px;grid-column:1/-1}
+.form button{justify-self:start}
+.field{width:100%;max-width:240px;padding:6px 8px;border:1px solid var(--line);border-radius:5px;
+  font:inherit;font-size:13px;background:var(--surface)}
+.field:focus{outline:2px solid var(--accent);outline-offset:1px}
+.check-out{margin-top:12px;padding:12px 14px;border:1px solid var(--line);border-radius:6px;
+  background:var(--raised);font-size:13px;display:flex;flex-direction:column;gap:6px}
+.bad-line{color:var(--bad);font-family:var(--mono);font-size:12px}
+.found{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px 18px}
+.found-item{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--raised)}
+/* Одна раскладка на все ячейки таблицы. Раньше содержимое склеивалось строками и текло
+   инлайном: соседние плашки стояли то в 0, то в 4 px, кнопки в 6, а плашка и раскрывашка
+   налезали друг на друга на -1 px. Шаг теперь один: 9 px между группами по вертикали,
+   8 px между кнопками, 6 px между плашками внутри группы. */
+.stack{display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-width:0}
+.pile{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pile.tight{gap:6px}
+.pile .sub{flex-basis:100%}
+.sheet-new{border-color:var(--accent)}
+.sheet-none{width:var(--sheet-w);height:calc(var(--sheet-w) / 1.5);flex:0 0 auto;
+  box-sizing:border-box;border:2px dashed var(--line);border-radius:5px;display:grid;
+  place-items:center;color:var(--dim);font-size:12px;text-align:center}
+.who{display:flex;align-items:center;gap:14px;--sheet-w:180px}
+@media (max-width:1500px){.who{--sheet-w:140px;gap:10px}}
+.who>span{min-width:0}                 /* иначе длинное имя не даёт картинке остаться целой */
+.who .name{display:block;overflow-wrap:anywhere}
+.marks{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:7px}
 
 .scene{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,540px);gap:26px;border-top:1px solid var(--line-soft);padding:22px 0}
 /* Кадр должен быть виден целиком и в подробностях, но не растекаться на сверхшироком
@@ -178,14 +281,63 @@ tr:hover td{background:#fafbfc}
 .frame img{width:100%;height:auto;aspect-ratio:3/2;border:1px solid var(--line);border-radius:5px;background:var(--raised)}
 .frame-label{font-weight:500;margin-bottom:7px}
 .gaps{font-size:12px;color:var(--muted);margin-top:5px}
+.told-cell{border-bottom:1px dotted var(--line);cursor:help}
 .frame .under{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px;font-size:12px;color:var(--muted)}
 .frame-none{border:1px dashed var(--line);border-radius:5px;min-height:150px;display:grid;place-items:center;padding:20px;text-align:center;color:var(--dim);font-size:13px}
 .scene h2{font:500 18px/1.25 var(--display);margin-bottom:4px}
 .scene .cap{color:var(--muted);margin-bottom:10px}
 .meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.excerpt summary{cursor:pointer;list-style:none}
+.excerpt summary::-webkit-details-marker{display:none}
+.excerpt summary::before{content:'▸ ';color:var(--dim)}
+.excerpt[open] summary::before{content:'▾ '}
 .excerpt{background:var(--read);border:1px solid var(--read-line);border-radius:5px;padding:11px 13px;font-size:13px;line-height:1.55;margin-top:10px}
 .excerpt .from{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:6px}
 .crumbs{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:13px;color:var(--muted)}
+/* Запись героя целиком. Три раздела: клетки поимённо, поля записи, промпт дословно.
+   Промпт — моноширинный и переносится как есть: это текст, который уйдёт генератору,
+   и «причёсывать» его на экране значит показывать не его. */
+.record-row td,.variants-row td{background:var(--ground);padding:16px 18px 20px}
+/* Запись живёт внутри прокручиваемой таблицы и по умолчанию растягивается на всю её
+   ширину — 1954 px, строка промпта уходит за край экрана. Ширина текста здесь своя,
+   читательская: это текст, а не таблица. */
+.record{display:grid;gap:14px;max-width:1040px}
+.record h3{font:500 13px/1.3 var(--display);letter-spacing:.02em;margin:0 0 6px}
+/* Десять клеток одной строкой: квадрат, имя, балл. Чего не хватает и где искали — в
+   подсказке. Развёрнутым списком это тридцать строк, за которыми не видно промпта,
+   а промпт здесь и есть то, ради чего запись открывают. */
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:11px;
+  background:var(--surface);border:1px solid var(--line);font-size:12px;color:var(--muted);
+  cursor:help;white-space:nowrap}
+.chip b{color:var(--text);font-weight:500}
+.chip-score{font-size:12px;color:var(--muted);margin-left:5px}
+.chip-score b{color:var(--text);font-weight:500}
+.record-ru{margin:0;font-size:13px;color:var(--muted);max-width:92ch}
+.prompt{margin:0;padding:12px 14px;background:var(--surface);border:1px solid var(--line);
+  border-radius:5px;font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;
+  max-height:min(560px,52vh);overflow:auto}
+@media (max-width:1180px){ .record{grid-template-columns:1fr} }
+
+/* Полоска прежних листов: миниатюры одного размера в ряд — иначе их не сравнить, а смысл
+   истории ровно в сравнении. Ряд прокручивается внутри себя, страницу не растягивает. */
+.variants{display:flex;gap:14px;overflow-x:auto;padding-bottom:4px;margin-top:12px}
+.variants figure{margin:0;flex:0 0 auto;width:200px}
+.variants img{width:200px;height:133px;object-fit:cover;border:1px solid var(--line);
+  border-radius:5px;background:var(--raised);display:block}
+.variants figcaption{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}
+.variants .same{color:var(--dim)}
+/* «Запись переписали» темнее «того же промпта»: разницу между вариантами читают по этой
+   строке. Цветом её не берём — жёлтый на светлом не проходит по контрасту. */
+.variants .other{color:var(--text)}
+.variants figcaption .btn{margin-top:6px}
+.disclose{display:inline-flex;align-items:center;gap:5px;padding:0;border:0;
+  background:0;font:inherit;font-size:12px;color:var(--accent-deep);cursor:pointer}
+.disclose:hover{text-decoration:underline}
+.disclose .caret{display:inline-block;transition:transform .12s;font-size:10px}
+.disclose[aria-expanded="true"] .caret{transform:rotate(90deg)}
+.disclose:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){ .disclose .caret{transition:none} }
 .whos{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .whos figure{margin:0;text-align:center;width:132px}
 .whos img{width:132px;height:auto;aspect-ratio:3/2;object-fit:cover;border:1px solid var(--line);border-radius:5px}
@@ -219,7 +371,6 @@ tr:hover td{background:#fafbfc}
 <div class="app">
   <header class="top">
     <span class="brand">Раскадровка</span>
-    <nav class="tabs" id="tabs" aria-label="Разделы"></nav>
     <span class="status" role="status"><span class="dot" id="dot" aria-hidden="true"></span><span id="statusText">панель готова</span></span>
   </header>
   <nav class="rail" id="rail" aria-label="Книга и этапы"></nav>
@@ -230,7 +381,9 @@ tr:hover td{background:#fafbfc}
 <script>
 const state = {screen: 'books', slug: null, books: [], book: null, styles: [], jobs: [],
                batch: null, openLog: null, wideLog: null, error: null, ready: false,
-               total: 0, settings: null, git: null, showAll: false};
+               total: 0, settings: null, git: null, showAll: false,
+               draw: {style: null, refs: '', composition: true}, showFound: false,
+               checked: null, openHistory: null, openRecord: null, loaded: null, width: 1};
 
 const SCREENS = [
   ['books', 'Книги', 'приём и разбор'],
@@ -240,7 +393,8 @@ const SCREENS = [
 ];
 
 const KIND_NAMES = {'ingest': 'разбор книги', 'index': 'индекс лиц и сцен',
-  'bible-entry': 'запись в библию', 'sheet': 'лист персонажа', 'scene-card': 'карточка сцены',
+  'bible-entry': 'запись в библию', 'bible-refine': 'добор внешности',
+  'sheet': 'лист персонажа', 'scene-card': 'карточка сцены',
   'prompt': 'промпт сцены', 'scene': 'кадр сцены', 'register': 'регистрация партии',
   'styles-page': 'страница стилей'};
 const STATUS_NAMES = {queued: 'в очереди', running: 'идёт', done: 'готово',
@@ -251,13 +405,17 @@ const STATUS_TAGS = {done: 'ok', failed: 'bad', running: 'run', queued: 'wait',
   cancelled: 'wait', interrupted: 'wait'};
 const FIELD_NAMES = {name: 'имя', appearance: 'описание', appearance_en: 'описание для промпта',
   locators: 'локаторы', understanding: 'балл', audit: 'аудит', sheet: 'лист',
-  sheet_sha256: 'хеш листа', sheet_prompt: 'промпт листа'};
+  sheet_sha256: 'хеш листа', sheet_prompt: 'промпт листа', gaps: 'пробелы',
+  gaps_for: 'отпечаток пробелов', gaps_at: 'время пробелов'};
 
 const AUDIT_KEYS = ['age','build','face','eyes','hair','skin','clothing','gear','marks','bearing'];
 const AUDIT_NAMES = {age:'возраст', build:'сложение', face:'лицо', eyes:'глаза', hair:'волосы',
                      skin:'кожа', clothing:'одежда', gear:'экипировка', marks:'приметы',
                      bearing:'осанка'};
 const OPEN = ['queued', 'running'];
+// Замок — про файл, за который спорят. Человеку он должен называться тем, что это за файл.
+const LOCK_NAMES = {'библия': 'библия книги', 'книга': 'книга целиком', 'лист': 'лист героя',
+                    'партия': 'партия', 'карточка': 'карточка сцены', 'кадр': 'кадр'};
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -280,7 +438,11 @@ async function load() {
   try {
     state.books = (await api('/api/books')).books;
     if (!state.slug && state.books.length) state.slug = state.books[0].slug;
+    // Книга сменилась — прежнюю с экрана убираем до запроса: если он не дойдёт, лучше
+    // «книга не выбрана», чем чужие персонажи под именем этой книги.
+    if (state.slug !== state.loaded) state.book = null;
     if (state.slug) state.book = await api('/api/books/' + state.slug);
+    state.loaded = state.slug || null;
     if (!state.styles.length) state.styles = (await api('/api/styles')).styles;
     if (state.batch) state.batch = await api(
       `/api/books/${encodeURIComponent(state.slug)}/batches/${encodeURIComponent(state.batch.name)}`);
@@ -297,6 +459,21 @@ async function load() {
 // — часы заданий —
 
 const seconds = iso => Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 1000));
+
+const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+                'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+function stampRu(iso) {
+  // История идёт днями, поэтому число обязательно: «12:30» в списке из пяти вариантов
+  // не отличает вчерашний от сегодняшнего.
+  if (!iso) return 'когда — неизвестно';
+  const d = new Date(iso);
+  if (isNaN(d)) return esc(iso);
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  const year = d.getFullYear() === new Date().getFullYear() ? '' : ` ${d.getFullYear()}`;
+  return `${d.getDate()} ${MONTHS[d.getMonth()]}${year}, ${hh}:${mm}`;
+}
 
 function clock(sec) {
   const m = Math.floor(sec / 60), s = sec % 60;
@@ -319,8 +496,16 @@ function spent(job, place) {
     return `<div class="clock"><span data-since="${esc(job.started)}">идёт ${
       clock(seconds(job.started))}</span>${esc(cap)}</div>`;
   }
-  if (job.status === 'queued')
-    return `<div class="clock">ждёт очереди${place ? `, ${place}-е по счёту` : ''} · задания идут по одному</div>`;
+  if (job.status === 'queued') {
+    // Почему ждёт — словом. «Задания идут по одному» было правдой при одной полосе;
+    // при трёх это враньё: рядом не идёт не потому, что нельзя, а потому что занят файл.
+    const held = (job.waiting_for || [])[0];
+    const why = held
+      ? `занято: ${esc(LOCK_NAMES[held.lock.split(':')[0]] || held.lock.split(':')[0])}${
+          held.label ? ' — ' + esc(held.label) : ''}`
+      : `свободных полос нет, рядом идёт ${state.width || 1}`;
+    return `<div class="clock">ждёт очереди${place ? `, ${place}-е по счёту` : ''} · ${why}</div>`;
+  }
   if (job.started && job.finished) {
     const sec = Math.max(0, Math.round((new Date(job.finished) - new Date(job.started)) / 1000));
     const tries = (job.result && job.result.tries || []).length;
@@ -337,15 +522,17 @@ function jobSubject(job) {
   return hero ? hero.name : key;
 }
 
-function openEntryJob(key) {
-  return state.jobs.find(j => j.kind === 'bible-entry' && j.args
+function openJobFor(kind, key) {
+  return state.jobs.find(j => j.kind === kind && j.args
                               && j.args.key === key && OPEN.includes(j.status));
 }
+const openEntryJob = key => openJobFor('bible-entry', key);
 
 async function pollJobs() {
   if (document.hidden) return;          // вкладка не на виду — сервер дёргать незачем
   try {
-    const answer = await api('/api/jobs?limit=12');
+    const answer = await api(`/api/jobs?limit=${state.showAll ? 200 : 12}`);
+    state.width = answer.width || 1;
     const fresh = answer.jobs;
     state.total = answer.total || fresh.length;
     // Задание кончилось — значит, в репозитории что-то изменилось: перечитываем рабочую
@@ -369,12 +556,14 @@ async function pollJobs() {
 // экран было нечем.
 // Книга — часть адреса. «Персонажи» без книги — вопрос без ответа: чьи это персонажи,
 // понять неоткуда, а ссылка на экран означала бы разное в разное время.
-function href(screen, batch) {
-  if (screen === 'books' || !state.slug) return '#/books';
-  return '#/' + encodeURIComponent(state.slug) + '/' + screen
+function href(screen, batch, slug = state.slug) {
+  if (screen === 'books' || !slug) return '#/books';
+  return '#/' + encodeURIComponent(slug) + '/' + screen
        + (batch ? '/' + encodeURIComponent(batch) : '');
 }
-function go(screen) { location.hash = href(screen, null); }
+// Переход называет книгу сам и `state.slug` заранее не трогает: кто меняет состояние до
+// адреса, тот отменяет проверку «книга сменилась» — экран открывался с данными прежней.
+function go(screen, slug) { location.hash = href(screen, null, slug); }
 function openBatch(name) { location.hash = href('batches', name); }
 
 function applyHash(first) {
@@ -389,7 +578,9 @@ function applyHash(first) {
     screen = known(parts[1]) ? parts[1] : 'books';
     want = screen === 'batches' && parts[2] ? parts[2] : null;
   }
-  const swap = slug && slug !== state.slug;
+  // Сверяемся с загруженной книгой, а не с `state.slug`: состояние можно выставить до
+  // перехода, и тогда проверка сравнивает значение само с собой и всегда молчит.
+  const swap = slug && slug !== state.loaded;
   if (slug) state.slug = slug;
   const had = state.batch ? state.batch.name : null;
   state.screen = screen;
@@ -406,13 +597,6 @@ function canonical() {
   // однозначной и после перезагрузки открывала то же самое.
   const want = href(state.screen, state.batch ? state.batch.name : null);
   if (location.hash !== want) history.replaceState(null, '', want);
-}
-
-function drawTabs() {
-  document.getElementById('tabs').innerHTML = SCREENS
-    .map(([key, name]) => `<button class="tab" data-go="${key}"${
-      state.screen === key ? ' aria-current="page"' : ''}>${name}</button>`)
-    .join('');
 }
 
 function stages() {
@@ -436,14 +620,15 @@ function stages() {
 }
 
 function drawRail() {
-  const book = state.books.find(b => b.slug === state.slug);
   const done = stages();
+  // Книга и оператор переехали сюда из шапки: это выбор, а не действие, и стоять он должен
+  // рядом с остальным выбором. Книги — списком кнопок, а не выпадающим списком: их немного,
+  // и какая открыта, видно не нажимая.
+  const operators = (state.settings && state.settings.operators) || [];
+  const now = state.settings && state.settings.operator;
+  const draws = operators.find(o => o.key === (state.settings || {}).draws);
+  const spec = operators.find(o => o.key === now);
   document.getElementById('rail').innerHTML = `
-    <div class="kicker">Книга</div>
-    <div class="book">
-      <div class="book-name">${esc(book ? book.title : '—')}</div>
-      <div class="book-sub">${esc(book ? (book.author || '') : 'книг ещё нет')}</div>
-    </div>
     <div class="kicker">Этапы</div>
     ${SCREENS.map(([key, name], n) => {
       const s = done[key];
@@ -456,6 +641,44 @@ function drawRail() {
         <span class="sr">, этап ${n + 1} из ${SCREENS.length}, ${
           s.done ? 'пройден' : s.started ? 'начат' : 'не начат'}</span>
       </button>`; }).join('')}
+
+    <div class="rail-part">
+      <div class="kicker">Книга</div>
+      ${state.books.length ? state.books.map(b => `
+        <button class="pickable" data-pick="${esc(b.slug)}"${
+          b.slug === state.slug ? ' aria-current="true"' : ''}>
+          <span class="pick-name">${esc(b.title)}</span>
+          <span class="pick-sub">${esc(b.author || b.slug)}</span>
+        </button>`).join('')
+        : '<div class="rail-note">книг ещё нет — заведите первую на экране «Книги»</div>'}
+    </div>
+
+    <div class="rail-part">
+      <div class="kicker">Книгу читает</div>
+      <div class="switch" role="group" aria-label="Кто читает книгу">
+        ${operators.map(o => `
+          <button class="pickable flat" data-operator="${esc(o.key)}"${
+            o.key === now ? ' aria-current="true"' : ''} title="${esc(o.sandbox)}">${
+            esc(o.title)}</button>`).join('') || '<div class="rail-note">Codex</div>'}
+      </div>
+      <div class="rail-note">${spec ? esc(spec.short) + ' · ' : ''}рисует всегда ${
+        draws ? esc(draws.title) : 'Codex'}</div>
+    </div>
+
+    <div class="rail-part">
+      <div class="kicker">Рядом заданий</div>
+      <div class="switch" role="group" aria-label="Сколько заданий идут рядом">
+        ${Array.from({length: (state.settings || {}).max_jobs || 4}, (_, i) => i + 1).map(n => `
+          <button class="pickable flat" data-jobs="${n}"${
+            n === ((state.settings || {}).jobs || 1) ? ' aria-current="true"' : ''}
+            title="${n === 1 ? 'по одному, как было'
+                   : `до ${n} непересекающихся заданий разом — и столько же прогонов Codex`}">${
+            n}</button>`).join('')}
+      </div>
+      <div class="rail-note">Спорящие за один файл всё равно идут по очереди: записи героев
+        одной книги — по одной, листы и разные книги — рядом.</div>
+    </div>
+
     <div class="note">Текст книги в репозиторий не попадает: файл лежит в
       <b>books/${esc(state.slug || '…')}/source/</b>, разбор — в <b>cache/</b>, оба вне git.
       ${state.git ? (state.git.lines.length
@@ -463,37 +686,78 @@ function drawRail() {
         : '<br>Дерево чистое.') : ''}</div>`;
 }
 
-function auditStrip(audit, understanding) {
-  if (!audit) return '<span class="tag wait">аудита нет</span>';
-  const gaps = AUDIT_KEYS.filter(k => audit[k] !== 1).map(k => AUDIT_NAMES[k]);
-  const label = `аудит ${understanding ?? '?'} из 10`
-    + (gaps.length ? `; просели: ${gaps.join(', ')}` : '; все клетки полные');
-  const cells = AUDIT_KEYS.map(k => {
-    const v = audit[k];
-    return `<span class="cell ${v === 1 ? 'full' : v === 0.5 ? 'half' : ''}"></span>`;
-  }).join('');
-  return `<div><span class="audit" role="img" aria-label="${esc(label)}" title="${esc(label)}">${cells}</span>`
-       + `<span class="score">${understanding ?? '—'}</span></div>`
-       + (gaps.length ? `<div class="gaps">просели: ${esc(gaps.join(', '))}</div>` : '');
+// Раскрывашка — не плашка состояния. Треугольник и подчёркивание говорят «нажми»,
+// а «лист принят» рядом не говорит ничего: их нельзя рисовать одинаково.
+function disclose(action, key, open, label, hint) {
+  return `<button class="disclose" data-${action}="${esc(key)}" aria-expanded="${open}"
+    title="${esc(hint)}"><span class="caret" aria-hidden="true">▸</span>${
+    open ? 'скрыть' : esc(label)}</button>`;
 }
 
-function checkCell(complaints) {
-  // «Не сходится» и «не хватает» — разные вещи. Первое чинят, второе дописывают; если красить
-  // одинаково, экран краснеет весь и перестаёт что-либо сообщать.
-  const wrong = complaints.filter(c => c.level !== 'missing');
-  const gaps = complaints.filter(c => c.level === 'missing');
-  const parts = [];
-  if (wrong.length) parts.push(`<span class="tag bad">${wrong.length} не сходится</span>
-      <div class="why">${wrong.map(c => esc(c.text)).join('<br>')}</div>`);
-  if (gaps.length) {
-    const fields = gaps.map(c => {
-      const key = (c.text.match(/нет поля (\w+)/) || [])[1];
-      return key ? (FIELD_NAMES[key] || key) : c.text;
+function auditSquares(audit, understanding, gaps) {
+  const label = `аудит ${understanding ?? '?'} из 10`;
+  const cells = AUDIT_KEYS.map(k => {
+    const v = audit[k];
+    const kind = v === 1 ? 'full' : gaps[k] ? 'told' : v === 0.5 ? 'half' : '';
+    // Подпись на каждой клетке, а не только на полоске: десять безымянных квадратов
+    // показывают форму записи и молчат о том, что именно в ней понято.
+    return `<span class="cell ${kind}" title="${esc(AUDIT_NAMES[k])} — ${
+      v === 1 ? 'книга даёт' : gaps[k] ? 'книга не даёт, искали'
+      : v === 0.5 ? 'книга даёт наполовину' : 'не найдено'}"></span>`;
+  }).join('');
+  return `<div><span class="audit" role="img" aria-label="${esc(label)}">${cells}</span>`
+       + `<span class="score">${understanding ?? '—'}</span></div>`;
+}
+
+function auditLines(audit, gaps) {
+  // Просевшая клетка и клетка, о которой книга молчит, — разные вещи. Первую добирают,
+  // вторую уже добрали и выяснили, что добирать нечего. Это про запись, а не про правила,
+  // и потому написано словами; правила живут в подсказках плашек.
+  const open = AUDIT_KEYS.filter(k => audit[k] !== 1 && !gaps[k]).map(k => AUDIT_NAMES[k]);
+  const told = AUDIT_KEYS.filter(k => audit[k] !== 1 && gaps[k]);
+  return (open.length ? `<div class="gaps">просели: ${esc(open.join(', '))}</div>` : '')
+       + (told.length ? `<div class="gaps">книга не даёт: ${told.map(k =>
+            `<span title="${esc(gaps[k].why + ' Искали: ' + gaps[k].looked)}"
+                   class="told-cell">${esc(AUDIT_NAMES[k])}</span>`).join(', ')}</div>` : '');
+}
+
+function statusTags(c) {
+  // Плашка с подсказкой вместо абзаца в каждой строке. Объяснение правила одно на всю
+  // таблицу, а набрано оно было заново у каждого героя — это не сообщение, а шум.
+  const tags = [];
+  if (!c.audit) tags.push('<span class="tag wait">аудита нет</span>');
+  if (c.closed) tags.push('<span class="tag ok" title="Каждая клетка либо полная, либо '
+    + 'объяснена пробелом: книга отдала всё, что у неё есть. Порога такая запись не '
+    + 'спрашивает — недосказанное уйдёт в промпт как «оставь обычным»">книга отдала всё</span>');
+  if (c.gaps_stale) tags.push('<span class="tag wait" title="Пробелы записаны по прежней '
+    + 'записи: с тех пор её переписали, и добор нужен заново">пробелы устарели</span>');
+
+  const wrong = c.complaints.filter(x => x.level !== 'missing');
+  // «Аудита нет» уже сказано плашкой слева: второй раз то же самое — не сообщение, а шум.
+  const missing = c.complaints.filter(x => x.level === 'missing'
+                                           && !(!c.audit && /нет поля audit\b/.test(x.text)));
+  if (wrong.length) tags.push(`<span class="tag bad">${wrong.length} не сходится</span>`);
+  if (missing.length) {
+    const fields = missing.map(x => {
+      const key = (x.text.match(/нет поля (\w+)/) || [])[1];
+      return key ? (FIELD_NAMES[key] || key) : x.text;
     });
-    parts.push(`<span class="tag wait" title="${esc(gaps.map(c => c.text).join('; '))}">не хватает: ${esc(fields.join(', '))}</span>`);
+    tags.push(`<span class="tag wait" title="${esc(missing.map(x => x.text).join('; '))}">не хватает: ${esc(fields.join(', '))}</span>`);
   }
-  if (!parts.length) parts.push('<span class="tag ok">запись годна</span>');
-  return parts.join(' ');
+  // «Не сходится» и «не хватает» — разные вещи. Первое чинят, второе дописывают; если
+  // красить одинаково, экран краснеет весь и перестаёт что-либо сообщать.
+  if (!wrong.length && !missing.length) tags.push('<span class="tag ok">запись годна</span>');
+  return tags;
+}
+
+function understandingCell(c) {
+  const gaps = c.gaps || {};
+  const wrong = c.complaints.filter(x => x.level !== 'missing');
+  return (c.audit ? auditSquares(c.audit, c.understanding, gaps) + auditLines(c.audit, gaps) : '')
+       + `<div class="pile tight">${statusTags(c).join('')}</div>`
+       + (wrong.length ? `<div class="why">${wrong.map(x => esc(x.text)).join('<br>')}</div>` : '')
+       + disclose('record', c.key, state.openRecord === c.key, 'что в записи',
+                  'Десять клеток поимённо и текст, который уйдёт генератору');
 }
 
 function eyebrow() {
@@ -503,73 +767,294 @@ function eyebrow() {
 }
 
 function screenBooks() {
-  if (!state.books.length) return `<h1>Книги</h1>
-    <div class="empty">Книг нет. Положите файл в <code>books/&lt;слаг&gt;/source/</code> и
-    разберите его через <code>scripts/ingest_book.py</code> — панель увидит книгу сама.</div>`;
-  return `<h1>Книги</h1>
-    <p class="lede">Каждая книга проходит один путь: разбор на абзацы, индекс лиц и сцен, библия
-    и листы персонажей, партии кадров. Панель показывает, где книга стоит сейчас.</p>
-    <div class="grid">${state.books.map(b => `
+  const cards = state.books.map(b => {
+    const ingest = state.jobs.find(j => j.kind === 'ingest' && j.args
+                                        && j.args.slug === b.slug && OPEN.includes(j.status));
+    const index = state.jobs.find(j => j.kind === 'index' && j.args
+                                       && j.args.slug === b.slug && OPEN.includes(j.status));
+    return `
       <div class="card${b.slug === state.slug ? ' on' : ''}">
         <h2 class="name">${esc(b.title)}</h2>
         <div class="sub">${esc(b.author || '')} · <code>${esc(b.slug)}</code></div>
         <div class="kv">
-          <span>разобрана <b>${b.parsed ? 'да' : 'нет'}</b></span>
+          <span>разобрана <b>${b.parsed ? 'да' : 'нет'}</b>${
+            b.parsed ? ` · абзацев <b>${b.paragraphs.toLocaleString('ru')}</b>` : ''}</span>
           <span>индекс <b>${b.indexed ? 'есть' : 'нет'}</b></span>
           <span>героев <b>${b.characters}</b></span>
           <span>листов <b>${b.sheets}</b></span>
           <span>партий <b>${b.batches}</b></span>
         </div>
         <div class="actions">
+          ${ingest ? '<button class="btn btn-sm" disabled>разбирается…</button>'
+            : b.parsed ? ''
+            : b.source ? `<button class="btn btn-sm btn-primary" data-parse="${esc(b.slug)}"
+                title="Файл книги на месте, разбора нет — так бывает после клона: кеш вне git">Разобрать</button>`
+            : `<span class="sub">файла книги нет: положите его в
+                <code>books/${esc(b.slug)}/source/</code></span>`}
+          ${b.parsed ? (index ? '<button class="btn btn-sm" disabled>индекс строится…</button>'
+            : `<button class="btn btn-sm${b.indexed ? '' : ' btn-primary'}"
+                data-index="${esc(b.slug)}"
+                title="Кто в книге есть, где описан и какие абзацы просятся в кадр; минута-две">${
+                b.indexed ? 'Пересобрать индекс' : 'Построить индекс'}</button>`) : ''}
           <button class="btn btn-sm" data-book="${esc(b.slug)}">Персонажи книги →</button>
         </div>
-      </div>`).join('')}</div>`;
+      </div>`; }).join('');
+  return `<h1>Книги</h1>
+    <p class="lede">Каждая книга проходит один путь: разбор на абзацы, индекс лиц и сцен, библия
+    и листы персонажей, партии кадров. Панель показывает, где книга стоит сейчас.</p>
+    <div class="step">
+      <div class="step-head"><span class="num" aria-hidden="true">1</span>
+        <div><h2>Завести книгу</h2>
+        <div class="step-sub">Файл fb2, epub или txt. Он ляжет в
+        <code>books/&lt;слаг&gt;/source/</code> — эта папка вне git, текст книги в репозиторий
+        не попадает никогда. Разбор на главы и абзацы идёт заданием, минуту-другую.
+        <br>Название, автора, переводчика, год и издание панель прочтёт из самого файла,
+        слаг сложит из названия — переписывать их отсюда незачем. За вами остаются права:
+        срок охраны из метаданных не выводится.</div></div></div>
+      <form class="form" id="newbook">
+        <label class="wide-field" for="bookfile">Файл книги
+          <span class="file">
+            <input type="file" name="file" id="bookfile" accept=".fb2,.epub,.txt">
+            <span class="btn">Выбрать файл</span>
+            <span class="file-name">fb2, epub или txt — файл не выбран</span>
+          </span></label>
+        <div class="wide-field filled" id="fromfile" hidden></div>
+        <label>Слаг<input name="slug" placeholder="выберется из названия" required
+          pattern="[a-z0-9]+(-[a-z0-9]+)*"></label>
+        <label>Название<input name="title" placeholder="Война миров"></label>
+        <label>Автор<input name="author" placeholder="Герберт Уэллс"></label>
+        <label>Перевод<input name="translator" placeholder="М. Зенкевич"></label>
+        <label>Издание<input name="edition" placeholder="Гослитиздат, 1935"></label>
+        <label>Год<input name="year" type="number" min="1" max="2100" placeholder="1898"></label>
+        <label>Права
+          <select name="rights">
+            <option value="public-domain">public-domain — свободна</option>
+            <option value="protected">protected — под охраной</option>
+          </select></label>
+        <label class="wide-field">Основание — чем подтверждается статус прав
+          <input name="basis" placeholder="автор умер в 1946, срок истёк в обеих юрисдикциях"></label>
+        <input type="hidden" name="staged" value="">
+        <label class="check"><input type="checkbox" name="numbered_only">
+          только пронумерованные главы — отбросить титулы и оглавление</label>
+        <button class="btn btn-primary" type="submit">Завести и разобрать</button>
+      </form>
+    </div>
+    ${state.books.length ? `<div class="step">
+      <div class="step-head"><span class="num" aria-hidden="true">2</span>
+        <div><h2>Книги в работе</h2>
+        <div class="step-sub">Разбор и индекс — детерминированные шаги, их делают те же
+        скрипты, что в терминале. Индекс нужен записям героев: он подсказывает агенту,
+        где книга описывает внешность.</div></div></div>
+      <div class="grid">${cards}</div></div>`
+    : `<div class="empty">Книг пока нет — заведите первую.</div>`}`;
 }
 
 function screenCharacters() {
   const book = state.book;
   if (!book) return '<div class="empty">Книга не выбрана.</div>';
   const rows = book.characters.map(c => {
-    const running = openEntryJob(c.key);
+    const entryJob = openJobFor('bible-entry', c.key) || openJobFor('bible-refine', c.key);
+    const sheetJob = openJobFor('sheet', c.key);
+    const shown = c.pending ? c.pending.file : c.sheet_file;
     return `<tr>
       <td><div class="who">
-        ${c.sheet_file
-          ? `<a href="/file/${esc(c.sheet_file)}" target="_blank" title="открыть лист целиком"><img class="sheet" src="/file/${esc(c.sheet_file)}" alt="лист внешности: ${esc(c.name)}" loading="lazy" width="1536" height="1024"></a>`
+        ${shown
+          ? `<a href="/file/${esc(shown)}" target="_blank" title="открыть лист целиком"><img class="sheet${
+              c.pending ? ' sheet-new' : ''}" src="/file/${esc(shown)}" alt="лист внешности: ${esc(c.name)}" loading="lazy" width="1536" height="1024"></a>`
           : '<span class="sheet-none">нет листа</span>'}
         <span><span class="name">${esc(c.name)}</span>
           <div class="sub"><code>${esc(c.key)}</code></div>
-          <div>${c.sheet ? '<span class="tag ok">лист принят</span>'
-                         : '<span class="tag wait">листа нет</span>'}</div></span>
+          <div class="marks">${c.pending ? '<span class="tag wait">лист на приёмке</span>'
+                : c.sheet ? '<span class="tag ok">лист принят</span>'
+                          : '<span class="tag wait">листа нет</span>'}
+            ${c.sheet && c.sheet_stale && !c.pending
+              ? '<span class="tag bad" title="Запись героя переписали после того, как лист сделан: лист показывает прежнего человека">лист по прежней записи</span>' : ''}
+            ${(c.history || []).length
+              ? disclose('history', c.key, state.openHistory === c.key,
+                         `прежних листов: ${c.history.length}`,
+                         'Прежние листы этого героя: сравнить и вернуть') : ''}</div></span>
       </div></td>
-      <td>${auditStrip(c.audit, c.understanding)}</td>
-      <td>${checkCell(c.complaints)}</td>
-      <td>${running
-            ? `<button class="btn btn-sm" disabled>${running.status === 'running'
-                 ? 'собирается…' : 'ждёт очереди'}</button>`
-            : `<button class="btn btn-sm" data-entry="${esc(c.key)}"
-                 title="${c.complaints.length ? 'Допишет недостающее' : 'Перепишет готовую запись целиком'}; Codex работает около 10–16 минут">${
-                 c.complaints.length ? 'Собрать запись' : 'Собрать заново'}</button>`}</td>
-    </tr>`;
+      <td><div class="stack">${understandingCell(c)}</div></td>
+      <td>${entryJob
+            ? `<div class="pile"><button class="btn btn-sm" disabled>${
+                 entryJob.status === 'running'
+                 ? (entryJob.kind === 'bible-refine' ? 'добирает…' : 'собирается…')
+                 : 'ждёт очереди'}</button></div>`
+            : `<div class="pile">
+                <button class="btn btn-sm" data-entry="${esc(c.key)}"
+                 title="${c.complaints.length ? 'Допишет недостающее' : 'Перепишет готовую запись целиком'}; работа около 10–16 минут">${
+                 c.complaints.length ? 'Собрать запись' : 'Собрать заново'}</button>
+                ${(c.refine || []).length
+                  ? `<button class="btn btn-sm" data-refine="${esc(c.key)}"
+                       title="Второй заход только по просевшим клеткам: ${esc(
+                         (c.refine || []).map(k => AUDIT_NAMES[k]).join(', '))}. Что книга даёт — поднимет, чего не даёт — объяснит и больше не спросит">Добрать (${
+                       c.refine.length})</button>` : ''}
+               </div>`}</td>
+      <td>${sheetCell(c, sheetJob)}</td>
+    </tr>${state.openRecord === c.key ? recordRow(c) : ''}${
+      state.openHistory === c.key ? historyRow(c) : ''}`;
   }).join('');
+  const table = `<div class="wide"><table class="chars">
+      <colgroup><col><col><col><col></colgroup>
+      <thead><tr><th scope="col">Герой и лист</th>
+        <th scope="col">Понимание и проверка</th>
+        <th scope="col">Запись</th><th scope="col">Лист</th></tr></thead>
+      <tbody>${rows || '<tr><td colspan="4" class="empty">Записей нет — заведите первую '
+        + 'из списка находок.</td></tr>'}</tbody>
+    </table></div>`;
+  // Порядок блоков зависит от того, что человеку сейчас нужнее. Пока записей нет, главное на
+  // экране — список находок; как только записи появились, главное — они, а находки уходят вниз.
+  const empty = !book.characters.length;
   return `${eyebrow()}<h1>Персонажи</h1>
-    <p class="lede">Запись героя — внешность словами книги с указателями на абзацы и аудит
-    понимания из десяти клеток. Порог для листа — 8 из 10: ниже панель не даёт генерировать.
-    «Не хватает» — поля, которых в записи нет: разбивка <code>audit</code> появилась позже
-    самих записей, и «Собрать запись» её дописывает. «Не сходится» — запись противоречит
-    себе или книге, это чинят.</p>
+    <p class="lede">Запись героя — внешность словами книги с указателями на абзацы и балл
+    понимания из десяти клеток. Порог для листа — 7 из 10, но закрытая запись порога
+    не спрашивает: если каждая клетка либо полная, либо объяснена пробелом, книга отдала
+    всё, и недосказанное уходит в промпт листа отдельной строкой — «оставь обычным»,
+    вместо выдуманного шрама.</p>
+    ${empty ? foundBlock(1) : ''}
     <div class="step">
-      <div class="step-head"><span class="num" aria-hidden="true">1</span>
-        <div><h2>Библия и аудит</h2>
-        <div class="step-sub">«Собрать запись» ставит задание Codex: он читает книгу через
-        кеш, пишет запись целиком и сам проходит проверку. Один герой — примерно 10–16 минут,
-        задания идут по одному. У героя с годной записью кнопка называется «Собрать заново»:
-        прежняя запись будет переписана.</div></div></div>
-      <div class="wide"><table>
-        <thead><tr><th scope="col">Герой и лист</th><th scope="col">Аудит и балл</th>
-          <th scope="col">Проверка</th><th scope="col"><span class="sr">Действие</span></th></tr></thead>
-        <tbody>${rows || '<tr><td colspan="4" class="empty">Записей нет.</td></tr>'}</tbody>
-      </table></div>
+      <div class="step-head"><span class="num" aria-hidden="true">${empty ? 2 : 1}</span>
+        <div><h2>Записи и листы</h2>
+        <div class="step-sub">«Собрать запись» ставит задание Codex: он читает книгу через кеш,
+        пишет запись целиком и сам проходит проверку — 10–16 минут на героя. «Сделать лист»
+        рисует по готовой записи три проекции без манеры и без сцены, 2–4 минуты; лист ложится
+        в <code>cache/</code> и ждёт вашего «Принять». Кнопка листа выключена, пока в записи
+        нет <code>subject_en</code> — одной фразы о том, кто это: её пишет агент, читавший
+        книгу. «Добрать» — второй заход по просевшим клеткам с другим правилом чтения:
+        прямое описание даёт клетке 1, признак сословия или ремесла, к которому книга героя
+        прямо причисляет, — 0.5, а молчание книги записывается пробелом и больше не
+        спрашивается.</div></div></div>
+      ${table}
+    </div>
+    ${empty ? '' : foundBlock(2)}`;
+}
+
+function foundBlock(n) {
+  const found = (state.book.found || []).filter(f => !f.known);
+  const parsed = (state.books.find(b => b.slug === state.slug) || {});
+  const head = `<div class="step-head"><span class="num" aria-hidden="true">${n}</span>
+      <div><h2>Кого нашла книга</h2>
+      <div class="step-sub">Имена находит индекс — он читает книгу и считает упоминания.
+      Вы выбираете, кого вести дальше; кто это такой и как выглядит, напишет агент, читая
+      книгу.</div></div></div>`;
+  if (!found.length) {
+    // Совет должен называть тот шаг, который сейчас мешает, а не следующий за ним.
+    const why = !parsed.parsed
+      ? `Книга ещё не разобрана на абзацы — без разбора ни имён, ни абзацев не найти.`
+      : !parsed.indexed ? 'Индекс не построен: он и подскажет имена.'
+      : (state.book.found || []).length ? 'Все найденные имена уже заведены.'
+      : 'Индекс никого не нашёл — заведите запись по ключу вручную в bible.json.';
+    const step = !parsed.parsed || !parsed.indexed;
+    return `<div class="step">${head}<div class="empty">${why}
+      ${step ? '<button class="btn btn-sm" data-go="books">На экран «Книги» →</button>' : ''}
+      </div></div>`;
+  }
+  const shown = state.showFound ? found : found.slice(0, 12);
+  return `<div class="step">${head}
+    <div class="found">${shown.map(f => `
+      <div class="found-item">
+        <div><b>${esc(f.name)}</b>
+          <div class="sub">упоминаний ${f.mentions} · <code>${esc(f.key)}</code></div></div>
+        <button class="btn btn-sm" data-found="${esc(f.name)}" data-key="${esc(f.key)}"
+          title="Панель запомнит, что книга зовёт его «${esc(f.name)}», и поставит задание">Завести запись</button>
+      </div>`).join('')}</div>
+    ${found.length > 12 ? `<div class="actions"><button class="btn btn-sm" data-more-found="">${
+      state.showFound ? 'Показать только частых' : `Показать всех (${found.length})`}</button></div>`
+      : ''}</div>`;
+}
+
+// Одна и та же причина, набранная абзацем в каждой строке, весила больше самих данных:
+// на восьми героях — четыре одинаковых куска по 111 знаков. Правило сказано один раз в шаге,
+// в строке остаётся короткая метка с полным текстом в подсказке.
+// Порядок значим: проверки идут сверху вниз, и общее «порог» стоит после частного «книга
+// не даёт больше». Прежнее правило /балл/ ловило и «нет балла понимания», и «балл 6.0 из 10,
+// порог 7» — и герой с честными шестью баллами получал ярлык «нет балла».
+const BLOCK_SHORT = [[/subject_en|appearance_en/, 'нужна запись'],
+                     [/нет балла/, 'нет балла'],
+                     [/не поднять/, 'книга не даёт больше'],
+                     [/порог/, 'балл ниже порога']];
+function shortBlock(why) {
+  const hit = BLOCK_SHORT.find(([re]) => re.test(why || ''));
+  return hit ? hit[1] : 'нельзя';
+}
+
+function sheetCell(c, job) {
+  // Кнопка всегда внутри группы, даже когда она одна: иначе одиночная кнопка стоит
+  // по другим правилам, чем пара, и строки перестают выравниваться между собой.
+  if (job) return `<div class="pile"><button class="btn btn-sm" disabled>${
+    job.status === 'running' ? 'рисуется…' : 'ждёт очереди'}</button></div>`;
+  if (c.pending) return `<div class="pile">
+    <button class="btn btn-sm btn-primary" data-accept="${esc(c.key)}"
+      title="Лист переедет в books/${esc(state.slug)}/characters/ и запишется в библию">Принять</button>
+    <button class="btn btn-sm" data-reject="${esc(c.key)}"
+      title="Стереть собранный лист и остаться без листа">Отклонить</button>
+    <button class="btn btn-sm" data-sheet="${esc(c.key)}"
+      title="Нарисовать заново тем же промптом">Заново</button></div>`;
+  if (c.sheet_blocked) return `<div class="pile">
+    <button class="btn btn-sm" disabled title="${esc(c.sheet_blocked)}">Сделать лист</button>
+    <span class="tag" title="${esc(c.sheet_blocked)}">${esc(shortBlock(c.sheet_blocked))}</span>
     </div>`;
+  return `<div class="pile"><button class="btn btn-sm${c.sheet ? '' : ' btn-primary'}"
+    data-sheet="${esc(c.key)}"
+    title="${c.sheet ? 'Прежний лист останется, пока новый не примут' : 'Codex рисует 2–4 минуты'}">${
+    c.sheet ? 'Пересобрать лист' : 'Сделать лист'}</button></div>`;
+}
+
+const CELL_WHY = {1: 'книга даёт', 0.5: 'книга даёт наполовину', 0: 'не найдено'};
+
+function recordRow(c) {
+  // Лист рисуют по записи, а не по баллу, и человек должен видеть текст, который уйдёт
+  // генератору, до того как лист соберут. Клетки здесь — одной строкой: их дело сказать,
+  // что понято. Чего не хватает и где искали — в подсказке: на экране это по три строки
+  // на клетку, тридцать строк на героя, и промпт уезжает за нижний край.
+  const audit = c.audit || {};
+  const gaps = c.gaps || {};
+  const strip = AUDIT_KEYS.map(k => {
+    const v = audit[k];
+    const gap = gaps[k];
+    const mark = v === 1 ? 'full' : gap ? 'told' : v === 0.5 ? 'half' : '';
+    const hint = gap ? `${gap.why} Искали: ${gap.looked}`
+                     : (CELL_WHY[v] ?? 'клетки нет в записи');
+    return `<span class="chip" title="${esc(AUDIT_NAMES[k])} — ${esc(hint)}"><span
+      class="cell ${mark}" aria-hidden="true"></span>${esc(AUDIT_NAMES[k])} <b>${
+      v === undefined ? '—' : v === 0.5 ? '\u00bd' : v}</b></span>`;
+  }).join('');
+  return `<tr class="record-row"><td colspan="4">
+    <div class="record">
+      <div class="chips">${strip}<span class="chip-score">балл <b>${
+        c.understanding ?? '—'}</b> из 10</span></div>
+      ${c.appearance ? `<p class="record-ru">${esc(c.appearance)}</p>` : ''}
+      <section>
+        <h3>Из чего соберут лист</h3>
+        <div class="step-sub">Ровно этот текст уходит генератору. ${c.prompt
+          && c.prompt.includes('Unspecified:')
+          ? 'Раздел <code>Unspecified</code> собран из пробелов: он велит оставить '
+            + 'несказанное обычным, вместо выдуманного.'
+          : 'Пробелов нет — раздела <code>Unspecified</code> в нём тоже нет.'}</div>
+        <pre class="prompt mono">${esc(c.prompt || 'промпта нет: в записи не хватает полей')}</pre>
+      </section>
+    </div></td></tr>`;
+}
+
+const LEFT_WHY = {replaced: 'заменён', rejected: 'отклонён'};
+
+function historyRow(c) {
+  // Лист героя — решение, а не файл. Прежние решения лежат рядом, их видно и к ним
+  // можно вернуться; сравнивать их по одному в папке — не работа человека.
+  const list = c.history || [];
+  return `<tr class="variants-row"><td colspan="4">
+    <div class="step-sub">Прежние листы <b>${esc(c.name)}</b>: картинка остаётся, даже когда
+      её заменили или отклонили. «Вернуть» меняет местами нынешний лист и выбранный.</div>
+    <div class="variants">${list.map(v => `<figure>
+      <a href="/file/${esc(v.file)}" target="_blank" title="открыть целиком">
+        <img src="/file/${esc(v.file)}" alt="прежний лист: ${esc(c.name)}, ${
+          esc(LEFT_WHY[v.left] || v.left || '')}" loading="lazy" width="1536" height="1024"></a>
+      <figcaption>${stampRu(v.at)} · ${esc(LEFT_WHY[v.left] || v.left || 'убран')}
+        <div class="${v.same_prompt ? 'same' : 'other'}">${v.same_prompt
+          ? 'тот же промпт' : 'запись с тех пор переписали'}</div>
+        <button class="btn btn-sm" data-restore="${esc(c.key)}"
+          data-file="${esc(v.rel)}">Вернуть</button></figcaption>
+    </figure>`).join('')}</div></td></tr>`;
 }
 
 function whoStrip(keys) {
@@ -630,9 +1115,63 @@ function sceneBlock(s) {
         <span class="tag">по плану шаблон ${esc(s.composition || '—')}</span></div>
       ${s.brief ? `<div class="step-sub" style="max-width:none">${esc(s.brief)}</div>` : ''}
       ${s.invariants.length ? whoStrip(s.invariants) : ''}
-      ${s.excerpt ? `<div class="excerpt"><div class="from">отрывок книги · ${esc(loc)}</div>${esc(s.excerpt)}</div>` : ''}
+      ${s.excerpt ? `<details class="excerpt"><summary class="from">отрывок книги · ${esc(loc)}</summary>${esc(s.excerpt)}</details>` : ''}
+      <div class="actions">${sceneActions(s)}</div>
     </div>
   </div>`;
+}
+
+function drawSettings() {
+  const b = state.batch;
+  const style = state.draw.style || b.style || (state.styles[0] || {}).key || '';
+  return `<div class="step">
+    <div class="step-head"><span class="num" aria-hidden="true">2</span>
+      <div><h2>Чем рисовать</h2>
+      <div class="step-sub">Направление задаёт манеру, шаблон композиции — где стоят тела.
+      Эталоны манеры берутся по номерам: пусто — панель возьмёт первые ${
+        state.settings ? state.settings.max_style_refs : 3}. Настройка одна на партию:
+      поставили — и рисуете кадр за кадром.</div></div></div>
+    <form class="form" onsubmit="return false">
+      <label>Направление
+        <select data-draw="style">${state.styles.map(s =>
+          `<option value="${esc(s.key)}"${s.key === style ? ' selected' : ''}>${
+            esc(s.name)}</option>`).join('')}</select></label>
+      <label>Эталоны манеры
+        <input data-draw="refs" value="${esc(state.draw.refs || '')}"
+          placeholder="ref-01 ref-03 — пусто значит по порядку"></label>
+      <label class="check"><input type="checkbox" data-draw="composition"
+        ${state.draw.composition === false ? '' : 'checked'}> брать шаблон композиции
+        из карточки</label>
+    </form></div>`;
+}
+
+function checkBlock() {
+  const c = state.checked;
+  if (!c || c.batch !== state.batch.name) return '';
+  const bad = c.problems.length + c.rights.length;
+  return `<div class="check-out">
+    <div><b>Сверка:</b> сходится кадров ${c.frames} из ${c.was}${
+      bad ? `, замечаний ${bad}` : ', замечаний нет'}.</div>
+    ${c.problems.map(p => `<div class="bad-line">${esc(p)}</div>`).join('')}
+    ${c.rights.map(p => `<div class="bad-line">права: ${esc(p)}</div>`).join('')}
+    <div class="actions">
+      <button class="btn btn-sm" data-register-batch=""
+        title="Перепишет manifest, README и галерею по тому, что лежит на диске">${
+        c.dropped
+          ? `Перезаписать манифест — уберёт записей: ${c.dropped}`
+          : 'Перезаписать манифест и галерею'}</button>
+    </div></div>`;
+}
+
+function sceneActions(s) {
+  const job = state.jobs.find(j => j.kind === 'scene' && j.args && j.args.card === s.id
+                                   && OPEN.includes(j.status));
+  if (job) return `<button class="btn btn-sm" disabled>${
+    job.status === 'running' ? 'рисуется…' : 'ждёт очереди'}</button>`;
+  const drawn = s.frames.some(fr => fr.image);
+  return `<button class="btn btn-sm${drawn ? '' : ' btn-primary'}" data-frame="${esc(s.id)}"
+    title="Codex рисует кадр 2–6 минут; прежний кадр останется, если у нового другое имя">${
+    drawn ? 'Ещё кадр' : 'Нарисовать кадр'}</button>`;
 }
 
 function screenBatches() {
@@ -642,28 +1181,87 @@ function screenBatches() {
   if (state.batch) {
     const b = state.batch;
     const withFrame = b.scenes.filter(s => s.frames.some(f => f.image)).length;
+    const empty = b.scenes.filter(s => !s.frames.some(f => f.image)).length;
+    const cardJob = state.jobs.find(j => j.kind === 'scene-card' && j.args
+                                         && j.args.batch === b.name && OPEN.includes(j.status));
     return `<div class="crumbs"><button class="btn btn-sm" data-batch="">← Все партии</button>
         <span>${esc(b.name)} · сцен ${b.scenes.length} · с кадром ${withFrame}</span></div>
       <h1>${esc(b.name)}</h1>
       ${b.request ? `<p class="lede">${esc(b.request)}</p>` : ''}
+      <div class="step">
+        <div class="step-head"><span class="num" aria-hidden="true">1</span>
+          <div><h2>Карточка сцены</h2>
+          <div class="step-sub">Карточка — замысел кадра словами: что происходит, кто в кадре,
+          какой отрывок книги за этим стоит. Пишет её Codex по вашей фразе, читая книгу через
+          кеш; 5–12 минут. Манеры в карточке нет — манера живёт в направлении.</div></div></div>
+        <form class="form" id="newcard">
+          <label class="wide-field">Что в кадре, одной фразой
+            <input name="brief" required
+              placeholder="Серый капитан швыряет камешек в шахтёра, и шахтёр кланяется"></label>
+          <label>Имя карточки
+            <input name="card" required pattern="[a-z0-9]+(-[a-z0-9]+)*"
+              placeholder="03-ugly-dan-kidaet-kamen"></label>
+          <label>Где это в книге
+            <input name="where" placeholder="глава 2, пересменка в депо"></label>
+          <label>Порядок<input name="order" type="number" min="1"
+            placeholder="${b.scenes.length + 1}"></label>
+          <button class="btn btn-primary" type="submit"${cardJob ? ' disabled' : ''}>${
+            cardJob ? 'карточка пишется…' : 'Написать карточку'}</button>
+        </form>
+      </div>
+      ${state.styles.length ? drawSettings() : ''}
+      <div class="step">
+        <div class="step-head"><span class="num" aria-hidden="true">3</span>
+          <div><h2>Кадры</h2>
+          <div class="step-sub">Кадр рисуется по карточке, направлению и листам героев.
+          Отбор — за вами: панель ничего не выбрасывает, кадры складываются рядом.
+          ${empty ? `Без кадра сейчас ${empty}.` : 'Кадр есть у каждой сцены.'}</div></div></div>
+        <div class="actions">
+          ${empty && state.styles.length
+            ? `<button class="btn btn-sm" data-frames-all=""
+                 title="Задания идут по одному: ${empty} кадров это примерно ${
+                   Math.round(empty * 4)} минут работы Codex">Нарисовать недостающие (${empty}) — около ${
+                   Math.round(empty * 4)} мин</button>`
+            : ''}
+          <button class="btn btn-sm" data-check-batch=""
+            title="Ничего не меняет: пересобирает промпты и сверяет их с диском, считает хеши, проверяет права">Проверить партию</button>
+        </div>
+        ${checkBlock()}
+      </div>
       ${b.scenes.map(sceneBlock).join('')}`;
   }
 
-  if (!book.batches.length) return `${eyebrow()}<h1>Партии</h1>
-    <div class="empty">Партий нет. Партия заводится папкой
-    <code>books/${esc(state.slug)}/&lt;номер-имя&gt;/</code> с планом сцен;
-    создание из панели — вторая версия.</div>`;
   return `${eyebrow()}<h1>Партии</h1>
     <p class="lede">Партия — замысел серии: направление, отобранные сцены, карточки и кадры.
     Манифест пишется только по существующим кадрам.</p>
-    <div class="grid">${book.batches.map(b => `
+    <div class="step">
+      <div class="step-head"><span class="num" aria-hidden="true">1</span>
+        <div><h2>Завести партию</h2>
+        <div class="step-sub">Партия — папка в книге с карточками сцен, промптами и
+        манифестом. Номер панель поставит сама, следующий свободный.</div></div></div>
+      <form class="form" id="newbatch">
+        <label>Имя<input name="name" required pattern="[a-z0-9]+(-[a-z0-9]+)*"
+          placeholder="proba-stiley"></label>
+        <label>Название<input name="title" placeholder="Проба нескольких направлений"></label>
+        <label>Короткое имя в файлах<input name="short" placeholder="proba"></label>
+        <label>Направление
+          <select name="style">
+            <option value="">выбрать у каждого кадра</option>
+            ${state.styles.map(s => `<option value="${esc(s.key)}">${esc(s.name)}</option>`).join('')}
+          </select></label>
+        <label class="wide-field">Замысел серии
+          <input name="request" placeholder="Первые десять глав, по четыре кадра на главу"></label>
+        <button class="btn btn-primary" type="submit">Завести партию</button>
+      </form>
+    </div>
+    ${book.batches.length ? `<div class="grid">${book.batches.map(b => `
       <div class="card"><h2 class="name">${esc(b.name)}</h2>
         <div class="sub">${esc(b.style || 'направление не задано')}</div>
         <div class="kv"><span>карточек <b>${b.cards}</b></span>
-          <span>в манифесте <b>${b.scenes}</b></span>
-          <span>план <b>${b.planned ? 'есть' : 'нет'}</b></span></div>
+          <span>кадров <b>${b.scenes}</b></span></div>
         <div class="actions"><button class="btn btn-sm" data-batch="${esc(b.name)}">Открыть</button></div>
-      </div>`).join('')}</div>`;
+      </div>`).join('')}</div>`
+    : '<div class="empty">Партий пока нет — заведите первую.</div>'}`;
 }
 
 function screenStyles() {
@@ -687,7 +1285,6 @@ function screenStyles() {
 }
 
 function draw() {
-  drawTabs();
   drawRail();
   const work = document.getElementById('work');
   if (!state.ready) { work.innerHTML = '<div class="skeleton">Читаю репозиторий…</div>'; return; }
@@ -724,7 +1321,8 @@ function drawJobs() {
   // Имя героя приходит вместе с книгой, позже первой отрисовки очереди: без него в
   // сигнатуре карточки навсегда остались бы с ключом вместо имени.
   const shape = JSON.stringify([state.openLog, state.wideLog, state.total, state.showAll,
-                                state.jobs.map(j => [j.id, j.status, j.error, jobSubject(j)])]);
+                                state.jobs.map(j => [j.id, j.status, j.error, jobSubject(j),
+                                  (j.waiting_for || []).map(w => w.lock).join()])]);
   if (shape === jobsShape) { if (state.openLog) showLog(state.openLog); return; }
   jobsShape = shape;
   // Состав очереди меняется и когда задание просто дошло до конца. Перенесём в новую
@@ -738,7 +1336,12 @@ function drawJobs() {
   }
   // Очередь — не журнал. По умолчанию видно то, что идёт, и последние пять законченных;
   // остальное — по требованию, а ненужное можно забыть совсем.
-  const live = state.jobs.filter(j => OPEN.includes(j.status));
+  // Задания приходят от новых к старым — так читается история. Но очередь читается
+  // наоборот: сначала то, что идёт, потом то, что возьмут следующим. Иначе номер
+  // «1-е по счёту» стоит под заданием, которое поставили последним.
+  const live = state.jobs.filter(j => OPEN.includes(j.status))
+    .sort((a, b) => (a.status === 'running' ? -1 : b.status === 'running' ? 1 : 0)
+                    || a.id.localeCompare(b.id));
   const past = state.jobs.filter(j => !OPEN.includes(j.status));
   const shown = state.showAll ? state.jobs : live.concat(past.slice(0, 5));
   let place = 0;
@@ -764,8 +1367,11 @@ function drawJobs() {
           ? `<button class="btn btn-sm" data-wide="${esc(j.id)}">Развернуть</button>` : ''}
         ${OPEN.includes(j.status)
           ? `<button class="btn btn-sm" data-cancel="${esc(j.id)}">Снять</button>` : ''}
-        ${['failed', 'interrupted'].includes(j.status) && j.kind === 'bible-entry' && j.args
-          ? `<button class="btn btn-sm" data-again="${esc(j.args.key)}">Собрать заново</button>` : ''}
+        ${['failed', 'interrupted'].includes(j.status) && j.args && j.args.key
+          && ['bible-entry', 'bible-refine'].includes(j.kind)
+          ? `<button class="btn btn-sm" data-${j.kind === 'bible-refine' ? 'refine' : 'again'}="${
+              esc(j.args.key)}">${j.kind === 'bible-refine' ? 'Добрать заново'
+                                                            : 'Собрать заново'}</button>` : ''}
       </div>
       ${state.openLog === j.id
           ? `<div class="log" id="log-${esc(j.id)}" tabindex="0" role="region"
@@ -815,13 +1421,214 @@ async function startEntry(key, button) {
   draw();
 }
 
+async function startSheet(key, button) {
+  if (button) button.disabled = true;
+  try {
+    await api(`/api/books/${encodeURIComponent(state.slug)}/sheets/${encodeURIComponent(key)}`,
+              {method: 'POST', body: '{}'});
+  } catch (error) { state.error = error.message; }
+  await pollJobs();
+  schedulePoll();
+  draw();
+}
+
+function drawBody(card) {
+  const refs = (state.draw.refs || '').split(/[\s,]+/).filter(Boolean);
+  return {card, style: state.draw.style || state.batch.style || (state.styles[0] || {}).key,
+          refs: refs.length ? refs : null, composition: state.draw.composition !== false};
+}
+
+async function startFrame(card, button) {
+  const path = `/api/books/${encodeURIComponent(state.slug)}/batches/${
+    encodeURIComponent(state.batch.name)}/frames`;
+  return post(path, drawBody(card), button);
+}
+
+async function startAllFrames(button) {
+  // Задания идут по одному, поэтому «нарисовать недостающие» — это просто очередь целиком.
+  const cards = state.batch.scenes.filter(s => !s.frames.some(fr => fr.image));
+  if (button) button.disabled = true;
+  const path = `/api/books/${encodeURIComponent(state.slug)}/batches/${
+    encodeURIComponent(state.batch.name)}/frames`;
+  for (const scene of cards) {
+    try { await api(path, {method: 'POST', body: JSON.stringify(drawBody(scene.id))}); }
+    catch (error) { state.error = error.message; break; }
+  }
+  await pollJobs();
+  schedulePoll();
+  await load();
+}
+
+async function checkBatch(button) {
+  if (button) { button.disabled = true; button.textContent = 'сверяю…'; }
+  try {
+    const answer = await api(`/api/books/${encodeURIComponent(state.slug)}/batches/${
+      encodeURIComponent(state.batch.name)}/check`);
+    state.checked = {...answer, batch: state.batch.name};
+  } catch (error) { state.error = error.message; }
+  draw();
+}
+
+async function post(path, body, button) {
+  // Единственный путь для кнопок, ставящих задание: отключить, послать, перечитать очередь.
+  // Своей версии событий кнопка не рассказывает — её состояние приходит из очереди.
+  if (button) button.disabled = true;
+  try {
+    await api(path, {method: 'POST', body: JSON.stringify(body || {})});
+  } catch (error) { state.error = error.message; }
+  await pollJobs();
+  schedulePoll();
+  await load();
+}
+
+async function sheetVerdict(key, verdict, button) {
+  if (button) button.disabled = true;
+  try {
+    await api(`/api/books/${encodeURIComponent(state.slug)}/sheets/${
+      encodeURIComponent(key)}/${verdict}`, {method: 'POST', body: '{}'});
+  } catch (error) { state.error = error.message; }
+  await load();
+}
+
+const FORMS = {
+  newbook: async data => {
+    const file = data.file;
+    if (!file || !file.size) throw new Error('выберите файл книги');
+    if (file.size > 40 * 1024 * 1024) throw new Error('файл больше 40 МБ');
+    // Файл уже на сервере, если по нему заполняли форму: шлём только его имя.
+    const body = {...data, file: undefined, filename: file.name,
+                  year: data.year ? Number(data.year) : null,
+                  numbered_only: !!data.numbered_only};
+    if (!data.staged) body.data = await base64(file);
+    return ['/api/books', body];
+  },
+  newbatch: async data => [`/api/books/${encodeURIComponent(state.slug)}/batches`, data],
+  newcard: async data => [`/api/books/${encodeURIComponent(state.slug)}/batches/${
+    encodeURIComponent(state.batch.name)}/cards`, data],
+};
+
+document.addEventListener('submit', async event => {
+  const form = event.target;
+  if (!FORMS[form.id]) return;
+  event.preventDefault();
+  const button = form.querySelector('button[type=submit]');
+  const data = {};
+  for (const el of form.elements) {
+    if (!el.name) continue;
+    data[el.name] = el.type === 'checkbox' ? el.checked
+                  : el.type === 'file' ? (el.files[0] || null)
+                  : el.value.trim();
+  }
+  if (button) { button.disabled = true; button.dataset.was = button.textContent;
+                button.textContent = 'отправляю…'; }
+  try {
+    const [path, body] = await FORMS[form.id](data);
+    await api(path, {method: 'POST', body: JSON.stringify(body)});
+    form.reset();
+  } catch (error) {
+    state.error = error.message;
+  } finally {
+    if (button) { button.disabled = false; button.textContent = button.dataset.was; }
+  }
+  await pollJobs();
+  schedulePoll();
+  await load();
+});
+
+async function base64(file) {
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  // По кускам: у книги в 20 МБ разворачивание массива в аргументы переполняет стек.
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000)
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(binary);
+}
+
+const META_FIELDS = {title: 'название', author: 'автор', translator: 'перевод',
+                     edition: 'издание', year_published: 'год', slug: 'слаг'};
+
+async function readBook(input) {
+  // Книга знает о себе название, автора, переводчика и год. Человеку остаётся сверить
+  // прочитанное и решить вопрос о правах — переписывать метаданные руками незачем.
+  const form = input.closest('form');
+  const said = document.getElementById('fromfile');
+  const file = input.files[0];
+  if (!form || !said) return;
+  if (!file) { said.hidden = true; return; }
+  said.hidden = false;
+  said.textContent = 'читаю, что книга знает о себе…';
+  try {
+    const meta = await api('/api/books/meta', {method: 'POST', body: JSON.stringify(
+      {filename: file.name, data: await base64(file)})});
+    const filled = [];
+    for (const [key, name] of Object.entries(META_FIELDS)) {
+      const field = form.elements[key === 'year_published' ? 'year' : key];
+      if (!field || !meta[key]) continue;
+      field.value = meta[key];
+      filled.push(name);
+    }
+    form.elements.staged.value = meta.staged || '';
+    said.textContent = filled.length
+      ? `Из файла: ${filled.join(', ')}. Проверьте и укажите права.`
+      : 'Файл о себе ничего не говорит — заполните поля сами.';
+  } catch (error) {
+    said.textContent = `метаданные не прочитались: ${error.message}. Заполните поля сами.`;
+  }
+}
+
+document.addEventListener('change', event => {
+  if (event.target.type === 'file') {
+    const shown = event.target.closest('.file').querySelector('.file-name');
+    const file = event.target.files[0];
+    shown.textContent = file
+      ? `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} МБ`
+      : 'fb2, epub или txt — файл не выбран';
+    if (event.target.id === 'bookfile') readBook(event.target);
+    return;
+  }
+  const key = event.target.dataset && event.target.dataset.draw;
+  if (!key) return;
+  state.draw[key] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+});
+
+// Список действий один на всю панель: перечень селекторов, набранный руками, молча
+// перестаёт ловить новые кнопки — так уже случилось с половиной кнопок цепочки.
+const ACTIONS = ['go', 'book', 'pick', 'operator', 'jobs', 'batch', 'entry', 'refine', 'again', 'log',
+                 'wide', 'cancel', 'dismiss', 'history', 'record', 'restore',
+                 'more', 'forget', 'sheet', 'accept', 'reject', 'parse', 'index', 'frame',
+                 'framesAll', 'checkBatch', 'registerBatch', 'found', 'moreFound'];
+const ACTION_SELECTOR = ACTIONS
+  .map(name => `[data-${name.replace(/[A-Z]/g, up => '-' + up.toLowerCase())}]`).join(',');
+
 document.addEventListener('click', async event => {
-  const target = event.target.closest('[data-go],[data-book],[data-batch],[data-entry],'
-    + '[data-log],[data-wide],[data-cancel],[data-again],[data-dismiss],[data-more],[data-forget]');
+  const target = event.target.closest(ACTION_SELECTOR);
   if (!target) return;
   const d = target.dataset;
   if (d.go) return go(d.go);
-  if (d.book) { state.slug = d.book; return go('characters'); }
+  if (d.book) return go('characters', d.book);
+  if (d.pick) {
+    // Смена книги экран не меняет: человек смотрел партии — пусть смотрит партии другой
+    // книги, а не возвращается к началу.
+    if (d.pick === state.slug) return;
+    state.batch = null;
+    return go(state.screen === 'books' ? 'characters' : state.screen, d.pick);
+  }
+  if (d.jobs) {
+    if (Number(d.jobs) === (state.settings || {}).jobs) return;
+    try {
+      state.settings = await api('/api/settings',
+          {method: 'POST', body: JSON.stringify({jobs: Number(d.jobs)})});
+    } catch (error) { state.error = `ширина не сменилась: ${error.message}`; }
+    return draw();
+  }
+  if (d.operator) {
+    if (d.operator === (state.settings || {}).operator) return;
+    try {
+      state.settings = await api('/api/settings',
+          {method: 'POST', body: JSON.stringify({operator: d.operator})});
+    } catch (error) { state.error = `оператор не сменился: ${error.message}`; }
+    return draw();
+  }
   if (d.batch !== undefined) return d.batch ? openBatch(d.batch) : go('batches');
   if (d.dismiss !== undefined) { state.error = null; return draw(); }
   if (d.log) {
@@ -831,7 +1638,11 @@ document.addEventListener('click', async event => {
     return draw();
   }
   if (d.wide) { state.wideLog = d.wide; state.openLog = null; drawJobs(); return draw(); }
-  if (d.more !== undefined) { state.showAll = !state.showAll; return drawJobs(); }
+  if (d.more !== undefined) {
+    state.showAll = !state.showAll;
+    await pollJobs();                 // за остальными заданиями надо сходить на сервер
+    return drawJobs();
+  }
   if (d.forget !== undefined) {
     await api('/api/jobs/clear', {method: 'POST'});
     state.showAll = false;
@@ -842,6 +1653,38 @@ document.addEventListener('click', async event => {
   if (d.cancel) { await api(`/api/jobs/${encodeURIComponent(d.cancel)}/cancel`, {method: 'POST'}); return pollJobs(); }
   if (d.again) return startEntry(d.again, target);
   if (d.entry) return startEntry(d.entry, target);
+  if (d.refine) return post(`/api/books/${encodeURIComponent(state.slug)}/bible/${
+    encodeURIComponent(d.refine)}/refine`, {}, target);
+  if (d.moreFound !== undefined) { state.showFound = !state.showFound; return draw(); }
+  if (d.found) return post(`/api/books/${encodeURIComponent(state.slug)}/bible/${
+    encodeURIComponent(d.key)}`, {name: d.found}, target);
+  if (d.sheet) return startSheet(d.sheet, target);
+  if (d.parse) return post(`/api/books/${encodeURIComponent(d.parse)}/parse`, {}, target);
+  if (d.index) return post(`/api/books/${encodeURIComponent(d.index)}/index`, {}, target);
+  if (d.frame) return startFrame(d.frame, target);
+  if (d.framesAll !== undefined) return startAllFrames(target);
+  if (d.checkBatch !== undefined) return checkBatch(target);
+  if (d.registerBatch !== undefined) {
+    const dropped = (state.checked || {}).dropped || 0;
+    // Перезапись выбрасывает из манифеста всё, что не сошлось, и переписывает README.
+    // Число говорится вслух до нажатия, а не после.
+    if (dropped && !confirm(`Из манифеста будут убраны записи: ${dropped}. `
+        + 'README и галерея будут переписаны. Кадры на диске останутся. Продолжить?')) return;
+    return post(`/api/books/${encodeURIComponent(state.slug)}/batches/${
+      encodeURIComponent(state.batch.name)}/register`, {}, target);
+  }
+  if (d.record) {
+    state.openRecord = state.openRecord === d.record ? null : d.record;
+    return draw();
+  }
+  if (d.history) {
+    state.openHistory = state.openHistory === d.history ? null : d.history;
+    return draw();
+  }
+  if (d.restore) return post(`/api/books/${encodeURIComponent(state.slug)}/sheets/${
+    encodeURIComponent(d.restore)}/restore`, {file: d.file}, target);
+  if (d.accept) return sheetVerdict(d.accept, 'accept', target);
+  if (d.reject) return sheetVerdict(d.reject, 'reject', target);
 });
 
 // Две секунды нужны, только пока что-то идёт. В покое это 1800 лишних запросов в час.

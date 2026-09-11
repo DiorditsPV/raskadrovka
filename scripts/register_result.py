@@ -116,20 +116,23 @@ def update_readme(batch, kept, check, problems):
 
 def register(batch, check=False):
     batch = Path(batch).resolve()
+    root = batch.parents[2]                 # корень дерева, а не место скрипта
     manifest_file = batch / 'metadata' / 'request.json'
     manifest = json.loads(manifest_file.read_text())
     problems, kept, wanted, refs = [], [], set(), {}
 
     for entry in manifest['scenes']:
         entry_id = entry['id']
-        output = OUTPUT / Path(entry['output']).name
+        # Корень берётся от самой партии, а не от места скрипта: панель может работать
+        # на другом дереве (проверка, временный репозиторий), и «output/» там своё.
+        output = root / 'output' / Path(entry['output']).name
         if not output.is_file():
             problems.append(f'{entry["id"]}: нет результата {output.name} — запись убрана')
             continue
 
         prompt_file = batch / entry['prompt']
         text, inputs = build_prompt.build(
-            batch, Path(entry['card']).stem, entry['style'],
+            batch, Path(entry['card']).stem, entry['style'], root=root,
             use_composition=bool(entry.get('composition')),
             wanted_refs=entry.get('style_refs'))
         if not prompt_file.is_file():
@@ -143,7 +146,7 @@ def register(batch, check=False):
         recorded = []
         for item in inputs:
             source = Path(item['path'])
-            name = snapshot_name(source)
+            name = snapshot_name(source, root)
             wanted.add(name)
             target = batch / 'input' / name
             if not check and (not target.is_file() or sha256_file(target) != sha256_file(source)):
@@ -155,7 +158,7 @@ def register(batch, check=False):
             recorded.append({'path': f'input/{name}', 'sha256': sha256_file(target),
                              'role': item['role'], 'stored': True})
             if item['role'] == 'style-reference':
-                ref_key, ref_entry = ref_record(source, f'input/{name}')
+                ref_key, ref_entry = ref_record(source, f'input/{name}', root)
                 if ref_key is None:
                     problems.append(f'{entry_id}: эталон {source.name} не найден в направлениях')
                 else:
