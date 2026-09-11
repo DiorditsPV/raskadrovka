@@ -7,7 +7,9 @@
 
 В публичный набор входят:
 
-- `README.md`, `LICENSE`, `RIGHTS.md`, `AGENTS.md`, `PUBLIC-RELEASE.md`;
+- `README.md` (английский) и `README.ru.md` (русский), `LICENSE`, `RIGHTS.md`, `AGENTS.md`,
+  `PUBLIC-RELEASE.md`;
+- `docs/screens/`: снимки панели для README — только на английском языке интерфейса;
 - `index.html`, `scripts/`, `tests/`;
 - `panel/`: локальная панель управления — сервер, страница, шаблоны заданий;
 - `.claude/skills/`: правила для агента, по которым собираются записи героев, карточки

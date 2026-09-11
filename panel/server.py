@@ -1258,8 +1258,12 @@ def api_settings_set(panel, match, query, body):
         if not 1 <= width <= MAX_JOBS:
             return 400, {'error': f'рядом идут от 1 до {MAX_JOBS} заданий'}
         change['jobs'] = width
+    if 'lang' in body:
+        if body['lang'] not in ('ru', 'en'):
+            return 400, {'error': 'язык: ru или en'}
+        change['lang'] = body['lang']
     if not change:
-        return 400, {'error': 'нечего менять: operator или jobs'}
+        return 400, {'error': 'нечего менять: operator, jobs или lang'}
     values = panel.set_settings(change)
     if 'jobs' in change:
         # Новые полосы поднимаются сразу; лишние уходят сами, когда доработают своё.
