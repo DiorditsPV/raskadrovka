@@ -68,45 +68,6 @@ author's machine. Style references are committed only under a free licence with 
 justified in both Russia and the United States; the rest live locally and are referred to by
 hash. Details are in [RIGHTS.md](RIGHTS.md) (in Russian).
 
-## Layout
-
-```text
-index.html                      gallery
-output/<book>--<batch>--<scene>.png
-scripts/
-  ingest_book.py                FB2/EPUB/TXT -> book.json without the text; metadata from the file
-  index_book.py                 mechanical index over the whole book: names, places, scenes
-  show_paragraphs.py            print the paragraphs you need from the local cache
-  build_prompt.py               scene prompt from card, style, template and sheets
-  generate_sheet.py             character sheet: prompt from the record, image by Codex
-  generate_scene.py             scene frame: prompt, image, entry in the manifest
-  register_result.py            hashes, snapshot of input/, batch refs.json
-  check_rights.py               rights: the book, quoting, reference licences
-  build_gallery.py              build and verify index.html
-  build_styles_page.py          build styles/index.html
-styles/
-  directions/<direction>.json   the manner in words, the palette, records about references
-  refs/<direction>/             manner references
-  prompts-directions.md         the prompts the references were generated with
-  index.html                    direction picker
-compositions/
-  templates/<template>.json     where the bodies stand and where the camera is
-  refs/<template>.png           grey blocking
-books/<book>/
-  book.json                     book manifest without the text
-  bible.json                    characters and places
-  characters/<key>.png          character sheets
-  characters/history/           earlier sheets: what was replaced and what was rejected
-  source/                       the book file — local, never committed
-  <batch>/
-    README.md                   what is in the batch and links to results
-    scenes/<scene>.json         scene cards
-    prompt/<scene>.txt          exact prompts
-    input/                      batch references; input/<scene>/ is a frame's edit target
-    metadata/request.json       batch manifest: scenes, hashes, roles of inputs
-    metadata/refs.json          sources and licences of references
-```
-
 ## Control panel
 
 The same path without a terminal:
@@ -154,14 +115,6 @@ What the panel does on its own:
   not touch the same file: records of one book go one by one, sheets and different books run
   at the same time.
 
-![The open record: ten traits by name and the exact prompt the generator receives](docs/screens/record.png)
-
-*“What is in the record”, opened. Ten traits named with their scores; the description in the
-book’s own words; and below it the exact text that goes to the generator — including the
-`Unspecified` section built from the gaps, which tells the generator to keep the unsaid
-ordinary instead of inventing it. The Russian paragraph is the book’s data: only the interface
-is translated.*
-
 The interface is bilingual, Russian and English, with the switch in the sidebar. Only what
 the panel itself wrote is translated: character names, descriptions and the agent's own text
 stay as they are, because that is the book's data.
@@ -183,26 +136,14 @@ The design and the screens are described in the
   them itself; the command can be changed in `cache/panel/settings.json`.
 - **Images are drawn by Codex**: only it has an image generation tool. Without Codex
   everything works except character sheets and frames.
-- `pytest` is needed for the tests only. One test parses the panel script through
-  `node --check` and is skipped when node is not installed.
 
 Money and rate limits are spent by the operator, not by the panel: a character record is
 7–16 minutes of Codex or Claude, a character sheet 2–4 minutes. How many jobs run side by
 side is visible and changeable in the panel's sidebar.
 
-## Running the scripts
-
-```bash
-python3 scripts/register_result.py books/<book>/<batch>   # hashes, input/, refs.json
-python3 scripts/check_rights.py                           # rights
-python3 scripts/build_gallery.py                          # rebuild index.html
-python3 scripts/build_styles_page.py                      # rebuild styles/index.html
-pytest tests/                                             # every check in the project
-```
-
-The order is not accidental: registration records what the frames were made from, the rights
-check reads what was recorded, and the gallery build verifies the hashes and fails if a
-picture was drawn from a card that no longer exists.
+Everything else — the layout of the folders, the scripts behind the buttons, the contracts
+the agent must keep — is written for the agent, not for you: see [AGENTS.md](AGENTS.md) and
+the skills in `.claude/skills/` (both in Russian).
 
 ## Kinship with Okrestnosti
 
