@@ -373,9 +373,9 @@ input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px}
     <span class="brand">Раскадровка</span>
     <span class="status" role="status"><span class="dot" id="dot" aria-hidden="true"></span><span id="statusText">панель готова</span></span>
   </header>
-  <nav class="rail" id="rail" aria-label="Книга и этапы"></nav>
+  <nav class="rail" id="rail"></nav>
   <main class="work" id="work"></main>
-  <aside class="queue" aria-label="Задания"><h2>Задания</h2><div class="jobs" id="jobs"></div></aside>
+  <aside class="queue"><h2 id="queueTitle">Задания</h2><div class="jobs" id="jobs"></div></aside>
 </div>
 
 <script>
@@ -383,7 +383,378 @@ const state = {screen: 'books', slug: null, books: [], book: null, styles: [], j
                batch: null, openLog: null, wideLog: null, error: null, ready: false,
                total: 0, settings: null, git: null, showAll: false,
                draw: {style: null, refs: '', composition: true}, showFound: false,
-               checked: null, openHistory: null, openRecord: null, loaded: null, width: 1};
+               checked: null, openHistory: null, openRecord: null, loaded: null, width: 1,
+               lang: 'ru'};
+
+// — язык интерфейса —
+//
+// Ключ перевода — сама русская фраза: так её видно в коде на месте, и непереведённое
+// показывается по-русски, а не пустотой или слугом. Данные не переводятся никогда:
+// имена героев, названия книг и то, что написал агент, остаются как есть.
+const EN = {
+  "Язык": "Language",
+  "Язык интерфейса": "Interface language",
+  "Переводится то, что написала панель. Имена героев, описания и тексты агента остаются как есть — это данные книги.": "Only what the panel itself wrote is translated. Character names, descriptions and the agent’s own text stay as they are — that is the book’s data.",
+  "язык не сохранился: {why}": "language was not saved: {why}",
+  "Задания": "Jobs",
+  "Книга и этапы": "Book and steps",
+  "книг нет": "no books",
+  "не разобрана": "not parsed",
+  "разобрана, индекс есть": "parsed, index built",
+  "разобрана, индекса нет": "parsed, no index",
+  "в песочнице": "sandboxed",
+  "без песочницы": "no sandbox",
+  "песочница: пишет только в рабочий каталог": "sandboxed: writes only inside the working directory",
+  "без песочницы: пишет куда угодно, границы держит проверка": "no sandbox: writes anywhere; only the job’s own checks hold the line",
+  "ответ не разобрался": "the answer did not parse",
+  "когда — неизвестно": "date unknown",
+  "идёт": "running",
+  "из {cap} до таймаута": "of {cap} until timeout",
+  "свободных полос нет, рядом идёт {n}": "no free lane, {n} running",
+  "ждёт очереди": "waiting",
+  ", {n}-е по счёту": ", {n} in line",
+  "шло": "took",
+  "кончилось": "finished",
+  "попыток {n}": "{n} attempts",
+  "ещё не начиналось": "not started yet",
+  "оператор работает": "operator working",
+  "панель готова": "panel ready",
+  "листов {a} из {b}": "{a} of {b} sheets",
+  "записей нет": "no records",
+  "с кадрами {a} из {b}": "{a} of {b} with frames",
+  "партий нет": "no batches",
+  "направлений {n}": "{n} directions",
+  "направлений нет": "no directions",
+  "Этапы": "Steps",
+  ", этап {n} из {all}, ": ", step {n} of {all}, ",
+  "пройден": "done",
+  "начат": "started",
+  "не начат": "not started",
+  "Книги": "Books",
+  "Персонажи": "Characters",
+  "Партии": "Batches",
+  "Стили": "Styles",
+  "приём и разбор": "intake and parsing",
+  "библия и листы": "bible and sheets",
+  "карточки и кадры": "cards and frames",
+  "направления и эталоны": "directions and references",
+  "Книга": "Book",
+  "книг ещё нет — заведите первую на экране «Книги»": "no books yet — add the first one on Books",
+  "Книгу читает": "Book read by",
+  "Кто читает книгу": "Who reads the book",
+  "рисует всегда {who}": "always drawn by {who}",
+  "Рядом заданий": "Jobs at once",
+  "Сколько заданий идут рядом": "How many jobs run at once",
+  "по одному, как было": "one at a time, as before",
+  "до {n} непересекающихся заданий разом — и столько же прогонов Codex": "up to {n} non-conflicting jobs at once — and as many Codex runs",
+  "Спорящие за один файл всё равно идут по очереди: записи героев одной книги — по одной, листы и разные книги — рядом.": "Jobs that touch the same file still queue up: records of one book go one by one, sheets and different books run side by side.",
+  "Текст книги в репозиторий не попадает: файл лежит в": "The book text never enters the repository: the file lives in",
+  "разбор — в": "the parse in",
+  "оба вне git.": "both outside git.",
+  "В дереве изменений:": "Changes in the tree:",
+  "Коммит — руками.": "Commit by hand.",
+  "Дерево чистое.": "Tree is clean.",
+  "скрыть": "hide",
+  "аудит {n} из 10": "understanding {n} of 10",
+  "книга даёт": "the book gives it",
+  "книга не даёт, искали": "the book does not give it, searched",
+  "книга даёт наполовину": "the book gives it in part",
+  "не найдено": "not found",
+  "просели": "thin",
+  "книга не даёт": "the book does not give",
+  "Искали": "Searched",
+  "аудита нет": "no audit",
+  "Каждая клетка либо полная, либо объяснена пробелом: книга отдала всё, что у неё есть. Порога такая запись не спрашивает — недосказанное уйдёт в промпт как «оставь обычным»": "Every trait is either full or explained by a gap: the book has given all it has. Such a record does not ask for the threshold — what is unsaid goes into the prompt as “keep it ordinary”",
+  "книга отдала всё": "the book gave all it has",
+  "Пробелы записаны по прежней записи: с тех пор её переписали, и добор нужен заново": "The gaps were written for an earlier record: it has been rewritten since, so a second pass is needed again",
+  "пробелы устарели": "gaps are stale",
+  "{n} не сходится": "{n} inconsistent",
+  "не хватает": "missing",
+  "запись годна": "record is sound",
+  "что в записи": "what is in the record",
+  "Десять клеток поимённо и текст, который уйдёт генератору": "All ten traits by name and the exact text the generator will receive",
+  "клетки нет в записи": "trait missing from the record",
+  "нельзя": "not possible",
+  "нужна запись": "needs a record",
+  "нет балла": "no score",
+  "книга не даёт больше": "the book gives no more",
+  "балл ниже порога": "below threshold",
+  "возраст": "age",
+  "сложение": "build",
+  "лицо": "face",
+  "глаза": "eyes",
+  "волосы": "hair",
+  "кожа": "skin",
+  "одежда": "clothing",
+  "экипировка": "gear",
+  "приметы": "marks",
+  "осанка": "bearing",
+  "имя": "name",
+  "описание": "description",
+  "описание для промпта": "prompt description",
+  "локаторы": "locators",
+  "балл": "score",
+  "аудит": "audit",
+  "лист": "sheet",
+  "хеш листа": "sheet hash",
+  "промпт листа": "sheet prompt",
+  "пробелы": "gaps",
+  "отпечаток пробелов": "gaps fingerprint",
+  "время пробелов": "gaps time",
+  "разобрана": "parsed",
+  "да": "yes",
+  "нет": "no",
+  "абзацев": "paragraphs",
+  "индекс": "index",
+  "есть": "built",
+  "героев": "characters",
+  "листов": "sheets",
+  "партий": "batches",
+  "разбирается…": "parsing…",
+  "Файл книги на месте, разбора нет — так бывает после клона: кеш вне git": "The book file is here but the parse is not — normal after a clone: the cache is outside git",
+  "Разобрать": "Parse",
+  "файла книги нет: положите его в": "no book file: put it in",
+  "индекс строится…": "building index…",
+  "Кто в книге есть, где описан и какие абзацы просятся в кадр; минута-две": "Who is in the book, where they are described, which paragraphs ask to be drawn; a minute or two",
+  "Пересобрать индекс": "Rebuild index",
+  "Построить индекс": "Build index",
+  "Персонажи книги →": "Characters of this book →",
+  "Каждая книга проходит один путь: разбор на абзацы, индекс лиц и сцен, библия и листы персонажей, партии кадров. Панель показывает, где книга стоит сейчас.": "Every book follows one path: parsing into paragraphs, an index of names and scenes, the bible and character sheets, batches of frames. The panel shows where the book stands now.",
+  "Завести книгу": "Add a book",
+  "Файл fb2, epub или txt. Он ляжет в": "An fb2, epub or txt file. It will be placed in",
+  "слаг": "slug",
+  "— эта папка вне git, текст книги в репозиторий не попадает никогда. Разбор на главы и абзацы идёт заданием, минуту-другую.": "— that folder is outside git, the book text never enters the repository. Parsing into chapters and paragraphs runs as a job, a minute or two.",
+  "Название, автора, переводчика, год и издание панель прочтёт из самого файла, слаг сложит из названия — переписывать их отсюда незачем. За вами остаются права: срок охраны из метаданных не выводится.": "The panel reads title, author, translator, year and edition from the file itself and builds the slug from the title — there is nothing to retype. Rights stay with you: no metadata tells you when copyright expires.",
+  "Файл книги": "Book file",
+  "Выбрать файл": "Choose file",
+  "fb2, epub или txt — файл не выбран": "fb2, epub or txt — no file chosen",
+  "Слаг": "Slug",
+  "выберется из названия": "taken from the title",
+  "Название": "Title",
+  "Война миров": "The War of the Worlds",
+  "Автор": "Author",
+  "Герберт Уэллс": "H. G. Wells",
+  "Перевод": "Translator",
+  "М. Зенкевич": "M. Zenkevich",
+  "Издание": "Edition",
+  "Гослитиздат, 1935": "Heinemann, 1898",
+  "Год": "Year",
+  "Права": "Rights",
+  "свободна": "free",
+  "под охраной": "in copyright",
+  "Основание — чем подтверждается статус прав": "Basis — what supports the rights status",
+  "автор умер в 1946, срок истёк в обеих юрисдикциях": "the author died in 1946, the term has expired in both jurisdictions",
+  "только пронумерованные главы — отбросить титулы и оглавление": "numbered chapters only — drop front matter and the table of contents",
+  "Завести и разобрать": "Add and parse",
+  "Книги в работе": "Books in progress",
+  "Разбор и индекс — детерминированные шаги, их делают те же скрипты, что в терминале. Индекс нужен записям героев: он подсказывает агенту, где книга описывает внешность.": "Parsing and indexing are deterministic steps, done by the same scripts as in the terminal. The index serves the character records: it tells the agent where the book describes appearance.",
+  "Книг пока нет — заведите первую.": "No books yet — add the first one.",
+  "Книга не выбрана.": "No book selected.",
+  "открыть лист целиком": "open the full sheet",
+  "лист внешности": "reference sheet",
+  "нет листа": "no sheet",
+  "лист на приёмке": "sheet awaiting your verdict",
+  "лист принят": "sheet accepted",
+  "листа нет": "no sheet yet",
+  "Запись героя переписали после того, как лист сделан: лист показывает прежнего человека": "The record was rewritten after the sheet was drawn: the sheet shows an earlier person",
+  "лист по прежней записи": "sheet from an earlier record",
+  "прежних листов: {n}": "earlier sheets: {n}",
+  "Прежние листы этого героя: сравнить и вернуть": "Earlier sheets of this character: compare and restore",
+  "добирает…": "second pass…",
+  "собирается…": "collecting…",
+  "Допишет недостающее": "Will fill in what is missing",
+  "Перепишет готовую запись целиком": "Will rewrite the finished record in full",
+  "работа около 10–16 минут": "takes about 10–16 minutes",
+  "Собрать запись": "Collect record",
+  "Собрать заново": "Collect again",
+  "Второй заход только по просевшим клеткам": "A second pass over the thin traits only",
+  "Что книга даёт — поднимет, чего не даёт — объяснит и больше не спросит": "What the book gives it will raise; what it does not, it will explain and never ask again",
+  "Добрать": "Second pass",
+  "Герой и лист": "Character and sheet",
+  "Понимание и проверка": "Understanding and checks",
+  "Запись": "Record",
+  "Лист": "Sheet",
+  "Записей нет — заведите первую из списка находок.": "No records yet — add the first one from the list of found names.",
+  "Запись героя — внешность словами книги с указателями на абзацы и балл понимания из десяти клеток. Порог для листа — 7 из 10, но закрытая запись порога не спрашивает: если каждая клетка либо полная, либо объяснена пробелом, книга отдала всё, и недосказанное уходит в промпт листа отдельной строкой — «оставь обычным», вместо выдуманного шрама.": "A character record is appearance in the book’s own words, with paragraph locators and an understanding score out of ten. The threshold for a sheet is 7 of 10 — but a closed record does not ask for it: if every trait is either full or explained by a gap, the book has given all it has, and what is unsaid goes into the sheet prompt as a line of its own — “keep it ordinary”, instead of an invented scar.",
+  "Записи и листы": "Records and sheets",
+  "«Собрать запись» ставит задание оператору: он читает книгу через кеш, пишет запись целиком и сам проходит проверку — 10–16 минут на героя. «Сделать лист» рисует по готовой записи три проекции без манеры и без сцены, 2–4 минуты; лист ложится в": "“Collect record” hands a job to the operator: it reads the book through the cache, writes the record in full and passes the checks itself — 10–16 minutes per character. “Draw sheet” renders three views from the finished record, with no manner and no scene, in 2–4 minutes; the sheet lands in",
+  "и ждёт вашего «Принять». Кнопка листа выключена, пока в записи нет": "and waits for your “Accept”. The sheet button stays off while the record has no",
+  "— одной фразы о том, кто это: её пишет агент, читавший книгу. «Добрать» — второй заход по просевшим клеткам с другим правилом чтения: прямое описание даёт клетке 1, признак сословия или ремесла, к которому книга героя прямо причисляет, — 0.5, а молчание книги записывается пробелом и больше не спрашивается.": "— one phrase saying who this is, written by the agent that read the book. “Second pass” goes over the thin traits again under a different rule: a direct description scores 1, a trait of the caste or trade the book explicitly assigns them scores 0.5, and the book’s silence is written down as a gap and never asked about again.",
+  "Кого нашла книга": "Who the book found",
+  "Имена находит индекс — он читает книгу и считает упоминания. Вы выбираете, кого вести дальше; кто это такой и как выглядит, напишет агент, читая книгу.": "The index finds the names — it reads the book and counts mentions. You choose who to carry forward; who they are and how they look is written by the agent, reading the book.",
+  "Книга ещё не разобрана на абзацы — без разбора ни имён, ни абзацев не найти.": "The book is not parsed into paragraphs yet — without that there are neither names nor paragraphs to find.",
+  "Индекс не построен: он и подскажет имена.": "The index is not built: it is what suggests the names.",
+  "Все найденные имена уже заведены.": "Every name found already has a record.",
+  "Индекс никого не нашёл — заведите запись по ключу вручную в bible.json.": "The index found no one — add a record by key by hand in bible.json.",
+  "На экран «Книги» →": "Go to Books →",
+  "упоминаний": "mentions",
+  "Панель запомнит, как книга его зовёт, и поставит задание": "The panel will remember what the book calls them and queue the job",
+  "Завести запись": "Add record",
+  "Показать только частых": "Show frequent only",
+  "Показать всех ({n})": "Show all ({n})",
+  "рисуется…": "drawing…",
+  "Лист переедет в книгу и запишется в библию": "The sheet moves into the book and is written into the bible",
+  "Принять": "Accept",
+  "Убрать лист в историю и остаться без листа": "Move the sheet to history and stay without one",
+  "Отклонить": "Reject",
+  "Нарисовать заново тем же промптом": "Draw again with the same prompt",
+  "Заново": "Again",
+  "Сделать лист": "Draw sheet",
+  "Прежний лист останется, пока новый не примут": "The old sheet stays until a new one is accepted",
+  "Рисование идёт 2–4 минуты": "Drawing takes 2–4 minutes",
+  "Пересобрать лист": "Redraw sheet",
+  "из 10": "of 10",
+  "Из чего соберут лист": "What the sheet will be built from",
+  "Ровно этот текст уходит генератору.": "This exact text goes to the generator.",
+  "Раздел <code>Unspecified</code> собран из пробелов: он велит оставить несказанное обычным, вместо выдуманного.": "The <code>Unspecified</code> section is built from the gaps: it tells the generator to keep the unsaid ordinary instead of inventing it.",
+  "Пробелов нет — раздела <code>Unspecified</code> в нём тоже нет.": "There are no gaps — so there is no <code>Unspecified</code> section either.",
+  "промпта нет: в записи не хватает полей": "no prompt: the record is missing fields",
+  "Прежние листы": "Earlier sheets of",
+  "картинка остаётся, даже когда её заменили или отклонили. «Вернуть» меняет местами нынешний лист и выбранный.": "the image stays even after it was replaced or rejected. “Restore” swaps the current sheet with the chosen one.",
+  "открыть целиком": "open full size",
+  "прежний лист": "earlier sheet",
+  "тот же промпт": "same prompt",
+  "запись с тех пор переписали": "record rewritten since",
+  "Вернуть": "Restore",
+  "заменён": "replaced",
+  "отклонён": "rejected",
+  "убран": "removed",
+  "с шаблоном {n}": "with template {n}",
+  "без шаблона композиции": "no composition template",
+  "эталоны {list}": "references {list}",
+  "без эталонов": "no references",
+  "кадр": "frame",
+  "кадра нет": "no frame",
+  "шаблон": "template",
+  "эталоны": "references",
+  "кадров ещё нет — есть только карточка": "no frames yet — only the card",
+  "гл": "ch",
+  "{n} по порядку": "{n} in order",
+  "полуинтервал абзацев: правая граница не входит": "half-open paragraph range: the right bound is excluded",
+  "по плану шаблон": "planned template",
+  "отрывок книги": "book excerpt",
+  "Чем рисовать": "What to draw with",
+  "Направление задаёт манеру, шаблон композиции — где стоят тела. Эталоны манеры берутся по номерам: пусто — панель возьмёт первые {n}. Настройка одна на партию: поставили — и рисуете кадр за кадром.": "The direction sets the manner, the composition template sets where the bodies stand. Manner references are taken by number: leave it empty and the panel takes the first {n}. One setting per batch: set it once, then draw frame after frame.",
+  "Направление": "Direction",
+  "Эталоны манеры": "Manner references",
+  "ref-01 ref-03 — пусто значит по порядку": "ref-01 ref-03 — empty means in order",
+  "брать шаблон композиции из карточки": "take the composition template from the card",
+  "Сверка:": "Check:",
+  "сходится кадров {a} из {b}": "{a} of {b} frames consistent",
+  ", замечаний {n}": ", {n} complaints",
+  ", замечаний нет": ", no complaints",
+  "права": "rights",
+  "Перепишет manifest, README и галерею по тому, что лежит на диске": "Rewrites the manifest, README and gallery from what is on disk",
+  "Перезаписать манифест — уберёт записей: {n}": "Rewrite manifest — will drop {n} entries",
+  "Перезаписать манифест и галерею": "Rewrite manifest and gallery",
+  "Кадр рисуется 2–6 минут; прежний останется, если у нового другое имя": "A frame takes 2–6 minutes; the old one stays if the new one has a different name",
+  "Ещё кадр": "Another frame",
+  "Нарисовать кадр": "Draw frame",
+  "← Все партии": "← All batches",
+  "сцен": "scenes",
+  "с кадром": "with a frame",
+  "Карточка сцены": "Scene card",
+  "Карточка — замысел кадра словами: что происходит, кто в кадре, какой отрывок книги за этим стоит. Пишет её оператор по вашей фразе, читая книгу через кеш; 5–12 минут. Манеры в карточке нет — манера живёт в направлении.": "A card is the frame’s intent in words: what happens, who is in it, which passage of the book stands behind it. The operator writes it from your one-line brief, reading the book through the cache; 5–12 minutes. There is no manner in a card — the manner lives in the direction.",
+  "Что в кадре, одной фразой": "What is in the frame, in one line",
+  "Серый капитан швыряет камешек в шахтёра, и шахтёр кланяется": "A Gray captain flicks a pebble at a miner, and the miner bows",
+  "Имя карточки": "Card name",
+  "Где это в книге": "Where this is in the book",
+  "глава 2, пересменка в депо": "chapter 2, shift change in the depot",
+  "Порядок": "Order",
+  "карточка пишется…": "writing card…",
+  "Написать карточку": "Write card",
+  "Кадры": "Frames",
+  "Кадр рисуется по карточке, направлению и листам героев. Отбор — за вами: панель ничего не выбрасывает, кадры складываются рядом.": "A frame is drawn from the card, the direction and the character sheets. Selection is yours: the panel throws nothing away, frames pile up side by side.",
+  "Без кадра сейчас {n}.": "{n} without a frame right now.",
+  "Кадр есть у каждой сцены.": "Every scene has a frame.",
+  "{n} кадров — это примерно {m} минут работы оператора": "{n} frames is roughly {m} minutes of operator time",
+  "Нарисовать недостающие ({n}) — около {m} мин": "Draw the missing ({n}) — about {m} min",
+  "Ничего не меняет: пересобирает промпты и сверяет их с диском, считает хеши, проверяет права": "Changes nothing: rebuilds the prompts, compares them with disk, computes hashes, checks rights",
+  "Проверить партию": "Check batch",
+  "Партия — замысел серии: направление, отобранные сцены, карточки и кадры. Манифест пишется только по существующим кадрам.": "A batch is the intent of a series: a direction, the chosen scenes, the cards and the frames. The manifest is written only from frames that exist.",
+  "Завести партию": "Add a batch",
+  "Партия — папка в книге с карточками сцен, промптами и манифестом. Номер панель поставит сама, следующий свободный.": "A batch is a folder inside the book holding scene cards, prompts and a manifest. The panel assigns the number itself, the next free one.",
+  "Имя": "Name",
+  "Проба нескольких направлений": "A trial of several directions",
+  "Короткое имя в файлах": "Short name in files",
+  "выбрать у каждого кадра": "choose per frame",
+  "Замысел серии": "Intent of the series",
+  "Первые десять глав, по четыре кадра на главу": "The first ten chapters, four frames per chapter",
+  "направление не задано": "no direction set",
+  "карточек": "cards",
+  "кадров": "frames",
+  "Открыть": "Open",
+  "Партий пока нет — заведите первую.": "No batches yet — add the first one.",
+  "Направлений нет. Они лежат в": "No directions yet. They live in",
+  "эталоны — в": "references in",
+  "Направление держит манеру и тональный ключ. Эталоны собственной генерации: собранные со свободных источников картинки нужной манеры не дают. Направление выбирают глазами по эталонам — поэтому здесь они крупные.": "A direction holds the manner and the tonal key. The references are generated here: pictures gathered from free sources do not give the manner you need. A direction is chosen by eye from its references — which is why they are large here.",
+  "эталонов": "references",
+  "Читаю репозиторий…": "Reading the repository…",
+  "Лог задания": "Job log",
+  "загрузка…": "loading…",
+  "Свернуть": "Collapse",
+  "Скрыть": "Hide",
+  "Пока пусто. Задания появляются здесь, когда вы нажимаете кнопку на экране этапа: панель показывает ход, лог и даёт снять задание.": "Empty for now. Jobs appear here when you press a button on a step screen: the panel shows progress, the log, and lets you cancel.",
+  "Скрыть лог": "Hide log",
+  "Свернуть лог": "Collapse log",
+  "Лог": "Log",
+  "Развернуть": "Expand",
+  "Снять": "Cancel",
+  "Добрать заново": "Second pass again",
+  "Показать все ({n})": "Show all ({n})",
+  "Убрать законченные": "Clear finished",
+  "(лог пуст)": "(log is empty)",
+  "сверяю…": "checking…",
+  "выберите файл книги": "choose a book file",
+  "файл больше 40 МБ": "the file is over 40 MB",
+  "отправляю…": "sending…",
+  "читаю, что книга знает о себе…": "reading what the book knows about itself…",
+  "Из файла: {list}. Проверьте и укажите права.": "From the file: {list}. Check them and set the rights.",
+  "Файл о себе ничего не говорит — заполните поля сами.": "The file says nothing about itself — fill the fields in yourself.",
+  "метаданные не прочитались: {why}. Заполните поля сами.": "metadata did not parse: {why}. Fill the fields in yourself.",
+  "МБ": "MB",
+  "ширина не сменилась: {why}": "width did not change: {why}",
+  "оператор не сменился: {why}": "operator did not change: {why}",
+  "Из манифеста будут убраны записи: {n}. README и галерея будут переписаны. Кадры на диске останутся. Продолжить?": "{n} entries will be dropped from the manifest. The README and the gallery will be rewritten. Frames on disk stay. Continue?",
+  "разбор книги": "parsing the book",
+  "индекс лиц и сцен": "index of names and scenes",
+  "запись в библию": "record into the bible",
+  "добор внешности": "second pass on appearance",
+  "лист персонажа": "character sheet",
+  "карточка сцены": "scene card",
+  "промпт сцены": "scene prompt",
+  "кадр сцены": "scene frame",
+  "регистрация партии": "batch registration",
+  "страница стилей": "styles page",
+  "в очереди": "queued",
+  "готово": "done",
+  "не прошло": "failed",
+  "снято": "cancelled",
+  "прервано": "interrupted",
+  "библия книги": "the book’s bible",
+  "книга целиком": "the whole book",
+  "лист героя": "a character sheet",
+  "партия": "a batch",
+  "января": "January",
+  "февраля": "February",
+  "марта": "March",
+  "апреля": "April",
+  "мая": "May",
+  "июня": "June",
+  "июля": "July",
+  "августа": "August",
+  "сентября": "September",
+  "октября": "October",
+  "ноября": "November",
+  "декабря": "December",
+};
+
+function t(text, fill) {
+  let out = (state.lang === 'en' && EN[text]) || text;
+  if (fill) for (const [key, value] of Object.entries(fill))
+    out = out.split('{' + key + '}').join(value);
+  return out;
+}
 
 const SCREENS = [
   ['books', 'Книги', 'приём и разбор'],
@@ -429,7 +800,7 @@ function clip(text, n) {
 
 async function api(path, options) {
   const answer = await fetch(path, {headers: {'Content-Type': 'application/json'}, ...options});
-  const data = await answer.json().catch(() => ({error: 'ответ не разобрался'}));
+  const data = await answer.json().catch(() => ({error: t('ответ не разобрался')}));
   if (!answer.ok) throw new Error(data.error || answer.statusText);
   return data;
 }
@@ -447,6 +818,7 @@ async function load() {
     if (state.batch) state.batch = await api(
       `/api/books/${encodeURIComponent(state.slug)}/batches/${encodeURIComponent(state.batch.name)}`);
     if (!state.settings) state.settings = await api('/api/settings');
+    state.lang = state.settings.lang || 'ru';
     state.git = await api('/api/git');
   } catch (error) { state.error = error.message; }
   state.ready = true;
@@ -466,13 +838,13 @@ const MONTHS = ['января', 'февраля', 'марта', 'апреля', 
 function stampRu(iso) {
   // История идёт днями, поэтому число обязательно: «12:30» в списке из пяти вариантов
   // не отличает вчерашний от сегодняшнего.
-  if (!iso) return 'когда — неизвестно';
+  if (!iso) return t('когда — неизвестно');
   const d = new Date(iso);
   if (isNaN(d)) return esc(iso);
   const hh = String(d.getHours()).padStart(2, '0');
   const mm = String(d.getMinutes()).padStart(2, '0');
   const year = d.getFullYear() === new Date().getFullYear() ? '' : ` ${d.getFullYear()}`;
-  return `${d.getDate()} ${MONTHS[d.getMonth()]}${year}, ${hh}:${mm}`;
+  return `${d.getDate()} ${t(MONTHS[d.getMonth()])}${year}, ${hh}:${mm}`;
 }
 
 function clock(sec) {
@@ -485,15 +857,16 @@ function tick() {
   // Часы бегущего задания обновляются на месте, без пересборки очереди: иначе открытый
   // лог мигал бы раз в секунду.
   for (const el of document.querySelectorAll('[data-since]')) {
-    el.textContent = 'идёт ' + clock(seconds(el.dataset.since));
+    el.textContent = t('идёт') + ' ' + clock(seconds(el.dataset.since));
   }
 }
 
 function spent(job, place) {
   if (job.status === 'running' && job.started) {
     // Часы без знаменателя не отвечают на вопрос «это половина пути или конец?».
-    const cap = state.settings ? ` из ${clock(state.settings.timeout)} до таймаута` : '';
-    return `<div class="clock"><span data-since="${esc(job.started)}">идёт ${
+    const cap = state.settings
+      ? ' ' + t('из {cap} до таймаута', {cap: clock(state.settings.timeout)}) : '';
+    return `<div class="clock"><span data-since="${esc(job.started)}">${t('идёт')} ${
       clock(seconds(job.started))}</span>${esc(cap)}</div>`;
   }
   if (job.status === 'queued') {
@@ -501,18 +874,19 @@ function spent(job, place) {
     // при трёх это враньё: рядом не идёт не потому, что нельзя, а потому что занят файл.
     const held = (job.waiting_for || [])[0];
     const why = held
-      ? `занято: ${esc(LOCK_NAMES[held.lock.split(':')[0]] || held.lock.split(':')[0])}${
+      ? `занято: ${esc(t(LOCK_NAMES[held.lock.split(':')[0]] || held.lock.split(':')[0]))}${
           held.label ? ' — ' + esc(held.label) : ''}`
-      : `свободных полос нет, рядом идёт ${state.width || 1}`;
-    return `<div class="clock">ждёт очереди${place ? `, ${place}-е по счёту` : ''} · ${why}</div>`;
+      : t('свободных полос нет, рядом идёт {n}', {n: state.width || 1});
+    return `<div class="clock">${t('ждёт очереди')}${
+      place ? t(', {n}-е по счёту', {n: place}) : ''} · ${why}</div>`;
   }
   if (job.started && job.finished) {
     const sec = Math.max(0, Math.round((new Date(job.finished) - new Date(job.started)) / 1000));
     const tries = (job.result && job.result.tries || []).length;
-    return `<div class="clock">шло ${clock(sec)} · кончилось ${esc(job.finished.slice(11))}${
-      tries > 1 ? ` · попыток ${tries}` : ''}</div>`;
+    return `<div class="clock">${t('шло')} ${clock(sec)} · ${t('кончилось')} ${
+      esc(job.finished.slice(11))}${tries > 1 ? ' · ' + t('попыток {n}', {n: tries}) : ''}</div>`;
   }
-  return '<div class="clock">ещё не начиналось</div>';
+  return `<div class="clock">${t('ещё не начиналось')}</div>`;
 }
 
 function jobSubject(job) {
@@ -544,7 +918,7 @@ async function pollJobs() {
     drawJobs();
     const busy = fresh.some(j => j.status === 'running');
     document.getElementById('dot').className = 'dot' + (busy ? ' busy' : '');
-    document.getElementById('statusText').textContent = busy ? 'Codex работает' : 'панель готова';
+    document.getElementById('statusText').textContent = busy ? t('оператор работает') : t('панель готова');
     if (finished) return load();
     // Состав идущих заданий изменился — кнопки на экране должны это показать.
     if (before !== fresh.filter(j => OPEN.includes(j.status)).map(j => j.id).join()) draw();
@@ -608,14 +982,16 @@ function stages() {
   const chars = book ? book.characters : 0, sheets = book ? book.sheets : 0;
   return {
     books: {done: !!(book && book.parsed && book.indexed), started: !!book,
-            note: !book ? 'книг нет' : !book.parsed ? 'не разобрана'
-                  : book.indexed ? 'разобрана, индекс есть' : 'разобрана, индекса нет'},
+            note: t(!book ? 'книг нет' : !book.parsed ? 'не разобрана'
+                  : book.indexed ? 'разобрана, индекс есть' : 'разобрана, индекса нет')},
     characters: {done: chars > 0 && sheets === chars, started: sheets > 0,
-                 note: chars ? `листов ${sheets} из ${chars}` : 'записей нет'},
+                 note: chars ? t('листов {a} из {b}', {a: sheets, b: chars}) : t('записей нет')},
     batches: {done: batches.length > 0 && shot === batches.length, started: batches.length > 0,
-              note: batches.length ? `с кадрами ${shot} из ${batches.length}` : 'партий нет'},
+              note: batches.length ? t('с кадрами {a} из {b}', {a: shot, b: batches.length})
+                                   : t('партий нет')},
     styles: {done: state.styles.length > 0, started: state.styles.length > 0,
-             note: state.styles.length ? `направлений ${state.styles.length}` : 'направлений нет'},
+             note: state.styles.length ? t('направлений {n}', {n: state.styles.length})
+                                       : t('направлений нет')},
   };
 }
 
@@ -629,7 +1005,7 @@ function drawRail() {
   const draws = operators.find(o => o.key === (state.settings || {}).draws);
   const spec = operators.find(o => o.key === now);
   document.getElementById('rail').innerHTML = `
-    <div class="kicker">Этапы</div>
+    <div class="kicker">${t('Этапы')}</div>
     ${SCREENS.map(([key, name], n) => {
       const s = done[key];
       return `
@@ -637,53 +1013,67 @@ function drawRail() {
         state.screen === key ? ' aria-current="step"' : ''}>
         <span class="mark${s.done ? '' : s.started ? ' part' : ''}" aria-hidden="true">${
           s.done ? '✓' : n + 1}</span>
-        <span><span class="stage-name">${name}</span> <span class="stage-sub">${esc(s.note)}</span></span>
-        <span class="sr">, этап ${n + 1} из ${SCREENS.length}, ${
-          s.done ? 'пройден' : s.started ? 'начат' : 'не начат'}</span>
+        <span><span class="stage-name">${esc(t(name))}</span> <span class="stage-sub">${esc(s.note)}</span></span>
+        <span class="sr">${t(', этап {n} из {all}, ', {n: n + 1, all: SCREENS.length})}${
+          s.done ? t('пройден') : s.started ? t('начат') : t('не начат')}</span>
       </button>`; }).join('')}
 
     <div class="rail-part">
-      <div class="kicker">Книга</div>
+      <div class="kicker">${t('Книга')}</div>
       ${state.books.length ? state.books.map(b => `
         <button class="pickable" data-pick="${esc(b.slug)}"${
           b.slug === state.slug ? ' aria-current="true"' : ''}>
           <span class="pick-name">${esc(b.title)}</span>
           <span class="pick-sub">${esc(b.author || b.slug)}</span>
         </button>`).join('')
-        : '<div class="rail-note">книг ещё нет — заведите первую на экране «Книги»</div>'}
+        : `<div class="rail-note">${t('книг ещё нет — заведите первую на экране «Книги»')}</div>`}
     </div>
 
     <div class="rail-part">
-      <div class="kicker">Книгу читает</div>
-      <div class="switch" role="group" aria-label="Кто читает книгу">
+      <div class="kicker">${t('Книгу читает')}</div>
+      <div class="switch" role="group" aria-label="${t('Кто читает книгу')}">
         ${operators.map(o => `
           <button class="pickable flat" data-operator="${esc(o.key)}"${
-            o.key === now ? ' aria-current="true"' : ''} title="${esc(o.sandbox)}">${
+            o.key === now ? ' aria-current="true"' : ''} title="${esc(t(o.sandbox))}">${
             esc(o.title)}</button>`).join('') || '<div class="rail-note">Codex</div>'}
       </div>
-      <div class="rail-note">${spec ? esc(spec.short) + ' · ' : ''}рисует всегда ${
-        draws ? esc(draws.title) : 'Codex'}</div>
+      <div class="rail-note">${spec ? esc(t(spec.short)) + ' · ' : ''}${
+        t('рисует всегда {who}', {who: draws ? esc(draws.title) : 'Codex'})}</div>
     </div>
 
     <div class="rail-part">
-      <div class="kicker">Рядом заданий</div>
-      <div class="switch" role="group" aria-label="Сколько заданий идут рядом">
+      <div class="kicker">${t('Рядом заданий')}</div>
+      <div class="switch" role="group" aria-label="${t('Сколько заданий идут рядом')}">
         ${Array.from({length: (state.settings || {}).max_jobs || 4}, (_, i) => i + 1).map(n => `
           <button class="pickable flat" data-jobs="${n}"${
             n === ((state.settings || {}).jobs || 1) ? ' aria-current="true"' : ''}
-            title="${n === 1 ? 'по одному, как было'
-                   : `до ${n} непересекающихся заданий разом — и столько же прогонов Codex`}">${
+            title="${n === 1 ? t('по одному, как было')
+                   : t('до {n} непересекающихся заданий разом — и столько же прогонов Codex',
+                       {n})}">${
             n}</button>`).join('')}
       </div>
-      <div class="rail-note">Спорящие за один файл всё равно идут по очереди: записи героев
-        одной книги — по одной, листы и разные книги — рядом.</div>
+      <div class="rail-note">${t('Спорящие за один файл всё равно идут по очереди: записи '
+        + 'героев одной книги — по одной, листы и разные книги — рядом.')}</div>
     </div>
 
-    <div class="note">Текст книги в репозиторий не попадает: файл лежит в
-      <b>books/${esc(state.slug || '…')}/source/</b>, разбор — в <b>cache/</b>, оба вне git.
+    <div class="rail-part">
+      <div class="kicker">${t('Язык')}</div>
+      <div class="switch" role="group" aria-label="${t('Язык интерфейса')}">
+        ${[['ru', 'Русский'], ['en', 'English']].map(([code, name]) => `
+          <button class="pickable flat" data-lang="${code}"${
+            code === state.lang ? ' aria-current="true"' : ''}>${name}</button>`).join('')}
+      </div>
+      <div class="rail-note">${t('Переводится то, что написала панель. Имена героев, описания '
+        + 'и тексты агента остаются как есть — это данные книги.')}</div>
+    </div>
+
+    <div class="note">${t('Текст книги в репозиторий не попадает: файл лежит в')}
+      <b>books/${esc(state.slug || '…')}/source/</b>, ${t('разбор — в')} <b>cache/</b>, ${
+      t('оба вне git.')}
       ${state.git ? (state.git.lines.length
-        ? `<br>В дереве изменений: <b>${state.git.lines.length}</b>. Коммит — руками.`
-        : '<br>Дерево чистое.') : ''}</div>`;
+        ? `<br>${t('В дереве изменений:')} <b>${state.git.lines.length}</b>. ${
+            t('Коммит — руками.')}`
+        : '<br>' + t('Дерево чистое.')) : ''}</div>`;
 }
 
 // Раскрывашка — не плашка состояния. Треугольник и подчёркивание говорят «нажми»,
@@ -691,19 +1081,19 @@ function drawRail() {
 function disclose(action, key, open, label, hint) {
   return `<button class="disclose" data-${action}="${esc(key)}" aria-expanded="${open}"
     title="${esc(hint)}"><span class="caret" aria-hidden="true">▸</span>${
-    open ? 'скрыть' : esc(label)}</button>`;
+    open ? t('скрыть') : esc(label)}</button>`;
 }
 
 function auditSquares(audit, understanding, gaps) {
-  const label = `аудит ${understanding ?? '?'} из 10`;
+  const label = t('аудит {n} из 10', {n: understanding ?? '?'});
   const cells = AUDIT_KEYS.map(k => {
     const v = audit[k];
     const kind = v === 1 ? 'full' : gaps[k] ? 'told' : v === 0.5 ? 'half' : '';
     // Подпись на каждой клетке, а не только на полоске: десять безымянных квадратов
     // показывают форму записи и молчат о том, что именно в ней понято.
-    return `<span class="cell ${kind}" title="${esc(AUDIT_NAMES[k])} — ${
-      v === 1 ? 'книга даёт' : gaps[k] ? 'книга не даёт, искали'
-      : v === 0.5 ? 'книга даёт наполовину' : 'не найдено'}"></span>`;
+    return `<span class="cell ${kind}" title="${esc(t(AUDIT_NAMES[k]))} — ${
+      v === 1 ? t('книга даёт') : gaps[k] ? t('книга не даёт, искали')
+      : v === 0.5 ? t('книга даёт наполовину') : t('не найдено')}"></span>`;
   }).join('');
   return `<div><span class="audit" role="img" aria-label="${esc(label)}">${cells}</span>`
        + `<span class="score">${understanding ?? '—'}</span></div>`;
@@ -713,40 +1103,44 @@ function auditLines(audit, gaps) {
   // Просевшая клетка и клетка, о которой книга молчит, — разные вещи. Первую добирают,
   // вторую уже добрали и выяснили, что добирать нечего. Это про запись, а не про правила,
   // и потому написано словами; правила живут в подсказках плашек.
-  const open = AUDIT_KEYS.filter(k => audit[k] !== 1 && !gaps[k]).map(k => AUDIT_NAMES[k]);
+  const open = AUDIT_KEYS.filter(k => audit[k] !== 1 && !gaps[k]).map(k => t(AUDIT_NAMES[k]));
   const told = AUDIT_KEYS.filter(k => audit[k] !== 1 && gaps[k]);
-  return (open.length ? `<div class="gaps">просели: ${esc(open.join(', '))}</div>` : '')
-       + (told.length ? `<div class="gaps">книга не даёт: ${told.map(k =>
-            `<span title="${esc(gaps[k].why + ' Искали: ' + gaps[k].looked)}"
-                   class="told-cell">${esc(AUDIT_NAMES[k])}</span>`).join(', ')}</div>` : '');
+  return (open.length ? `<div class="gaps">${t('просели')}: ${esc(open.join(', '))}</div>` : '')
+       + (told.length ? `<div class="gaps">${t('книга не даёт')}: ${told.map(k =>
+            `<span title="${esc(gaps[k].why + ' ' + t('Искали') + ': ' + gaps[k].looked)}"
+                   class="told-cell">${esc(t(AUDIT_NAMES[k]))}</span>`).join(', ')}</div>` : '');
 }
 
 function statusTags(c) {
   // Плашка с подсказкой вместо абзаца в каждой строке. Объяснение правила одно на всю
   // таблицу, а набрано оно было заново у каждого героя — это не сообщение, а шум.
   const tags = [];
-  if (!c.audit) tags.push('<span class="tag wait">аудита нет</span>');
-  if (c.closed) tags.push('<span class="tag ok" title="Каждая клетка либо полная, либо '
+  if (!c.audit) tags.push(`<span class="tag wait">${t('аудита нет')}</span>`);
+  if (c.closed) tags.push(`<span class="tag ok" title="${t('Каждая клетка либо полная, либо '
     + 'объяснена пробелом: книга отдала всё, что у неё есть. Порога такая запись не '
-    + 'спрашивает — недосказанное уйдёт в промпт как «оставь обычным»">книга отдала всё</span>');
-  if (c.gaps_stale) tags.push('<span class="tag wait" title="Пробелы записаны по прежней '
-    + 'записи: с тех пор её переписали, и добор нужен заново">пробелы устарели</span>');
+    + 'спрашивает — недосказанное уйдёт в промпт как «оставь обычным»')}">${
+    t('книга отдала всё')}</span>`);
+  if (c.gaps_stale) tags.push(`<span class="tag wait" title="${t('Пробелы записаны по прежней '
+    + 'записи: с тех пор её переписали, и добор нужен заново')}">${
+    t('пробелы устарели')}</span>`);
 
   const wrong = c.complaints.filter(x => x.level !== 'missing');
   // «Аудита нет» уже сказано плашкой слева: второй раз то же самое — не сообщение, а шум.
   const missing = c.complaints.filter(x => x.level === 'missing'
                                            && !(!c.audit && /нет поля audit\b/.test(x.text)));
-  if (wrong.length) tags.push(`<span class="tag bad">${wrong.length} не сходится</span>`);
+  if (wrong.length) tags.push(`<span class="tag bad">${
+    t('{n} не сходится', {n: wrong.length})}</span>`);
   if (missing.length) {
     const fields = missing.map(x => {
       const key = (x.text.match(/нет поля (\w+)/) || [])[1];
-      return key ? (FIELD_NAMES[key] || key) : x.text;
+      return key ? t(FIELD_NAMES[key] || key) : x.text;
     });
-    tags.push(`<span class="tag wait" title="${esc(missing.map(x => x.text).join('; '))}">не хватает: ${esc(fields.join(', '))}</span>`);
+    tags.push(`<span class="tag wait" title="${esc(missing.map(x => x.text).join('; '))}">${t('не хватает')}: ${esc(fields.join(', '))}</span>`);
   }
   // «Не сходится» и «не хватает» — разные вещи. Первое чинят, второе дописывают; если
   // красить одинаково, экран краснеет весь и перестаёт что-либо сообщать.
-  if (!wrong.length && !missing.length) tags.push('<span class="tag ok">запись годна</span>');
+  if (!wrong.length && !missing.length)
+    tags.push(`<span class="tag ok">${t('запись годна')}</span>`);
   return tags;
 }
 
@@ -756,8 +1150,8 @@ function understandingCell(c) {
   return (c.audit ? auditSquares(c.audit, c.understanding, gaps) + auditLines(c.audit, gaps) : '')
        + `<div class="pile tight">${statusTags(c).join('')}</div>`
        + (wrong.length ? `<div class="why">${wrong.map(x => esc(x.text)).join('<br>')}</div>` : '')
-       + disclose('record', c.key, state.openRecord === c.key, 'что в записи',
-                  'Десять клеток поимённо и текст, который уйдёт генератору');
+       + disclose('record', c.key, state.openRecord === c.key, t('что в записи'),
+                  t('Десять клеток поимённо и текст, который уйдёт генератору'));
 }
 
 function eyebrow() {
@@ -777,81 +1171,85 @@ function screenBooks() {
         <h2 class="name">${esc(b.title)}</h2>
         <div class="sub">${esc(b.author || '')} · <code>${esc(b.slug)}</code></div>
         <div class="kv">
-          <span>разобрана <b>${b.parsed ? 'да' : 'нет'}</b>${
-            b.parsed ? ` · абзацев <b>${b.paragraphs.toLocaleString('ru')}</b>` : ''}</span>
-          <span>индекс <b>${b.indexed ? 'есть' : 'нет'}</b></span>
-          <span>героев <b>${b.characters}</b></span>
-          <span>листов <b>${b.sheets}</b></span>
-          <span>партий <b>${b.batches}</b></span>
+          <span>${t('разобрана')} <b>${b.parsed ? t('да') : t('нет')}</b>${
+            b.parsed ? ` · ${t('абзацев')} <b>${b.paragraphs.toLocaleString(
+              state.lang === 'en' ? 'en' : 'ru')}</b>` : ''}</span>
+          <span>${t('индекс')} <b>${b.indexed ? t('есть') : t('нет')}</b></span>
+          <span>${t('героев')} <b>${b.characters}</b></span>
+          <span>${t('листов')} <b>${b.sheets}</b></span>
+          <span>${t('партий')} <b>${b.batches}</b></span>
         </div>
         <div class="actions">
-          ${ingest ? '<button class="btn btn-sm" disabled>разбирается…</button>'
+          ${ingest ? `<button class="btn btn-sm" disabled>${t('разбирается…')}</button>`
             : b.parsed ? ''
             : b.source ? `<button class="btn btn-sm btn-primary" data-parse="${esc(b.slug)}"
-                title="Файл книги на месте, разбора нет — так бывает после клона: кеш вне git">Разобрать</button>`
-            : `<span class="sub">файла книги нет: положите его в
+                title="${t('Файл книги на месте, разбора нет — так бывает после клона: кеш вне git')}">${
+                t('Разобрать')}</button>`
+            : `<span class="sub">${t('файла книги нет: положите его в')}
                 <code>books/${esc(b.slug)}/source/</code></span>`}
-          ${b.parsed ? (index ? '<button class="btn btn-sm" disabled>индекс строится…</button>'
+          ${b.parsed ? (index ? `<button class="btn btn-sm" disabled>${
+                t('индекс строится…')}</button>`
             : `<button class="btn btn-sm${b.indexed ? '' : ' btn-primary'}"
                 data-index="${esc(b.slug)}"
-                title="Кто в книге есть, где описан и какие абзацы просятся в кадр; минута-две">${
-                b.indexed ? 'Пересобрать индекс' : 'Построить индекс'}</button>`) : ''}
-          <button class="btn btn-sm" data-book="${esc(b.slug)}">Персонажи книги →</button>
+                title="${t('Кто в книге есть, где описан и какие абзацы просятся в кадр; минута-две')}">${
+                b.indexed ? t('Пересобрать индекс') : t('Построить индекс')}</button>`) : ''}
+          <button class="btn btn-sm" data-book="${esc(b.slug)}">${t('Персонажи книги →')}</button>
         </div>
       </div>`; }).join('');
-  return `<h1>Книги</h1>
-    <p class="lede">Каждая книга проходит один путь: разбор на абзацы, индекс лиц и сцен, библия
-    и листы персонажей, партии кадров. Панель показывает, где книга стоит сейчас.</p>
+  return `<h1>${t('Книги')}</h1>
+    <p class="lede">${t('Каждая книга проходит один путь: разбор на абзацы, индекс лиц и сцен, '
+    + 'библия и листы персонажей, партии кадров. Панель показывает, где книга стоит сейчас.')}</p>
     <div class="step">
       <div class="step-head"><span class="num" aria-hidden="true">1</span>
-        <div><h2>Завести книгу</h2>
-        <div class="step-sub">Файл fb2, epub или txt. Он ляжет в
-        <code>books/&lt;слаг&gt;/source/</code> — эта папка вне git, текст книги в репозиторий
-        не попадает никогда. Разбор на главы и абзацы идёт заданием, минуту-другую.
-        <br>Название, автора, переводчика, год и издание панель прочтёт из самого файла,
-        слаг сложит из названия — переписывать их отсюда незачем. За вами остаются права:
-        срок охраны из метаданных не выводится.</div></div></div>
+        <div><h2>${t('Завести книгу')}</h2>
+        <div class="step-sub">${t('Файл fb2, epub или txt. Он ляжет в')}
+        <code>books/&lt;${t('слаг')}&gt;/source/</code> ${t('— эта папка вне git, текст книги '
+        + 'в репозиторий не попадает никогда. Разбор на главы и абзацы идёт заданием, '
+        + 'минуту-другую.')}
+        <br>${t('Название, автора, переводчика, год и издание панель прочтёт из самого файла, '
+        + 'слаг сложит из названия — переписывать их отсюда незачем. За вами остаются права: '
+        + 'срок охраны из метаданных не выводится.')}</div></div></div>
       <form class="form" id="newbook">
-        <label class="wide-field" for="bookfile">Файл книги
+        <label class="wide-field" for="bookfile">${t('Файл книги')}
           <span class="file">
             <input type="file" name="file" id="bookfile" accept=".fb2,.epub,.txt">
-            <span class="btn">Выбрать файл</span>
-            <span class="file-name">fb2, epub или txt — файл не выбран</span>
+            <span class="btn">${t('Выбрать файл')}</span>
+            <span class="file-name">${t('fb2, epub или txt — файл не выбран')}</span>
           </span></label>
         <div class="wide-field filled" id="fromfile" hidden></div>
-        <label>Слаг<input name="slug" placeholder="выберется из названия" required
+        <label>${t('Слаг')}<input name="slug" placeholder="${t('выберется из названия')}" required
           pattern="[a-z0-9]+(-[a-z0-9]+)*"></label>
-        <label>Название<input name="title" placeholder="Война миров"></label>
-        <label>Автор<input name="author" placeholder="Герберт Уэллс"></label>
-        <label>Перевод<input name="translator" placeholder="М. Зенкевич"></label>
-        <label>Издание<input name="edition" placeholder="Гослитиздат, 1935"></label>
-        <label>Год<input name="year" type="number" min="1" max="2100" placeholder="1898"></label>
-        <label>Права
+        <label>${t('Название')}<input name="title" placeholder="${t('Война миров')}"></label>
+        <label>${t('Автор')}<input name="author" placeholder="${t('Герберт Уэллс')}"></label>
+        <label>${t('Перевод')}<input name="translator" placeholder="${t('М. Зенкевич')}"></label>
+        <label>${t('Издание')}<input name="edition" placeholder="${t('Гослитиздат, 1935')}"></label>
+        <label>${t('Год')}<input name="year" type="number" min="1" max="2100" placeholder="1898"></label>
+        <label>${t('Права')}
           <select name="rights">
-            <option value="public-domain">public-domain — свободна</option>
-            <option value="protected">protected — под охраной</option>
+            <option value="public-domain">public-domain — ${t('свободна')}</option>
+            <option value="protected">protected — ${t('под охраной')}</option>
           </select></label>
-        <label class="wide-field">Основание — чем подтверждается статус прав
-          <input name="basis" placeholder="автор умер в 1946, срок истёк в обеих юрисдикциях"></label>
+        <label class="wide-field">${t('Основание — чем подтверждается статус прав')}
+          <input name="basis" placeholder="${t('автор умер в 1946, срок истёк в обеих юрисдикциях')}"></label>
         <input type="hidden" name="staged" value="">
         <label class="check"><input type="checkbox" name="numbered_only">
-          только пронумерованные главы — отбросить титулы и оглавление</label>
-        <button class="btn btn-primary" type="submit">Завести и разобрать</button>
+          ${t('только пронумерованные главы — отбросить титулы и оглавление')}</label>
+        <button class="btn btn-primary" type="submit">${t('Завести и разобрать')}</button>
       </form>
     </div>
     ${state.books.length ? `<div class="step">
       <div class="step-head"><span class="num" aria-hidden="true">2</span>
-        <div><h2>Книги в работе</h2>
-        <div class="step-sub">Разбор и индекс — детерминированные шаги, их делают те же
-        скрипты, что в терминале. Индекс нужен записям героев: он подсказывает агенту,
-        где книга описывает внешность.</div></div></div>
+        <div><h2>${t('Книги в работе')}</h2>
+        <div class="step-sub">${t('Разбор и индекс — детерминированные шаги, их делают те же '
+        + 'скрипты, что в терминале. Индекс нужен записям героев: он подсказывает агенту, '
+        + 'где книга описывает внешность.')}</div></div></div>
       <div class="grid">${cards}</div></div>`
-    : `<div class="empty">Книг пока нет — заведите первую.</div>`}`;
+    : `<div class="empty">${t('Книг пока нет — заведите первую.')}</div>`}`;
 }
 
 function screenCharacters() {
   const book = state.book;
-  if (!book) return '<div class="empty">Книга не выбрана.</div>';
+  if (!book) return `<div class="empty">${t('Книга не выбрана.')}</div>`;
   const rows = book.characters.map(c => {
     const entryJob = openJobFor('bible-entry', c.key) || openJobFor('bible-refine', c.key);
     const sheetJob = openJobFor('sheet', c.key);
@@ -859,35 +1257,40 @@ function screenCharacters() {
     return `<tr>
       <td><div class="who">
         ${shown
-          ? `<a href="/file/${esc(shown)}" target="_blank" title="открыть лист целиком"><img class="sheet${
-              c.pending ? ' sheet-new' : ''}" src="/file/${esc(shown)}" alt="лист внешности: ${esc(c.name)}" loading="lazy" width="1536" height="1024"></a>`
-          : '<span class="sheet-none">нет листа</span>'}
+          ? `<a href="/file/${esc(shown)}" target="_blank" title="${t('открыть лист целиком')}"><img class="sheet${
+              c.pending ? ' sheet-new' : ''}" src="/file/${esc(shown)}" alt="${t('лист внешности')}: ${esc(c.name)}" loading="lazy" width="1536" height="1024"></a>`
+          : `<span class="sheet-none">${t('нет листа')}</span>`}
         <span><span class="name">${esc(c.name)}</span>
           <div class="sub"><code>${esc(c.key)}</code></div>
-          <div class="marks">${c.pending ? '<span class="tag wait">лист на приёмке</span>'
-                : c.sheet ? '<span class="tag ok">лист принят</span>'
-                          : '<span class="tag wait">листа нет</span>'}
+          <div class="marks">${c.pending ? `<span class="tag wait">${t('лист на приёмке')}</span>`
+                : c.sheet ? `<span class="tag ok">${t('лист принят')}</span>`
+                          : `<span class="tag wait">${t('листа нет')}</span>`}
             ${c.sheet && c.sheet_stale && !c.pending
-              ? '<span class="tag bad" title="Запись героя переписали после того, как лист сделан: лист показывает прежнего человека">лист по прежней записи</span>' : ''}
+              ? `<span class="tag bad" title="${t('Запись героя переписали после того, как лист '
+                  + 'сделан: лист показывает прежнего человека')}">${
+                  t('лист по прежней записи')}</span>` : ''}
             ${(c.history || []).length
               ? disclose('history', c.key, state.openHistory === c.key,
-                         `прежних листов: ${c.history.length}`,
-                         'Прежние листы этого героя: сравнить и вернуть') : ''}</div></span>
+                         t('прежних листов: {n}', {n: c.history.length}),
+                         t('Прежние листы этого героя: сравнить и вернуть')) : ''}</div></span>
       </div></td>
       <td><div class="stack">${understandingCell(c)}</div></td>
       <td>${entryJob
             ? `<div class="pile"><button class="btn btn-sm" disabled>${
                  entryJob.status === 'running'
-                 ? (entryJob.kind === 'bible-refine' ? 'добирает…' : 'собирается…')
-                 : 'ждёт очереди'}</button></div>`
+                 ? (entryJob.kind === 'bible-refine' ? t('добирает…') : t('собирается…'))
+                 : t('ждёт очереди')}</button></div>`
             : `<div class="pile">
                 <button class="btn btn-sm" data-entry="${esc(c.key)}"
-                 title="${c.complaints.length ? 'Допишет недостающее' : 'Перепишет готовую запись целиком'}; работа около 10–16 минут">${
-                 c.complaints.length ? 'Собрать запись' : 'Собрать заново'}</button>
+                 title="${c.complaints.length ? t('Допишет недостающее')
+                    : t('Перепишет готовую запись целиком')}; ${t('работа около 10–16 минут')}">${
+                 c.complaints.length ? t('Собрать запись') : t('Собрать заново')}</button>
                 ${(c.refine || []).length
                   ? `<button class="btn btn-sm" data-refine="${esc(c.key)}"
-                       title="Второй заход только по просевшим клеткам: ${esc(
-                         (c.refine || []).map(k => AUDIT_NAMES[k]).join(', '))}. Что книга даёт — поднимет, чего не даёт — объяснит и больше не спросит">Добрать (${
+                       title="${t('Второй заход только по просевшим клеткам')}: ${esc(
+                         (c.refine || []).map(k => t(AUDIT_NAMES[k])).join(', '))}. ${
+                         t('Что книга даёт — поднимет, чего не даёт — объяснит и больше не спросит')}">${
+                         t('Добрать')} (${
                        c.refine.length})</button>` : ''}
                </div>`}</td>
       <td>${sheetCell(c, sheetJob)}</td>
@@ -896,34 +1299,34 @@ function screenCharacters() {
   }).join('');
   const table = `<div class="wide"><table class="chars">
       <colgroup><col><col><col><col></colgroup>
-      <thead><tr><th scope="col">Герой и лист</th>
-        <th scope="col">Понимание и проверка</th>
-        <th scope="col">Запись</th><th scope="col">Лист</th></tr></thead>
-      <tbody>${rows || '<tr><td colspan="4" class="empty">Записей нет — заведите первую '
-        + 'из списка находок.</td></tr>'}</tbody>
+      <thead><tr><th scope="col">${t('Герой и лист')}</th>
+        <th scope="col">${t('Понимание и проверка')}</th>
+        <th scope="col">${t('Запись')}</th><th scope="col">${t('Лист')}</th></tr></thead>
+      <tbody>${rows || `<tr><td colspan="4" class="empty">${
+        t('Записей нет — заведите первую из списка находок.')}</td></tr>`}</tbody>
     </table></div>`;
   // Порядок блоков зависит от того, что человеку сейчас нужнее. Пока записей нет, главное на
   // экране — список находок; как только записи появились, главное — они, а находки уходят вниз.
   const empty = !book.characters.length;
-  return `${eyebrow()}<h1>Персонажи</h1>
-    <p class="lede">Запись героя — внешность словами книги с указателями на абзацы и балл
-    понимания из десяти клеток. Порог для листа — 7 из 10, но закрытая запись порога
-    не спрашивает: если каждая клетка либо полная, либо объяснена пробелом, книга отдала
-    всё, и недосказанное уходит в промпт листа отдельной строкой — «оставь обычным»,
-    вместо выдуманного шрама.</p>
+  return `${eyebrow()}<h1>${t('Персонажи')}</h1>
+    <p class="lede">${t('Запись героя — внешность словами книги с указателями на абзацы и балл '
+    + 'понимания из десяти клеток. Порог для листа — 7 из 10, но закрытая запись порога '
+    + 'не спрашивает: если каждая клетка либо полная, либо объяснена пробелом, книга отдала '
+    + 'всё, и недосказанное уходит в промпт листа отдельной строкой — «оставь обычным», '
+    + 'вместо выдуманного шрама.')}</p>
     ${empty ? foundBlock(1) : ''}
     <div class="step">
       <div class="step-head"><span class="num" aria-hidden="true">${empty ? 2 : 1}</span>
-        <div><h2>Записи и листы</h2>
-        <div class="step-sub">«Собрать запись» ставит задание Codex: он читает книгу через кеш,
-        пишет запись целиком и сам проходит проверку — 10–16 минут на героя. «Сделать лист»
-        рисует по готовой записи три проекции без манеры и без сцены, 2–4 минуты; лист ложится
-        в <code>cache/</code> и ждёт вашего «Принять». Кнопка листа выключена, пока в записи
-        нет <code>subject_en</code> — одной фразы о том, кто это: её пишет агент, читавший
-        книгу. «Добрать» — второй заход по просевшим клеткам с другим правилом чтения:
-        прямое описание даёт клетке 1, признак сословия или ремесла, к которому книга героя
-        прямо причисляет, — 0.5, а молчание книги записывается пробелом и больше не
-        спрашивается.</div></div></div>
+        <div><h2>${t('Записи и листы')}</h2>
+        <div class="step-sub">${t('«Собрать запись» ставит задание оператору: он читает книгу '
+        + 'через кеш, пишет запись целиком и сам проходит проверку — 10–16 минут на героя. '
+        + '«Сделать лист» рисует по готовой записи три проекции без манеры и без сцены, '
+        + '2–4 минуты; лист ложится в')} <code>cache/</code> ${t('и ждёт вашего «Принять». '
+        + 'Кнопка листа выключена, пока в записи нет')} <code>subject_en</code> ${
+        t('— одной фразы о том, кто это: её пишет агент, читавший книгу. «Добрать» — второй '
+        + 'заход по просевшим клеткам с другим правилом чтения: прямое описание даёт клетке 1, '
+        + 'признак сословия или ремесла, к которому книга героя прямо причисляет, — 0.5, '
+        + 'а молчание книги записывается пробелом и больше не спрашивается.')}</div></div></div>
       ${table}
     </div>
     ${empty ? '' : foundBlock(2)}`;
@@ -933,20 +1336,21 @@ function foundBlock(n) {
   const found = (state.book.found || []).filter(f => !f.known);
   const parsed = (state.books.find(b => b.slug === state.slug) || {});
   const head = `<div class="step-head"><span class="num" aria-hidden="true">${n}</span>
-      <div><h2>Кого нашла книга</h2>
-      <div class="step-sub">Имена находит индекс — он читает книгу и считает упоминания.
-      Вы выбираете, кого вести дальше; кто это такой и как выглядит, напишет агент, читая
-      книгу.</div></div></div>`;
+      <div><h2>${t('Кого нашла книга')}</h2>
+      <div class="step-sub">${t('Имена находит индекс — он читает книгу и считает упоминания. '
+      + 'Вы выбираете, кого вести дальше; кто это такой и как выглядит, напишет агент, читая '
+      + 'книгу.')}</div></div></div>`;
   if (!found.length) {
     // Совет должен называть тот шаг, который сейчас мешает, а не следующий за ним.
     const why = !parsed.parsed
-      ? `Книга ещё не разобрана на абзацы — без разбора ни имён, ни абзацев не найти.`
-      : !parsed.indexed ? 'Индекс не построен: он и подскажет имена.'
-      : (state.book.found || []).length ? 'Все найденные имена уже заведены.'
-      : 'Индекс никого не нашёл — заведите запись по ключу вручную в bible.json.';
+      ? t('Книга ещё не разобрана на абзацы — без разбора ни имён, ни абзацев не найти.')
+      : !parsed.indexed ? t('Индекс не построен: он и подскажет имена.')
+      : (state.book.found || []).length ? t('Все найденные имена уже заведены.')
+      : t('Индекс никого не нашёл — заведите запись по ключу вручную в bible.json.');
     const step = !parsed.parsed || !parsed.indexed;
     return `<div class="step">${head}<div class="empty">${why}
-      ${step ? '<button class="btn btn-sm" data-go="books">На экран «Книги» →</button>' : ''}
+      ${step ? `<button class="btn btn-sm" data-go="books">${
+          t('На экран «Книги» →')}</button>` : ''}
       </div></div>`;
   }
   const shown = state.showFound ? found : found.slice(0, 12);
@@ -954,12 +1358,14 @@ function foundBlock(n) {
     <div class="found">${shown.map(f => `
       <div class="found-item">
         <div><b>${esc(f.name)}</b>
-          <div class="sub">упоминаний ${f.mentions} · <code>${esc(f.key)}</code></div></div>
+          <div class="sub">${t('упоминаний')} ${f.mentions} · <code>${esc(f.key)}</code></div></div>
         <button class="btn btn-sm" data-found="${esc(f.name)}" data-key="${esc(f.key)}"
-          title="Панель запомнит, что книга зовёт его «${esc(f.name)}», и поставит задание">Завести запись</button>
+          title="${t('Панель запомнит, как книга его зовёт, и поставит задание')}">${
+          t('Завести запись')}</button>
       </div>`).join('')}</div>
     ${found.length > 12 ? `<div class="actions"><button class="btn btn-sm" data-more-found="">${
-      state.showFound ? 'Показать только частых' : `Показать всех (${found.length})`}</button></div>`
+      state.showFound ? t('Показать только частых')
+                      : t('Показать всех ({n})', {n: found.length})}</button></div>`
       : ''}</div>`;
 }
 
@@ -975,29 +1381,31 @@ const BLOCK_SHORT = [[/subject_en|appearance_en/, 'нужна запись'],
                      [/порог/, 'балл ниже порога']];
 function shortBlock(why) {
   const hit = BLOCK_SHORT.find(([re]) => re.test(why || ''));
-  return hit ? hit[1] : 'нельзя';
+  return t(hit ? hit[1] : 'нельзя');
 }
 
 function sheetCell(c, job) {
   // Кнопка всегда внутри группы, даже когда она одна: иначе одиночная кнопка стоит
   // по другим правилам, чем пара, и строки перестают выравниваться между собой.
   if (job) return `<div class="pile"><button class="btn btn-sm" disabled>${
-    job.status === 'running' ? 'рисуется…' : 'ждёт очереди'}</button></div>`;
+    job.status === 'running' ? t('рисуется…') : t('ждёт очереди')}</button></div>`;
   if (c.pending) return `<div class="pile">
     <button class="btn btn-sm btn-primary" data-accept="${esc(c.key)}"
-      title="Лист переедет в books/${esc(state.slug)}/characters/ и запишется в библию">Принять</button>
+      title="${t('Лист переедет в книгу и запишется в библию')}">${t('Принять')}</button>
     <button class="btn btn-sm" data-reject="${esc(c.key)}"
-      title="Стереть собранный лист и остаться без листа">Отклонить</button>
+      title="${t('Убрать лист в историю и остаться без листа')}">${t('Отклонить')}</button>
     <button class="btn btn-sm" data-sheet="${esc(c.key)}"
-      title="Нарисовать заново тем же промптом">Заново</button></div>`;
+      title="${t('Нарисовать заново тем же промптом')}">${t('Заново')}</button></div>`;
   if (c.sheet_blocked) return `<div class="pile">
-    <button class="btn btn-sm" disabled title="${esc(c.sheet_blocked)}">Сделать лист</button>
+    <button class="btn btn-sm" disabled title="${esc(c.sheet_blocked)}">${
+      t('Сделать лист')}</button>
     <span class="tag" title="${esc(c.sheet_blocked)}">${esc(shortBlock(c.sheet_blocked))}</span>
     </div>`;
   return `<div class="pile"><button class="btn btn-sm${c.sheet ? '' : ' btn-primary'}"
     data-sheet="${esc(c.key)}"
-    title="${c.sheet ? 'Прежний лист останется, пока новый не примут' : 'Codex рисует 2–4 минуты'}">${
-    c.sheet ? 'Пересобрать лист' : 'Сделать лист'}</button></div>`;
+    title="${c.sheet ? t('Прежний лист останется, пока новый не примут')
+                     : t('Рисование идёт 2–4 минуты')}">${
+    c.sheet ? t('Пересобрать лист') : t('Сделать лист')}</button></div>`;
 }
 
 const CELL_WHY = {1: 'книга даёт', 0.5: 'книга даёт наполовину', 0: 'не найдено'};
@@ -1013,25 +1421,25 @@ function recordRow(c) {
     const v = audit[k];
     const gap = gaps[k];
     const mark = v === 1 ? 'full' : gap ? 'told' : v === 0.5 ? 'half' : '';
-    const hint = gap ? `${gap.why} Искали: ${gap.looked}`
-                     : (CELL_WHY[v] ?? 'клетки нет в записи');
-    return `<span class="chip" title="${esc(AUDIT_NAMES[k])} — ${esc(hint)}"><span
-      class="cell ${mark}" aria-hidden="true"></span>${esc(AUDIT_NAMES[k])} <b>${
+    const hint = gap ? `${gap.why} ${t('Искали')}: ${gap.looked}`
+                     : t(CELL_WHY[v] ?? 'клетки нет в записи');
+    return `<span class="chip" title="${esc(t(AUDIT_NAMES[k]))} — ${esc(hint)}"><span
+      class="cell ${mark}" aria-hidden="true"></span>${esc(t(AUDIT_NAMES[k]))} <b>${
       v === undefined ? '—' : v === 0.5 ? '\u00bd' : v}</b></span>`;
   }).join('');
   return `<tr class="record-row"><td colspan="4">
     <div class="record">
-      <div class="chips">${strip}<span class="chip-score">балл <b>${
-        c.understanding ?? '—'}</b> из 10</span></div>
+      <div class="chips">${strip}<span class="chip-score">${t('балл')} <b>${
+        c.understanding ?? '—'}</b> ${t('из 10')}</span></div>
       ${c.appearance ? `<p class="record-ru">${esc(c.appearance)}</p>` : ''}
       <section>
-        <h3>Из чего соберут лист</h3>
-        <div class="step-sub">Ровно этот текст уходит генератору. ${c.prompt
+        <h3>${t('Из чего соберут лист')}</h3>
+        <div class="step-sub">${t('Ровно этот текст уходит генератору.')} ${c.prompt
           && c.prompt.includes('Unspecified:')
-          ? 'Раздел <code>Unspecified</code> собран из пробелов: он велит оставить '
-            + 'несказанное обычным, вместо выдуманного.'
-          : 'Пробелов нет — раздела <code>Unspecified</code> в нём тоже нет.'}</div>
-        <pre class="prompt mono">${esc(c.prompt || 'промпта нет: в записи не хватает полей')}</pre>
+          ? t('Раздел <code>Unspecified</code> собран из пробелов: он велит оставить '
+            + 'несказанное обычным, вместо выдуманного.')
+          : t('Пробелов нет — раздела <code>Unspecified</code> в нём тоже нет.')}</div>
+        <pre class="prompt mono">${esc(c.prompt || t('промпта нет: в записи не хватает полей'))}</pre>
       </section>
     </div></td></tr>`;
 }
@@ -1043,17 +1451,18 @@ function historyRow(c) {
   // можно вернуться; сравнивать их по одному в папке — не работа человека.
   const list = c.history || [];
   return `<tr class="variants-row"><td colspan="4">
-    <div class="step-sub">Прежние листы <b>${esc(c.name)}</b>: картинка остаётся, даже когда
-      её заменили или отклонили. «Вернуть» меняет местами нынешний лист и выбранный.</div>
+    <div class="step-sub">${t('Прежние листы')} <b>${esc(c.name)}</b>: ${
+      t('картинка остаётся, даже когда её заменили или отклонили. «Вернуть» меняет местами '
+      + 'нынешний лист и выбранный.')}</div>
     <div class="variants">${list.map(v => `<figure>
-      <a href="/file/${esc(v.file)}" target="_blank" title="открыть целиком">
-        <img src="/file/${esc(v.file)}" alt="прежний лист: ${esc(c.name)}, ${
-          esc(LEFT_WHY[v.left] || v.left || '')}" loading="lazy" width="1536" height="1024"></a>
-      <figcaption>${stampRu(v.at)} · ${esc(LEFT_WHY[v.left] || v.left || 'убран')}
+      <a href="/file/${esc(v.file)}" target="_blank" title="${t('открыть целиком')}">
+        <img src="/file/${esc(v.file)}" alt="${t('прежний лист')}: ${esc(c.name)}, ${
+          esc(t(LEFT_WHY[v.left] || v.left || ''))}" loading="lazy" width="1536" height="1024"></a>
+      <figcaption>${stampRu(v.at)} · ${esc(t(LEFT_WHY[v.left] || v.left || 'убран'))}
         <div class="${v.same_prompt ? 'same' : 'other'}">${v.same_prompt
-          ? 'тот же промпт' : 'запись с тех пор переписали'}</div>
+          ? t('тот же промпт') : t('запись с тех пор переписали')}</div>
         <button class="btn btn-sm" data-restore="${esc(c.key)}"
-          data-file="${esc(v.rel)}">Вернуть</button></figcaption>
+          data-file="${esc(v.rel)}">${t('Вернуть')}</button></figcaption>
     </figure>`).join('')}</div></td></tr>`;
 }
 
@@ -1062,8 +1471,8 @@ function whoStrip(keys) {
   return `<div class="whos">${keys.map(k => {
     const c = known[k];
     return `<figure>${c && c.sheet_file
-      ? `<img src="/file/${esc(c.sheet_file)}" alt="лист внешности: ${esc(c.name)}" loading="lazy" width="1536" height="1024">`
-      : '<span class="sheet-none" style="width:132px;height:88px">нет</span>'}
+      ? `<img src="/file/${esc(c.sheet_file)}" alt="${t('лист внешности')}: ${esc(c.name)}" loading="lazy" width="1536" height="1024">`
+      : `<span class="sheet-none" style="width:132px;height:88px">${t('нет')}</span>`}
       <figcaption>${esc(c ? c.name : k)}</figcaption></figure>`;
   }).join('')}</div>`;
 }
@@ -1078,9 +1487,11 @@ function frameLabel(fr, differs) {
   // тире в служебной строке: его называют словами и в полный голос.
   const parts = [];
   if (differs.composition)
-    parts.push(fr.composition ? `с шаблоном ${fr.composition}` : 'без шаблона композиции');
+    parts.push(fr.composition ? t('с шаблоном {n}', {n: fr.composition})
+                              : t('без шаблона композиции'));
   if (differs.style) parts.push(styleName(fr.style));
-  if (differs.refs) parts.push(`эталоны ${fr.style_refs.join(', ') || 'без эталонов'}`);
+  if (differs.refs) parts.push(t('эталоны {list}',
+      {list: fr.style_refs.join(', ') || t('без эталонов')}));
   return parts.join(' · ');
 }
 
@@ -1096,26 +1507,27 @@ function sceneBlock(s) {
         return `<div class="frame">
         ${label ? `<div class="frame-label">${esc(label)}</div>` : ''}
         ${fr.image
-          ? `<a href="/file/${esc(fr.image)}" target="_blank"><img src="/file/${esc(fr.image)}" alt="кадр: ${esc(s.title)}" loading="lazy" width="1536" height="1024"></a>`
-          : '<div class="frame-none">кадра нет</div>'}
+          ? `<a href="/file/${esc(fr.image)}" target="_blank"><img src="/file/${esc(fr.image)}" alt="${t('кадр')}: ${esc(s.title)}" loading="lazy" width="1536" height="1024"></a>`
+          : `<div class="frame-none">${t('кадра нет')}</div>`}
         <div class="under">${differs.style ? '' : `<span class="tag">${esc(styleName(fr.style))}</span>`}
-          ${differs.composition ? '' : `<span>шаблон <code>${esc(fr.composition || '—')}</code></span>`}
-          ${differs.refs ? '' : `<span>эталоны ${fr.style_refs.map(esc).join(', ') || '—'}</span>`}</div>
+          ${differs.composition ? '' : `<span>${t('шаблон')} <code>${esc(fr.composition || '—')}</code></span>`}
+          ${differs.refs ? '' : `<span>${t('эталоны')} ${fr.style_refs.map(esc).join(', ') || '—'}</span>`}</div>
       </div>`; }).join('')
-    : '<div class="frame-none">кадров ещё нет — есть только карточка</div>';
+    : `<div class="frame-none">${t('кадров ещё нет — есть только карточка')}</div>`;
   const loc = s.locator
-    ? `гл${s.locator.chapter} [${s.locator.paragraphs[0]}, ${s.locator.paragraphs[1]})` : '—';
+    ? `${t('гл')}${s.locator.chapter} [${s.locator.paragraphs[0]}, ${
+        s.locator.paragraphs[1]})` : '—';
   return `<div class="scene">
     <div class="frames">${frames}</div>
     <div>
       <h2>${esc(s.title)}</h2>
       <div class="cap">${esc(s.caption || '')}</div>
-      <div class="meta"><span class="tag">${s.order ?? '—'} по порядку</span>
-        <span class="tag mono" title="полуинтервал абзацев: правая граница не входит">${esc(loc)}</span>
-        <span class="tag">по плану шаблон ${esc(s.composition || '—')}</span></div>
+      <div class="meta"><span class="tag">${t('{n} по порядку', {n: s.order ?? '—'})}</span>
+        <span class="tag mono" title="${t('полуинтервал абзацев: правая граница не входит')}">${esc(loc)}</span>
+        <span class="tag">${t('по плану шаблон')} ${esc(s.composition || '—')}</span></div>
       ${s.brief ? `<div class="step-sub" style="max-width:none">${esc(s.brief)}</div>` : ''}
       ${s.invariants.length ? whoStrip(s.invariants) : ''}
-      ${s.excerpt ? `<details class="excerpt"><summary class="from">отрывок книги · ${esc(loc)}</summary>${esc(s.excerpt)}</details>` : ''}
+      ${s.excerpt ? `<details class="excerpt"><summary class="from">${t('отрывок книги')} · ${esc(loc)}</summary>${esc(s.excerpt)}</details>` : ''}
       <div class="actions">${sceneActions(s)}</div>
     </div>
   </div>`;
@@ -1126,22 +1538,22 @@ function drawSettings() {
   const style = state.draw.style || b.style || (state.styles[0] || {}).key || '';
   return `<div class="step">
     <div class="step-head"><span class="num" aria-hidden="true">2</span>
-      <div><h2>Чем рисовать</h2>
-      <div class="step-sub">Направление задаёт манеру, шаблон композиции — где стоят тела.
-      Эталоны манеры берутся по номерам: пусто — панель возьмёт первые ${
-        state.settings ? state.settings.max_style_refs : 3}. Настройка одна на партию:
-      поставили — и рисуете кадр за кадром.</div></div></div>
+      <div><h2>${t('Чем рисовать')}</h2>
+      <div class="step-sub">${t('Направление задаёт манеру, шаблон композиции — где стоят тела. '
+      + 'Эталоны манеры берутся по номерам: пусто — панель возьмёт первые {n}. Настройка одна '
+      + 'на партию: поставили — и рисуете кадр за кадром.',
+        {n: state.settings ? state.settings.max_style_refs : 3})}</div></div></div>
     <form class="form" onsubmit="return false">
-      <label>Направление
+      <label>${t('Направление')}
         <select data-draw="style">${state.styles.map(s =>
           `<option value="${esc(s.key)}"${s.key === style ? ' selected' : ''}>${
             esc(s.name)}</option>`).join('')}</select></label>
-      <label>Эталоны манеры
+      <label>${t('Эталоны манеры')}
         <input data-draw="refs" value="${esc(state.draw.refs || '')}"
-          placeholder="ref-01 ref-03 — пусто значит по порядку"></label>
+          placeholder="${t('ref-01 ref-03 — пусто значит по порядку')}"></label>
       <label class="check"><input type="checkbox" data-draw="composition"
-        ${state.draw.composition === false ? '' : 'checked'}> брать шаблон композиции
-        из карточки</label>
+        ${state.draw.composition === false ? '' : 'checked'}> ${
+        t('брать шаблон композиции из карточки')}</label>
     </form></div>`;
 }
 
@@ -1150,16 +1562,16 @@ function checkBlock() {
   if (!c || c.batch !== state.batch.name) return '';
   const bad = c.problems.length + c.rights.length;
   return `<div class="check-out">
-    <div><b>Сверка:</b> сходится кадров ${c.frames} из ${c.was}${
-      bad ? `, замечаний ${bad}` : ', замечаний нет'}.</div>
+    <div><b>${t('Сверка:')}</b> ${t('сходится кадров {a} из {b}', {a: c.frames, b: c.was})}${
+      bad ? t(', замечаний {n}', {n: bad}) : t(', замечаний нет')}.</div>
     ${c.problems.map(p => `<div class="bad-line">${esc(p)}</div>`).join('')}
-    ${c.rights.map(p => `<div class="bad-line">права: ${esc(p)}</div>`).join('')}
+    ${c.rights.map(p => `<div class="bad-line">${t('права')}: ${esc(p)}</div>`).join('')}
     <div class="actions">
       <button class="btn btn-sm" data-register-batch=""
-        title="Перепишет manifest, README и галерею по тому, что лежит на диске">${
+        title="${t('Перепишет manifest, README и галерею по тому, что лежит на диске')}">${
         c.dropped
-          ? `Перезаписать манифест — уберёт записей: ${c.dropped}`
-          : 'Перезаписать манифест и галерею'}</button>
+          ? t('Перезаписать манифест — уберёт записей: {n}', {n: c.dropped})
+          : t('Перезаписать манифест и галерею')}</button>
     </div></div>`;
 }
 
@@ -1167,16 +1579,16 @@ function sceneActions(s) {
   const job = state.jobs.find(j => j.kind === 'scene' && j.args && j.args.card === s.id
                                    && OPEN.includes(j.status));
   if (job) return `<button class="btn btn-sm" disabled>${
-    job.status === 'running' ? 'рисуется…' : 'ждёт очереди'}</button>`;
+    job.status === 'running' ? t('рисуется…') : t('ждёт очереди')}</button>`;
   const drawn = s.frames.some(fr => fr.image);
   return `<button class="btn btn-sm${drawn ? '' : ' btn-primary'}" data-frame="${esc(s.id)}"
-    title="Codex рисует кадр 2–6 минут; прежний кадр останется, если у нового другое имя">${
-    drawn ? 'Ещё кадр' : 'Нарисовать кадр'}</button>`;
+    title="${t('Кадр рисуется 2–6 минут; прежний останется, если у нового другое имя')}">${
+    drawn ? t('Ещё кадр') : t('Нарисовать кадр')}</button>`;
 }
 
 function screenBatches() {
   const book = state.book;
-  if (!book) return '<div class="empty">Книга не выбрана.</div>';
+  if (!book) return `<div class="empty">${t('Книга не выбрана.')}</div>`;
 
   if (state.batch) {
     const b = state.batch;
@@ -1184,99 +1596,107 @@ function screenBatches() {
     const empty = b.scenes.filter(s => !s.frames.some(f => f.image)).length;
     const cardJob = state.jobs.find(j => j.kind === 'scene-card' && j.args
                                          && j.args.batch === b.name && OPEN.includes(j.status));
-    return `<div class="crumbs"><button class="btn btn-sm" data-batch="">← Все партии</button>
-        <span>${esc(b.name)} · сцен ${b.scenes.length} · с кадром ${withFrame}</span></div>
+    return `<div class="crumbs"><button class="btn btn-sm" data-batch="">${
+        t('← Все партии')}</button>
+        <span>${esc(b.name)} · ${t('сцен')} ${b.scenes.length} · ${
+        t('с кадром')} ${withFrame}</span></div>
       <h1>${esc(b.name)}</h1>
       ${b.request ? `<p class="lede">${esc(b.request)}</p>` : ''}
       <div class="step">
         <div class="step-head"><span class="num" aria-hidden="true">1</span>
-          <div><h2>Карточка сцены</h2>
-          <div class="step-sub">Карточка — замысел кадра словами: что происходит, кто в кадре,
-          какой отрывок книги за этим стоит. Пишет её Codex по вашей фразе, читая книгу через
-          кеш; 5–12 минут. Манеры в карточке нет — манера живёт в направлении.</div></div></div>
+          <div><h2>${t('Карточка сцены')}</h2>
+          <div class="step-sub">${t('Карточка — замысел кадра словами: что происходит, кто '
+          + 'в кадре, какой отрывок книги за этим стоит. Пишет её оператор по вашей фразе, '
+          + 'читая книгу через кеш; 5–12 минут. Манеры в карточке нет — манера живёт '
+          + 'в направлении.')}</div></div></div>
         <form class="form" id="newcard">
-          <label class="wide-field">Что в кадре, одной фразой
+          <label class="wide-field">${t('Что в кадре, одной фразой')}
             <input name="brief" required
-              placeholder="Серый капитан швыряет камешек в шахтёра, и шахтёр кланяется"></label>
-          <label>Имя карточки
+              placeholder="${t('Серый капитан швыряет камешек в шахтёра, и шахтёр кланяется')}"></label>
+          <label>${t('Имя карточки')}
             <input name="card" required pattern="[a-z0-9]+(-[a-z0-9]+)*"
               placeholder="03-ugly-dan-kidaet-kamen"></label>
-          <label>Где это в книге
-            <input name="where" placeholder="глава 2, пересменка в депо"></label>
-          <label>Порядок<input name="order" type="number" min="1"
+          <label>${t('Где это в книге')}
+            <input name="where" placeholder="${t('глава 2, пересменка в депо')}"></label>
+          <label>${t('Порядок')}<input name="order" type="number" min="1"
             placeholder="${b.scenes.length + 1}"></label>
           <button class="btn btn-primary" type="submit"${cardJob ? ' disabled' : ''}>${
-            cardJob ? 'карточка пишется…' : 'Написать карточку'}</button>
+            cardJob ? t('карточка пишется…') : t('Написать карточку')}</button>
         </form>
       </div>
       ${state.styles.length ? drawSettings() : ''}
       <div class="step">
         <div class="step-head"><span class="num" aria-hidden="true">3</span>
-          <div><h2>Кадры</h2>
-          <div class="step-sub">Кадр рисуется по карточке, направлению и листам героев.
-          Отбор — за вами: панель ничего не выбрасывает, кадры складываются рядом.
-          ${empty ? `Без кадра сейчас ${empty}.` : 'Кадр есть у каждой сцены.'}</div></div></div>
+          <div><h2>${t('Кадры')}</h2>
+          <div class="step-sub">${t('Кадр рисуется по карточке, направлению и листам героев. '
+          + 'Отбор — за вами: панель ничего не выбрасывает, кадры складываются рядом.')}
+          ${empty ? t('Без кадра сейчас {n}.', {n: empty})
+                  : t('Кадр есть у каждой сцены.')}</div></div></div>
         <div class="actions">
           ${empty && state.styles.length
             ? `<button class="btn btn-sm" data-frames-all=""
-                 title="Задания идут по одному: ${empty} кадров это примерно ${
-                   Math.round(empty * 4)} минут работы Codex">Нарисовать недостающие (${empty}) — около ${
-                   Math.round(empty * 4)} мин</button>`
+                 title="${t('{n} кадров — это примерно {m} минут работы оператора',
+                   {n: empty, m: Math.round(empty * 4)})}">${
+                 t('Нарисовать недостающие ({n}) — около {m} мин',
+                   {n: empty, m: Math.round(empty * 4)})}</button>`
             : ''}
           <button class="btn btn-sm" data-check-batch=""
-            title="Ничего не меняет: пересобирает промпты и сверяет их с диском, считает хеши, проверяет права">Проверить партию</button>
+            title="${t('Ничего не меняет: пересобирает промпты и сверяет их с диском, '
+              + 'считает хеши, проверяет права')}">${t('Проверить партию')}</button>
         </div>
         ${checkBlock()}
       </div>
       ${b.scenes.map(sceneBlock).join('')}`;
   }
 
-  return `${eyebrow()}<h1>Партии</h1>
-    <p class="lede">Партия — замысел серии: направление, отобранные сцены, карточки и кадры.
-    Манифест пишется только по существующим кадрам.</p>
+  return `${eyebrow()}<h1>${t('Партии')}</h1>
+    <p class="lede">${t('Партия — замысел серии: направление, отобранные сцены, карточки '
+    + 'и кадры. Манифест пишется только по существующим кадрам.')}</p>
     <div class="step">
       <div class="step-head"><span class="num" aria-hidden="true">1</span>
-        <div><h2>Завести партию</h2>
-        <div class="step-sub">Партия — папка в книге с карточками сцен, промптами и
-        манифестом. Номер панель поставит сама, следующий свободный.</div></div></div>
+        <div><h2>${t('Завести партию')}</h2>
+        <div class="step-sub">${t('Партия — папка в книге с карточками сцен, промптами и '
+        + 'манифестом. Номер панель поставит сама, следующий свободный.')}</div></div></div>
       <form class="form" id="newbatch">
-        <label>Имя<input name="name" required pattern="[a-z0-9]+(-[a-z0-9]+)*"
+        <label>${t('Имя')}<input name="name" required pattern="[a-z0-9]+(-[a-z0-9]+)*"
           placeholder="proba-stiley"></label>
-        <label>Название<input name="title" placeholder="Проба нескольких направлений"></label>
-        <label>Короткое имя в файлах<input name="short" placeholder="proba"></label>
-        <label>Направление
+        <label>${t('Название')}<input name="title" placeholder="${
+          t('Проба нескольких направлений')}"></label>
+        <label>${t('Короткое имя в файлах')}<input name="short" placeholder="proba"></label>
+        <label>${t('Направление')}
           <select name="style">
-            <option value="">выбрать у каждого кадра</option>
+            <option value="">${t('выбрать у каждого кадра')}</option>
             ${state.styles.map(s => `<option value="${esc(s.key)}">${esc(s.name)}</option>`).join('')}
           </select></label>
-        <label class="wide-field">Замысел серии
-          <input name="request" placeholder="Первые десять глав, по четыре кадра на главу"></label>
-        <button class="btn btn-primary" type="submit">Завести партию</button>
+        <label class="wide-field">${t('Замысел серии')}
+          <input name="request" placeholder="${t('Первые десять глав, по четыре кадра на главу')}"></label>
+        <button class="btn btn-primary" type="submit">${t('Завести партию')}</button>
       </form>
     </div>
     ${book.batches.length ? `<div class="grid">${book.batches.map(b => `
       <div class="card"><h2 class="name">${esc(b.name)}</h2>
-        <div class="sub">${esc(b.style || 'направление не задано')}</div>
-        <div class="kv"><span>карточек <b>${b.cards}</b></span>
-          <span>кадров <b>${b.scenes}</b></span></div>
-        <div class="actions"><button class="btn btn-sm" data-batch="${esc(b.name)}">Открыть</button></div>
+        <div class="sub">${esc(b.style || t('направление не задано'))}</div>
+        <div class="kv"><span>${t('карточек')} <b>${b.cards}</b></span>
+          <span>${t('кадров')} <b>${b.scenes}</b></span></div>
+        <div class="actions"><button class="btn btn-sm" data-batch="${esc(b.name)}">${
+          t('Открыть')}</button></div>
       </div>`).join('')}</div>`
-    : '<div class="empty">Партий пока нет — заведите первую.</div>'}`;
+    : `<div class="empty">${t('Партий пока нет — заведите первую.')}</div>`}`;
 }
 
 function screenStyles() {
-  if (!state.styles.length) return `<h1>Стили</h1>
-    <div class="empty">Направлений нет. Они лежат в <code>styles/directions/*.json</code>,
-    эталоны — в <code>styles/refs/</code>.</div>`;
-  return `<h1>Стили</h1>
-    <p class="lede">Направление держит манеру и тональный ключ. Эталоны собственной генерации:
-    собранные со свободных источников картинки нужной манеры не дают. Направление выбирают
-    глазами по эталонам — поэтому здесь они крупные.</p>
+  if (!state.styles.length) return `<h1>${t('Стили')}</h1>
+    <div class="empty">${t('Направлений нет. Они лежат в')} <code>styles/directions/*.json</code>,
+    ${t('эталоны — в')} <code>styles/refs/</code>.</div>`;
+  return `<h1>${t('Стили')}</h1>
+    <p class="lede">${t('Направление держит манеру и тональный ключ. Эталоны собственной '
+    + 'генерации: собранные со свободных источников картинки нужной манеры не дают. '
+    + 'Направление выбирают глазами по эталонам — поэтому здесь они крупные.')}</p>
     <div class="styles-list">${state.styles.map(s => `
       <div class="card">
         <div class="style-head">
           <div><h2 class="name">${esc(s.name)}</h2>
-            <div class="sub"><code>${esc(s.key)}</code> · эталонов ${s.refs.length}</div></div>
+            <div class="sub"><code>${esc(s.key)}</code> · ${t('эталонов')} ${s.refs.length}</div></div>
           <div class="notes" lang="en">${esc(clip(s.palette_en, 320))}</div>
         </div>
         <div class="refs">${s.refs.map(r =>
@@ -1285,22 +1705,27 @@ function screenStyles() {
 }
 
 function draw() {
+  document.documentElement.lang = state.lang;
+  document.getElementById('queueTitle').textContent = t('Задания');
+  document.getElementById('rail').setAttribute('aria-label', t('Книга и этапы'));
+  document.querySelector('.queue').setAttribute('aria-label', t('Задания'));
   drawRail();
   const work = document.getElementById('work');
-  if (!state.ready) { work.innerHTML = '<div class="skeleton">Читаю репозиторий…</div>'; return; }
+  if (!state.ready) { work.innerHTML = `<div class="skeleton">${t('Читаю репозиторий…')}</div>`; return; }
   const body = {books: screenBooks, characters: screenCharacters,
                 batches: screenBatches, styles: screenStyles}[state.screen]();
   const wide = state.wideLog ? `
     <div class="step">
       <div class="step-head"><span class="num" aria-hidden="true">⌄</span>
-        <div><h2>Лог задания</h2>
+        <div><h2>${t('Лог задания')}</h2>
         <div class="step-sub mono">${esc(state.wideLog)}</div></div></div>
       <div class="log wide-log" id="log-${esc(state.wideLog)}" tabindex="0" role="region"
-           aria-label="Лог задания ${esc(state.wideLog)}">загрузка…</div>
-      <div class="actions"><button class="btn btn-sm" data-log="${esc(state.wideLog)}">Свернуть</button></div>
+           aria-label="${t('Лог задания')} ${esc(state.wideLog)}">${t('загрузка…')}</div>
+      <div class="actions"><button class="btn btn-sm" data-log="${esc(state.wideLog)}">${
+        t('Свернуть')}</button></div>
     </div>` : '';
   work.innerHTML = (state.error
-      ? `<div class="err"><span>${esc(state.error)}</span><button class="btn btn-sm" data-dismiss="">Скрыть</button></div>`
+      ? `<div class="err"><span>${esc(state.error)}</span><button class="btn btn-sm" data-dismiss="">${t('Скрыть')}</button></div>`
       : '') + body + wide;
   if (state.wideLog) {
     showLog(state.wideLog);
@@ -1320,7 +1745,8 @@ function drawJobs() {
   // изменился сам состав очереди; текст лога и часы обновляем на месте.
   // Имя героя приходит вместе с книгой, позже первой отрисовки очереди: без него в
   // сигнатуре карточки навсегда остались бы с ключом вместо имени.
-  const shape = JSON.stringify([state.openLog, state.wideLog, state.total, state.showAll,
+  // Язык — часть облика очереди: без него после переключения карточки остаются прежними.
+  const shape = JSON.stringify([state.lang, state.openLog, state.wideLog, state.total, state.showAll,
                                 state.jobs.map(j => [j.id, j.status, j.error, jobSubject(j),
                                   (j.waiting_for || []).map(w => w.lock).join()])]);
   if (shape === jobsShape) { if (state.openLog) showLog(state.openLog); return; }
@@ -1330,8 +1756,8 @@ function drawJobs() {
   const open = state.openLog ? document.getElementById('log-' + state.openLog) : null;
   const kept = open ? {text: open.textContent, top: open.scrollTop} : null;
   if (!state.jobs.length) {
-    box.innerHTML = `<div class="empty">Пока пусто. Задания появляются здесь, когда вы
-      нажимаете кнопку на экране этапа: панель показывает ход, лог и даёт снять задание.</div>`;
+    box.innerHTML = `<div class="empty">${t('Пока пусто. Задания появляются здесь, когда вы '
+      + 'нажимаете кнопку на экране этапа: панель показывает ход, лог и даёт снять задание.')}</div>`;
     return;
   }
   // Очередь — не журнал. По умолчанию видно то, что идёт, и последние пять законченных;
@@ -1352,38 +1778,41 @@ function drawJobs() {
     <div class="job${j.status === 'running' ? ' now' : ''}">
       <div class="job-top">
         <span class="job-kind">${esc(subject || KIND_NAMES[j.kind] || j.kind)}</span>
-        <span class="tag ${STATUS_TAGS[j.status] || ''}">${esc(STATUS_NAMES[j.status] || j.status)}</span>
+        <span class="tag ${STATUS_TAGS[j.status] || ''}">${esc(t(STATUS_NAMES[j.status] || j.status))}</span>
       </div>
-      ${subject ? `<div class="job-what">${esc(KIND_NAMES[j.kind] || j.kind)}</div>` : ''}
+      ${subject ? `<div class="job-what">${esc(t(KIND_NAMES[j.kind] || j.kind))}</div>` : ''}
       ${spent(j, j.status === 'queued' ? place : 0)}
       ${j.error ? `<div class="why${STATUS_TAGS[j.status] === 'bad' ? '' : ' quiet'}">${
         esc(j.error)}</div>` : ''}
       <div class="job-id">${esc(j.id)}</div>
       <div class="actions">
         <button class="btn btn-sm" data-log="${esc(j.id)}">${
-          state.openLog === j.id ? 'Скрыть лог'
-          : state.wideLog === j.id ? 'Свернуть лог' : 'Лог'}</button>
+          state.openLog === j.id ? t('Скрыть лог')
+          : state.wideLog === j.id ? t('Свернуть лог') : t('Лог')}</button>
         ${state.openLog === j.id
-          ? `<button class="btn btn-sm" data-wide="${esc(j.id)}">Развернуть</button>` : ''}
+          ? `<button class="btn btn-sm" data-wide="${esc(j.id)}">${t('Развернуть')}</button>` : ''}
         ${OPEN.includes(j.status)
-          ? `<button class="btn btn-sm" data-cancel="${esc(j.id)}">Снять</button>` : ''}
+          ? `<button class="btn btn-sm" data-cancel="${esc(j.id)}">${t('Снять')}</button>` : ''}
         ${['failed', 'interrupted'].includes(j.status) && j.args && j.args.key
           && ['bible-entry', 'bible-refine'].includes(j.kind)
           ? `<button class="btn btn-sm" data-${j.kind === 'bible-refine' ? 'refine' : 'again'}="${
-              esc(j.args.key)}">${j.kind === 'bible-refine' ? 'Добрать заново'
-                                                            : 'Собрать заново'}</button>` : ''}
+              esc(j.args.key)}">${j.kind === 'bible-refine' ? t('Добрать заново')
+                                                            : t('Собрать заново')}</button>` : ''}
       </div>
       ${state.openLog === j.id
           ? `<div class="log" id="log-${esc(j.id)}" tabindex="0" role="region"
-                  aria-label="Лог задания ${esc(j.id)}">${esc(kept ? kept.text : 'загрузка…')}</div>`
+                  aria-label="${t('Лог задания')} ${esc(j.id)}">${
+                    esc(kept ? kept.text : t('загрузка…'))}</div>`
           : ''}
     </div>`; }).join('');
   const hidden = state.total - shown.length;
   box.insertAdjacentHTML('beforeend', `<div class="queue-foot">
-    ${hidden > 0 ? `<button class="btn btn-sm" data-more="">Показать все (${state.total})</button>`
+    ${hidden > 0 ? `<button class="btn btn-sm" data-more="">${
+        t('Показать все ({n})', {n: state.total})}</button>`
       : state.showAll && state.total > live.length + 5
-        ? '<button class="btn btn-sm" data-more="">Свернуть</button>' : ''}
-    ${past.length ? '<button class="btn btn-sm" data-forget="">Убрать законченные</button>' : ''}
+        ? `<button class="btn btn-sm" data-more="">${t('Свернуть')}</button>` : ''}
+    ${past.length ? `<button class="btn btn-sm" data-forget="">${
+        t('Убрать законченные')}</button>` : ''}
   </div>`);
   if (kept) {
     const fresh = document.getElementById('log-' + state.openLog);
@@ -1397,7 +1826,7 @@ async function showLog(id) {
   if (!box) return;
   try {
     const data = await api(`/api/jobs/${encodeURIComponent(id)}/log?tail=200`);
-    const text = data.log || '(лог пуст)';
+    const text = data.log || t('(лог пуст)');
     if (box.textContent === text) return;
     // Догоняем хвост, только если человек и так смотрел в конец: иначе чтение середины
     // лога у бегущего задания невозможно — его каждый раз уносило бы вниз.
@@ -1460,7 +1889,7 @@ async function startAllFrames(button) {
 }
 
 async function checkBatch(button) {
-  if (button) { button.disabled = true; button.textContent = 'сверяю…'; }
+  if (button) { button.disabled = true; button.textContent = t('сверяю…'); }
   try {
     const answer = await api(`/api/books/${encodeURIComponent(state.slug)}/batches/${
       encodeURIComponent(state.batch.name)}/check`);
@@ -1493,8 +1922,8 @@ async function sheetVerdict(key, verdict, button) {
 const FORMS = {
   newbook: async data => {
     const file = data.file;
-    if (!file || !file.size) throw new Error('выберите файл книги');
-    if (file.size > 40 * 1024 * 1024) throw new Error('файл больше 40 МБ');
+    if (!file || !file.size) throw new Error(t('выберите файл книги'));
+    if (file.size > 40 * 1024 * 1024) throw new Error(t('файл больше 40 МБ'));
     // Файл уже на сервере, если по нему заполняли форму: шлём только его имя.
     const body = {...data, file: undefined, filename: file.name,
                   year: data.year ? Number(data.year) : null,
@@ -1520,7 +1949,7 @@ document.addEventListener('submit', async event => {
                   : el.value.trim();
   }
   if (button) { button.disabled = true; button.dataset.was = button.textContent;
-                button.textContent = 'отправляю…'; }
+                button.textContent = t('отправляю…'); }
   try {
     const [path, body] = await FORMS[form.id](data);
     await api(path, {method: 'POST', body: JSON.stringify(body)});
@@ -1556,7 +1985,7 @@ async function readBook(input) {
   if (!form || !said) return;
   if (!file) { said.hidden = true; return; }
   said.hidden = false;
-  said.textContent = 'читаю, что книга знает о себе…';
+  said.textContent = t('читаю, что книга знает о себе…');
   try {
     const meta = await api('/api/books/meta', {method: 'POST', body: JSON.stringify(
       {filename: file.name, data: await base64(file)})});
@@ -1569,10 +1998,11 @@ async function readBook(input) {
     }
     form.elements.staged.value = meta.staged || '';
     said.textContent = filled.length
-      ? `Из файла: ${filled.join(', ')}. Проверьте и укажите права.`
-      : 'Файл о себе ничего не говорит — заполните поля сами.';
+      ? t('Из файла: {list}. Проверьте и укажите права.', {list: filled.join(', ')})
+      : t('Файл о себе ничего не говорит — заполните поля сами.');
   } catch (error) {
-    said.textContent = `метаданные не прочитались: ${error.message}. Заполните поля сами.`;
+    said.textContent = t('метаданные не прочитались: {why}. Заполните поля сами.',
+                         {why: error.message});
   }
 }
 
@@ -1581,8 +2011,8 @@ document.addEventListener('change', event => {
     const shown = event.target.closest('.file').querySelector('.file-name');
     const file = event.target.files[0];
     shown.textContent = file
-      ? `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} МБ`
-      : 'fb2, epub или txt — файл не выбран';
+      ? `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} ${t('МБ')}`
+      : t('fb2, epub или txt — файл не выбран');
     if (event.target.id === 'bookfile') readBook(event.target);
     return;
   }
@@ -1593,7 +2023,8 @@ document.addEventListener('change', event => {
 
 // Список действий один на всю панель: перечень селекторов, набранный руками, молча
 // перестаёт ловить новые кнопки — так уже случилось с половиной кнопок цепочки.
-const ACTIONS = ['go', 'book', 'pick', 'operator', 'jobs', 'batch', 'entry', 'refine', 'again', 'log',
+const ACTIONS = ['go', 'book', 'pick', 'operator', 'jobs', 'lang', 'batch', 'entry', 'refine',
+                 'again', 'log',
                  'wide', 'cancel', 'dismiss', 'history', 'record', 'restore',
                  'more', 'forget', 'sheet', 'accept', 'reject', 'parse', 'index', 'frame',
                  'framesAll', 'checkBatch', 'registerBatch', 'found', 'moreFound'];
@@ -1613,12 +2044,22 @@ document.addEventListener('click', async event => {
     state.batch = null;
     return go(state.screen === 'books' ? 'characters' : state.screen, d.pick);
   }
+  if (d.lang) {
+    if (d.lang === state.lang) return;
+    state.lang = d.lang;                 // язык меняется сразу, не дожидаясь сервера
+    draw();
+    try {
+      state.settings = await api('/api/settings',
+          {method: 'POST', body: JSON.stringify({lang: d.lang})});
+    } catch (error) { state.error = t('язык не сохранился: {why}', {why: error.message}); }
+    return;
+  }
   if (d.jobs) {
     if (Number(d.jobs) === (state.settings || {}).jobs) return;
     try {
       state.settings = await api('/api/settings',
           {method: 'POST', body: JSON.stringify({jobs: Number(d.jobs)})});
-    } catch (error) { state.error = `ширина не сменилась: ${error.message}`; }
+    } catch (error) { state.error = t('ширина не сменилась: {why}', {why: error.message}); }
     return draw();
   }
   if (d.operator) {
@@ -1626,7 +2067,7 @@ document.addEventListener('click', async event => {
     try {
       state.settings = await api('/api/settings',
           {method: 'POST', body: JSON.stringify({operator: d.operator})});
-    } catch (error) { state.error = `оператор не сменился: ${error.message}`; }
+    } catch (error) { state.error = t('оператор не сменился: {why}', {why: error.message}); }
     return draw();
   }
   if (d.batch !== undefined) return d.batch ? openBatch(d.batch) : go('batches');
@@ -1668,8 +2109,8 @@ document.addEventListener('click', async event => {
     const dropped = (state.checked || {}).dropped || 0;
     // Перезапись выбрасывает из манифеста всё, что не сошлось, и переписывает README.
     // Число говорится вслух до нажатия, а не после.
-    if (dropped && !confirm(`Из манифеста будут убраны записи: ${dropped}. `
-        + 'README и галерея будут переписаны. Кадры на диске останутся. Продолжить?')) return;
+    if (dropped && !confirm(t('Из манифеста будут убраны записи: {n}. README и галерея будут '
+        + 'переписаны. Кадры на диске останутся. Продолжить?', {n: dropped}))) return;
     return post(`/api/books/${encodeURIComponent(state.slug)}/batches/${
       encodeURIComponent(state.batch.name)}/register`, {}, target);
   }

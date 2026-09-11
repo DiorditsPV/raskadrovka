@@ -1,173 +1,204 @@
-# Раскадровка — сцены из книг по стилевому референсу
+# Raskadrovka — book scenes drawn to a style reference
 
-Книга подаётся агенту, агент режет её на важные сцены, каждая сцена описывается карточкой, а
-карточка вместе со стилевыми референсами становится промптом для генерации картинки. На выходе —
-серия иллюстраций к книге в одной манере, с полной историей: какая сцена, какой промпт, какие
-референсы, какой результат.
+*English · [Русский](README.ru.md)*
 
-Проект вырос из [«Окрестностей»](https://github.com/DiorditsPV/okrestnosti) — серии плакатов
-о районах Москвы. Оттуда взята вся машинерия: устройство партии, манифест с хешами, роли
-референсов в промпте, галерея с проверками и правила для агента. Что уже перенесено и что ещё
-предстоит — в [плане ребилда](docs/superpowers/plans/2026-09-07-rebuild.md); замысел и контракты
-данных — в [спецификации](docs/superpowers/specs/2026-09-07-raskadrovka-design.md).
+A book goes to an agent, the agent cuts it into the scenes worth drawing, each scene is
+described by a card, and the card together with style references becomes the prompt for an
+image. The result is a series of illustrations for one book in one manner, with the full
+history kept: which scene, which prompt, which references, which result.
 
-## Как это работает
+The project grew out of [Okrestnosti](https://github.com/DiorditsPV/okrestnosti), a series
+of posters about Moscow districts. All of the machinery comes from there: how a batch is
+laid out, the manifest with hashes, the roles references play in a prompt, the gallery with
+its checks, and the rules for the agent.
 
-1. **Приём книги.** FB2, EPUB или TXT раскладывается на главы и абзацы. Сам файл остаётся в
-   локальной игнорируемой папке; в репозиторий попадает только `book.json` — автор, издание,
-   статус прав, хеш файла, оглавление и хеши абзацев.
-2. **Раскладка на сцены.** Агент читает книгу и пишет карточки сцен. На длинных книгах, где
-   читать всё дорого, дешёвый скрипт сначала отбирает кандидатов по эвристикам — описательность,
-   смена места, свет и цвет, мало диалога, — и агент смотрит только их окрестности.
-3. **Библия и листы персонажей.** Один раз на книгу собираются внешность героев и вид мест с
-   локаторами в тексте, и на каждого героя генерируется лист персонажа. Лист подмешивается в
-   каждый промпт, чтобы герой на десяти картинках был одним человеком: описание словами этого
-   не держит.
-4. **Направление стиля.** Манера берётся из `styles/<направление>/` — папки, где манера описана
-   словами и подкреплена свободными референсами. Партия снимает с направления копию, поэтому
-   провенанс каждой серии самодостаточен.
-5. **Промпт.** Собирается из карточки, библии, листов и записей о референсах детерминированно и
-   коммитится целиком. Референсы задают палитру и рисовку, лист — лицо героя, карточка —
-   содержание кадра.
-6. **Генерация и галерея.** Встроенный инструмент генерации, один вызов на сцену, правки
-   через edit-target. Результат регистрируется в манифесте, проверка сверяет права и хеши,
-   галерея пересобирается.
+<table>
+<tr>
+<td width="50%"><img src="docs/screens/scene-realism.jpg" alt="A Helldiver at the drill face, cinematic realism"></td>
+<td width="50%"><img src="docs/screens/scene-ink.jpg" alt="Ugly Dan flicks a pebble, ink and flat colour"></td>
+</tr>
+<tr>
+<td><em>One book, two style directions: the same series machinery, a different manner.</em></td>
+<td><em>Frames carry the scene card; the manner comes from the direction.</em></td>
+</tr>
+</table>
 
-## Права
+## How it works
 
-**Репозиторий публичный, и это учтено в его устройстве.** Книги в нём четыре, все под
-охраной: в git идут манифест без текста, хеши абзацев, описания внешности словами книги
-с указателями и сгенерированные здесь листы персонажей. Пределы цитирования заданы
-константами и проверяются `scripts/check_rights.py`, а не соблюдаются на память.
+1. **Intake.** An FB2, EPUB or TXT file is split into chapters and paragraphs. The file
+   itself stays in a local, git-ignored folder; only `book.json` enters the repository —
+   author, edition, rights status, file hash, table of contents and paragraph hashes.
+2. **Cutting into scenes.** The agent reads the book and writes scene cards. For long books,
+   where reading everything is expensive, a cheap script first picks candidates by heuristics
+   — descriptiveness, a change of place, light and colour, little dialogue — and the agent
+   looks only at their surroundings.
+3. **The bible and character sheets.** Once per book, the appearance of the characters and
+   the look of the places are collected with locators into the text, and a reference sheet is
+   generated for every character. The sheet is mixed into every prompt so that the character
+   is the same person across ten pictures: a description in words does not hold that.
+4. **Style direction.** The manner comes from `styles/<direction>/` — a folder where the
+   manner is described in words and backed by freely licensed references. A batch takes its
+   own snapshot of the direction, so the provenance of each series is self-contained.
+5. **The prompt.** Assembled deterministically from the card, the bible, the sheets and the
+   reference records, and committed in full. References set the palette and the drawing;
+   the sheet sets the character's face; the card sets what is in the frame.
+6. **Generation and gallery.** A built-in image tool, one call per scene, corrections through
+   an edit target. The result is registered in the manifest, the checker verifies rights and
+   hashes, the gallery is rebuilt.
 
-Текст книги в репозитории не хранится. В карточке сцены допускается отрывок не длиннее двух
-абзацев — целыми абзацами, с указанием автора, переводчика и издания; для книг в общественном
-достоянии ограничение снимается. Совпадение отрывка с абзацами локатора проверяется по хешам
-абзацев, поэтому проверка работает на любой копии, а не только у автора. Стилевые референсы
-коммитятся только со свободной лицензией и обоснованием свободы в России и в США, остальные
-живут локально и упоминаются хешем. Подробности — в [RIGHTS.md](RIGHTS.md).
+![A character reference sheet: three views of the same person](docs/screens/sheet-darrow.jpg)
 
-## Структура
+*A character sheet is drawn once per character, from the record, with no manner and no scene —
+three views and visible hands. It is mixed into every frame prompt so that the character is
+the same person across ten pictures: a description in words does not hold that.*
+
+## Rights
+
+**This repository is public, and its design accounts for that.** It holds four books, all of
+them in copyright: what goes into git is the manifest without text, paragraph hashes,
+appearance descriptions in the book's own words with locators, and character sheets generated
+here. The quoting limits are set as constants and verified by `scripts/check_rights.py` —
+they are not kept in anyone's head.
+
+The text of a book is never stored in the repository. A scene card may carry an excerpt of
+no more than two paragraphs — whole paragraphs, with author, translator and edition named;
+for public-domain books the limit is lifted. That the excerpt matches the paragraphs of its
+locator is verified against paragraph hashes, so the check works on any copy, not only on the
+author's machine. Style references are committed only under a free licence with the freedom
+justified in both Russia and the United States; the rest live locally and are referred to by
+hash. Details are in [RIGHTS.md](RIGHTS.md) (in Russian).
+
+## Layout
 
 ```text
-index.html                      галерея
-output/<книга>--<партия>--<сцена>.png
+index.html                      gallery
+output/<book>--<batch>--<scene>.png
 scripts/
-  ingest_book.py                FB2/EPUB/TXT -> book.json без текста; метаданные из файла
-  index_book.py                 механический индекс по всей книге: лица, места, сцены
-  show_paragraphs.py            печать нужных абзацев из локального кеша
-  build_prompt.py               промпт сцены из карточки, стиля, шаблона и листов
-  generate_sheet.py             лист персонажа: промпт из записи, картинка — Codex
-  generate_scene.py             кадр сцены: промпт, картинка, запись в манифест
-  register_result.py            хеши, снимок input/, refs.json партии
-  check_rights.py               права: книга, цитирование, лицензии референсов
-  build_gallery.py              сборка и сверка index.html
-  build_styles_page.py          сборка styles/index.html
+  ingest_book.py                FB2/EPUB/TXT -> book.json without the text; metadata from the file
+  index_book.py                 mechanical index over the whole book: names, places, scenes
+  show_paragraphs.py            print the paragraphs you need from the local cache
+  build_prompt.py               scene prompt from card, style, template and sheets
+  generate_sheet.py             character sheet: prompt from the record, image by Codex
+  generate_scene.py             scene frame: prompt, image, entry in the manifest
+  register_result.py            hashes, snapshot of input/, batch refs.json
+  check_rights.py               rights: the book, quoting, reference licences
+  build_gallery.py              build and verify index.html
+  build_styles_page.py          build styles/index.html
 styles/
-  directions/<направление>.json манера словами, палитра и записи об эталонах
-  refs/<направление>/           эталоны манеры
-  prompts-directions.md         промпты, которыми эталоны сгенерированы
-  index.html                    страница выбора направления
+  directions/<direction>.json   the manner in words, the palette, records about references
+  refs/<direction>/             manner references
+  prompts-directions.md         the prompts the references were generated with
+  index.html                    direction picker
 compositions/
-  templates/<шаблон>.json       расстановка тел: кто где стоит, какая камера
-  refs/<шаблон>.png             серый блокинг
-books/<книга>/
-  book.json                     манифест книги без текста
-  bible.json                    персонажи и места
-  characters/<ключ>.png         листы персонажей
-  characters/history/           прежние листы: чем заменили и что отклонили
-  source/                       файл книги — локально, в git не попадает
-  <партия>/
-    README.md                   что в партии и ссылки на результаты
-    scenes/<сцена>.json         карточки сцен
-    prompt/<сцена>.txt          точные промпты
-    input/                      референсы партии; input/<сцена>/ — edit-target кадра
-    metadata/request.json       манифест партии: сцены, хеши, роли входов
-    metadata/refs.json          источники и лицензии референсов
+  templates/<template>.json     where the bodies stand and where the camera is
+  refs/<template>.png           grey blocking
+books/<book>/
+  book.json                     book manifest without the text
+  bible.json                    characters and places
+  characters/<key>.png          character sheets
+  characters/history/           earlier sheets: what was replaced and what was rejected
+  source/                       the book file — local, never committed
+  <batch>/
+    README.md                   what is in the batch and links to results
+    scenes/<scene>.json         scene cards
+    prompt/<scene>.txt          exact prompts
+    input/                      batch references; input/<scene>/ is a frame's edit target
+    metadata/request.json       batch manifest: scenes, hashes, roles of inputs
+    metadata/refs.json          sources and licences of references
 ```
 
-Подробное устройство папки книги — в [books/README.md](books/README.md), направления стиля —
-в [styles/README.md](styles/README.md), шаблоны композиции — в
-[compositions/README.md](compositions/README.md).
+## Control panel
 
-## Панель управления
-
-Тот же путь без терминала:
+The same path without a terminal:
 
 ```bash
 python3 panel/server.py --port 8770 --open
 ```
 
-Локальное окно в репозиторий: весь путь от файла книги до кадра, без терминала. Книги и их
-прогресс, записи героев с аудитом понимания и результатом проверки, партии, направления стиля
-с эталонами, очередь заданий с логами. Ничего своего панель не хранит — состояние это те же
-файлы, и шаг, сделанный руками в терминале, она увидит.
+![The Characters screen: the record, the understanding audit and the exact sheet prompt](docs/screens/characters.png)
 
-Шаги, где нужно суждение, панель отдаёт **оператору** — Codex или Claude, выбор в боковине —
-и сама проверяет результат. Разница между ними одна и названа вслух: `codex exec` пишет
-только в рабочий каталог, `claude -p --permission-mode bypassPermissions` не ограничен ничем.
-Рисование выбора не имеет: `image_gen` есть только у Codex.
+*The record open: ten traits by name, what the book does not give, and the exact text that
+goes to the generator. The Russian paragraph is the book's own data — only the interface is
+translated.*
 
-Отбор остаётся за человеком: какие герои нужны, какой лист принять, какие сцены рисовать.
+A local window into the repository: the whole path from a book file to a frame. Books and
+their progress, character records with the understanding audit and the result of the checks,
+batches, style directions with their references, the job queue with logs. The panel stores
+nothing of its own — its state is those same files, and a step taken by hand in the terminal
+is one it will see.
 
-Что панель делает сама:
+Steps that need judgement go to an **operator** — Codex or Claude, chosen in the sidebar —
+and the panel checks the result itself. There is one difference between them and it is named
+out loud: `codex exec` writes only inside the working directory, while
+`claude -p --permission-mode bypassPermissions` is not constrained at all. Drawing is not a
+choice: `image_gen` exists only in Codex.
 
-- **читает книгу о себе** — название, автора, переводчика, год и издание берёт из fb2 или
-  epub, слаг складывает из названия; человеку остаются только права;
-- **собирает запись героя** словами книги, с указателями на абзацы и аудитом понимания
-  из десяти клеток;
-- **добирает внешность** вторым заходом по просевшим клеткам: прямое описание даёт клетке
-  единицу, признак сословия или ремесла — половину, а молчание книги записывается пробелом
-  и больше не спрашивается. Пробел уходит в промпт листа отдельным разделом — «оставь
-  обычным» вместо выдуманного;
-- **рисует лист и кадр** и кладёт их на приёмку: судья содержания — человек, не проверка;
-- **хранит прежние листы**: приёмка и отказ ничего не стирают, к любому варианту можно
-  вернуться;
-- **ведёт несколько заданий рядом** — сколько разрешает настройка, и только те, что не спорят
-  за один файл: записи героев одной книги идут по очереди, листы и разные книги — одновременно.
+Selection stays with the human: which characters are needed, which sheet to accept, which
+scenes to draw.
 
-Устройство и экраны — [спецификация панели](docs/superpowers/specs/2026-09-09-panel-design.md).
+What the panel does on its own:
 
-## Что нужно, чтобы запустить у себя
+- **reads what the book knows about itself** — title, author, translator, year and edition
+  come from the fb2 or epub, the slug is built from the title; only rights stay with you;
+- **collects a character record** in the book's own words, with paragraph locators and an
+  understanding audit of ten traits;
+- **runs a second pass on appearance** over the thin traits: a direct description scores a
+  trait 1, a trait of the caste or trade the book explicitly assigns scores 0.5, and the
+  book's silence is written down as a gap and never asked about again. The gap goes into the
+  sheet prompt as a section of its own — "keep it ordinary" instead of something invented;
+- **draws the sheet and the frame** and puts them up for your verdict: the judge of content
+  is a human, not a check;
+- **keeps earlier sheets**: neither accepting nor rejecting erases anything, and any variant
+  can be brought back;
+- **runs several jobs side by side** — as many as the setting allows, and only those that do
+  not touch the same file: records of one book go one by one, sheets and different books run
+  at the same time.
 
-- **Python 3.10+**. Скрипты и панель — только стандартная библиотека, ставить нечего.
-- **Свой файл книги** — fb2, epub или txt. В репозитории книг нет и не будет: сюда попадают
-  манифест, хеши абзацев и записи героев, а сам текст лежит в игнорируемой
-  `books/<книга>/source/`. Раскладку по этому репозиторию воспроизведёт тот, у кого есть
-  свой экземпляр книги.
-- **Оператор** для шагов с суждением — хотя бы один из двух, настроенный и вошедший в
-  аккаунт: [Codex CLI](https://github.com/openai/codex) (`codex exec`) или
-  [Claude Code](https://github.com/anthropics/claude-code) (`claude -p`). Панель зовёт их
-  сама; команда меняется в `cache/panel/settings.json`.
-- **Картинки рисует Codex**: инструмент генерации изображений есть только у него. Без Codex
-  работает всё, кроме листов персонажей и кадров.
-- `pytest` — только для тестов, в работе не нужен. Один тест разбирает скрипт панели через
-  `node --check` и пропускается, если node не установлен.
+The interface is bilingual, Russian and English, with the switch in the sidebar. Only what
+the panel itself wrote is translated: character names, descriptions and the agent's own text
+stay as they are, because that is the book's data — which is why the Russian text is still
+visible in the screenshots above.
 
-Деньги и лимиты расходует оператор, а не панель: запись героя — это 7–16 минут работы
-Codex или Claude, лист персонажа — 2–4 минуты. Сколько заданий идут рядом, видно и меняется
-в боковине панели.
+The design and the screens are described in the
+[panel specification](docs/superpowers/specs/2026-09-09-panel-design.md) (in Russian).
 
-## Запуск
+## What you need to run it
+
+- **Python 3.10+.** The scripts and the panel use the standard library only; there is
+  nothing to install.
+- **Your own book file** — fb2, epub or txt. There are no books in this repository and there
+  never will be: what lands here is the manifest, paragraph hashes and character records,
+  while the text itself sits in the git-ignored `books/<book>/source/`. Anyone holding their
+  own copy of the book can reproduce the layout from this repository.
+- **An operator** for the steps that need judgement — at least one of the two, configured
+  and signed in: [Codex CLI](https://github.com/openai/codex) (`codex exec`) or
+  [Claude Code](https://github.com/anthropics/claude-code) (`claude -p`). The panel calls
+  them itself; the command can be changed in `cache/panel/settings.json`.
+- **Images are drawn by Codex**: only it has an image generation tool. Without Codex
+  everything works except character sheets and frames.
+- `pytest` is needed for the tests only. One test parses the panel script through
+  `node --check` and is skipped when node is not installed.
+
+Money and rate limits are spent by the operator, not by the panel: a character record is
+7–16 minutes of Codex or Claude, a character sheet 2–4 minutes. How many jobs run side by
+side is visible and changeable in the panel's sidebar.
+
+## Running the scripts
 
 ```bash
-python3 scripts/register_result.py books/<книга>/<партия>   # хеши, input/, refs.json
-python3 scripts/check_rights.py                            # права
-python3 scripts/build_gallery.py                           # пересобрать index.html
-python3 scripts/build_styles_page.py                       # пересобрать styles/index.html
-pytest tests/                                              # все проверки проекта
+python3 scripts/register_result.py books/<book>/<batch>   # hashes, input/, refs.json
+python3 scripts/check_rights.py                           # rights
+python3 scripts/build_gallery.py                          # rebuild index.html
+python3 scripts/build_styles_page.py                      # rebuild styles/index.html
+pytest tests/                                             # every check in the project
 ```
 
-Порядок не случаен: регистрация записывает, из чего получены кадры, проверка прав читает
-записанное, сборка галереи сверяет хеши и падает, если картинка нарисована по карточке,
-которой больше нет.
+The order is not accidental: registration records what the frames were made from, the rights
+check reads what was recorded, and the gallery build verifies the hashes and fails if a
+picture was drawn from a card that no longer exists.
 
-Скрипты используют только стандартную библиотеку Python 3.10+. Тесты — `pytest tests/`, он
-ставится отдельно и в проекте не требуется. Один тест разбирает скрипт панели через
-`node --check` и пропускается, если node не установлен: страница панели — единственный файл
-без сборки, и синтаксическую ошибку в нём больше ловить нечем.
+## Kinship with Okrestnosti
 
-## Родство с «Окрестностями»
-
-Там вход — фотография места, здесь — текст сцены; роль стилевого референса та же. Московские
-плакаты остались в родительском проекте, здесь коллекции — книги.
+There the input is a photograph of a place, here it is the text of a scene; the role of the
+style reference is the same. The Moscow posters stayed in the parent project; here the
+collections are books.

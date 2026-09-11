@@ -49,8 +49,12 @@ def test_every_called_function_exists():
     declared |= set(re.findall(r'\bfunction\s+\w+\s*\(([^)]*)\)', SCRIPT)
                     ) and set(re.findall(r'[\w$]+', ' '.join(
                         re.findall(r'\bfunction\s+\w+\s*\(([^)]*)\)', SCRIPT))))
+    # Строки в одинарных и двойных кавычках выбрасываем: в словаре перевода есть «Show all
+    # ({n})», и «all (» из него читалось как вызов несуществующей функции. Обратные кавычки
+    # оставляем — внутри них живут настоящие вызовы в `${...}`.
+    code = re.sub(r"'(?:[^'\\\n]|\\.)*'|\"(?:[^\"\\\n]|\\.)*\"", "''", SCRIPT)
     # Вызовы вида `имя(` в начале выражения: методы (`.map(`) отсеяны взглядом назад.
-    called = set(re.findall(r'(?<![.\w$])([a-z][A-Za-z0-9_$]{2,})\s*\(', SCRIPT))
+    called = set(re.findall(r'(?<![.\w$])([a-z][A-Za-z0-9_$]{2,})\s*\(', code))
     missing = sorted(called - declared - BUILTIN)
     assert not missing, f'вызываются, но не объявлены: {", ".join(missing)}'
 
