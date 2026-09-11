@@ -4,6 +4,7 @@
       "name": "Дэрроу",
       "appearance": "До резьбы, в Ликосе: шестнадцать лет, высокий и всё ещё растёт; худой и жилистый, выглядит моложе, чем себя чувствует. Красивое от рождения угловатое худое лицо. Волосы цвета старой крови, ржаво-рыжие; радужки такие же ржаво-красные. Кожа тугая и бледная, испещрена шрамами от ожогов и порезов. Кроваво-красный фрайсьют Хеллдайвера из нанопластика закрывает тело с ног до головы; на спине тёмно-красная клановая L Лямбды. На лбу алая повязка. На обеих кистях костяные на ощупь сигилы Красных — грубый круг со стрелой и штриховкой. Шахтёрские руки сильные, порезанные, обожжённые и в шрамах; свежий ожог на тыльной стороне кисти тянется от костяшек до запястья. На шнурке у груди висит обручальное кольцо из волос и шёлка. В задней кобуре — складной слингБлейд, жестоко изогнутый резак длиной с ногу. В шахте двигается быстро и ловко; даже в ужасе руки не становятся неуклюжими.",
       "appearance_en": "pre-Carving 16-year-old Red miner; tall, thin, wiry; angular handsome face; rust-red hair and irises; tight pale scarred skin; blood-red Helldiver frysuit, Lambda L on back; scarlet headband; Red hand sigils; burned hands; hair-and-silk wedding ring on neck cord; curved slingBlade in back holster",
+      "subject_en": "a teenage boy, a helium miner on Mars in an underground colony",
       "locators": [
         {
           "chapter": 1,
@@ -132,6 +133,7 @@
       "name": "Ио",
       "appearance": "Шестнадцать. Крошечная и худая — рёбра проступают под кожей, вся проволока, обёрнутая бледной кожей, колени подгибаются. Кожа бледная, подземная. Тяжёлая грива ржаво-рыжих волос, красных как марсианский камень; после смены в Уэбберри волосы в пыли и паутине. Лицом могла бы сойти за Золотую. Многослойные юбки ниже колена и блуза — красные, полудюжины оттенков, как носят все женщины клана. Тонкое кольцо из сплетённых волос на безымянном пальце. Держится прямо, легка на ногу — танцовщица.",
       "appearance_en": "a sixteen-year-old girl, tiny and thin, ribs showing beneath the skin, all wire wrapped in pale skin; pale underground complexion; a heavy mane of rust-red hair, the red of Mars rock, dusted and cobwebbed from a shift in the silk works; a face fine enough to pass for one of the Golds; layered skirts falling below the knee and a blouse, all in half a dozen different reds as the clan women wear; a thin band of woven hair on her ring finger; upright and light on her feet, a dancer",
+      "subject_en": "a teenage girl, a silk-works weaver in an underground Martian mining colony",
       "locators": [
         {
           "chapter": 1,
@@ -171,14 +173,29 @@
       ],
       "understanding": 9.0,
       "sheet": "characters/eo.png",
-      "sheet_sha256": "8fe82935c6632233ae55f4e72b7a6af7f86395bf61db616a73d82f5b8c8def09",
+      "sheet_sha256": "a60021314ecc22a8c6a083946f30dfe27e032b2632570972522f7f353c836f43",
       "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a teenage girl, a silk-works weaver in an underground Martian mining colony. a sixteen-year-old girl, tiny and thin, ribs showing beneath the skin, all wire wrapped in pale skin; pale underground complexion; a heavy mane of rust-red hair, the red of Mars rock, dusted and cobwebbed from a shift in the silk works; a face fine enough to pass for one of the Golds; layered skirts falling below the knee and a blouse, all in half a dozen different reds as the clan women wear; a thin band of woven hair on her ring finger; upright and light on her feet, a dancer.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
     },
     "narol": {
       "name": "дядя Нарол",
-      "appearance": "Тридцать пять, но выглядит стариком: лицо бледное и призрачное, вечно нахмуренное. Моргает долго и тяжело, будто каждый раз больно открывать глаза и снова видеть мир. Пьёт не зная меры — сутулость и тяжесть в движениях. Рыжие волосы Красных, тронутые сединой. Руки шахтёрские, сильные, в шрамах. Алый фрайсьют headTalk'а — старшего смены, на голове рабочий блок с дисплеем. Цитра на плечевых ремнях поперёк груди, старая, металлическая.",
-      "appearance_en": "a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest",
+      "appearance": "Тридцатипятилетний Красный мужчина, но выглядит старым и усталым. Крупный. Лицо бледное и призрачное; шрам кривит верхнюю губу, грубая борода царапает шею. Густые волосы тронуты сединой; их ржаво-рыжая основа и ржаво-красные глаза следуют из общих признаков Красных, лично цвет волос и глаз Нарола не назван. Обычно хмурится; моргает долго и тяжело, словно ему больно каждый раз открывать глаза и снова видеть мир. По общему признаку шахтёров руки сильные и в шрамах, на кистях по признаку Цвета — сигилы Красных. На смене, по форме двух headTalk'ов, носит алый фрайсьют; следит за командой через головной блок. На празднике цитра висит на плечевых ремнях у бёдер: пластиковая дека и множество туго натянутых металлических струн обращены вверх. Часто пьян; не создан для нежности, но обнимает одной рукой и целует в макушку.",
+      "appearance_en": "thirty-five, big, old and tired; pale ghostly face, upper-lip scar, coarse beard, long hard blinks and a scowl; thick rust-red hair streaked gray, rust-red eyes; strong scarred miner's hands with Red Sigils; scarlet headTalk frysuit and head unit; shoulder-slung zither",
+      "subject_en": "a thirty-five-year-old Red man, the headTalk of a two-hundred-plus mining crew in Lykos, an underground Martian colony",
       "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            12,
+            13
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            15,
+            16
+          ]
+        },
         {
           "chapter": 1,
           "paragraphs": [
@@ -187,23 +204,85 @@
           ]
         },
         {
+          "chapter": 2,
+          "paragraphs": [
+            54,
+            55
+          ]
+        },
+        {
           "chapter": 3,
           "paragraphs": [
             125,
             126
           ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            147,
+            150
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            159,
+            160
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            375,
+            377
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            428,
+            429
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            435,
+            436
+          ]
         }
       ],
-      "understanding": 8.5,
+      "audit": {
+        "age": 1,
+        "build": 1,
+        "face": 1,
+        "eyes": 0.5,
+        "hair": 1,
+        "skin": 1,
+        "clothing": 0.5,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 9.0,
       "sheet": "characters/narol.png",
       "sheet_sha256": "289f9eee63c6324a155ffff363519688a8fba21bae504f2be7851faf0098c99a",
       "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a man, a mining crew chief in an underground Martian colony. a man of thirty-five worn old before his time; a pale, ghostly, habitually scowling face; long hard blinks, as though it pains him to open his eyes and see the world again; stooped and heavy with drink; the red hair of his Color going grey; strong scarred miner's hands; a scarlet crew-chief frysuit with a working head unit and display across his brow; a battered metal zither slung on shoulder straps across his chest.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
     },
     "ugly_dan": {
       "name": "Урод Дэн",
-      "appearance": "Серый капитан средних лет, засаленный и наглый. Ветеран фронта: покалечен, списан, вместо руки старый протез устаревшей модели — он его стесняется. Кожа потемнела от солнца, что под землёй редкость. Седые волосы висят тонкими редкими прядями на глаза; сами глаза — два кубика льда, обвалянные в золе. Простой изношенный серый дуроармор, такой же неопрятный, как волосы. Сигилы Серых на тыльной стороне ладоней и на шее.",
-      "appearance_en": "a greasy middle-aged Gray militia captain, insolent in his bearing; a front-line veteran, crippled and discharged, with an old outdated replacement arm he is self-conscious about; skin darkened by sun exposure, unusual underground; grey hair hanging thin and weedy over his eyes; eyes like two icecubes rolled in ash; simple worn grey duroArmor as unkempt as his hair; the sigils of his Color on the backs of his hands and at his neck",
+      "appearance": "Мужчина-Серый; точный возраст, рост и сложение не названы. Засаленный капитан с кожей, потемневшей от солнца, что под землёй редкость. Серые, как у его Цвета, волосы тонкими редкими прядями свисают на глаза — два кубика льда, обвалянные в золе. Сигилы Серых — вьющийся серый знак, похожий на цифру четыре с несколькими полосами рядом, — идут по обеим кистям и запястьям. После увечья его убрали с фронта в Евразии; теперь у него протез руки старой модели, которого он стесняется, сторона не названа. На нём, по форме стоящих рядом ликосских Tinpot'ов, простой усталый серый дуроармор, неопрятный, потёртый и в пятнах. Пользуется электрическим тампером, магнитными наручниками и гравиботинками. Жесток и непреклонен; голос затхлый и тяжёлый, с маслянистым акцентом с Земли. Издевательски кидает камешек, подмигивает, облизывает зубы, ухмыляется и провоцирует избитого Дэрроу ответить ударом. Вероятно, относится к старшим ветеранам ликосского гарнизона: большинство местных Tinpot'ов — мальчишки или старики, списанные с земных войн, а Дэн — бывший фронтовик и капитан; это вывод из общего признака группы, не прямое описание его возраста. Указанный дуроармор также выведен из общей формы ликосских Tinpot'ов; личная одежда Дэна не описана.",
+      "appearance_en": "greasy Gray captain, age unstated; sun-darkened skin; thin, weedy gray hair over eyes like icecubes rolled in ash; curling gray sigils like a barred number four on hands and wrists; old-model replacement arm, side unstated; simple tired gray duroArmor; electric thumper; cruel, mocking bearing; likely an older veteran, inferred from shared Lykos Tinpot traits: most of the garrison are boys or old men retired from Earth's wars, while Dan is a former frontline captain; the stated simple, worn, stained gray duroArmor is inferred from shared Lykos Tinpot traits; Dan-specific clothing is unstated",
+      "subject_en": "a Gray man of unstated age, a Tinpot captain stationed in Lykos, an underground Martian mining colony",
       "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            28,
+            29
+          ]
+        },
         {
           "chapter": 2,
           "paragraphs": [
@@ -215,27 +294,109 @@
           "chapter": 2,
           "paragraphs": [
             57,
-            58
+            59
           ]
         },
         {
           "chapter": 2,
           "paragraphs": [
-            58,
-            59
+            59,
+            60
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            63,
+            66
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            171,
+            174
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            264,
+            266
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            266,
+            267
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            269,
+            272
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            289,
+            290
           ]
         }
       ],
-      "understanding": 8.5,
+      "audit": {
+        "age": 0.5,
+        "build": 0,
+        "face": 0,
+        "eyes": 1,
+        "hair": 1,
+        "skin": 1,
+        "clothing": 0.5,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 7.0,
+      "gaps": {
+        "age": {
+          "why": "Точный возраст Дэна книга не называет: принадлежность к старшим ветеранам выведена только из состава ликосских Tinpot'ов и его собственной службы на фронте; число лет и однозначная возрастная роль отсутствуют.",
+          "looked": "все 12 точных упоминаний Ugly Dan / Dan и их окружение в главах 2, 3, 5, 6, 8 и 25; поиск age / years / old / older / young / boy / man / veteran / retired / captain; все абзацы с Gray / Grays / Grey / Greys и Tinpot / Tinpots по книге, особенно 55, 57–58 и 171–173."
+        },
+        "build": {
+          "why": "Рост и телосложение Дэна нигде не описаны; служба капитаном, удар тампером и помощь Дио на виселице не дают надёжных сведений о росте, полноте, плечах или мускулатуре, а общих признаков сложения Серых или ликосских Tinpot'ов книга не приводит.",
+          "looked": "все 12 точных упоминаний Ugly Dan / Dan с соседними абзацами; поиск height / tall / short / big / small / thick / thin / broad / heavy / lean / build / shoulder / muscle / strong; все групповые упоминания Gray / Grays / Grey / Greys и Tinpot / Tinpots по книге."
+        },
+        "face": {
+          "why": "Книга не даёт строения лица Дэна — формы лица, носа, челюсти, щёк, губ, бровей, морщин или растительности; прозвище Ugly и слово greasy не задают конкретных черт, а глаза и волосы учтены в других клетках. Общего описания лиц Серых или Tinpot'ов нет.",
+          "looked": "все 12 точных упоминаний Ugly Dan / Dan и их окружение; поиск face / jaw / chin / cheek / nose / mouth / lips / teeth / brow / beard / moustache / wrinkle / scar / ugly / greasy; все абзацы с Gray / Grays / Grey / Greys и Tinpot / Tinpots по книге."
+        },
+        "clothing": {
+          "why": "Лично одежда Дэна не описана: простой усталый серый дуроармор, неопрятный, потёртый и в пятнах, выведен только из общей формы ликосских Tinpot'ов, поэтому клетка остаётся на 0.5; одежда под бронёй, головной убор и индивидуальные детали не названы.",
+          "looked": "все 12 точных упоминаний Ugly Dan / Dan с окружением; поиск wear / wore / wearing / dressed / clothes / clothing / uniform / shirt / trousers / coat / jacket / boots / helm / helmet / armor / armour / duroArmor; все упоминания Gray / Grays / Grey / Greys и Tinpot / Tinpots, особенно абзацы 55, 171 и 430."
+        }
+      },
       "sheet": "characters/ugly_dan.png",
       "sheet_sha256": "b20ee9eaa5ea09f5b6620230b9815ebf780186d3ba154a8b41d4f8d874203216",
-      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a man, a militia captain garrisoning an underground Martian mining colony. a greasy middle-aged Gray militia captain, insolent in his bearing; a front-line veteran, crippled and discharged, with an old outdated replacement arm he is self-conscious about; skin darkened by sun exposure, unusual underground; grey hair hanging thin and weedy over his eyes; eyes like two icecubes rolled in ash; simple worn grey duroArmor as unkempt as his hair; the sigils of his Color on the backs of his hands and at his neck.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a man, a militia captain garrisoning an underground Martian mining colony. a greasy middle-aged Gray militia captain, insolent in his bearing; a front-line veteran, crippled and discharged, with an old outdated replacement arm he is self-conscious about; skin darkened by sun exposure, unusual underground; grey hair hanging thin and weedy over his eyes; eyes like two icecubes rolled in ash; simple worn grey duroArmor as unkempt as his hair; the sigils of his Color on the backs of his hands and at his neck.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame.",
+      "gaps_for": "84469410aa109cfd975cf9f5c1842ba05b17c7f958779db6d7cc0514eb9adae9",
+      "gaps_at": "2026-09-11T12:10:16"
     },
     "dago": {
       "name": "Даго",
-      "appearance": "Мужчина-Красный, легендарный Хеллдайвер Гаммы. Возраст не назван; по бледной, жёсткой, словно полоса старой кожи, внешности и сравнению с юным Дэрроу кажется старше. Очень худой; вместо лица — ухмылка. Как у Красного, волосы цвета старой крови, радужки ржаво-красные, на кистях костяные на ощупь сигилы — грубый круг со стрелой и штриховкой. Кроваво-красный фрайсьют Хеллдайвера, на спине тёмно-красная трость Гаммы. Курит длинный бернер, глубоко затягивается. Говорит протяжно и мало; спокойно наблюдает с привычной ухмылкой.",
-      "appearance_en": "older-looking, extremely thin Red man; pale, craggy, old-leather skin and a smirk for a face; rust-red hair and eyes; blood-red Gamma Helldiver frysuit with a dark-red cane on the back; Red hand sigils; long burner; watchful, laconic, slow-drawling bearing",
+      "appearance": "Красный мужчина, легендарный Хеллдайвер клана Гамма в подземной шахтёрской колонии Ликос на Марсе. Точный возраст не назван; рядом с шестнадцатилетним Дэрроу выглядит старше и закалённее. Бледный, жёсткий на вид, словно полоса старой кожи; очень худой, вместо лица — ухмылка. По общим признакам Красных волосы цвета старой крови, радужки ржаво-красные, на кистях костяные на ощупь сигилы — грубый круг со стрелой и штриховкой. Кроваво-красный фрайсьют Хеллдайвера, на спине тёмно-красная трость Гаммы. Курит длинный бернер, глубоко затягивается. Говорит протяжно и скупо, спокойно наблюдает с ухмылкой.",
+      "appearance_en": "older-looking, extremely thin Red man; pale and hard-looking, like a strip of old leather, with a smirk for a face; rust-red hair and irises, and Red hand sigils, inferred from shared Color traits; blood-red Gamma Helldiver frysuit with dark-red cane on back; long burner; watchful, laconic drawl",
+      "subject_en": "a Red man of unstated age, Gamma's legendary Helldiver in the underground Martian mining colony of Lykos",
       "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            28,
+            29
+          ]
+        },
         {
           "chapter": 2,
           "paragraphs": [
@@ -279,6 +440,13 @@
           ]
         },
         {
+          "chapter": 8,
+          "paragraphs": [
+            435,
+            436
+          ]
+        },
+        {
           "chapter": 43,
           "paragraphs": [
             3426,
@@ -298,49 +466,496 @@
         "marks": 0.5,
         "bearing": 1
       },
-      "understanding": 8.0
+      "understanding": 8.0,
+      "gaps": {
+        "age": {
+          "why": "Точный возраст Даго книга не называет: он только выглядит старше шестнадцатилетнего Дэрроу — жёстким, как старая кожа, и «крутым, изборождённым»; числа или возрастной роли для него нет.",
+          "looked": "все 9 найденных абзацев с Dago и их окружение (гл. 2, абз. 67–78; гл. 3, 147 и 163–165; гл. 10, 560–561; гл. 43, 3426); поиск age / old / older / young / years / boy / man / craggy по книге."
+        },
+        "eyes": {
+          "why": "Глаза самого Даго не описаны: ржаво-красные радужки известны только как признак Красных (гл. 3, абз. 147 и 149); форма глаз и индивидуальный взгляд не названы.",
+          "looked": "все упоминания Dago с окружением; поиск eyes / eye / irises / gaze / look / watch по книге и в главах 1–3, 10 и 43; групповые описания Красных в абзацах 5, 10, 147 и 149."
+        },
+        "hair": {
+          "why": "Волосы самого Даго не описаны: цвет старой крови, ржаво-красный, выведен только из общих признаков Красных; длина, стрижка, фактура, залысины или седина не даны.",
+          "looked": "все упоминания Dago с окружением; поиск hair / red hair / old blood / gray / grey / white / bald / balding по книге; групповые описания Красных в абзацах 5, 10, 147 и 149."
+        },
+        "marks": {
+          "why": "Личных примет Даго — собственных шрамов, ожогов, татуировок, протезов или украшений — книга не даёт; сигилы Красного (абз. 149) и сильные покрытые шрамами руки шахтёра (абз. 435) остаются только признаками Цвета и ремесла.",
+          "looked": "все упоминания Dago с окружением; поиск scar / burn / cut / mark / tattoo / Sigil / hands / knuckles / ring / band / prosthetic по книге; групповые описания в абзацах 149 и 435."
+        }
+      },
+      "sheet": "characters/dago.png",
+      "sheet_sha256": "6d0f35dc18dca85d91c799d68c7a66a298b38d6a834bbb030f50782987ea1c2d",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a Red man of unstated age, Gamma's legendary Helldiver in the underground Martian mining colony of Lykos. older-looking, extremely thin Red man; pale and hard-looking, like a strip of old leather, with a smirk for a face; rust-red hair and irises, and Red hand sigils, inferred from shared Color traits; blood-red Gamma Helldiver frysuit with dark-red cane on back; long burner; watchful, laconic drawl.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
     },
     "barlow": {
       "name": "старый Барлоу",
-      "appearance": "Старый и толстый, по его собственным словам. Смеётся сухо, шутит через рацию.",
-      "appearance_en": "an old fat crewman, dry chuckling, voice crackling over suit static",
+      "appearance": "Старый Красный мужчина, шахтёр из буровой команды Лямбды. Старый и толстый, по его собственным словам, хотя Дансер ещё толще. По общим признакам Красных волосы цвета старой крови, радужки ржаво-красные, на кистях костяные на ощупь сигилы — грубый круг со стрелой и штриховкой; это признаки Цвета, а не личное описание Барлоу. На смене — в ржаво-красном фрайсьюте с тёмно-красной L Лямбды на спине, по общей форме шахтёрской команды. Сухо посмеивается и любит шутить по рации; Дэрроу считает его осторожным и не склонным к риску. Может улизнуть с буровой команды покурить. Кисти — как у всех Красных шахтёров, «покрытые шрамами сильные руки нашего рода», под ногтями въевшаяся ржавая пыль забоя; это признак ремесла, а не личное описание Барлоу. Фрайсьют команды — нанопластик, закрывает с ног до головы, с лицевой пластиной и съёмной крышкой-шлемом, которую наверху снимают; под шлемом повязка на лбу. Как бурильщик Лямбды работает на буровой установке — по его же словам, «мой бур ещё вгрызается»; у бурильщиков в ухе рация, у каждого — слингБлейд, кривой резак в полноги длиной, в чехле на спине, чтобы отсечь и прижечь застрявшую в механизме конечность; это общая экипировка команды, не его личная. Курит бёрнеры, как вся команда после смены.",
+      "appearance_en": "an old, fat Red man; rust-red hair and irises and bone-textured Red hand sigils, inferred from shared Color traits; a rust-red Lambda mining frysuit with a dark-red L on the back, inferred from the crew uniform; dry-chuckling, fond of jokes over the comm, cautious in bearing; a smoker; scarred, strong miner's hands with rust ground in under the nails, inferred from shared Red miner traits; the frysuit is nanoplastic, covering him toe to head, with a faceplate and a removable lid worn off at the surface, a sweatband under it, inferred from shared Lambda drillteam traits; a driller who runs a drill rig; a comm in his ear and a slingBlade, a curved halfmoon cutter as long as a leg, holstered on his back, inferred from shared Lambda drillteam traits; smokes burners",
+      "subject_en": "an old Red man, a miner in Lambda's drillteam in the underground Martian mining colony of Lykos",
       "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            2,
+            4
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            5,
+            6
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            14,
+            15
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            17,
+            18
+          ]
+        },
         {
           "chapter": 1,
           "paragraphs": [
             21,
             22
           ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            28,
+            29
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            34,
+            35
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            40,
+            41
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            45,
+            49
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            47,
+            48
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            53,
+            55
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            53,
+            54
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            72,
+            73
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            77,
+            78
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            147,
+            150
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            435,
+            436
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            464,
+            465
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            981,
+            982
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            1411,
+            1412
+          ]
+        },
+        {
+          "chapter": 32,
+          "paragraphs": [
+            2254,
+            2255
+          ]
         }
-      ]
+      ],
+      "audit": {
+        "age": 1,
+        "build": 1,
+        "face": 0,
+        "eyes": 0.5,
+        "hair": 0.5,
+        "skin": 0.5,
+        "clothing": 0.5,
+        "gear": 0.5,
+        "marks": 0.5,
+        "bearing": 1
+      },
+      "understanding": 6.0,
+      "gaps": {
+        "face": {
+          "why": "Черт лица Барлоу книга не даёт нигде: ни формы, ни выражения, ни бороды или морщин; общего описания лиц Красных или старых шахтёров в тексте тоже нет — лица описаны только у Дэрроу, Даго и Ральфа лично.",
+          "looked": "все 10 абзацев с именем Barlow (гл. 1, 2, 8, 9, 16, 22, 32) с окружением; поиск face / beard / wrinkl / gnarled / weathered / grizzled / bald по всей книге; поиск old + Reds / men / miners / elders; абзацы 10–60, 144–151, 428–435."
+        },
+        "eyes": {
+          "why": "Своих глаз у Барлоу в тексте нет: ржаво-красные радужки — только признак Цвета (гл. 3, абз. 147 и 149: «волосы и глаза у неё наши»); форма, взгляд, веки не названы.",
+          "looked": "абзацы с именем Barlow и их окружение; поиск eyes / irises / red eyes по всей книге; сравнение с Дансером (абз. 434 — у него «ярче большинства», значит у остальных ржавые)."
+        },
+        "hair": {
+          "why": "Волосы названы только как признак Цвета — цвет старой крови, ржаво-красные (абз. 147, 149, 10); длина, стрижка, седина старого шахтёра для Барлоу не даны; седина у Дансера (абз. 434) — его личная черта, не признак группы.",
+          "looked": "абзацы с именем Barlow; поиск hair / gray hair / white hair / balding / bald по всей книге; описания старых Красных (Дансер 434, Нарол 31, Даго 68)."
+        },
+        "skin": {
+          "why": "Тон кожи и лицо не даны: есть только руки шахтёра — «покрытые шрамами сильные руки нашего рода» (абз. 435) и ржавчина под ногтями (абз. 47) как признак ремесла. Бледность кожи книга приписывает лично Дэрроу (абз. 147), а не Красным вообще.",
+          "looked": "поиск skin / pale / scar / hands рядом с Reds / miners / crew по всей книге; абзацы 10, 47, 147, 435, 560; окружение всех упоминаний Barlow."
+        },
+        "clothing": {
+          "why": "Дана только рабочая форма команды — ржаво-красный фрайсьют с L Лямбды, нанопластик, лицевая пластина, крышка-шлем, повязка (абз. 2, 5, 53, 54, 77). Чем Барлоу одет вне смены, книга не говорит: «комбинезон или домотканое» (абз. 463) — привычка Дэрроу, а не описание мужчин Ликоса.",
+          "looked": "поиск frysuit / jumpsuit / homespun / boots / clothes / wore по всей книге; сцены вне шахты — Флаш (79), Лаурелтайд (144–185), тюрьма и суд (276–286); окружение всех упоминаний Barlow."
+        },
+        "gear": {
+          "why": "Известно, что он бурильщик с буром (абз. 21, 1411), а рация, крышка-шлем и слингБлейд — общая экипировка команды (абз. 3, 40, 77, 2255). Как выглядит именно его установка и носит ли он что-то своё — головной блок, сканер, — книга не говорит; клоуДрилл с перчатками (абз. 3) — машина Адского ныряльщика, не рядового бурильщика.",
+          "looked": "поиск slingBlade / head unit / headTalk / faceplate / lid / drill / rig / scanner по всей книге; абзацы 3, 12, 33, 37–40, 1411, 2254–2255; окружение всех упоминаний Barlow."
+        },
+        "marks": {
+          "why": "Личных примет — шрамов, ожогов, протезов, украшений — у Барлоу в тексте нет; есть только сигилы Красного на кистях (абз. 149) и общие шрамы на руках шахтёров (абз. 435) как признаки Цвета и ремесла.",
+          "looked": "поиск scar / burn / tattoo / ring / band / bite рядом с Barlow и с Reds / miners по всей книге; приметы старых Красных (Дансер 434, Нарол 30–31) — личные, не групповые; окружение всех упоминаний Barlow."
+        }
+      },
+      "gaps_for": "656c515bdd4d5b4c6d1200f450b5fd50ee28de9c05d18a8948c6ccd03994631f",
+      "gaps_at": "2026-09-10T19:19:20",
+      "sheet": "characters/barlow.png",
+      "sheet_sha256": "8cca9baad33978a0ce59d98995a035826dbf65b4c9c5d8dfb813964fe7cee749",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: an old Red man, a miner in Lambda's drillteam in the underground Martian mining colony of Lykos. an old, fat Red man; rust-red hair and irises and bone-textured Red hand sigils, inferred from shared Color traits; a rust-red Lambda mining frysuit with a dark-red L on the back, inferred from the crew uniform; dry-chuckling, fond of jokes over the comm, cautious in bearing; a smoker; scarred, strong miner's hands with rust ground in under the nails, inferred from shared Red miner traits; the frysuit is nanoplastic, covering him toe to head, with a faceplate and a removable lid worn off at the surface, a sweatband under it, inferred from shared Lambda drillteam traits; a driller who runs a drill rig; a comm in his ear and a slingBlade, a curved halfmoon cutter as long as a leg, holstered on his back, inferred from shared Lambda drillteam traits; smokes burners.\n\nUnspecified: the source does not describe this person's face, eyes, hair, skin, clothing, gear or\ndistinguishing marks. Keep these ordinary and unremarkable — plain and average, nothing memorable;\ninvent no colour, scars, tattoos, jewellery, insignia or accessories that the description above\ndoes not name.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
     },
     "kieran": {
       "name": "Кирэн",
-      "appearance": "Брат Дэрроу. Рыжие волосы. Жена и дети виснут на нём.",
-      "appearance_en": "Darrow's brother, red-haired, his children swarming him and his wife at his side",
+      "appearance": "Девятнадцатилетний Красный мужчина, старший брат Дэрроу и шахтёр клана Лямбда. Рыжие волосы. По общим признакам Красных радужки ржаво-красные, а на кистях костяные на ощупь сигилы — грубый круг со стрелой и штриховкой; это признаки Цвета, а не личное описание Кирэна. На смене — в ржаво-красном фрайсьюте шахтёра с тёмно-красной L Лямбды на спине, по общей форме команды. По общему признаку шахтёров кисти сильные и покрыты шрамами; это не личное описание Кирэна. Как рядовой бурильщик смены, при работе использует метровый бур, крюки и тросы; это выведено из общей экипировки бурильщиков Лямбды, а не названо лично. Осторожный и ответственный семьянин: жена и дети рядом с ним; прижимает жену к себе, стережёт младшего брата и не даёт ему умереть.",
+      "appearance_en": "nineteen-year-old Red man; red hair; rust-red irises and bone-textured Red hand sigils, inferred from shared Color traits; rust-red Lambda miner's frysuit with dark-red L on back, inferred from crew uniform; this uniform is inferred from shared Lambda crew traits; strong, scarred hands, inferred from shared miner traits; a meter-long drill, hooks, and lines, inferred from shared Lambda driller traits; cautious, responsible family man who holds his wife close and guards his younger brother",
+      "subject_en": "a nineteen-year-old man, a miner in Lambda's crew in Lykos, an underground Martian mining colony",
       "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            7,
+            8
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            23,
+            24
+          ]
+        },
+        {
+          "chapter": 1,
+          "paragraphs": [
+            36,
+            37
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            45,
+            46
+          ]
+        },
+        {
+          "chapter": 2,
+          "paragraphs": [
+            54,
+            55
+          ]
+        },
         {
           "chapter": 3,
           "paragraphs": [
             147,
             148
           ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            149,
+            150
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            333,
+            334
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            348,
+            349
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            435,
+            436
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            981,
+            982
+          ]
         }
-      ]
+      ],
+      "audit": {
+        "age": 1,
+        "build": 0.5,
+        "face": 0,
+        "eyes": 0.5,
+        "hair": 1,
+        "skin": 0.5,
+        "clothing": 0.5,
+        "gear": 0.5,
+        "marks": 0.5,
+        "bearing": 1
+      },
+      "understanding": 6.0,
+      "gaps": {
+        "build": {
+          "why": "Рост и общее телосложение Кирэна лично нигде не описаны; известны только сильные кисти, выведенные из общего описания шахтёров, поэтому клетка остаётся на 0.5.",
+          "looked": "все 22 упоминания Kieran по книге и их окружение; поиск big / small / short / tall / thin / slim / broad / strong / hands / height; групповое описание шахтёров в главе 8, абзац 435."
+        },
+        "face": {
+          "why": "Черты лица Кирэна — форма лица, носа, челюсти, рта и губ — в тексте нигде не названы.",
+          "looked": "все 22 упоминания Kieran по книге и их окружение, включая главы 1–6, 16, 20–21, 25 и 44; поиск face / jaw / nose / mouth / lips / brow / cheek рядом с именем."
+        },
+        "eyes": {
+          "why": "Лично глаза Кирэна не описаны: ржаво-красные радужки известны только как общий признак Красных, поэтому клетка остаётся на 0.5.",
+          "looked": "все упоминания Kieran и их окружение; поиск eyes / irises и групповых описаний Red / Reds; общий признак глаз Красных в главе 3, абзац 149."
+        },
+        "skin": {
+          "why": "Цвет и состояние кожи Кирэна лично не описаны; покрытые шрамами кисти известны только из общего описания шахтёров, поэтому клетка остаётся на 0.5.",
+          "looked": "все упоминания Kieran и их окружение; поиск skin / pale / dark / scar / burn / callous / hands; групповое описание шахтёров в главе 8, абзац 435."
+        },
+        "clothing": {
+          "why": "Личная одежда Кирэна не названа: ржаво-красный фрайсьют с тёмно-красной L на спине выведен только из общей формы смены Лямбды, без индивидуальной посадки или деталей, поэтому клетка остаётся на 0.5.",
+          "looked": "все упоминания Kieran и сцены шахтёрской смены в главах 1–2; поиск wear / wore / clothes / shirt / suit / frysuit / glove / boot; общая форма Лямбды в главе 2, абзац 54."
+        },
+        "gear": {
+          "why": "Личная рабочая экипировка Кирэна не перечислена: метровый бур, крюки и тросы выведены только из общей экипировки бурильщиков его смены, поэтому клетка остаётся на 0.5.",
+          "looked": "все упоминания Kieran, особенно смена в главах 1–2; поиск drill / hook / line / scanner / blade / holster / gear / helmet / faceplate / glove / boot; описание бурильщиков Лямбды в главе 1, абзац 7."
+        },
+        "marks": {
+          "why": "Личные приметы Кирэна — шрамы, ожоги, татуировки, протезы или украшения — в тексте не названы; сигилы Красных и шрамы на кистях известны только как общие признаки Цвета и шахтёров, поэтому клетка остаётся на 0.5.",
+          "looked": "все упоминания Kieran и их окружение; поиск scar / burn / mark / tattoo / Sigil / ring / band / prosthetic; групповые описания сигилов Красных в главе 3, абзац 149, и рук шахтёров в главе 8, абзац 435."
+        }
+      },
+      "gaps_for": "542b16abf194e7c2d8e88090f424e1e83fbaba43227d70c7d92c57d2d986e160",
+      "gaps_at": "2026-09-11T12:05:41",
+      "sheet": "characters/kieran.png",
+      "sheet_sha256": "3087224c53fe1428f93e8dcb46ecaa7a59aa0ee5724bd28ae0079825c54c9aeb",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a nineteen-year-old man, a miner in Lambda's crew in Lykos, an underground Martian mining colony. nineteen-year-old Red man; red hair; rust-red irises and bone-textured Red hand sigils, inferred from shared Color traits; rust-red Lambda miner's frysuit with dark-red L on back, inferred from crew uniform; this uniform is inferred from shared Lambda crew traits; strong, scarred hands, inferred from shared miner traits; a meter-long drill, hooks, and lines, inferred from shared Lambda driller traits; cautious, responsible family man who holds his wife close and guards his younger brother.\n\nUnspecified: the source does not describe this person's build, face, eyes, skin, clothing, gear or\ndistinguishing marks. Keep these ordinary and unremarkable — plain and average, nothing memorable;\ninvent no colour, scars, tattoos, jewellery, insignia or accessories that the description above\ndoes not name.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
     },
     "mother": {
       "name": "мать Дэрроу",
-      "appearance": "Улыбка женщины, которая видела, что жизнь может предложить, и в лучшем случае этим позабавлена. Говорит медленно, с иронией.",
-      "appearance_en": "a woman whose smile is that of someone who has seen what life offers and is at best amused by it; a slow ironic voice",
+      "appearance": "Взрослая женщина-Красная, вдова и мать Дэрроу, Кирэна и Леанны в подземной шахтёрской колонии Ликос; точный возраст не назван. Высокая; плечи стали тоньше, чем когда она учила Дэрроу песням. Цвет глаз передала Дэрроу: его радужки ржаво-красные. Волосы предположительно ржаво-рыжие, как у Красных; лично её волосы не описаны. Ладони мозолистые. По одежде дан только общий обычай женщин клана: многослойные юбки ниже колена и блузы полудюжины оттенков красного. На кистях предположительно общие для Красных костяные на ощупь сигилы — грубый круг со стрелой и штриховкой. Улыбка женщины, которая видела всё, что может предложить жизнь, и в лучшем случае этим позабавлена; голос медленный, ироничный. Держится тихо и сдержанно: пожимает плечами, медленно улыбается, в гневе дрожит, но в горе молча готовит еду и держит руку сына. Во воспоминании подаёт суп половником; от испуганного крика её рука дрожит и бульон колеблется в половнике. Ржаво-рыжие волосы и сигилы остаются выводом из общих признаков Красных, а одежда — из общих признаков женщин клана, не личным описанием.",
+      "appearance_en": "adult Red woman; tall, thinner shoulders; rust-red irises inherited by Darrow; likely rust-red hair and Red hand sigils by Color; calloused palms; clan women's layered below-knee skirts and blouse in shades of red; bemused smile, slow ironic voice; quiet, restrained bearing; holds a ladle while serving soup, her hand trembling at a frightening scream; the likely rust-red hair and Red hand sigils are inferred from shared Red traits; the layered skirts and red blouse are inferred from shared clan-women traits",
+      "subject_en": "an adult Red woman, a widowed homemaker and matriarch of a mining family in Lykos, an underground Martian colony",
       "locators": [
+        {
+          "chapter": 1,
+          "paragraphs": [
+            0,
+            1
+          ]
+        },
         {
           "chapter": 3,
           "paragraphs": [
             134,
             135
           ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            137,
+            138
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            139,
+            141
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            147,
+            149
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            149,
+            150
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            333,
+            334
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            348,
+            350
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            381,
+            382
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            385,
+            387
+          ]
+        },
+        {
+          "chapter": 13,
+          "paragraphs": [
+            801,
+            802
+          ]
+        },
+        {
+          "chapter": 25,
+          "paragraphs": [
+            1595,
+            1596
+          ]
+        },
+        {
+          "chapter": 44,
+          "paragraphs": [
+            3558,
+            3559
+          ]
         }
-      ]
+      ],
+      "audit": {
+        "age": 0.5,
+        "build": 1,
+        "face": 0,
+        "eyes": 1,
+        "hair": 0.5,
+        "skin": 1,
+        "clothing": 0.5,
+        "gear": 1,
+        "marks": 0.5,
+        "bearing": 1
+      },
+      "understanding": 7.0,
+      "gaps": {
+        "age": {
+          "why": "Точный возраст матери Дэрроу книга нигде не называет: известны только её взрослая семейная роль и возраст сыновей, поэтому клетка остаётся на выводе 0.5.",
+          "looked": "все прямые упоминания Mother / my mother / Ma / Mum по книге, особенно главы 1–6; воспоминание в главе 25, абзац 1595; поиск age / old / young / years рядом с упоминаниями матери и семьи."
+        },
+        "face": {
+          "why": "Книга не даёт строения или постоянных черт её лица — формы лица, носа, губ, бровей, морщин; улыбка описывает выражение и повадку, но не заполняет клетку лица.",
+          "looked": "все прямые выходы матери в главах 1–6 и воспоминания в главах 13, 25 и 44; поиск face / cheek / nose / mouth / lips / jaw / brow / wrinkle вблизи Mother / my mother / Ma / Mum."
+        },
+        "hair": {
+          "why": "Лично её волосы не описаны: ржаво-рыжий цвет — только вывод из общих признаков Красных; длина, укладка, фактура и седина не названы, поэтому клетка остаётся на 0.5.",
+          "looked": "все упоминания Mother / my mother / Ma / Mum и их окружение; поиск hair / braid / curl / gray / grey / white по книге; групповые описания Красных в главе 1, абзац 10, и главе 3, абзацы 147–149."
+        },
+        "clothing": {
+          "why": "Её личная одежда нигде не названа: многослойные юбки ниже колена и красные блузы описаны только как общий обычай женщин клана, без обуви, украшений или индивидуальных деталей, поэтому клетка остаётся на 0.5.",
+          "looked": "сцены с матерью на Лаурелтайде, дома, у виселицы и в воспоминаниях — главы 1–6, 25 и 44; поиск wear / wore / dress / skirt / blouse / shirt / clothes / boot; групповое описание женщин клана в главе 3, абзац 148."
+        },
+        "marks": {
+          "why": "Личных примет — шрамов, ожогов, татуировок, протезов или украшений — у неё нет в тексте; сигилы на кистях известны только как общий признак Красных, а мозоли на ладонях уже учтены как состояние кожи, поэтому клетка остаётся на 0.5.",
+          "looked": "все прямые упоминания матери и их окружение; поиск scar / burn / mark / tattoo / Sigil / ring / band / prosthetic; абзац 385 с мозолистыми ладонями и групповое описание сигилов Красных в главе 3, абзац 149."
+        }
+      },
+      "gaps_for": "212e318b65d90d367bc0a806721b9abf8f80963e0e5f83e4b90788d41526018f",
+      "gaps_at": "2026-09-11T11:09:40",
+      "sheet": "characters/mother.png",
+      "sheet_sha256": "f0bfa254cda029063dcd05284b9733ffd40e2a1f2cd259614d49804e285886ae",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: an adult Red woman, a widowed homemaker and matriarch of a mining family in Lykos, an underground Martian colony. adult Red woman; tall, thinner shoulders; rust-red irises inherited by Darrow; likely rust-red hair and Red hand sigils by Color; calloused palms; clan women's layered below-knee skirts and blouse in shades of red; bemused smile, slow ironic voice; quiet, restrained bearing; holds a ladle while serving soup, her hand trembling at a frightening scream; the likely rust-red hair and Red hand sigils are inferred from shared Red traits; the layered skirts and red blouse are inferred from shared clan-women traits.\n\nUnspecified: the source does not describe this person's age, face, hair, clothing or\ndistinguishing marks. Keep these ordinary and unremarkable — plain and average, nothing memorable;\ninvent no colour, scars, tattoos, jewellery, insignia or accessories that the description above\ndoes not name.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
     }
   },
   "places": {

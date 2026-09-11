@@ -16,6 +16,7 @@ PARAGRAPHS = [{'i': 0, 'chapter': 1, 'text': 'Первый абзац.'},
 
 GOOD = {'name': 'Герой', 'appearance': 'Русое описание для человека.',
         'appearance_en': 'a plain english description for the prompt',
+        'subject_en': 'a person of some sort in some place',
         'locators': [{'chapter': 1, 'paragraphs': [1, 2]}],
         'audit': {'age': 1, 'build': 1, 'face': 1, 'eyes': 0.5, 'hair': 1,
                   'skin': 1, 'clothing': 1, 'gear': 1, 'marks': 1, 'bearing': 0.5},
@@ -64,18 +65,18 @@ def test_point_locator_rejected_as_empty_interval(book):
 
 def test_locator_beyond_the_book_rejected(book):
     entry = dict(GOOD, locators=[{'chapter': 1, 'paragraphs': [5, 6]}])
-    assert any('в книге нет абзацев [5]' in c for c in check(entry, book))
+    assert any('в книге нет абзацев 5' in c for c in check(entry, book))
 
 
 def test_locator_with_wrong_chapter_rejected(book):
     """Именно этот случай и портит указатель незаметно: описание верное, ссылка врёт."""
     entry = dict(GOOD, locators=[{'chapter': 1, 'paragraphs': [2, 3]}])
-    assert any('глава 1' in c and '[2]' in c for c in check(entry, book))
+    assert any('глава 1' in c and 'главе 2' in c for c in check(entry, book))
 
 
 def test_locator_across_two_chapters_rejected(book):
     entry = dict(GOOD, locators=[{'chapter': 1, 'paragraphs': [1, 3]}])
-    assert any('[1, 2]' in c for c in check(entry, book))
+    assert any('главах 1 и 2' in c for c in check(entry, book))
 
 
 def test_audit_keys_must_be_exactly_ten(book):
@@ -120,3 +121,40 @@ def test_without_cache_only_the_form_is_checked(tmp_path):
     entry = dict(GOOD, locators=[{'chapter': 1, 'paragraphs': [9, 9]}])
     assert any('полуинтервал' in c for c in validators.check_bible_entry(
         'hero', entry, SLUG, tmp_path))
+
+
+# — объяснённые пробелы —
+
+def gapped(**changes):
+    entry = json.loads(json.dumps(GOOD))
+    entry.update(changes)
+    return entry
+
+
+def test_gap_without_where_you_looked_is_refused():
+    entry = gapped(gaps={'eyes': {'why': 'цвет глаз в книге не назван'}})
+    out = validators.check_bible_entry('hero', entry)
+    assert any('gaps.eyes.looked' in c for c in out)
+
+
+def test_gap_on_a_full_cell_is_a_contradiction():
+    entry = gapped(gaps={'hair': {'why': 'о волосах книга не говорит ничего',
+                                  'looked': 'главы 1–3, поиск hair и волосы'}})
+    entry['audit']['hair'] = 1
+    out = validators.check_bible_entry('hero', entry)
+    assert any('клетка полная' in c for c in out)
+
+
+def test_refine_demands_every_sagging_cell_be_raised_or_explained():
+    """У добора нет исхода «посмотрел и ничего не сделал»: иначе панель предложит его снова."""
+    entry = gapped()
+    entry['audit'] = dict(entry['audit'], eyes=0.5, bearing=0)
+    entry['understanding'] = sum(entry['audit'].values())
+    out = validators.check_bible_refine('hero', entry)
+    assert any('eyes' in c and 'bearing' in c and 'без пробела' in c for c in out)
+
+    entry['gaps'] = {'eyes': {'why': 'цвета глаз книга не называет нигде',
+                              'looked': 'главы 1–3, поиск eyes и глаза'},
+                     'bearing': {'why': 'о походке книга не говорит',
+                                 'looked': 'главы 1–3, поиск walked и stood'}}
+    assert not validators.check_bible_refine('hero', entry)

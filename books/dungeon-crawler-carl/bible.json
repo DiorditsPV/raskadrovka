@@ -1,0 +1,712 @@
+{
+  "characters": {
+    "donut": {
+      "name": "Принцесса Донат",
+      "appearance": "Персидская выставочная кошка, черепаховой масти: пушистая, «чёрно-бежево-белая», в другом месте — «чёрно-бурой расцветки». Порода с плоской мордой: «сплющенная» морда, на фотографиях с выставок — вечно «пушистая и сердитая». Шерсть длинная и густая — «столько шерсти», что светящуюся метку сквозь неё видно лишь пятном; обычно пышная, от злости распушается ещё сильнее; мягкая, сваливается в колтуны, её надо вычёсывать. Длинный пушистый хвост, которым она обвивает шею Карла; по натуре тяжёлая — на плечо запрыгивает с ощутимым весом. Глаза большие, жёлтые. Взрослая: котёнком она носилась «года четыре назад». На голове — маленькая кошачья тиара с дымчатыми тёмными камнями, в центре глубоко-фиолетовый камень, внутри которого клубятся облака. На ошейнике — серебряная подвеска-бабочка на колечке, звенит при движении. На задней половине тела — серебряный чешуйчатый крупер из волшебной стали, свисает до середины к полу, как юбочка, живот открыт, есть прорезь для хвоста; при прыжках позвякивает и распушается. На передней лапе плотно сидит браслет. Над правой лопаткой — магическая метка, светящаяся сквозь шерсть золотистым пятном. Повадка: гордая и надменная, едет на плече Карла, хлещет хвостом, вылизывает лапу с показным безразличием, прыгает на месте от возбуждения, перед публикой встаёт в позу льва из «Короля Льва».",
+      "appearance_en": "an adult tortoiseshell Persian show cat; fluffy, poofy long thick fur in black, brown, beige and white; flat squished Persian face with a permanently fuzzy, pissed-off look; large yellow eyes; long fluffy tail; heavy-bodied; a small cat-sized jeweled tiara set with smoky dark gems and a deep purple centre stone that swirls with clouds; a collar with a little silver butterfly charm on a ring; silver fae-steel scale armour draped over the back half of the body like a short skirt, hanging about halfway to the floor, stomach uncovered, a slot for the tail; a bracelet wrapped snugly around one front leg; a glowing gold-coloured splotch of a mark just over the right shoulder blade, seen through the fur; haughty, regal bearing",
+      "subject_en": "an adult female Persian show cat, a pedigreed grand champion who became a talking dungeon crawler",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            25,
+            26
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            31,
+            32
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            35,
+            37
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            41,
+            42
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            289,
+            290
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            600,
+            601
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            624,
+            625
+          ]
+        },
+        {
+          "chapter": 9,
+          "paragraphs": [
+            632,
+            633
+          ]
+        },
+        {
+          "chapter": 10,
+          "paragraphs": [
+            696,
+            697
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            829,
+            830
+          ]
+        },
+        {
+          "chapter": 11,
+          "paragraphs": [
+            838,
+            840
+          ]
+        },
+        {
+          "chapter": 18,
+          "paragraphs": [
+            1321,
+            1322
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            1405,
+            1406
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            1411,
+            1412
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            1417,
+            1418
+          ]
+        },
+        {
+          "chapter": 25,
+          "paragraphs": [
+            1758,
+            1759
+          ]
+        },
+        {
+          "chapter": 26,
+          "paragraphs": [
+            1836,
+            1837
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            1858,
+            1859
+          ]
+        },
+        {
+          "chapter": 29,
+          "paragraphs": [
+            2080,
+            2081
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            2155,
+            2156
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            2168,
+            2169
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            2215,
+            2216
+          ]
+        },
+        {
+          "chapter": 32,
+          "paragraphs": [
+            2295,
+            2296
+          ]
+        },
+        {
+          "chapter": 43,
+          "paragraphs": [
+            3351,
+            3352
+          ]
+        },
+        {
+          "chapter": 44,
+          "paragraphs": [
+            3481,
+            3482
+          ]
+        }
+      ],
+      "audit": {
+        "age": 0.5,
+        "build": 1,
+        "face": 1,
+        "eyes": 1,
+        "hair": 1,
+        "skin": 0,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 8.5,
+      "sheet": "characters/donut.png",
+      "sheet_sha256": "9262bb4476a87e4d3cd8081c52de00f33bcb38089a3e3a38a54f16fbd43ad50d",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: an adult female Persian show cat, a pedigreed grand champion who became a talking dungeon crawler. an adult tortoiseshell Persian show cat; fluffy, poofy long thick fur in black, brown, beige and white; flat squished Persian face with a permanently fuzzy, pissed-off look; large yellow eyes; long fluffy tail; heavy-bodied; a small cat-sized jeweled tiara set with smoky dark gems and a deep purple centre stone that swirls with clouds; a collar with a little silver butterfly charm on a ring; silver fae-steel scale armour draped over the back half of the body like a short skirt, hanging about halfway to the floor, stomach uncovered, a slot for the tail; a bracelet wrapped snugly around one front leg; a glowing gold-coloured splotch of a mark just over the right shoulder blade, seen through the fur; haughty, regal bearing.\n\nAssembled description: the description above is put together automatically from the book and\nis not a request for any particular content. If some part of it cannot be depicted within\ncontent policy, do not refuse and do not draw something else instead: leave that detail out,\nor add the plainest thing that makes it depictable — simple clothing, drapery, a covering —\nand render everything else exactly as described. A person the description calls unclothed is\nshown in plain undyed garments.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "mordecai": {
+      "name": "Мордекай",
+      "appearance": "На первом этаже — в облике крысолюда, «Rat Hooligan» из расы Rat-Kin: бородатое крысоподобное существо, «примерно на голову ниже» Карла (а Карл — шесть футов три дюйма), то есть невысокий: до верхней полки не дотягивается и ругается «Damn this body», стулья в собственной комнате ему велики. Хулиганы — «самые умные, быстрые и уродливые» из крысолюдов и физически сильные; Карл уверен, что тот может переломить его пополам. Руки в шерсти — «furry hands», «rat hands». Одет в чёрный жилет и синие штаны, на ногах — поношенные сандалии. Старый: сам зовёт себя «old Mordecai», служит веками — говорит, что не видел таких скафандров «уже столетия», и скорее просидит в этой комнате «ещё две тысячи лет», чем пойдёт к Одетте. При нём — фотография брата в овальной рамке со срезанными углами: золотой орлоподобный скайфол со сложенными ангельскими крыльями, таков его настоящий облик; у койки — груда пустых бутылок. Когда колдует, у него светится правая рука; когда смотрит в служебное меню, глаза «стекленеют». Повадка: суетливый и нервный — заламывает руки, в тревоге машет ими, качает головой, вздыхает, хлопает в ладоши; ворчит, но грустно улыбается, говоря о брате; пьёт в одиночку и засыпает с его фотографией в обнимку, язык заплетается; перед начальством вытягивается в струнку и боится. С главы 37 (второй этаж) тот же герой в другом облике — семифутовый обсидиановый «Bugaboo»: как медведь без шеи, с огромными совиными глазами, комично тонкими ногами и длинными тонкими руками, с лохматой мордой; этот облик в описание листа не входит. Сила его — не перекачанная: Хулиганы, по описанию расы, «не такие накачанные, как Rat Brute» — это признак группы Rat Hooligan, к которой книга его прямо причисляет, а не слово о нём самом.",
+      "appearance_en": "a bearded, rat-like humanoid of the Rat-Kin race, a Rat Hooligan; short, about a head shorter than a six-foot-three man, too short to reach a high shelf; physically strong; ugly; furry rat hands; wearing a black vest, blue pants and a pair of well-worn sandals; old; fussy, nervous bearing; strongly built but not bulked-up or bodybuilder-massive (inferred from shared Rat Hooligan traits)",
+      "subject_en": "an old male skyfowl changeling, a former crawler now guildmaster and game guide of a tutorial guild in an alien game-show dungeon, currently shaped as a Rat Hooligan",
+      "locators": [
+        {
+          "chapter": 4,
+          "paragraphs": [
+            195,
+            196
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            199,
+            200
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            233,
+            235
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            237,
+            238
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            249,
+            250
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            278,
+            279
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            292,
+            297
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            322,
+            323
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            376,
+            377
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            422,
+            423
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1041,
+            1043
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            1850,
+            1851
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            2802,
+            2805
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            2823,
+            2824
+          ]
+        },
+        {
+          "chapter": 38,
+          "paragraphs": [
+            2882,
+            2883
+          ]
+        },
+        {
+          "chapter": 38,
+          "paragraphs": [
+            2885,
+            2886
+          ]
+        },
+        {
+          "chapter": 38,
+          "paragraphs": [
+            2912,
+            2914
+          ]
+        },
+        {
+          "chapter": 39,
+          "paragraphs": [
+            2947,
+            2948
+          ]
+        }
+      ],
+      "audit": {
+        "age": 0.5,
+        "build": 0.5,
+        "face": 0.5,
+        "eyes": 0,
+        "hair": 0.5,
+        "skin": 0.5,
+        "clothing": 1,
+        "gear": 0.5,
+        "marks": 0,
+        "bearing": 1
+      },
+      "understanding": 5.0,
+      "gaps": {
+        "age": {
+          "why": "книга говорит, что он стар, но не показывает старость: «old Mordecai» (гл4 ¶199), готовится к миру Земли с 1964 года, «дольше, чем ты живёшь» (гл6 ¶309), видел скафандры «столетия назад» (гл38 ¶2885), «ещё 2000 лет в этой комнате» (гл37 ¶2802); сколько ему лет и как возраст виден на крысином теле — седина, морщины, сутулость — не сказано нигде; второй заход: крысиное тело — назначенный ему облик моба текущего этажа, а не его собственное (гл5 ¶294, ¶297), поэтому возраст в нём ничем не отмечен; признака возраста у группы Rat-Kin книга не даёт, а долголетие скайфолов (гл5 ¶301) — черта его настоящего облика",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск old / years / solars / centuries / grey|gray / wrinkl / elderly; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        },
+        "build": {
+          "why": "рост известен (на голову ниже Карла ростом 6′3″, гл4 ¶195 + гл5 ¶278), сила — по признаку группы (гл5 ¶237); масса, полнота и пропорции крысиного тела не описаны, хвост не упомянут ни разу за всю книгу; второй заход: кроме гл5 ¶237 («physically strong», не «roided-out», самые быстрые — уже учтено) книга о телосложении Rat-Kin ничего не говорит",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск tail / Rat-Kin / Hooligan / Rat Brute / small / short / fat / thin; ¶1283 про рат-кинов говорит только, что это умные мобы; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        },
+        "face": {
+          "why": "прямо — только «bearded, rat-like» и то, что Карл «едва разглядел черты» (гл4 ¶195); из группы — «самые уродливые из Rat-Kin» (гл5 ¶237). Уши, нос, зубы, усы, форма морды не описаны. Единственная зацепка — сравнение с Мастером Сплинтером из «Черепашек-ниндзя» (гл4 ¶199), но это чужой персонаж, и правила проекта не пускают его в промпт. «Shaggy face» (гл39 ¶2947) — уже облик Bugaboo; второй заход: из черт лица группы Rat-Kin книга даёт только «ugliest» (гл5 ¶237) — уже учтено",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск face / features / nose / snout / muzzle / whiskers / teeth / ears / Splinter; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        },
+        "eyes": {
+          "why": "цвет, размер и форма глаз крысиного облика не названы нигде; в тексте только «The eye widened» в щели двери (гл4 ¶198) и «глаза стекленеют», когда он в служебном меню (гл27 ¶1850, ¶1897) — это состояние, а не внешность. «Огромные совиные глаза» (гл37 ¶2804) — облик Bugaboo; второй заход: глаза группы Rat-Kin не описаны нигде",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск eye / eyes / glossy / gaze / looked; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        },
+        "hair": {
+          "why": "есть борода (гл4 ¶195) и шерсть на руках (гл5 ¶233); цвет и длина шерсти, форма и цвет бороды не названы. «Hairier», «fur», «shaggy» в гл37–49 (¶2804, ¶2942, ¶2947) относятся к облику Bugaboo; второй заход: шерсть и борода группы Rat-Kin не описаны; «rat pelts», «poor rat skin» (гл10 ¶753, гл22 ¶1535) — лут с обычных крыс-мобов, не с его группы",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск hair / fur / furry / beard / bearded / shaggy / grey|gray; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        },
+        "skin": {
+          "why": "тело покрыто шерстью — «furry hands», «rat hands», «rat arm» (гл5 ¶233, гл6 ¶376, гл14 ¶1041); цвет шерсти, кожи на морде и ладонях, состояние меха не описаны нигде. «Furry hands» в гл49 ¶3889 — уже облик Bugaboo; второй заход: шерсть и кожа группы Rat-Kin не описаны; «rat pelts», «poor rat skin» (гл10 ¶753, гл22 ¶1535) — лут с обычных крыс-мобов, не с его группы",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск skin / fur / furry / pelt / paw / hands; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        },
+        "gear": {
+          "why": "при нём — фото брата в овальной рамке со срезанными углами (гл5 ¶293), бутылки у койки (гл14 ¶1041), светящаяся при колдовстве правая рука (гл6 ¶322); ни инструмента, ни сумки, ни посоха, ни знака гильдмастера книга не даёт; второй заход: урна с прахом матери (гл5 ¶256, ¶290, гл14 ¶1041, гл49 ¶3890) названа прямо, но стоит на полке в его комнате — это обстановка, а не то, что при нём, поэтому в лист не взята; общего снаряжения гильдмастеров и гидов книга не описывает — облик у каждого свой (гл5 ¶297, гл45 ¶3550)",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск guildmaster / guide / staff / wand / belt / pouch / badge / bottle / photo; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        },
+        "marks": {
+          "why": "шрамов, меток, татуировок, украшений, протезов у крысиного облика не названо; хвост, уши и прочие приметы тела не описаны вовсе; второй заход: примет группы Rat-Kin книга не называет",
+          "looked": "индекс: абзацы 195, 199, 233, 237, 293, 321, 374, 376, 567, 714, 1041, 1850, 1855, 1897, 2804, 2912, 2915, 2947 прочитаны — новые подсказки индекса (567 плащ Карла, 714 кулаки Карла, 1855 разбор боя, 2915 речь Зев, 293 биография, 321 и 374 диалог) о внешности ничего не говорят; все 202 абзаца с именем Mordecai прочитаны целиком; по всей книге — поиск scar / tattoo / mark / ring / necklace / earring / tail / missing; второй заход по признакам группы: поиск Rat-Kin / rat-kin / Hooligan / Rat Brute / Rat Shaman — внешность группы описана только в гл5 ¶237 (умнейшие, быстрейшие, уродливейшие, сильные, не накачанные — уже учтено), ¶1283 внешности не даёт; обычные крысы-мобы (гл10 ¶748, гл25 ¶1746) — другая группа, к Rat-Kin книга их не относит; guildmaster / game guide / guide — облик гида назначается заново в каждом мире (гл5 ¶297), общей внешности у гидов нет; skyfowl / Changeling / shapeshift (гл5 ¶294–301, гл31 ¶2236) — его настоящий облик и дар смены облика, к листу не относятся; по гл4–36 поиск his / the rat's / Mordecai's + beard / whiskers / tail / snout / ears / teeth / nose / fur / eyes / face / claws / paws / hands / head / back — новых черт крысиного облика нет"
+        }
+      },
+      "gaps_for": "b9822effc8cfbceb155de7e8d06bd0a071250b659117e14d270a77df7a41b7a4",
+      "gaps_at": "2026-09-11T15:01:20"
+    },
+    "carl": {
+      "name": "Карл",
+      "appearance": "Мужчина двадцати семи лет, человек (система записала его в расу Human, и сменить её он отказался), бывший механик береговой охраны США из Сиэтла. Очень крупный: рост шесть футов три дюйма (≈190 см), вес около 230 фунтов (≈105 кг); тело «от природы держит мышцы», годами ходил в зал трижды в неделю, хоть и не в той форме, что на службе; Донат жалуется, что он «гораздо тяжелее, чем выглядит». Лицо: книга говорит только, что он чисто выбрит — побрился в первом же безопасном месте. Черт лица, цвета глаз, цвета и длины волос, цвета кожи в книге нет; что волосы на голове есть, видно лишь из «жар чуть не подпалил мне волосы». Кожа — только состояние: в первые дни грязь такая, что вода в душе шла чёрной; ожоги третьей степени на лице после взрыва зажили гладко, без следа; подошвы от ходьбы босиком загрубели так, что он почти не чувствует земли. Одежда: в подземелье вошёл в чём был — трусы-боксеры, тяжёлая кожаная куртка и розовые кроксы бывшей девушки не по размеру, которые слетели в первой же схватке. С тех пор без штанов и босиком; в гл45 орк-Маэстро дарит ему армейские ботинки Bates, точь-в-точь служебные, но надевать их он не собирается: часть его умений работает только босиком. На шоу его объявляют «худшим костюмом подземелья». Под курткой — облегающая рубашка с коротким рукавом из кожи тролля. У куртки правый рукав растворён слизнем — «однорукавная» куртка, позже сильно обгоревшая. Поверх — чёрный кожистый плащ с капюшоном из крыла ночного призрака: кожа натянута между рядами длинных, во весь рост, костей-пальцев, на капюшоне торчащие острые «уши» — «Бэтмен из магазина за доллар». На коленях — наколенники-браслеты из кожи и меха с тонкими игольчатыми шипами дюймов по восемь; шипы выдвигаются только в бою. Старые трусы сгорели; новые — белые, в маленьких красных сердечках. Беспалые перчатки надел на обе руки, правая растворилась вместе с рукавом — осталась одна, на левой. Оружие — собственные кулаки и ноги: на правом запястье угольно-серый браслет (боевая перчатка «для правой руки»), который, стоит сжать кулак на две секунды, превращается в чёрную угловатую латную перчатку из оркской стали с блестящими шипами, без всяких украшений, и исчезает облачком дыма. В кармане — пачка Marlboro Red и зажигалка Zippo; курит, но бережёт сигареты. Приметы: на внутренней стороне левого предплечья выжжена татуировка — череп гоблина, проступает и на рукаве куртки; на шее — татуировка «кинжал, с которого капает кровь»; других татуировок у него никогда не было. На указательном пальце правой ноги — кольцо; ногти на ногах после волшебного педикюра блестят и искрятся. Повадка: учили рукопашной на службе, дерётся ударом кулака и пинком; кошка Донат ездит у него на плече, пользуясь его ростом, спит у него на шее и прячется за спиной между курткой и плащом, цепляясь когтями; «не выношу драмы», на шоу натягивает улыбку и делает вид, что смеётся, а когда злится — пугает даже кошку.",
+      "appearance_en": "a twenty-seven-year-old human man, very big: six foot three, about 230 pounds, naturally heavily muscled, a gym-built body a little past its military-service shape, heavier than he looks; clean-shaven; barefoot with hardened soles, no trousers and no shoes; white boxer shorts covered in little red hearts; a form-fitting short-sleeved trollskin shirt; over it a heavy leather jacket with the right sleeve missing, badly scorched; over everything a black, leathery, hooded cloak made from a demon wing, the skin stretched between rows of long body-length finger bones, the hood with pointed ear-like points on either side; slip-on kneepads of skin and fur, their thin needle-like spikes retracted; a single fingerless glove on the left hand, the right hand bare; a plain charcoal-coloured bracer on the right wrist; a tattoo of a goblin-shaped skull branded on the inner left forearm, the same symbol showing on the outside of the jacket's left sleeve; a tattoo of a dagger dripping blood on the neck; a toe ring on the index toe of the right foot; glittering, freshly pedicured toenails",
+      "subject_en": "a twenty-seven-year-old man, a former US Coast Guard marine technician from Seattle who became a barefoot dungeon crawler",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            24,
+            25
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            27,
+            28
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            29,
+            30
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            38,
+            39
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            42,
+            43
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            131,
+            132
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            167,
+            168
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            215,
+            216
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            278,
+            279
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            522,
+            523
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            554,
+            555
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            558,
+            572
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            578,
+            583
+          ]
+        },
+        {
+          "chapter": 10,
+          "paragraphs": [
+            689,
+            690
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            875,
+            876
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1090,
+            1097
+          ]
+        },
+        {
+          "chapter": 17,
+          "paragraphs": [
+            1203,
+            1204
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            1421,
+            1423
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            1434,
+            1435
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            1459,
+            1460
+          ]
+        },
+        {
+          "chapter": 22,
+          "paragraphs": [
+            1520,
+            1521
+          ]
+        },
+        {
+          "chapter": 25,
+          "paragraphs": [
+            1753,
+            1754
+          ]
+        },
+        {
+          "chapter": 25,
+          "paragraphs": [
+            1758,
+            1759
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            1861,
+            1862
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            1902,
+            1903
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            1908,
+            1909
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            1911,
+            1912
+          ]
+        },
+        {
+          "chapter": 27,
+          "paragraphs": [
+            1920,
+            1921
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            2169,
+            2170
+          ]
+        },
+        {
+          "chapter": 30,
+          "paragraphs": [
+            2207,
+            2208
+          ]
+        },
+        {
+          "chapter": 32,
+          "paragraphs": [
+            2311,
+            2312
+          ]
+        },
+        {
+          "chapter": 32,
+          "paragraphs": [
+            2380,
+            2384
+          ]
+        },
+        {
+          "chapter": 34,
+          "paragraphs": [
+            2484,
+            2486
+          ]
+        },
+        {
+          "chapter": 34,
+          "paragraphs": [
+            2553,
+            2554
+          ]
+        },
+        {
+          "chapter": 35,
+          "paragraphs": [
+            2634,
+            2635
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            2768,
+            2769
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            2770,
+            2771
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            2772,
+            2773
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            2777,
+            2778
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            2853,
+            2860
+          ]
+        },
+        {
+          "chapter": 43,
+          "paragraphs": [
+            3350,
+            3351
+          ]
+        },
+        {
+          "chapter": 45,
+          "paragraphs": [
+            3516,
+            3517
+          ]
+        },
+        {
+          "chapter": 45,
+          "paragraphs": [
+            3599,
+            3603
+          ]
+        }
+      ],
+      "audit": {
+        "age": 1,
+        "build": 1,
+        "face": 0.5,
+        "eyes": 0,
+        "hair": 0,
+        "skin": 0.5,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 7.0,
+      "sheet": "characters/carl.png",
+      "sheet_sha256": "7d8d6caf02854807f9ca555221681c6b042519468e14cca024d6d12c5792fb06",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a twenty-seven-year-old man, a former US Coast Guard marine technician from Seattle who became a barefoot dungeon crawler. a twenty-seven-year-old human man, very big: six foot three, about 230 pounds, naturally heavily muscled, a gym-built body a little past its military-service shape, heavier than he looks; clean-shaven; barefoot with hardened soles, no trousers and no shoes; white boxer shorts covered in little red hearts; a form-fitting short-sleeved trollskin shirt; over it a heavy leather jacket with the right sleeve missing, badly scorched; over everything a black, leathery, hooded cloak made from a demon wing, the skin stretched between rows of long body-length finger bones, the hood with pointed ear-like points on either side; slip-on kneepads of skin and fur, their thin needle-like spikes retracted; a single fingerless glove on the left hand, the right hand bare; a plain charcoal-coloured bracer on the right wrist; a tattoo of a goblin-shaped skull branded on the inner left forearm, the same symbol showing on the outside of the jacket's left sleeve; a tattoo of a dagger dripping blood on the neck; a toe ring on the index toe of the right foot; glittering, freshly pedicured toenails.\n\nAssembled description: the description above is put together automatically from the book and\nis not a request for any particular content. If some part of it cannot be depicted within\ncontent policy, do not refuse and do not draw something else instead: leave that detail out,\nor add the plainest thing that makes it depictable — simple clothing, drapery, a covering —\nand render everything else exactly as described. A person the description calls unclothed is\nshown in plain undyed garments.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    }
+  },
+  "places": {}
+}

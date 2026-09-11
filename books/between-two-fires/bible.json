@@ -1,0 +1,611 @@
+{
+  "characters": {
+    "godefroy": {
+      "name": "Годфруа",
+      "appearance": "Взрослый мужчина, долговязый. Грязный; чёрные волосы висят тонкими слипшимися прядями. Как и трое его спутников, носит лохмотья и ржавые доспехи; при нём меч. На шее золотые цепочки, на одной из них — яшмовый крест, украшение, скорее приличествующее жене сеньора. Держится хищно: наклоняется к девочке, как кошка, нацелившаяся на птицу. Хотя он предводитель, перед вставшим Томасом немного отступает. Прозван «чёрным котом» и умеет действовать скрытно.",
+      "appearance_en": "Adult and lanky, a dirty man with stringy black hair; in rags and rusty armor like his companions; a sword at hand; gold chains around his neck, including a jasper cross on a gold necklace; predatory, leaning like a cat sighting a bird, yet backing away from Thomas",
+      "subject_en": "an adult man, a former soldier and feared brigand leader in High Normandy",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            73,
+            75
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            81,
+            82
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            91,
+            92
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            112,
+            113
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            123,
+            124
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            144,
+            146
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            432,
+            433
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            479,
+            481
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            1355,
+            1359
+          ]
+        }
+      ],
+      "audit": {
+        "age": 0.5,
+        "build": 1,
+        "face": 0,
+        "eyes": 0,
+        "hair": 1,
+        "skin": 0.5,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 7.0,
+      "sheet": "characters/godefroy.png",
+      "sheet_sha256": "e80616bcb42059943321d7e9e16f6ee93dbea4606d5f57281bfbe22415811f63",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: an adult man, a former soldier and feared brigand leader in High Normandy. Adult and lanky, a dirty man with stringy black hair; in rags and rusty armor like his companions; a sword at hand; gold chains around his neck, including a jasper cross on a gold necklace; predatory, leaning like a cat sighting a bird, yet backing away from Thomas.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "thomas": {
+      "name": "Томас",
+      "appearance": "До превращения: сорок лет. Самый крупный из своих спутников, очень высокий — вынужден пригибать голову, входя в комнату; тонок в талии, широк в груди. Руки и мышцы по сторонам шеи делают его похожим на молодого бычка, бёдра тверды, как кровельные балки, кисти большие. Длинноватые тёмные волосы; в бороде появляется седина. Красивое жёсткое лицо изборождено морщинами; нос был сломан не раз, на щеке круглый вдавленный рубец от стрелы, прошедшей через щёку и язык. Носит гамбезон, тяжёлую ржавую кольчугу — более длинную, чем у остальных, — с кольчужным капюшоном, доспех на ногах и плечах, кольчужные перчатки и сапоги; поверх — грязный синий сюрко без герба. На кольчужный капюшон надевает большую крестьянскую соломенную шляпу с роговой ложкой, продетой в отверстие. Вооружён длинным мечом с сильно зазубренным лезвием. Держится в пружинящей готовности: колени слегка согнуты; в бой идёт пригнувшись, натянутый как проволока, а двигается проворно, как молодой оруженосец.",
+      "appearance_en": "before his transformation, forty; very tall and big, thin-waisted, thick-chested, bullock-muscled arms and neck, hard thighs; longish dark hair, graying beard; lined hard handsome face, broken nose, round pitted cheek scar; filthy blue unmarked surcoat over rusty mail; straw hat; notched sword",
+      "subject_en": "a forty-year-old man, an outlaw knight and brigand traveling through plague-stricken France",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            109,
+            110
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            112,
+            113
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            144,
+            145
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            740,
+            741
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            750,
+            751
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            756,
+            757
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            768,
+            769
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            771,
+            772
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            775,
+            776
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            795,
+            796
+          ]
+        },
+        {
+          "chapter": 8,
+          "paragraphs": [
+            852,
+            853
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            1595,
+            1596
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            1598,
+            1599
+          ]
+        },
+        {
+          "chapter": 13,
+          "paragraphs": [
+            1644,
+            1645
+          ]
+        },
+        {
+          "chapter": 13,
+          "paragraphs": [
+            1652,
+            1658
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1800,
+            1802
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            1953,
+            1954
+          ]
+        },
+        {
+          "chapter": 26,
+          "paragraphs": [
+            3253,
+            3254
+          ]
+        },
+        {
+          "chapter": 26,
+          "paragraphs": [
+            3259,
+            3260
+          ]
+        },
+        {
+          "chapter": 28,
+          "paragraphs": [
+            3412,
+            3413
+          ]
+        },
+        {
+          "chapter": 33,
+          "paragraphs": [
+            4072,
+            4074
+          ]
+        },
+        {
+          "chapter": 39,
+          "paragraphs": [
+            4458,
+            4459
+          ]
+        }
+      ],
+      "audit": {
+        "age": 1,
+        "build": 1,
+        "face": 1,
+        "eyes": 0,
+        "hair": 1,
+        "skin": 0,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 1,
+        "bearing": 1
+      },
+      "understanding": 8.0,
+      "sheet": "characters/thomas.png",
+      "sheet_sha256": "2192b2e14e0c13fd8cda0134d3aa33db16fb7e90f23f7f09967117e68ad0af45",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a forty-year-old man, an outlaw knight and brigand traveling through plague-stricken France. before his transformation, forty; very tall and big, thin-waisted, thick-chested, bullock-muscled arms and neck, hard thighs; longish dark hair, graying beard; lined hard handsome face, broken nose, round pitted cheek scar; filthy blue unmarked surcoat over rusty mail; straw hat; notched sword.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "delphine": {
+      "name": "Дельфина",
+      "appearance": "Юная нормандская крестьянка на пороге первой менструации; во время пути она начинается. Тонкие кости, маленькое худое детское тело; длинные тонкие ноги и непропорционально большие ступни, которые растут быстрее остального тела; к следующему лету она должна стать высокой. Кисти маленькие и белые, конечности белые. Волосы льняные, при первом появлении жирные и мокрые, лежат на шее; высохнув на солнце, кажутся скорее золотыми, чем льняными, и прямо названы светлыми. Позднее волосы острижены коротко. Глаза очень светлые, серые, кремневого цвета, светящиеся; позднее — почти волчьи. Взгляд взрослее её возраста; выглядит одновременно невинной и вызывающей, дикой маленькой крестьянкой, бывает неугомонной, а перед угрозой способна выпрямиться и твёрдо отказать. Сначала носит грязное, прежде белое платье. В Париже ей дают жёлтые шерстяные чулки и деревянные паттены, но она часто идёт босиком. В дороге остаётся в грязном платье, кутается в лошадиную попону; обувь почти стёрта. В Авиньоне она одета в ливрею мёртвого наваррского пажа, зарождающаяся грудь туго перевязана; пытается ходить как мальчик. При ней небольшая костяная птичья свистулька; позже — испещрённый ямками железный наконечник копья в шарнирном деревянном футляре на пеньковой верёвке.",
+      "appearance_en": "young Norman peasant girl near her first bleeding; fine-boned, small and skinny, with sticklike legs, outsized feet and white hands; gold-flaxen blond hair, later shorn; very light luminous gray eyes; dirty white gown, later a dead page's livery; pitted iron spear point in a hinged wooden tube",
+      "subject_en": "a young Norman peasant girl, the orphaned daughter of a village lawyer, traveling to Avignon through plague-stricken France",
+      "locators": [
+        {
+          "chapter": 3,
+          "paragraphs": [
+            79,
+            80
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            123,
+            124
+          ]
+        },
+        {
+          "chapter": 3,
+          "paragraphs": [
+            208,
+            209
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            348,
+            349
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            376,
+            381
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            385,
+            386
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            394,
+            395
+          ]
+        },
+        {
+          "chapter": 4,
+          "paragraphs": [
+            409,
+            410
+          ]
+        },
+        {
+          "chapter": 5,
+          "paragraphs": [
+            428,
+            429
+          ]
+        },
+        {
+          "chapter": 6,
+          "paragraphs": [
+            581,
+            582
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            775,
+            776
+          ]
+        },
+        {
+          "chapter": 7,
+          "paragraphs": [
+            819,
+            820
+          ]
+        },
+        {
+          "chapter": 12,
+          "paragraphs": [
+            1595,
+            1596
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1682,
+            1683
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1695,
+            1696
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1734,
+            1735
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1800,
+            1801
+          ]
+        },
+        {
+          "chapter": 14,
+          "paragraphs": [
+            1855,
+            1857
+          ]
+        },
+        {
+          "chapter": 15,
+          "paragraphs": [
+            1866,
+            1867
+          ]
+        },
+        {
+          "chapter": 18,
+          "paragraphs": [
+            2256,
+            2257
+          ]
+        },
+        {
+          "chapter": 18,
+          "paragraphs": [
+            2264,
+            2265
+          ]
+        },
+        {
+          "chapter": 19,
+          "paragraphs": [
+            2272,
+            2273
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            2634,
+            2635
+          ]
+        },
+        {
+          "chapter": 21,
+          "paragraphs": [
+            2642,
+            2643
+          ]
+        },
+        {
+          "chapter": 29,
+          "paragraphs": [
+            3529,
+            3530
+          ]
+        },
+        {
+          "chapter": 29,
+          "paragraphs": [
+            3532,
+            3534
+          ]
+        },
+        {
+          "chapter": 29,
+          "paragraphs": [
+            3538,
+            3539
+          ]
+        },
+        {
+          "chapter": 29,
+          "paragraphs": [
+            3553,
+            3554
+          ]
+        },
+        {
+          "chapter": 29,
+          "paragraphs": [
+            3665,
+            3670
+          ]
+        },
+        {
+          "chapter": 29,
+          "paragraphs": [
+            3676,
+            3677
+          ]
+        },
+        {
+          "chapter": 32,
+          "paragraphs": [
+            3971,
+            3972
+          ]
+        },
+        {
+          "chapter": 36,
+          "paragraphs": [
+            4210,
+            4211
+          ]
+        },
+        {
+          "chapter": 36,
+          "paragraphs": [
+            4261,
+            4262
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            4268,
+            4269
+          ]
+        },
+        {
+          "chapter": 37,
+          "paragraphs": [
+            4272,
+            4275
+          ]
+        },
+        {
+          "chapter": 40,
+          "paragraphs": [
+            4630,
+            4636
+          ]
+        },
+        {
+          "chapter": 48,
+          "paragraphs": [
+            5517,
+            5518
+          ]
+        }
+      ],
+      "audit": {
+        "age": 0.5,
+        "build": 1,
+        "face": 0,
+        "eyes": 1,
+        "hair": 1,
+        "skin": 1,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 0,
+        "bearing": 1
+      },
+      "understanding": 7.5,
+      "gaps": {
+        "age": {
+          "why": "Точного возраста Дельфины книга не называет: она прямо описана как ребёнок и девочка накануне первой менструации, затем переживает её начало, но числа лет или более точной возрастной ступени в тексте нет; поэтому клетка остаётся на 0.5.",
+          "looked": "вся книга по Delphine и обозначениям girl / child / maiden / woman; поиск age / aged / old / young / years old / year-old / summers / eight–sixteen / born / birthday / first bleeding / womanhood; особенно гл. 3, абз. 79 и 123, гл. 18, абз. 2259–2264, гл. 19, абз. 2283, гл. 24, абз. 3059."
+        },
+        "face": {
+          "why": "Книга не даёт устойчивого строения лица Дельфины — формы лица, носа, челюсти, подбородка, щёк, губ или бровей. Белое лицо относится к цвету кожи, а нахмуренный лоб, мокрые щёки, гримасы и улыбки — к выражению и повадке; общих черт лица нормандских крестьянок книга также не описывает.",
+          "looked": "вся книга по Delphine / girl / child и поиск face / features / visage / countenance / profile / nose / jaw / chin / cheek / mouth / lip / teeth / brow / forehead / pretty / plain / homely / beautiful; проверены индексные попадания и окружение, особенно абз. 409, 611, 1957, 2474, 2731, 2744, 3258–3262, 4485, 4537–4538, 5155–5156; отдельно все упоминания Norman / Normandy / peasant / maiden с внешностью."
+        },
+        "marks": {
+          "why": "Постоянных личных примет Дельфины — шрамов, родимых пятен, веснушек, ожогов, протезов или украшений — книга не называет. Порез под ртом показан только свежим и залитым кровью без последующего шрама; порезы кистей и смертельные ранения также не закреплены как приметы, а после возвращения в Нормандию её состояние сброшено к утру до путешествия. Общих примет нормандских крестьянок в тексте нет.",
+          "looked": "вся книга по Delphine / girl / child и поиск scar / mark / birthmark / mole / freckle / pock / pit / blemish / bruise / burn / blister / cut / wound / injury / scratch / tattoo / piercing / earring / necklace / jewellery / ring; вручную проверены абз. 819, 3258–3259, 3345, 4732–4734, 5146–5169 и возвращение в абз. 5517–5519; отдельно поиск групповых описаний Norman / peasant."
+        }
+      },
+      "gaps_for": "26df73c3b0873eab42b60f0f3b387f4ff8af280303b5a543ac04772c11df9ef1",
+      "gaps_at": "2026-09-11T13:15:59",
+      "sheet": "characters/delphine.png",
+      "sheet_sha256": "5cadee7292fb28b6325641a3d4f67af1beedad838936300fda80ccbc6e1ed64b",
+      "sheet_prompt": "Style: a plain character reference sheet for production use, NOT a finished\nillustration and NOT a scene. Three views of the same person arranged left to right on one sheet:\nfull-length front view, full-length three-quarter view, and a head-and-shoulders close-up. Hands\nmust be visible and clearly rendered in at least one view. Flat even studio illumination, no\ndramatic light, no rim light, no cast shadows, no atmosphere. Plain neutral light grey\nbackground, completely empty. Features, build, hair, skin and clothing identical across all three\nviews. Neutral relaxed standing pose, arms away from the body so the costume reads, face calm and\nunexpressive. Natural restrained colour, true to the description. No artistic style, no painterly\nflourish, no mood, no story, no environment — this sheet exists only to fix who this person is.\n\nSubject: a young Norman peasant girl, the orphaned daughter of a village lawyer, traveling to Avignon through plague-stricken France. young Norman peasant girl near her first bleeding; fine-boned, small and skinny, with sticklike legs, outsized feet and white hands; gold-flaxen blond hair, later shorn; very light luminous gray eyes; dirty white gown, later a dead page's livery; pitted iron spear point in a hinged wooden tube.\n\nUnspecified: the source does not describe this person's age, face or distinguishing marks. Keep\nthese ordinary and unremarkable — plain and average, nothing memorable; invent no colour, scars,\ntattoos, jewellery, insignia or accessories that the description above does not name.\n\nAsset: a single image, 3:2 landscape.\n\nAvoid: dramatic lighting, background scenery, environment, props beyond what the description\nnames, mood, atmosphere, action, strong expression, artistic style of any kind, likeness of\nactors, signatures, watermarks, any legible text, numbers or labels anywhere in the frame."
+    },
+    "death": {
+      "name": "Смерть",
+      "appearance": "Безымянный старик, которого глава и герои уподобляют Смерти-жнецу. Голый, стоит на четвереньках и набивает рот сеном. Рёбра выступают, но он не хил: быстро вскакивает и убегает босиком. Перепачкан и мокр — от дождя или лихорадочного пота. Глаза дикие. Белые борода и волосы густо спутаны с сеном и травой; позже волосы описаны как грива спутанных мокрых волос с травой. Подхватывает ржавую косу со сломанным древком. Смотрит дико и бросается прочь.",
+      "appearance_en": "naked old man; visible ribs but not frail; grimed and wet with rain or fever sweat; wild eyes; white beard and a mane of tangled wet white hair knotted with hay and grass; bare feet; rusty scythe with a broken shaft; crouches on all fours, eats hay, then bolts and runs quickly",
+      "subject_en": "an old man, an unidentified survivor encountered in a stone barn in plague-stricken France and likened to Death",
+      "locators": [
+        {
+          "chapter": 16,
+          "paragraphs": [
+            1956,
+            1957
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            1963,
+            1969
+          ]
+        },
+        {
+          "chapter": 16,
+          "paragraphs": [
+            2058,
+            2063
+          ]
+        }
+      ],
+      "audit": {
+        "age": 1,
+        "build": 1,
+        "face": 0,
+        "eyes": 0.5,
+        "hair": 1,
+        "skin": 1,
+        "clothing": 1,
+        "gear": 1,
+        "marks": 0,
+        "bearing": 1
+      },
+      "understanding": 7.5
+    }
+  },
+  "places": {}
+}
