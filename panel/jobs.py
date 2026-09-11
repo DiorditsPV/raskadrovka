@@ -21,6 +21,7 @@
 Только стандартная библиотека.
 """
 import json
+import os
 import threading
 import traceback
 from collections import deque
@@ -93,9 +94,20 @@ class Queue:
         return self.dir / f'{job_id}.log'
 
     def _write(self, job):
+        """Запись задания на диск — целиком или никак.
+
+        `write_text` сначала обрезает файл, потом пишет: между этими мгновениями читатель
+        видит пустышку. При одной полосе это почти не случалось, при нескольких — сразу:
+        в контейнере тесты очереди посыпались с «Expecting value: line 1 column 1».
+        Поэтому пишем во временный файл рядом и подменяем одним движением: `os.replace`
+        атомарен в пределах каталога, и читатель видит либо прежнее задание, либо новое.
+        """
         self.dir.mkdir(parents=True, exist_ok=True)
-        self.file_of(job['id']).write_text(
-            json.dumps(job, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        target = self.file_of(job['id'])
+        text = json.dumps(job, ensure_ascii=False, indent=2) + '\n'
+        tmp = target.with_name(f'.{target.name}.{os.getpid()}.{threading.get_ident()}')
+        tmp.write_text(text, encoding='utf-8')
+        os.replace(tmp, target)
         return job
 
     def get(self, job_id):

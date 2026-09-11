@@ -287,3 +287,32 @@ def test_a_waiting_job_says_what_holds_it(tmp_path):
     assert jobs.subject_of(q.get(first['id'])) == 'grace'
     release.set()
     q.stop()
+
+
+def test_a_job_file_is_never_read_half_written(tmp_path):
+    """`write_text` сначала обрезает файл, потом пишет: между этими мгновениями читатель
+    видит пустышку. При одной полосе это почти не случалось, при нескольких — сразу, и
+    тесты очереди посыпались в контейнере с «Expecting value: line 1 column 1»."""
+    q = jobs.Queue(root=tmp_path, handlers={'ingest': lambda job, tools: {'ok': True}})
+    job = q.add('ingest', {'slug': 'kniga'})
+    beda = []
+
+    def читаем():
+        for _ in range(400):
+            try:
+                if q.get(job['id']) is None:
+                    beda.append('задание пропало')
+            except Exception as error:
+                beda.append(f'{type(error).__name__}: {error}')
+                return
+
+    def пишем():
+        for n in range(400):
+            job['attempts'] = n
+            q._write(job)
+
+    reader = threading.Thread(target=читаем)
+    reader.start()
+    пишем()
+    reader.join(timeout=10)
+    assert not beda, beda[:3]

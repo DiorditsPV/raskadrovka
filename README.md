@@ -145,6 +145,26 @@ Everything else — the layout of the folders, the scripts behind the buttons, t
 the agent must keep — is written for the agent, not for you: see [AGENTS.md](AGENTS.md) and
 the skills in `.claude/skills/` (both in Russian).
 
+## Running it in a container
+
+There is nothing to build into an image — the project has no external dependencies. The image
+exists for a **boundary**: inside it the agent sees `/work` and nothing else, which turns
+`codex exec -s workspace-write` from a promise into a fact.
+
+```bash
+docker compose up -d          # panel on http://127.0.0.1:8770
+docker compose exec panel claude   # one-time login for the Claude operator
+```
+
+The repository is mounted as a single volume — the tree guard lays hard links inside
+`cache/panel/guard/`, and a hard link cannot cross a filesystem boundary. Your `~/.codex`
+comes along because its key is a file; Claude Code keeps its credentials in the macOS
+Keychain, which cannot be mounted into Linux, so it logs in once inside the container and
+keeps that in a volume of its own.
+
+The port is published on the loopback only. The panel has no authentication: anyone who
+reaches it can start jobs and spend your account.
+
 ## Kinship with Okrestnosti
 
 There the input is a photograph of a place, here it is the text of a scene; the role of the
