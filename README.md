@@ -115,11 +115,11 @@ The same path without a terminal:
 python3 panel/server.py --port 8770 --open
 ```
 
-![The Characters screen: the record, the understanding audit and the exact sheet prompt](docs/screens/characters.png)
+![The Characters screen: records, the understanding audit, buttons for every step](docs/screens/characters.png)
 
-*The record open: ten traits by name, what the book does not give, and the exact text that
-goes to the generator. The Russian paragraph is the book's own data — only the interface is
-translated.*
+*Left: the steps a book goes through, the books themselves, the operator and how many jobs run
+at once. Middle: one character — the accepted sheet, ten traits as a strip, what the book does
+not give, and the buttons that move the work on. Right: the job queue with timings and logs.*
 
 A local window into the repository: the whole path from a book file to a frame. Books and
 their progress, character records with the understanding audit and the result of the checks,
@@ -154,10 +154,17 @@ What the panel does on its own:
   not touch the same file: records of one book go one by one, sheets and different books run
   at the same time.
 
+![The open record: ten traits by name and the exact prompt the generator receives](docs/screens/record.png)
+
+*“What is in the record”, opened. Ten traits named with their scores; the description in the
+book’s own words; and below it the exact text that goes to the generator — including the
+`Unspecified` section built from the gaps, which tells the generator to keep the unsaid
+ordinary instead of inventing it. The Russian paragraph is the book’s data: only the interface
+is translated.*
+
 The interface is bilingual, Russian and English, with the switch in the sidebar. Only what
 the panel itself wrote is translated: character names, descriptions and the agent's own text
-stay as they are, because that is the book's data — which is why the Russian text is still
-visible in the screenshots above.
+stay as they are, because that is the book's data.
 
 The design and the screens are described in the
 [panel specification](docs/superpowers/specs/2026-09-09-panel-design.md) (in Russian).
